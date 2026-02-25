@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sun, Moon, Music, ExternalLink } from 'lucide-react';
+import { Sun, Moon, Music, ExternalLink, Disc } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
@@ -304,6 +304,128 @@ const Discography = () => {
           </p>
         </div>
       </div>
+
+      {/* Latest Albums Section */}
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-[#F7E859]/20 to-transparent">
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 bg-[#F26B3A] rounded-full flex items-center justify-center">
+                <Disc className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl text-[#101010]">
+                Latest Albums
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Tuned for Dreams */}
+              <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src="/images/dreams-cover.webp"
+                    alt="Tuned for Dreams album cover"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#240046] text-white text-sm font-semibold rounded-full">
+                      <Moon className="w-4 h-4" />
+                      Sleep
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
+                      8 Tracks
+                    </span>
+                  </div>
+                  <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
+                    Tuned for Dreams
+                  </h3>
+                  <p className="text-sm text-[#2A2A2A] mb-4">
+                    A psychoacoustic sleep album designed on the ISO Principle, moving infants from wakefulness to deep sleep through physiological deceleration.
+                  </p>
+                  <a
+                    href="#/album/tuned-for-dreams"
+                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#240046] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
+                  >
+                    Listen Now
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </a>
+                </div>
+              </article>
+
+              {/* The Bloom's House: Volume 1 */}
+              <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src="/images/the-blooms-house-volume-1-cover.webp"
+                    alt="The Bloom's House: Volume 1 album cover"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F26B3A] text-white text-sm font-semibold rounded-full">
+                      <Sun className="w-4 h-4" />
+                      Playful
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
+                      10 Tracks
+                    </span>
+                  </div>
+                  <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
+                    The Bloom's House: Volume 1
+                  </h3>
+                  <p className="text-sm text-[#2A2A2A] mb-4">
+                    A complete collection of fun, engaging songs for toddlers and preschoolers covering daily routines and developmental skills.
+                  </p>
+                  <a
+                    href="#/album/the-blooms-house-volume-1"
+                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#F26B3A] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
+                  >
+                    Listen Now
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </a>
+                </div>
+              </article>
+
+              {/* The Bloom's House: Classics Party */}
+              <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src="/images/the-blooms-house-classics-party-cover.webp"
+                    alt="The Bloom's House: Classics Party album cover"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F7E859] text-[#101010] text-sm font-semibold rounded-full">
+                      <Sun className="w-4 h-4" />
+                      Celebratory
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
+                      12 Tracks
+                    </span>
+                  </div>
+                  <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
+                    The Bloom's House: Classics Party
+                  </h3>
+                  <p className="text-sm text-[#2A2A2A] mb-4">
+                    A vibrant collection of classic children's songs transformed with contemporary pop production and playful energy for family dance parties.
+                  </p>
+                  <a
+                    href="#/album/the-blooms-house-classics-party"
+                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#F7E859] text-[#101010] font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
+                  >
+                    Listen Now
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Daytime Music Section */}
       <section className="py-16 lg:py-24">
