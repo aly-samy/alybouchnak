@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Discography from './pages/Discography';
 import FAQ from './pages/FAQ';
+import Contact from './pages/Contact';
 import SingleTrack from './pages/SingleTrack';
 import SingleAlbum from './pages/SingleAlbum';
 import TheBloomsHouseVolume1 from './pages/TheBloomsHouseVolume1';
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/discography" element={<Discography />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/track/bock-bock-chicken" element={<SingleTrack />} />
         <Route path="/track/the-funny-bunny-jump" element={<TheFunnyBunnyJump />} />
         <Route path="/track/boom-teka-boom" element={<BoomTekaBoom />} />
