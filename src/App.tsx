@@ -7,6 +7,11 @@ import SingleTrack from './pages/SingleTrack';
 import SingleAlbum from './pages/SingleAlbum';
 import TheBloomsHouseVolume1 from './pages/TheBloomsHouseVolume1';
 import TheBloomsHouseClassicsParty from './pages/TheBloomsHouseClassicsParty';
+import TheFunnyBunnyJump from './pages/TheFunnyBunnyJump';
+import BoomTekaBoom from './pages/BoomTekaBoom';
+import TheWiseMice from './pages/TheWiseMice';
+import NannyAndPapa from './pages/NannyAndPapa';
+import TheYummySpoon from './pages/TheYummySpoon';
 
 function App() {
   return (
