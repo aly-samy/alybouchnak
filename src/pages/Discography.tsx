@@ -59,7 +59,7 @@ const daytimeReleases: Release[] = [
     date: 'Mar 11, 2026',
     description: 'Transforms mealtime struggles into fun using positive reinforcement for picky eaters.',
     image: '/images/the-yummy-spoon-cover.webp',
-    link: 'https://push.fm/ps/the-yummy-spoon',
+    link: '#/track/the-yummy-spoon',
     status: 'available',
   },
   {
@@ -69,7 +69,7 @@ const daytimeReleases: Release[] = [
     date: 'Apr 3, 2026',
     description: 'Build active listening and motor skills with this high-energy freeze dance game.',
     image: '/images/the-funny-bunny-jump-cover.webp',
-    link: 'https://push.fm/ps/the-funny-bunny-jump',
+    link: '#/track/the-funny-bunny-jump',
     status: 'available',
   },
   {
@@ -79,7 +79,7 @@ const daytimeReleases: Release[] = [
     date: 'Feb 27, 2026',
     description: 'High-energy celebration of the special bond between grandparents and grandchildren.',
     image: '/images/nanny-and-papa-cover.webp',
-    link: 'https://push.fm/ps/nanny-and-papa',
+    link: '#/track/nanny-papa',
     status: 'available',
   },
   {
@@ -89,7 +89,7 @@ const daytimeReleases: Release[] = [
     date: 'Feb 11, 2026',
     description: 'Master memory and sequencing with this cumulative dance track.',
     image: '/images/the-wise-mice-cover.webp',
-    link: 'https://push.fm/fl/the-wise-mice',
+    link: '#/track/the-wise-mice',
     status: 'available',
   },
   {
@@ -99,7 +99,7 @@ const daytimeReleases: Release[] = [
     date: 'Jan 30, 2026',
     description: 'High-energy wake-up songs to start the day.',
     image: '/images/boom-teka-cover.webp',
-    link: 'https://push.fm/fl/boom-teka-boom',
+    link: '#/track/boom-teka-boom',
     status: 'available',
   },
   {
@@ -365,8 +365,6 @@ const Discography = () => {
                     ) : (
                       <a
                         href={release.link}
-                        target={release.link.startsWith('http') ? '_blank' : undefined}
-                        rel={release.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className="btn-primary w-full justify-center text-sm"
                       >
                         {getButtonText(release.status, release.type)}

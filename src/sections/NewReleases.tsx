@@ -22,7 +22,7 @@ const releases: Release[] = [
     date: 'Feb 11, 2026',
     description: 'Master memory and sequencing with this cumulative dance track.',
     image: '/images/the-wise-mice-cover.webp',
-    link: 'https://push.fm/fl/the-wise-mice',
+    link: '#/track/the-wise-mice',
     status: 'available',
   },
   {
@@ -31,7 +31,7 @@ const releases: Release[] = [
     date: 'Jan 30, 2026',
     description: 'The ultimate morning wake-up song.',
     image: '/images/boom-teka-cover.webp',
-    link: 'https://push.fm/fl/boom-teka-boom',
+    link: '#/track/boom-teka-boom',
     status: 'available',
   },
   {
@@ -40,7 +40,7 @@ const releases: Release[] = [
     date: 'Feb 27, 2026',
     description: 'A heartwarming family anthem celebrating grandparent bonds.',
     image: '/images/nanny-and-papa-cover.webp',
-    link: 'https://push.fm/ps/nanny-and-papa',
+    link: '#/track/nanny-papa',
     status: 'presave',
   },
   {
@@ -49,7 +49,7 @@ const releases: Release[] = [
     date: 'Mar 11, 2026',
     description: 'Turn mealtime into playtime with this gentle guide for picky eaters.',
     image: '/images/the-yummy-spoon-cover.webp',
-    link: 'https://push.fm/ps/the-yummy-spoon',
+    link: '#/track/the-yummy-spoon',
     status: 'presave',
   },
   {
@@ -58,7 +58,7 @@ const releases: Release[] = [
     date: 'Apr 3, 2026',
     description: 'Build active listening and motor skills with this freeze dance game.',
     image: '/images/the-funny-bunny-jump-cover.webp',
-    link: 'https://push.fm/ps/the-funny-bunny-jump',
+    link: '#/track/the-funny-bunny-jump',
     status: 'presave',
   },
   {
@@ -215,8 +215,6 @@ const NewReleases = () => {
                 ) : (
                   <a
                     href={release.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className={getButtonClass(release.status)}
                   >
                     {getButtonText(release.status)}
