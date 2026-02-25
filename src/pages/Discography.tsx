@@ -24,6 +24,26 @@ interface Release {
 const daytimeReleases: Release[] = [
   {
     id: 1,
+    title: "The Bloom's House: Volume 1",
+    type: 'Album',
+    date: 'Dec 25, 2025',
+    description: 'A complete collection of fun, engaging songs for toddlers and preschoolers covering daily routines and developmental skills.',
+    image: '/images/the-blooms-house-volume-1-cover.webp',
+    link: '#/album/the-blooms-house-volume-1',
+    status: 'available',
+  },
+  {
+    id: 2,
+    title: "The Bloom's House: Classics Party",
+    type: 'Album',
+    date: 'Feb 14, 2026',
+    description: 'A vibrant collection of classic children\'s songs transformed with contemporary pop production and playful energy. Perfect for family dance parties, classroom activities, and creating joyful memories together.',
+    image: '/images/the-blooms-house-classics-party-cover.webp',
+    link: '#/album/the-blooms-house-classics-party',
+    status: 'available',
+  },
+  {
+    id: 3,
     title: 'Old MacDonald Had a Farm (Farm Party)',
     type: 'Coming Soon',
     date: 'Mar 6, 2026',
@@ -33,7 +53,7 @@ const daytimeReleases: Release[] = [
     status: 'coming-soon',
   },
   {
-    id: 2,
+    id: 4,
     title: 'The Wheels on the Bus (Party Ride)',
     type: 'Coming Soon',
     date: 'Mar 27, 2026',
@@ -43,7 +63,7 @@ const daytimeReleases: Release[] = [
     status: 'coming-soon',
   },
   {
-    id: 3,
+    id: 5,
     title: 'Five Little Monkeys (Jungle Party)',
     type: 'Coming Soon',
     date: 'Mar 20, 2026',

@@ -4,11 +4,8 @@ import Discography from './pages/Discography';
 import FAQ from './pages/FAQ';
 import SingleTrack from './pages/SingleTrack';
 import SingleAlbum from './pages/SingleAlbum';
-import TheFunnyBunnyJump from './pages/TheFunnyBunnyJump';
-import BoomTekaBoom from './pages/BoomTekaBoom';
-import TheWiseMice from './pages/TheWiseMice';
-import NannyAndPapa from './pages/NannyAndPapa';
-import TheYummySpoon from './pages/TheYummySpoon';
+import TheBloomsHouseVolume1 from './pages/TheBloomsHouseVolume1';
+import TheBloomsHouseClassicsParty from './pages/TheBloomsHouseClassicsParty';
 
 function App() {
   return (
@@ -23,6 +20,9 @@ function App() {
         <Route path="/track/the-wise-mice" element={<TheWiseMice />} />
         <Route path="/track/nanny-papa" element={<NannyAndPapa />} />
         <Route path="/track/the-yummy-spoon" element={<TheYummySpoon />} />
+        <Route path="/album/tuned-for-dreams" element={<SingleAlbum />} />
+        <Route path="/album/the-blooms-house-volume-1" element={<TheBloomsHouseVolume1 />} />
+        <Route path="/album/the-blooms-house-classics-party" element={<TheBloomsHouseClassicsParty />} />
         <Route path="/album/tuned-for-dreams" element={<SingleAlbum />} />
       </Routes>
     </HashRouter>
