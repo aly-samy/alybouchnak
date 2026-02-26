@@ -16,19 +16,6 @@ import SEO from '../components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Schema.org structured data for the homepage
-const homeSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Aly Bouchnak',
-  alternateName: ['Aly Bouchnak Music', "The Bloom's House"],
-  url: 'https://alybouchnak.com',
-  potentialAction: {
-    '@type': 'ListenAction',
-    target: 'https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8',
-  },
-};
-
 // MusicGroup schema
 const artistSchema = {
   '@context': 'https://schema.org',
