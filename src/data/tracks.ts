@@ -473,7 +473,7 @@ See you tomorrow!
     genre: "Children's Pop, Farm Songs",
     ageRange: '2-6 years',
     mood: 'Energetic',
-    routine: 'Playtime',s
+    routine: 'Playtime',
     isrc: 'GX8KD2658865',
     upc: '5063925085663',
     album: "The Bloom's House: Party Classics",
