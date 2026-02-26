@@ -5,6 +5,7 @@ import { Sun, Moon, Music, ExternalLink, Disc } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -329,6 +330,7 @@ const Discography = () => {
       <div className="grain-overlay" />
       
       <Navigation />
+      <Breadcrumbs />
 
       {/* Header */}
       <div ref={headerRef} className="pt-32 pb-16 bg-[#F7E859]">

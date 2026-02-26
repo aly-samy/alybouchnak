@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Homepage -->
+  <url>
+    <loc>https://alybouchnak.com/</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/Aly-bouchnak-profile.webp</image:loc>
+      <image:title>Aly Bouchnak - Children's Music Artist</image:title>
+      <image:caption>Aly Bouchnak creates modern nursery rhymes and kids pop songs for toddlers and preschoolers</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Discography Page -->
+  <url>
+    <loc>https://alybouchnak.com/discography</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- FAQ Page -->
+  <url>
+    <loc>https://alybouchnak.com/faq</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://alybouchnak.com/contact</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Album Pages -->
+  <url>
+    <loc>https://alybouchnak.com/album/tuned-for-dreams</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/dreams-cover.webp</image:loc>
+      <image:title>Tuned for Dreams - Sleep Album</image:title>
+      <image:caption>Calm and soothing sleep music for toddlers and preschoolers</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://alybouchnak.com/album/the-blooms-house-volume-1</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/the-blooms-house-volume-1-cover.webp</image:loc>
+      <image:title>The Bloom's House: Volume 1</image:title>
+      <image:caption>Fun, engaging songs for toddlers and preschoolers covering daily routines</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://alybouchnak.com/album/the-blooms-house-classics-party</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/the-blooms-house-classics-party-cover.webp</image:loc>
+      <image:title>The Bloom's House: Classics Party</image:title>
+      <image:caption>Classic children's songs transformed with contemporary pop production</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Single Track Pages -->
+  <url>
+    <loc>https://alybouchnak.com/track/bock-bock-chicken</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/bock-bock-chicken-cover.webp</image:loc>
+      <image:title>Bock Bock Chicken</image:title>
+      <image:caption>High-energy movement song for children</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://alybouchnak.com/track/the-funny-bunny-jump</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/the-funny-bunny-jump-cover.webp</image:loc>
+      <image:title>The Funny Bunny Jump</image:title>
+      <image:caption>Freeze dance game song for kids</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://alybouchnak.com/track/boom-teka-boom</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/boom-teka-cover.webp</image:loc>
+      <image:title>Boom Teka Boom</image:title>
+      <image:caption>Morning wake-up anthem for children</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://alybouchnak.com/track/the-wise-mice</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/the-wise-mice-cover.webp</image:loc>
+      <image:title>The Wise Mice</image:title>
+      <image:caption>Memory and sequencing song for kids</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://alybouchnak.com/track/nanny-papa</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/nanny-papa-cover.webp</image:loc>
+      <image:title>Nanny & Papa</image:title>
+      <image:caption>Family connection fun song</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://alybouchnak.com/track/the-yummy-spoon</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://alybouchnak.com/images/the-yummy-spoon-cover.webp</image:loc>
+      <image:title>The Yummy Spoon</image:title>
+      <image:caption>Mealtime routine song for children</image:caption>
+    </image:image>
+  </url>
+</urlset>

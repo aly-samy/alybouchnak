@@ -1,0 +1,105 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Disallow: 
+
+# Sitemap locations for search engines
+Sitemap: https://alybouchnak.com/sitemap.xml
+Sitemap: https://alybouchnak.com/sitemap-index.xml
+
+# Block access to sensitive directories and system files
+Disallow: /admin/
+Disallow: /config/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /*.log$
+Disallow: /*.tmp$
+Disallow: /_notes/
+Disallow: /backup/
+
+# Allow crawling of important resource directories
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /libs/
+Allow: /assets/
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+Allow: *.webp
+Allow: *.svg
+Allow: *.mp3
+Allow: *.mp4
+
+# AI crawlers - Block from training but allow indexing
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: YouBot
+Disallow: /
+
+# Special instructions for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Allow social media crawlers for rich previews
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+Allow: /images/
+
+User-agent: LinkedInBot
+Allow: /
+
+# Allow SEO tools and analytics crawlers
+User-agent: SemrushBot
+Allow: /
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+# Block unwanted bots
+User-agent: AhrefsSiteAudit
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
