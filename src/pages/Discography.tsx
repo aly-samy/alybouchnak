@@ -26,7 +26,7 @@ const daytimeReleases: Release[] = [
     id: 1,
     title: "The Bloom's House: Volume 1",
     type: 'Album',
-    date: 'Dec 25, 2025',
+    date: 'May 20, 2026',
     description: 'A complete collection of fun, engaging songs for toddlers and preschoolers covering daily routines and developmental skills.',
     image: '/images/the-blooms-house-volume-1-cover.webp',
     link: '#/album/the-blooms-house-volume-1',
@@ -36,7 +36,7 @@ const daytimeReleases: Release[] = [
     id: 2,
     title: "The Bloom's House: Classics Party",
     type: 'Album',
-    date: 'Feb 14, 2026',
+    date: 'Apr 24, 2026',
     description: 'A vibrant collection of classic children\'s songs transformed with contemporary pop production and playful energy. Perfect for family dance parties, classroom activities, and creating joyful memories together.',
     image: '/images/the-blooms-house-classics-party-cover.webp',
     link: '#/album/the-blooms-house-classics-party',
@@ -170,34 +170,71 @@ const sleepReleases: Release[] = [
 const discographySchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: "Aly Bouchnak Discography | Songs for Toddler Routines & Sleep",
-  description: "Complete catalog of Aly Bouchnak's music. Functional songs for toddler routines: high-energy 'Bouncy Beats' for play and 'Dream Tones' for sleep.",
+  '@id': 'https://alybouchnak.com/discography#discography',
   url: 'https://alybouchnak.com/discography',
+  name: "Aly Bouchnak Discography | Toddler & Preschool Music",
+  description: "Browse complete music catalog of Aly Bouchnak, including high-energy toddler dance songs and calming sleep albums from The Bloom's House.",
+  inLanguage: 'en',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': 'https://alybouchnak.com/#website'
+  },
+  about: {
+    '@type': 'MusicGroup',
+    '@id': 'https://alybouchnak.com/#artist'
+  },
   mainEntity: {
     '@type': 'ItemList',
+    numberOfItems: [
+      ...daytimeReleases.filter(r => r.status === 'available'),
+      ...sleepReleases
+    ].length,
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
     itemListElement: [
-      ...daytimeReleases.filter(r => r.status === 'available').map((release, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'MusicRecording',
-          name: release.title,
-          url: release.link.startsWith('http') ? release.link : `https://alybouchnak.com${release.link}`,
-          image: release.image ? `https://alybouchnak.com${release.image}` : undefined,
-          datePublished: release.date,
-          description: release.description,
-        },
-      })),
+      ...daytimeReleases
+        .filter(r => r.status === 'available')
+        .map((release, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'MusicRecording',
+            '@id': `https://alybouchnak.com${release.link}#track`,
+            name: release.title,
+            url: release.link.startsWith('http')
+              ? release.link
+              : `https://alybouchnak.com${release.link}`,
+            image: release.image
+              ? `https://alybouchnak.com${release.image}` 
+              : undefined,
+            datePublished: release.date,
+            description: release.description,
+            byArtist: {
+              '@id': 'https://alybouchnak.com/#artist'
+            }
+          },
+        })),
+
       ...sleepReleases.map((release, index) => ({
         '@type': 'ListItem',
-        position: daytimeReleases.filter(r => r.status === 'available').length + index + 1,
+        position:
+          daytimeReleases.filter(r => r.status === 'available').length +
+          index +
+          1,
         item: {
           '@type': 'MusicAlbum',
+          '@id': `https://alybouchnak.com${release.link}#album`,
           name: release.title,
-          url: release.link.startsWith('http') ? release.link : `https://alybouchnak.com${release.link}`,
-          image: release.image ? `https://alybouchnak.com${release.image}` : undefined,
+          url: release.link.startsWith('http')
+            ? release.link
+            : `https://alybouchnak.com${release.link}`,
+          image: release.image
+            ? `https://alybouchnak.com${release.image}` 
+            : undefined,
           datePublished: release.date,
           description: release.description,
+          byArtist: {
+            '@id': 'https://alybouchnak.com/#artist'
+          }
         },
       })),
     ],

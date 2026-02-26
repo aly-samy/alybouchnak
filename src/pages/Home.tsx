@@ -35,21 +35,46 @@ const artistSchema = {
   '@type': 'MusicGroup',
   '@id': 'https://alybouchnak.com/#artist',
   name: 'Aly Bouchnak',
+  url: 'https://alybouchnak.com',
   image: [
-    'https://alybouchnak.com/images/aly-bouchnak-hero.webp',
+    'https://alybouchnak.com/images/Aly-bouchnak-profile.webp'
   ],
+
+  description:
+    "Aly Bouchnak is a children’s music producer creating modern nursery rhymes and movement-based digital pop for toddlers and preschoolers. His music blends playful energy with structured rhythm to support family dance time, routines, and early learning.",
+
+  genre: [
+    "Children's Music",
+    "Kids Pop",
+    "Nursery Rhymes",
+    "Educational Music",
+    "Digital Pop"
+  ],
+
+  inLanguage: "en",
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: 'Worldwide'
+  },
+
+  foundingDate: '2025',
+
   brand: {
     '@type': 'Brand',
-    name: "The Bloom's House",
+    name: "The Bloom's House"
   },
+
+  founder: {
+    '@type': 'Person',
+    name: 'Aly Bouchnak'
+  },
+
   identifier: {
     '@type': 'PropertyValue',
     propertyID: 'ISNI',
-    value: '0000000529569919',
+    value: '0000000529569919'
   },
-  url: 'https://alybouchnak.com',
-  description: "Aly Bouchnak creates fun, engaging digital pop music for children and families. Our songs are designed to be both entertaining for kids and enjoyable for parents, making family time more musical and fun!",
-  genre: ["Children's Music", 'Digital Pop', 'Family Music', 'Kids Pop', 'Educational Music'],
+
   sameAs: [
     'https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8',
     'https://music.apple.com/au/artist/aly-bouchnak/1840274949',
@@ -61,10 +86,11 @@ const artistSchema = {
     'https://genius.com/artists/Aly-bouchnak',
     'https://www.musixmatch.com/artist/Aly-Bouchnak',
     'https://x.com/aly_bouchnak',
-    'https://www.tiktok.com/@alybouchnak',
+    'https://www.tiktok.com/@alybouchnak'
   ],
-  keywords: "children's music, kids songs, family music, toddler songs, educational music, digital pop for kids",
-  foundingDate: '2025',
+
+  keywords:
+    "toddler music, preschool songs, nursery rhymes remix, kids dance songs, movement songs for toddlers, educational kids music, family friendly music"
 };
 
 function Home() {
@@ -116,15 +142,15 @@ function Home() {
 
   return (
     <div ref={mainRef} className="relative">
-      <SEO
-        title="Aly Bouchnak | Modern Kids' Pop & Family Music | Official Site"
-        description="Aly Bouchnak is a children's music artist creating modern digital pop songs for toddlers and families. Known for hits like 'Pet-Pop' and the 'Bouncy Beats for Little Feet' playlist."
-        keywords="children's music, kids songs, educational music, toddler songs, family music, digital pop for kids"
-        canonical="https://alybouchnak.com"
-        ogImage="https://alybouchnak.com/images/social-preview.png"
-        ogType="website"
-        schemaData={{ ...homeSchema, ...artistSchema }}
-      />
+<SEO
+  title="Aly Bouchnak | Modern Kids Pop, Nursery Rhymes & Family Dance Music"
+  description="Aly Bouchnak creates modern nursery rhymes and kids pop songs for toddlers and preschoolers. Stream movement-based family dance music from The Bloom’s House."
+  keywords="toddler music, preschool songs, nursery rhymes remix, kids dance songs, movement songs for toddlers, family dance music, educational kids music"
+  canonical="https://alybouchnak.com"
+  ogImage="https://alybouchnak.com/images/Aly-bouchnak-profile.webp"
+  ogType="website"
+  schemaData={artistSchema}
+/>
 
       {/* Grain overlay */}
       <div className="grain-overlay" />
