@@ -1,37 +1,48 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Home from './pages/Home';
 import Discography from './pages/Discography';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
-import SingleTrack from './pages/SingleTrack';
-import SingleAlbum from './pages/SingleAlbum';
-import TheBloomsHouseVolume1 from './pages/TheBloomsHouseVolume1';
-import TheBloomsHouseClassicsParty from './pages/TheBloomsHouseClassicsParty';
-import TheFunnyBunnyJump from './pages/TheFunnyBunnyJump';
-import BoomTekaBoom from './pages/BoomTekaBoom';
-import TheWiseMice from './pages/TheWiseMice';
-import NannyAndPapa from './pages/NannyAndPapa';
-import TheYummySpoon from './pages/TheYummySpoon';
+import DynamicTrackPage from './pages/DynamicTrackPage';
+import DynamicAlbumPage from './pages/DynamicAlbumPage';
+import { initGA, trackPageView } from './lib/analytics';
+import { initPixel, trackPixelPageView } from './lib/pixel';
+
+function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Initialize analytics on app load
+    initGA();
+    initPixel();
+  }, []);
+
+  useEffect(() => {
+    // Track page views on route changes (SPA hash routing support)
+    const fullPath = location.pathname + location.hash;
+    trackPageView(fullPath);
+    trackPixelPageView();
+  }, [location]);
+
+  return <>{children}</>;
+}
 
 function App() {
   return (
     <HashRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/discography" element={<Discography />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/track/bock-bock-chicken" element={<SingleTrack />} />
-        <Route path="/track/the-funny-bunny-jump" element={<TheFunnyBunnyJump />} />
-        <Route path="/track/boom-teka-boom" element={<BoomTekaBoom />} />
-        <Route path="/track/the-wise-mice" element={<TheWiseMice />} />
-        <Route path="/track/nanny-papa" element={<NannyAndPapa />} />
-        <Route path="/track/the-yummy-spoon" element={<TheYummySpoon />} />
-        <Route path="/album/tuned-for-dreams" element={<SingleAlbum />} />
-        <Route path="/album/the-blooms-house-volume-1" element={<TheBloomsHouseVolume1 />} />
-        <Route path="/album/the-blooms-house-classics-party" element={<TheBloomsHouseClassicsParty />} />
-        <Route path="/album/tuned-for-dreams" element={<SingleAlbum />} />
-      </Routes>
+      <AnalyticsWrapper>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/discography" element={<Discography />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
+          {/* Dynamic Track Routes - All tracks rendered from centralized data */}
+          <Route path="/track/:slug" element={<DynamicTrackPage />} />
+          {/* Dynamic Album Routes - All albums rendered from centralized data */}
+          <Route path="/album/:slug" element={<DynamicAlbumPage />} />
+        </Routes>
+      </AnalyticsWrapper>
     </HashRouter>
   );
 }

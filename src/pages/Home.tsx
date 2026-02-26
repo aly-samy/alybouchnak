@@ -77,7 +77,34 @@ const artistSchema = {
   ],
 
   keywords:
-    "toddler music, preschool songs, nursery rhymes remix, kids dance songs, movement songs for toddlers, educational kids music, family friendly music"
+    "toddler music, preschool songs, nursery rhymes remix, kids dance songs, movement songs for toddlers, educational kids music, family friendly music",
+
+  // Enhanced entity recognition
+  knowsAbout: [
+    "Children's Music Education",
+    "Music Production",
+    "Digital Pop Production",
+    "Early Childhood Development",
+    "Toddler Entertainment",
+    "Family-Friendly Content"
+  ],
+
+  foundingLocation: {
+    '@type': 'Place',
+    name: 'Sydney, Australia'
+  },
+
+  hasAlbum: {
+    '@type': 'MusicAlbum',
+    '@id': 'https://alybouchnak.com/album/the-blooms-house-volume-1#album',
+    name: "The Bloom's House: Volume 1",
+    url: 'https://alybouchnak.com/album/the-blooms-house-volume-1'
+  },
+
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://alybouchnak.com/#website'
+  }
 };
 
 function Home() {

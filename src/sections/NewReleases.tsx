@@ -2,8 +2,14 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
+import { getAllTracks } from '../data/tracks';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Get recent tracks from centralized data
+const recentTracks = getAllTracks()
+  .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
+  .slice(0, 4);
 
 interface Release {
   id: number;
@@ -15,62 +21,21 @@ interface Release {
   status: 'available' | 'presave' | 'coming-soon';
 }
 
-const releases: Release[] = [
-  {
-    id: 1,
-    title: 'The Wise Mice',
-    date: 'Feb 11, 2026',
-    description: 'Master memory and sequencing with this cumulative dance track.',
-    image: '/images/the-wise-mice-cover.webp',
-    link: '#/track/the-wise-mice',
-    status: 'available',
-  },
-  {
-    id: 2,
-    title: 'Boom Teka Boom (EP)',
-    date: 'Jan 30, 2026',
-    description: 'The ultimate morning wake-up song.',
-    image: '/images/boom-teka-cover.webp',
-    link: '#/track/boom-teka-boom',
-    status: 'available',
-  },
-  {
-    id: 3,
-    title: 'Nanny & Papa',
-    date: 'Feb 27, 2026',
-    description: 'A heartwarming family anthem celebrating grandparent bonds.',
-    image: '/images/nanny-and-papa-cover.webp',
-    link: '#/track/nanny-papa',
-    status: 'presave',
-  },
-  {
-    id: 4,
-    title: 'The Yummy Spoon',
-    date: 'Mar 11, 2026',
-    description: 'Turn mealtime into playtime with this gentle guide for picky eaters.',
-    image: '/images/the-yummy-spoon-cover.webp',
-    link: '#/track/the-yummy-spoon',
-    status: 'presave',
-  },
-  {
-    id: 5,
-    title: 'The Funny Bunny Jump',
-    date: 'Apr 3, 2026',
-    description: 'Build active listening and motor skills with this freeze dance game.',
-    image: '/images/the-funny-bunny-jump-cover.webp',
-    link: '#/track/the-funny-bunny-jump',
-    status: 'presave',
-  },
-  {
-    id: 6,
-    title: 'Mary Had a Little Lamb',
-    date: 'Feb 27, 2026',
-    description: 'A modern, bouncy reimagining of a classic to fuel your dance party.',
-    image: '/images/mary-had-a-little-lamb.webp',
-    link: '#',
-    status: 'coming-soon',
-  },
-];
+// Convert tracks to releases format
+const releases: Release[] = recentTracks.map((track, index) => ({
+  id: index + 1,
+  title: track.title,
+  date: new Date(track.releaseDate).toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  }),
+  description: track.description,
+  image: track.coverImage,
+  link: `#/track/${track.slug}`,
+  status: 'available' as const
+}));
+
 
 const NewReleases = () => {
   const sectionRef = useRef<HTMLElement>(null);

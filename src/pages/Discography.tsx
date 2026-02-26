@@ -6,166 +6,17 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import { getAllAlbums, type Album } from '../data/albums';
+import { getTracksByAlbum } from '../data/tracks';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Release {
-  id: number;
-  title: string;
-  type: string;
-  date: string;
-  description: string;
-  image: string;
-  link: string;
-  tracks?: { name: string; duration: string }[];
-  lyrics?: string;
-  status: 'available' | 'coming-soon';
-}
+// Get albums from centralized data
+const allAlbums = getAllAlbums();
 
-const daytimeReleases: Release[] = [
-  {
-    id: 1,
-    title: "The Bloom's House: Volume 1",
-    type: 'Album',
-    date: 'May 20, 2026',
-    description: 'A complete collection of fun, engaging songs for toddlers and preschoolers covering daily routines and developmental skills.',
-    image: '/images/the-blooms-house-volume-1-cover.webp',
-    link: '#/album/the-blooms-house-volume-1',
-    status: 'available',
-  },
-  {
-    id: 2,
-    title: "The Bloom's House: Classics Party",
-    type: 'Album',
-    date: 'Apr 24, 2026',
-    description: 'A vibrant collection of classic children\'s songs transformed with contemporary pop production and playful energy. Perfect for family dance parties, classroom activities, and creating joyful memories together.',
-    image: '/images/the-blooms-house-classics-party-cover.webp',
-    link: '#/album/the-blooms-house-classics-party',
-    status: 'available',
-  },
-  {
-    id: 3,
-    title: 'Old MacDonald Had a Farm (Farm Party)',
-    type: 'Coming Soon',
-    date: 'Mar 6, 2026',
-    description: 'Develops gross motor skills through high-energy freeze dance and active play.',
-    image: '',
-    link: '#',
-    status: 'coming-soon',
-  },
-  {
-    id: 4,
-    title: 'The Wheels on the Bus (Party Ride)',
-    type: 'Coming Soon',
-    date: 'Mar 27, 2026',
-    description: 'Transforms mealtime struggles into fun using positive reinforcement for picky eaters.',
-    image: '',
-    link: '#',
-    status: 'coming-soon',
-  },
-  {
-    id: 5,
-    title: 'Five Little Monkeys (Jungle Party)',
-    type: 'Coming Soon',
-    date: 'Mar 20, 2026',
-    description: 'A cumulative memory game designed to boost focus and cognitive sequencing skills.',
-    image: '',
-    link: '#',
-    status: 'coming-soon',
-  },
-  {
-    id: 4,
-    title: 'The Yummy Spoon',
-    type: 'EP',
-    date: 'Mar 11, 2026',
-    description: 'Transforms mealtime struggles into fun using positive reinforcement for picky eaters.',
-    image: '/images/the-yummy-spoon-cover.webp',
-    link: '#/track/the-yummy-spoon',
-    status: 'available',
-  },
-  {
-    id: 5,
-    title: 'The Funny Bunny Jump',
-    type: 'Single',
-    date: 'Apr 3, 2026',
-    description: 'Build active listening and motor skills with this high-energy freeze dance game.',
-    image: '/images/the-funny-bunny-jump-cover.webp',
-    link: '#/track/the-funny-bunny-jump',
-    status: 'available',
-  },
-  {
-    id: 6,
-    title: 'Nanny & Papa',
-    type: 'EP',
-    date: 'Feb 27, 2026',
-    description: 'High-energy celebration of the special bond between grandparents and grandchildren.',
-    image: '/images/nanny-and-papa-cover.webp',
-    link: '#/track/nanny-papa',
-    status: 'available',
-  },
-  {
-    id: 7,
-    title: 'The Wise Mice',
-    type: 'EP',
-    date: 'Feb 11, 2026',
-    description: 'Master memory and sequencing with this cumulative dance track.',
-    image: '/images/the-wise-mice-cover.webp',
-    link: '#/track/the-wise-mice',
-    status: 'available',
-  },
-  {
-    id: 8,
-    title: 'Boom Teka Boom',
-    type: 'EP',
-    date: 'Jan 30, 2026',
-    description: 'High-energy wake-up songs to start the day.',
-    image: '/images/boom-teka-cover.webp',
-    link: '#/track/boom-teka-boom',
-    status: 'available',
-  },
-  {
-    id: 9,
-    title: 'Bock Bock Chicken',
-    type: 'Single',
-    date: 'Sep 16, 2025',
-    description: 'A high-energy gross motor skills song for toddlers (125 BPM).',
-    image: '/images/bock-bock-chicken-cover.webp',
-    link: '#/track/bock-bock-chicken',
-    status: 'available',
-    tracks: [{ name: 'Bock Bock Chicken', duration: '01:56' }],
-    lyrics: `Bock bock bock bock chicken!
-On Bock bock bock bock banana
-Bock bock bock bock chicken!
-In a bock bock bock bandana!
-
-Bock bock chicken
-On a bock bock banana
-In a bock bock bandana`,
-  },
-];
-
-const sleepReleases: Release[] = [
-  {
-    id: 10,
-    title: 'Tuned for Dreams',
-    type: 'Album',
-    date: 'Jan 9, 2026',
-    description: 'Scientific lullabies using the ISO Principle and Brown Noise.',
-    image: '/images/dreams-cover.webp',
-    link: '#/album/tuned-for-dreams',
-    status: 'available',
-    tracks: [
-      { name: 'The Safe Container', duration: '03:00' },
-      { name: 'The Pendulum', duration: '03:00' },
-      { name: 'The Sacred Shush', duration: '03:00' },
-      { name: 'The Dimming Light', duration: '03:00' },
-      { name: 'The Ancient Tongue', duration: '03:00' },
-      { name: 'The Protective Shadow', duration: '03:00' },
-      { name: 'The Liquid Room', duration: '03:00' },
-      { name: 'The Infinite Loop', duration: '03:00' },
-    ],
-  },
-];
+// Separate albums by mood
+const daytimeReleases = allAlbums.filter(album => album.mood === 'Playful' || album.mood === 'Energetic');
+const sleepReleases = allAlbums.filter(album => album.mood === 'Calming' || album.mood === 'Transitional');
 
 // Schema.org for discography page
 const discographySchema = {
