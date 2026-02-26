@@ -99,46 +99,6 @@ function DynamicAlbumPage() {
 
   const MoodIcon = albumData.mood === 'Calm' ? Moon : Sun;
 
-  const albumSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'MusicAlbum',
-    name: albumData.title,
-    byArtist: {
-      '@type': 'MusicGroup',
-      name: 'Aly Bouchnak',
-      '@id': 'https://alybouchnak.com/#artist',
-    },
-    datePublished: albumData.releaseDate,
-    genre: albumData.genre.split(', '),
-    description: albumData.description,
-    image: `https://alybouchnak.com${albumData.coverImage}`,
-    url: `https://alybouchnak.com/album/${albumData.slug}`,
-    numTracks: albumData.trackCount,
-    track: albumData.tracks ? {
-      '@type': 'ItemList',
-      itemListElement: albumData.tracks.map((track, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'MusicRecording',
-          name: track.title,
-          duration: `PT${track.duration.replace(':', 'M')}S`,
-          position: track.number || index + 1,
-        },
-      })),
-    } : undefined,
-    potentialAction: {
-      '@type': 'ListenAction',
-      target: albumData.spotifyUrl,
-    },
-    audience: {
-      '@type': 'PeopleAudience',
-      suggestedMinAge: albumData.ageRange.split('-')[0],
-      suggestedMaxAge: albumData.ageRange.split('-')[1]?.replace(/\D/g, '') || '8',
-      audienceType: 'Children, Parents, Families',
-    },
-  };
-
   return (
     <div className="relative min-h-screen bg-[#C8F0F7]">
       <SEO

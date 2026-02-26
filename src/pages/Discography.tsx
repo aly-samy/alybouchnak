@@ -75,7 +75,7 @@ const discographySchema = {
           '@type': 'MusicAlbum',
           '@id': `https://alybouchnak.com${release.link}#album`,
           name: release.title,
-          url: release.link.startsWith('http')
+          url: release.link?.startsWith('http')
             ? release.link
             : `https://alybouchnak.com${release.link}`,
           image: release.image
@@ -159,7 +159,7 @@ const Discography = () => {
   }, []);
 
   const getButtonText = (status: string, type: string) => {
-    if (status === 'coming-soon') return 'Coming Soon';
+    if (!status || status === 'coming-soon') return 'Coming Soon';
     if (type === 'EP' || type === 'Album') return 'Listen';
     return 'Stream Now';
   };
@@ -398,7 +398,7 @@ const Discography = () => {
                         href={release.link}
                         className="btn-primary w-full justify-center text-sm"
                       >
-                        {getButtonText(release.status, release.type)}
+                        {getButtonText(release.status || '', release.type || '')}
                         <ExternalLink className="w-4 h-4 ml-2" />
                       </a>
                     )}
