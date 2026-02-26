@@ -17,6 +17,7 @@ import {
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -301,6 +302,7 @@ const TheBloomsHouseClassicsParty = () => {
       />
 
       <Navigation />
+      <Breadcrumbs />
 
       {/* Hero Section */}
       <div ref={heroRef} className="pt-28 pb-12 lg:pt-32 lg:pb-16 bg-gradient-to-b from-[#F7E859] to-[#C8F0F7]">

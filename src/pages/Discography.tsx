@@ -317,12 +317,12 @@ const Discography = () => {
   return (
     <div className="relative min-h-screen bg-[#C8F0F7]">
       <SEO
-        title="Aly Bouchnak Discography | Songs for Toddler Routines & Sleep"
-        description="Complete catalog of Aly Bouchnak's music. Functional songs for toddler routines: high-energy 'Bouncy Beats' for play and 'Dream Tones' for sleep."
-        keywords="Aly Bouchnak songs, kids music discography, toddler songs, children's music albums, sleep music for kids"
+        title="Aly Bouchnak Discography | Toddler Dance Songs, Preschool Music & Sleep Albums"
+        description="Explore the complete discography of Aly Bouchnak, featuring toddler dance songs, preschool learning tracks, and calming sleep albums from The Bloom’s House universe."
+        keywords="Aly Bouchnak discography, toddler dance songs, preschool music, kids learning songs, children's sleep music, The Bloom's House album"
         canonical="https://alybouchnak.com/discography"
         ogImage="https://alybouchnak.com/images/social-preview.png"
-        ogType="website"
+        ogType="music.playlist"
         schemaData={discographySchema}
       />
 
@@ -396,7 +396,7 @@ const Discography = () => {
               <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
                 <div className="aspect-square overflow-hidden">
                   <img
-                    src="/images/the-blooms-house-volume-1-cover.webp"
+                    src="/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp"
                     alt="The Bloom's House: Volume 1 album cover"
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
@@ -431,7 +431,7 @@ const Discography = () => {
               <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
                 <div className="aspect-square overflow-hidden">
                   <img
-                    src="/images/the-blooms-house-classics-party-cover.webp"
+                    src="/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp"
                     alt="The Bloom's House: Classics Party album cover"
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
@@ -443,7 +443,7 @@ const Discography = () => {
                       Celebratory
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
-                      12 Tracks
+                      5 Tracks
                     </span>
                   </div>
                   <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
