@@ -28,7 +28,7 @@ const albumData = {
   coverImage: '/images/dreams-cover.webp',
   artist: 'Aly Bouchnak',
   releaseDate: '2026-01-09',
-  totalTracks: 8,
+  totalTracks: 11,
   totalDuration: '25:24',
   genre: 'Lullabies, Sleep Music, Ambient, Functional Music',
   ageRange: '1-8 years',

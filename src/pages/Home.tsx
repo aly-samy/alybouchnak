@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from '../sections/Navigation';
 import Hero from '../sections/Hero';
+import SpotifyPlayer from '../sections/SpotifyPlayer';
 import About from '../sections/About';
 import MoodSupport from '../sections/MoodSupport';
 import NewReleases from '../sections/NewReleases';
@@ -134,6 +135,7 @@ function Home() {
       {/* Main content */}
       <main className="relative">
         <Hero />
+        <SpotifyPlayer />
         <About />
         <MoodSupport />
         <NewReleases />
