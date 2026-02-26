@@ -13,7 +13,6 @@ import {
   ExternalLink,
   Youtube,
   Music2,
-  Share2,
   Link2
 } from 'lucide-react';
 import Navigation from '../sections/Navigation';
@@ -21,7 +20,7 @@ import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { getTrackBySlug } from '../data/tracks';
-import { Track } from '../data/tracks';
+import type { Track } from '../data/tracks';
 import { trackEvent, EventCategories, EventActions } from '../lib/analytics';
 import { trackStreamClick, trackContentView } from '../lib/pixel';
 import { useEngagementTracking } from '../hooks/useEngagementTracking';

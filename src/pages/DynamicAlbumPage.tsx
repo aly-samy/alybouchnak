@@ -15,7 +15,6 @@ import {
   Disc,
   Volume2,
   Heart,
-  Share2,
   Link2,
   Music2
 } from 'lucide-react';
@@ -24,7 +23,7 @@ import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { getAlbumBySlug } from '../data/albums';
-import { Album } from '../data/albums';
+import type { Album } from '../data/albums';
 import { trackEvent, EventCategories, EventActions } from '../lib/analytics';
 import { trackStreamClick, trackContentView } from '../lib/pixel';
 import { useEngagementTracking } from '../hooks/useEngagementTracking';
@@ -146,19 +145,13 @@ function DynamicAlbumPage() {
         title={`${albumData.title} | Aly Bouchnak`}
         description={albumData.description}
         keywords={`${albumData.title}, Aly Bouchnak, ${albumData.genre}, children's music, toddler songs, kids album`}
-        image={`https://alybouchnak.com${albumData.coverImage}`}
-        type="music.album"
-        schema={albumSchema}
+        ogImage={`https://alybouchnak.com${albumData.coverImage}`}
       />
 
       <Navigation />
 
       <main className="pt-20">
-        <Breadcrumbs items={[
-          { label: 'Home', link: '/' },
-          { label: 'Discography', link: '/discography' },
-          { label: albumData.title }
-        ]} />
+        <Breadcrumbs />
 
         {/* Hero Section */}
         <section ref={heroRef} className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">

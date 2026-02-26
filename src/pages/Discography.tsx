@@ -6,8 +6,7 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { getAllAlbums, type Album } from '../data/albums';
-import { getTracksByAlbum } from '../data/tracks';
+import { getAllAlbums } from '../data/albums';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,7 +51,7 @@ const discographySchema = {
             '@type': 'MusicRecording',
             '@id': `https://alybouchnak.com${release.link}#track`,
             name: release.title,
-            url: release.link.startsWith('http')
+            url: release.link?.startsWith('http')
               ? release.link
               : `https://alybouchnak.com${release.link}`,
             image: release.image
@@ -159,7 +158,7 @@ const Discography = () => {
     return () => ctx.revert();
   }, []);
 
-  const getButtonText = (status: Release['status'], type: string) => {
+  const getButtonText = (status: string, type: string) => {
     if (status === 'coming-soon') return 'Coming Soon';
     if (type === 'EP' || type === 'Album') return 'Listen';
     return 'Stream Now';
@@ -371,7 +370,7 @@ const Discography = () => {
                       <ul className="space-y-1 mb-4 text-sm border-t border-gray-100 pt-3">
                         {release.tracks.map((track, idx) => (
                           <li key={idx} className="flex justify-between text-[#2A2A2A]/70">
-                            <span>{track.name}</span>
+                            <span>{track.title}</span>
                             <span>{track.duration}</span>
                           </li>
                         ))}
@@ -460,7 +459,7 @@ const Discography = () => {
                       <ul className="space-y-1 mb-4 text-sm border-t border-white/10 pt-3">
                         {release.tracks.map((track, idx) => (
                           <li key={idx} className="flex justify-between text-white/60">
-                            <span>{track.name}</span>
+                            <span>{track.title}</span>
                             <span>{track.duration}</span>
                           </li>
                         ))}
