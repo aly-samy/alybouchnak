@@ -1,15 +1,27 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Play } from 'lucide-react';
+import { Play, ArrowRight } from 'lucide-react';
 import { getAllTracks } from '../data/tracks';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Helper to determine release status based on date
+function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Released' {
+  const today = new Date();
+  const release = new Date(releaseDate);
+  const diffTime = release.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays > 14) return 'Upcoming';
+  if (diffDays > 0) return 'Pre-Saves';
+  return 'Released';
+}
+
 // Get recent tracks from centralized data
 const recentTracks = getAllTracks()
   .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
-  .slice(0, 4);
+  .slice(0, 6);
 
 interface Release {
   id: number;
@@ -18,7 +30,7 @@ interface Release {
   description: string;
   image: string;
   link: string;
-  status: 'available' | 'presave' | 'coming-soon';
+  status: 'Upcoming' | 'Pre-Saves' | 'Released';
 }
 
 // Convert tracks to releases format
@@ -33,8 +45,21 @@ const releases: Release[] = recentTracks.map((track, index) => ({
   description: track.description,
   image: track.coverImage,
   link: `#/track/${track.slug}`,
-  status: 'available' as const
+  status: getReleaseStatus(track.releaseDate)
 }));
+
+const getStatusBadgeClass = (status: string) => {
+  switch (status) {
+    case 'Upcoming':
+      return 'bg-gray-100 text-gray-600';
+    case 'Pre-Saves':
+      return 'bg-orange-100 text-orange-600';
+    case 'Released':
+      return 'bg-green-100 text-green-600';
+    default:
+      return 'bg-gray-100 text-gray-600';
+  }
+};
 
 
 const NewReleases = () => {

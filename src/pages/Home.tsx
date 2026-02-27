@@ -7,6 +7,7 @@ import SpotifyPlayer from '../sections/SpotifyPlayer';
 import About from '../sections/About';
 import MoodSupport from '../sections/MoodSupport';
 import NewReleases from '../sections/NewReleases';
+import LatestAlbums from '../sections/LatestAlbums';
 import Playlist from '../sections/Playlist';
 import Testimonials from '../sections/Testimonials';
 import Support from '../sections/Support';
@@ -179,6 +180,7 @@ function Home() {
         <About />
         <MoodSupport />
         <NewReleases />
+        <LatestAlbums />
         <Playlist />
         <Testimonials />
         <Support />

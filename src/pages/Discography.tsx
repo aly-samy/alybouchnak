@@ -1,21 +1,122 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sun, Moon, Music, ExternalLink, Disc } from 'lucide-react';
+import { Sun, Moon, Music, ExternalLink, Disc, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { getAllAlbums } from '../data/albums';
+import { getAllTracks } from '../data/tracks';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Get albums from centralized data
+// Get all data
 const allAlbums = getAllAlbums();
+const allTracks = getAllTracks();
 
-// Separate albums by mood
-const daytimeReleases = allAlbums.filter(album => album.mood === 'Playful' || album.mood === 'Energetic');
-const sleepReleases = allAlbums.filter(album => album.mood === 'Calming' || album.mood === 'Transitional');
+// Define daytime and nighttime moods
+const DAYTIME_MOODS = ['Playful', 'Energetic', 'Upbeat', 'Celebratory'];
+const NIGHTTIME_MOODS = ['Calming', 'Transitional', 'Gentle', 'Sleep'];
+
+// Combine and categorize releases (tracks + albums)
+interface CombinedRelease {
+  id: number;
+  title: string;
+  type: 'Album' | 'EP' | 'Single';
+  status: 'Upcoming' | 'Pre-Saves' | 'Released';
+  releaseDate: string;
+  date: string;
+  image?: string;
+  coverImage?: string;
+  link?: string;
+  description: string;
+  genre: string;
+  mood: string;
+  routine?: string;
+  isTrack: boolean;
+}
+
+// Helper to determine release status based on date
+function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Released' {
+  const today = new Date();
+  const release = new Date(releaseDate);
+  const diffTime = release.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays > 14) return 'Upcoming';
+  if (diffDays > 0) return 'Pre-Saves';
+  return 'Released';
+}
+
+// Helper to determine type
+function getReleaseType(item: typeof allAlbums[0] | typeof allTracks[0], isTrack: boolean): 'Album' | 'EP' | 'Single' {
+  if (isTrack) return 'Single';
+  const trackCount = (item as typeof allAlbums[0]).trackCount;
+  if (trackCount >= 8) return 'Album';
+  if (trackCount >= 4) return 'EP';
+  return 'Single';
+}
+
+// Create combined releases array
+function createCombinedReleases(): CombinedRelease[] {
+  const albumsAsReleases: CombinedRelease[] = allAlbums.map(album => ({
+    ...album,
+    id: album.id || Math.random(),
+    type: getReleaseType(album, false),
+    status: getReleaseStatus(album.releaseDate),
+    date: album.date || album.releaseDate,
+    isTrack: false,
+    image: album.image || album.coverImage,
+    link: album.link || `#/album/${album.slug}`,
+    genre: album.genre,
+    mood: album.mood,
+  }));
+
+  const tracksAsReleases: CombinedRelease[] = allTracks.map(track => ({
+    ...track,
+    id: track.id,
+    type: getReleaseType(track, true),
+    status: getReleaseStatus(track.releaseDate),
+    date: track.releaseDate,
+    isTrack: true,
+    image: track.coverImage,
+    link: track.albumUrl || `#/track/${track.slug}`,
+    genre: track.genre,
+    mood: track.mood,
+  }));
+
+  return [...albumsAsReleases, ...tracksAsReleases];
+}
+
+const allReleases = createCombinedReleases();
+
+// Sort by release date (newest first)
+const sortByDate = (a: CombinedRelease, b: CombinedRelease) => 
+  new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
+
+// Get unique values for filters
+const getUniqueYears = (releases: CombinedRelease[]) => {
+  const years = releases.map(r => new Date(r.releaseDate).getFullYear());
+  return [...new Set(years)].sort((a, b) => b - a);
+};
+
+const getUniqueGenres = (releases: CombinedRelease[]) => {
+  const genres = releases.flatMap(r => r.genre.split(', ').map(g => g.trim()));
+  return [...new Set(genres)].sort();
+};
+
+const getUniqueMoods = (releases: CombinedRelease[]) => {
+  return [...new Set(releases.map(r => r.mood))].sort();
+};
+
+const getUniqueRoutines = (releases: CombinedRelease[]) => {
+  const routines = releases.map(r => r.routine).filter((r): r is string => !!r);
+  return [...new Set(routines)].sort();
+};
+
+const filteredDaytimeReleases = allReleases.filter(r => DAYTIME_MOODS.includes(r.mood) && r.status === 'Released');
+const filteredSleepReleases = allReleases.filter(r => NIGHTTIME_MOODS.includes(r.mood));
 
 // Schema.org for discography page
 const discographySchema = {
@@ -36,14 +137,10 @@ const discographySchema = {
   },
   mainEntity: {
     '@type': 'ItemList',
-    numberOfItems: [
-      ...daytimeReleases.filter(r => r.status === 'available'),
-      ...sleepReleases
-    ].length,
+    numberOfItems: filteredDaytimeReleases.length + filteredSleepReleases.length,
     itemListOrder: 'https://schema.org/ItemListOrderAscending',
     itemListElement: [
-      ...daytimeReleases
-        .filter(r => r.status === 'available')
+      ...filteredDaytimeReleases
         .map((release, index) => ({
           '@type': 'ListItem',
           position: index + 1,
@@ -65,12 +162,9 @@ const discographySchema = {
           },
         })),
 
-      ...sleepReleases.map((release, index) => ({
+      ...filteredSleepReleases.map((release, index) => ({
         '@type': 'ListItem',
-        position:
-          daytimeReleases.filter(r => r.status === 'available').length +
-          index +
-          1,
+        position: filteredDaytimeReleases.length + index + 1,
         item: {
           '@type': 'MusicAlbum',
           '@id': `https://alybouchnak.com${release.link}#album`,
@@ -96,6 +190,67 @@ const Discography = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const daytimeRef = useRef<HTMLDivElement>(null);
   const sleepRef = useRef<HTMLDivElement>(null);
+  
+  // Filter states for daytime section
+  const [daytimeYearFilter, setDaytimeYearFilter] = useState<string>('all');
+  const [daytimeGenreFilter, setDaytimeGenreFilter] = useState<string>('all');
+  const [daytimeMoodFilter, setDaytimeMoodFilter] = useState<string>('all');
+  const [daytimeRoutineFilter, setDaytimeRoutineFilter] = useState<string>('all');
+  const [daytimeCurrentPage, setDaytimeCurrentPage] = useState(1);
+  
+  // Pagination state for sleep section
+  const [sleepCurrentPage, setSleepCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 12;
+
+  // Filter and sort daytime releases
+  const filteredDaytimeReleases = useMemo(() => {
+    let releases = allReleases.filter(r => DAYTIME_MOODS.includes(r.mood));
+    
+    if (daytimeYearFilter !== 'all') {
+      releases = releases.filter(r => new Date(r.releaseDate).getFullYear().toString() === daytimeYearFilter);
+    }
+    if (daytimeGenreFilter !== 'all') {
+      releases = releases.filter(r => r.genre.toLowerCase().includes(daytimeGenreFilter.toLowerCase()));
+    }
+    if (daytimeMoodFilter !== 'all') {
+      releases = releases.filter(r => r.mood === daytimeMoodFilter);
+    }
+    if (daytimeRoutineFilter !== 'all') {
+      releases = releases.filter(r => r.routine === daytimeRoutineFilter);
+    }
+    
+    return releases.sort(sortByDate);
+  }, [daytimeYearFilter, daytimeGenreFilter, daytimeMoodFilter, daytimeRoutineFilter]);
+
+  // Paginate daytime releases
+  const paginatedDaytimeReleases = useMemo(() => {
+    const startIndex = (daytimeCurrentPage - 1) * ITEMS_PER_PAGE;
+    return filteredDaytimeReleases.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredDaytimeReleases, daytimeCurrentPage]);
+
+  const daytimeTotalPages = Math.ceil(filteredDaytimeReleases.length / ITEMS_PER_PAGE);
+
+  // Filter and sort sleep releases
+  const filteredSleepReleases = useMemo(() => {
+    return allReleases
+      .filter(r => NIGHTTIME_MOODS.includes(r.mood))
+      .sort(sortByDate);
+  }, []);
+
+  // Paginate sleep releases
+  const paginatedSleepReleases = useMemo(() => {
+    const startIndex = (sleepCurrentPage - 1) * ITEMS_PER_PAGE;
+    return filteredSleepReleases.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredSleepReleases, sleepCurrentPage]);
+
+  const sleepTotalPages = Math.ceil(filteredSleepReleases.length / ITEMS_PER_PAGE);
+
+  // Get filter options
+  const daytimeReleasesForFilters = allReleases.filter(r => DAYTIME_MOODS.includes(r.mood));
+  const years = getUniqueYears(daytimeReleasesForFilters);
+  const genres = getUniqueGenres(daytimeReleasesForFilters);
+  const moods = getUniqueMoods(daytimeReleasesForFilters);
+  const routines = getUniqueRoutines(daytimeReleasesForFilters);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -156,13 +311,35 @@ const Discography = () => {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [paginatedDaytimeReleases, paginatedSleepReleases]);
 
   const getButtonText = (status: string, type: string) => {
-    if (!status || status === 'coming-soon') return 'Coming Soon';
+    if (status === 'Upcoming') return 'Coming Soon';
+    if (status === 'Pre-Saves') return 'Pre-Save Now';
     if (type === 'EP' || type === 'Album') return 'Listen';
     return 'Stream Now';
   };
+
+  const getStatusBadgeClass = (status: string) => {
+    switch (status) {
+      case 'Upcoming':
+        return 'bg-gray-100 text-gray-600';
+      case 'Pre-Saves':
+        return 'bg-orange-100 text-orange-600';
+      case 'Released':
+        return 'bg-green-100 text-green-600';
+      default:
+        return 'bg-gray-100 text-gray-600';
+    }
+  };
+
+  // Get latest 3 albums for the Latest Albums section
+  const latestAlbums = useMemo(() => {
+    return allReleases
+      .filter(r => !r.isTrack)
+      .sort(sortByDate)
+      .slice(0, 3);
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-[#C8F0F7]">
@@ -207,110 +384,43 @@ const Discography = () => {
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Tuned for Dreams */}
-              <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src="/images/dreams-cover.webp"
-                    alt="Tuned for Dreams album cover"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#240046] text-white text-sm font-semibold rounded-full">
-                      <Moon className="w-4 h-4" />
-                      Sleep
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
-                      8 Tracks
-                    </span>
+              {latestAlbums.map((album) => (
+                <article key={album.id} className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="aspect-square overflow-hidden">
+                    <img
+                      src={album.image}
+                      alt={album.title}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
                   </div>
-                  <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
-                    Tuned for Dreams
-                  </h3>
-                  <p className="text-sm text-[#2A2A2A] mb-4">
-                    A psychoacoustic sleep album designed on the ISO Principle, moving infants from wakefulness to deep sleep through physiological deceleration.
-                  </p>
-                  <a
-                    href="#/album/tuned-for-dreams"
-                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#240046] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
-                  >
-                    Listen Now
-                    <ExternalLink className="w-4 h-4 ml-2" />
-                  </a>
-                </div>
-              </article>
-
-              {/* The Bloom's House: Volume 1 */}
-              <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src="/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp"
-                    alt="The Bloom's House: Volume 1 album cover"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F26B3A] text-white text-sm font-semibold rounded-full">
-                      <Sun className="w-4 h-4" />
-                      Playful
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
-                      10 Tracks
-                    </span>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full ${
+                        NIGHTTIME_MOODS.includes(album.mood) ? 'bg-[#240046] text-white' : 'bg-[#F26B3A] text-white'
+                      }`}>
+                        {NIGHTTIME_MOODS.includes(album.mood) ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+                        {album.mood}
+                      </span>
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full ${getStatusBadgeClass(album.status)}`}>
+                        {album.status}
+                      </span>
+                    </div>
+                    <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
+                      {album.title}
+                    </h3>
+                    <p className="text-sm text-[#2A2A2A] mb-4">
+                      {album.description}
+                    </p>
+                    <a
+                      href={album.link}
+                      className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#F26B3A] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
+                    >
+                      {getButtonText(album.status, album.type)}
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </a>
                   </div>
-                  <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
-                    The Bloom's House: Volume 1
-                  </h3>
-                  <p className="text-sm text-[#2A2A2A] mb-4">
-                    A complete collection of fun, engaging songs for toddlers and preschoolers covering daily routines and developmental skills.
-                  </p>
-                  <a
-                    href="#/album/the-blooms-house-volume-1"
-                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#F26B3A] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
-                  >
-                    Listen Now
-                    <ExternalLink className="w-4 h-4 ml-2" />
-                  </a>
-                </div>
-              </article>
-
-              {/* The Bloom's House: Classics Party */}
-              <article className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src="/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp"
-                    alt="The Bloom's House: Classics Party album cover"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F7E859] text-[#101010] text-sm font-semibold rounded-full">
-                      <Sun className="w-4 h-4" />
-                      Celebratory
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
-                      5 Tracks
-                    </span>
-                  </div>
-                  <h3 className="font-['Fredoka_One'] text-xl text-[#101010] mb-2">
-                    The Bloom's House: Classics Party
-                  </h3>
-                  <p className="text-sm text-[#2A2A2A] mb-4">
-                    A vibrant collection of classic children's songs transformed with contemporary pop production and playful energy for family dance parties.
-                  </p>
-                  <a
-                    href="#/album/the-blooms-house-classics-party"
-                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#F7E859] text-[#101010] font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
-                  >
-                    Listen Now
-                    <ExternalLink className="w-4 h-4 ml-2" />
-                  </a>
-                </div>
-              </article>
+                </article>
+              ))}
             </div>
           </div>
         </div>
@@ -329,12 +439,62 @@ const Discography = () => {
               </h2>
             </div>
 
+            {/* Filters */}
+            <div className="bg-white rounded-2xl p-4 mb-8 shadow-lg">
+              <div className="flex items-center gap-2 mb-4">
+                <Filter className="w-5 h-5 text-[#F26B3A]" />
+                <span className="font-semibold text-[#101010]">Filter Releases</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <select
+                  value={daytimeYearFilter}
+                  onChange={(e) => { setDaytimeYearFilter(e.target.value); setDaytimeCurrentPage(1); }}
+                  className="px-4 py-2 rounded-lg border border-gray-200 focus:border-[#F26B3A] focus:outline-none text-sm"
+                >
+                  <option value="all">All Years</option>
+                  {years.map(year => (
+                    <option key={year} value={year.toString()}>{year}</option>
+                  ))}
+                </select>
+                <select
+                  value={daytimeGenreFilter}
+                  onChange={(e) => { setDaytimeGenreFilter(e.target.value); setDaytimeCurrentPage(1); }}
+                  className="px-4 py-2 rounded-lg border border-gray-200 focus:border-[#F26B3A] focus:outline-none text-sm"
+                >
+                  <option value="all">All Genres</option>
+                  {genres.map(genre => (
+                    <option key={genre} value={genre}>{genre}</option>
+                  ))}
+                </select>
+                <select
+                  value={daytimeMoodFilter}
+                  onChange={(e) => { setDaytimeMoodFilter(e.target.value); setDaytimeCurrentPage(1); }}
+                  className="px-4 py-2 rounded-lg border border-gray-200 focus:border-[#F26B3A] focus:outline-none text-sm"
+                >
+                  <option value="all">All Moods</option>
+                  {moods.map(mood => (
+                    <option key={mood} value={mood}>{mood}</option>
+                  ))}
+                </select>
+                <select
+                  value={daytimeRoutineFilter}
+                  onChange={(e) => { setDaytimeRoutineFilter(e.target.value); setDaytimeCurrentPage(1); }}
+                  className="px-4 py-2 rounded-lg border border-gray-200 focus:border-[#F26B3A] focus:outline-none text-sm"
+                >
+                  <option value="all">All Routines</option>
+                  {routines.map(routine => (
+                    <option key={routine} value={routine}>{routine}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
             <div ref={daytimeRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {daytimeReleases.map((release) => (
+              {paginatedDaytimeReleases.map((release) => (
                 <article
                   key={release.id}
                   className={`release-card card overflow-hidden ${
-                    release.status === 'coming-soon' ? 'border-2 border-dashed border-gray-300' : ''
+                    release.status === 'Upcoming' ? 'border-2 border-dashed border-gray-300' : ''
                   }`}
                 >
                   {release.image ? (
@@ -359,37 +519,13 @@ const Discography = () => {
                       {release.title}
                     </h3>
                     <p className="text-sm text-[#2A2A2A]/70 mb-3">
-                      {release.status === 'coming-soon' ? 'Releasing' : 'Released'}: {release.date}
+                      {release.status === 'Upcoming' ? 'Releasing' : 'Released'}: {release.date}
                     </p>
                     <p className="text-sm text-[#2A2A2A] mb-4 line-clamp-2">
                       {release.description}
                     </p>
 
-                    {/* Track list */}
-                    {release.tracks && (
-                      <ul className="space-y-1 mb-4 text-sm border-t border-gray-100 pt-3">
-                        {release.tracks.map((track, idx) => (
-                          <li key={idx} className="flex justify-between text-[#2A2A2A]/70">
-                            <span>{track.title}</span>
-                            <span>{track.duration}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
-                    {/* Lyrics */}
-                    {release.lyrics && (
-                      <details className="mb-4 text-sm">
-                        <summary className="font-semibold text-[#101010] cursor-pointer hover:text-[#F26B3A]">
-                          View Lyrics
-                        </summary>
-                        <p className="mt-2 text-[#2A2A2A]/80 whitespace-pre-line text-xs">
-                          {release.lyrics}
-                        </p>
-                      </details>
-                    )}
-
-                    {release.status === 'coming-soon' ? (
+                    {release.status === 'Upcoming' ? (
                       <button className="w-full py-3 px-6 bg-gray-200 text-gray-500 font-bold rounded-full cursor-not-allowed">
                         Coming Soon
                       </button>
@@ -406,6 +542,28 @@ const Discography = () => {
                 </article>
               ))}
             </div>
+            {/* Pagination for Daytime */}
+            {daytimeTotalPages > 1 && (
+              <div className="flex items-center justify-center gap-4 mt-10">
+                <button
+                  onClick={() => setDaytimeCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={daytimeCurrentPage === 1}
+                  className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <span className="text-sm font-medium text-[#101010]">
+                  Page {daytimeCurrentPage} of {daytimeTotalPages}
+                </span>
+                <button
+                  onClick={() => setDaytimeCurrentPage(prev => Math.min(daytimeTotalPages, prev + 1))}
+                  disabled={daytimeCurrentPage === daytimeTotalPages}
+                  className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -427,7 +585,7 @@ const Discography = () => {
             </p>
 
             <div ref={sleepRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {sleepReleases.map((release) => (
+              {paginatedSleepReleases.map((release) => (
                 <article
                   key={release.id}
                   className="release-card bg-[#2a2a2a] rounded-[28px] overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.30)]"
@@ -454,18 +612,6 @@ const Discography = () => {
                       {release.description}
                     </p>
 
-                    {/* Track list */}
-                    {release.tracks && (
-                      <ul className="space-y-1 mb-4 text-sm border-t border-white/10 pt-3">
-                        {release.tracks.map((track, idx) => (
-                          <li key={idx} className="flex justify-between text-white/60">
-                            <span>{track.title}</span>
-                            <span>{track.duration}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
                     <a
                       href={release.link}
                       className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#F7E859] text-[#240046] font-bold rounded-full 
@@ -479,6 +625,29 @@ const Discography = () => {
                 </article>
               ))}
             </div>
+
+            {/* Pagination for Sleep */}
+            {sleepTotalPages > 1 && (
+              <div className="flex items-center justify-center gap-4 mt-10">
+                <button
+                  onClick={() => setSleepCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={sleepCurrentPage === 1}
+                  className="p-2 rounded-full bg-white/10 text-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <span className="text-sm font-medium text-white">
+                  Page {sleepCurrentPage} of {sleepTotalPages}
+                </span>
+                <button
+                  onClick={() => setSleepCurrentPage(prev => Math.min(sleepTotalPages, prev + 1))}
+                  disabled={sleepCurrentPage === sleepTotalPages}
+                  className="p-2 rounded-full bg-white/10 text-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
