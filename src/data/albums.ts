@@ -188,7 +188,7 @@ This album applies principles of music education and developmental psychology:\n
     youtubeUrl: 'https://youtube.com/playlist/placeholder',
     trackCount: 8,
     duration: '42:30',
-    upc: '198391926950',
+    upc: '5063893028990',
     amazonUrl: 'https://amazon.com/music/player/artists/B0FVYF53CC/aly-bouchnak',
     educationalBenefits: [
       { title: 'Sleep Routine', description: 'Establishes consistent bedtime rituals and healthy sleep habits.' },
