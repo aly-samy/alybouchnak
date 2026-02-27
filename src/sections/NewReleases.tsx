@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Play, ArrowRight } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { getAllTracks } from '../data/tracks';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,20 +47,6 @@ const releases: Release[] = recentTracks.map((track, index) => ({
   link: `#/track/${track.slug}`,
   status: getReleaseStatus(track.releaseDate)
 }));
-
-const getStatusBadgeClass = (status: string) => {
-  switch (status) {
-    case 'Upcoming':
-      return 'bg-gray-100 text-gray-600';
-    case 'Pre-Saves':
-      return 'bg-orange-100 text-orange-600';
-    case 'Released':
-      return 'bg-green-100 text-green-600';
-    default:
-      return 'bg-gray-100 text-gray-600';
-  }
-};
-
 
 const NewReleases = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -129,17 +115,17 @@ const NewReleases = () => {
 
   const getButtonText = (status: Release['status']) => {
     switch (status) {
-      case 'available':
+      case 'Released':
         return 'Listen Now';
-      case 'presave':
+      case 'Pre-Saves':
         return 'Pre-Save';
-      case 'coming-soon':
+      case 'Upcoming':
         return 'Coming Soon';
     }
   };
 
   const getButtonClass = (status: Release['status']) => {
-    if (status === 'coming-soon') {
+    if (status === 'Upcoming') {
       return 'inline-flex items-center justify-center w-full px-6 py-3 bg-gray-300 text-gray-500 font-bold rounded-full cursor-not-allowed';
     }
     return 'btn-primary w-full justify-center';
@@ -191,14 +177,14 @@ const NewReleases = () => {
                   {release.title}
                 </h3>
                 <p className="text-sm text-[#F26B3A] font-semibold">
-                  {release.status === 'available' ? 'Released' : release.status === 'presave' ? 'Releasing' : 'Coming'}: {release.date}
+                  {release.status === 'Released' ? 'Released' : release.status === 'Pre-Saves' ? 'Releasing' : 'Coming'}: {release.date}
                 </p>
                 <p className="text-sm text-[#2A2A2A] line-clamp-2">
                   {release.description}
                 </p>
 
                 {/* Button */}
-                {release.status === 'coming-soon' ? (
+                {release.status === 'Upcoming' ? (
                   <button className={getButtonClass(release.status)} disabled>
                     {getButtonText(release.status)}
                   </button>
