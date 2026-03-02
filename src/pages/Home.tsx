@@ -57,11 +57,23 @@ const artistSchema = {
     name: 'Aly Bouchnak'
   },
 
-  identifier: {
-    '@type': 'PropertyValue',
-    propertyID: 'ISNI',
-    value: '0000000529569919'
-  },
+  identifier: [
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'ISNI',
+      value: '0000000529569919'
+    },
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'IPI',
+      value: '1337888402'
+    },
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'IPI',
+      value: '1337888304'
+    }
+  ],
 
   sameAs: [
     'https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8',
