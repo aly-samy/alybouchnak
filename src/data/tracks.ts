@@ -276,7 +276,7 @@ Boom teka boom, nice and slow`,
     title: 'The Funny Bunny Jump (Freeze Dance)',
     subtitle: 'Interactive freeze dance game for listening skills (Ages 2–6)',
     description: 'An interactive freeze dance game that builds listening skills and motor control. Children hop like bunnies and freeze when the music stops.',
-    coverImage: '/images/funny-bunny-jump-cover.webp',
+    coverImage: '/images/the-funny-bunny-jump-cover.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-04-03',
     duration: '1:50',
@@ -360,7 +360,7 @@ When the music plays again!`,
     title: 'The Wise Mice (Memory Game)',
     subtitle: 'Cumulative memory song for cognitive skills (Ages 2–6)',
     description: 'A cumulative memory song that enhances sequencing and cognitive skills. Children repeat growing sequences of mouse actions, building working memory.',
-    coverImage: '/images/wise-mice-cover.webp',
+    coverImage: '/images/the-wise-mice-cover.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-11',
     duration: '2:20',
@@ -418,7 +418,7 @@ Wise mice memories make us giggle!`,
       description: 'Cumulative memory song for kids ages 2-6. Build working memory and sequencing skills through playful mouse actions.',
       keywords: 'memory game song, cognitive development music, sequencing song, educational kids music, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/the-wise-mice',
-      ogImage: 'https://alybouchnak.com/images/wise-mice-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/the-wise-mice-cover.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -440,7 +440,7 @@ Wise mice memories make us giggle!`,
       datePublished: '2026-02-11',
       isrcCode: 'GX89G2624756',
       description: 'A cumulative memory song that enhances sequencing and cognitive skills.',
-      image: 'https://alybouchnak.com/images/wise-mice-cover.webp'
+      image: 'https://alybouchnak.com/images/the-wise-mice-cover.webp'
     }
   },
   {
@@ -449,7 +449,7 @@ Wise mice memories make us giggle!`,
     title: 'The Yummy Spoon (Open Wide)',
     subtitle: 'Mealtime encouragement song for picky eaters (Ages 2–6)',
     description: 'A playful mealtime song that encourages trying new foods and makes eating fun. Perfect for reducing picky eating and creating positive mealtime associations.',
-    coverImage: '/images/yummy-spoon-cover.webp',
+    coverImage: '/images/the-yummy-spoon-cover.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-03-11',
     duration: '1:41',
@@ -502,7 +502,7 @@ Eating healthy is alright!`,
       description: 'Playful mealtime song to encourage healthy eating. Perfect for reducing picky eating and making meals fun for toddlers.',
       keywords: 'mealtime song, picky eater song, healthy eating for kids, toddler mealtime, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/the-yummy-spoon',
-      ogImage: 'https://alybouchnak.com/images/yummy-spoon-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/the-yummy-spoon-cover.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -524,7 +524,7 @@ Eating healthy is alright!`,
       datePublished: '2026-03-11',
       isrcCode: 'GX89G2661676',
       description: 'A playful mealtime song that encourages trying new foods and makes eating fun.',
-      image: 'https://alybouchnak.com/images/yummy-spoon-cover.webp'
+      image: 'https://alybouchnak.com/images/the-yummy-spoon-cover.webp'
     }
   },
   {
@@ -533,7 +533,7 @@ Eating healthy is alright!`,
     title: 'Nanny & Papa (Funny Bunny Family)',
     subtitle: 'Heartwarming family celebration song (Ages 2–6)',
     description: 'A heartwarming celebration of grandparent relationships. This song honors the special bond between children and their Nanny and Papa through joyful lyrics and warm melodies.',
-    coverImage: '/images/nanny-papa-cover.webp',
+    coverImage: '/images/nanny-and-papa-cover.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-27',
     duration: '2:34',
@@ -586,7 +586,7 @@ Grandparent love will never fade`,
       description: 'Heartwarming song celebrating grandparent relationships. Perfect for honoring Nanny and Papa bonds with children.',
       keywords: 'grandparent song, nanny papa song, family love song, grandparents day song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/nanny-papa',
-      ogImage: 'https://alybouchnak.com/images/nanny-papa-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/nanny-and-papa-cover.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -608,7 +608,7 @@ Grandparent love will never fade`,
       datePublished: '2026-02-27',
       isrcCode: 'GXBDS2573588',
       description: 'A heartwarming celebration of grandparent relationships.',
-      image: 'https://alybouchnak.com/images/nanny-papa-cover.webp'
+      image: 'https://alybouchnak.com/images/nanny-and-papa-cover.webp'
     }
   },
   {
@@ -752,7 +752,7 @@ See you tomorrow!
     title: 'Old MacDonald Had a Farm (Farm Party)',
     subtitle: 'Farm animal celebration song (Ages 2–6)',
     description: 'A high-energy party version of "Old MacDonald Had a Farm" with modern beats and animal sound effects that get everyone dancing and singing along.',
-    coverImage: '/images/old-macdonald-farm-party-cover.webp',
+    coverImage: '/images/Old-McDonald-had-a-farm.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-03-06',
     duration: '2:14',
@@ -852,7 +852,7 @@ Old Mac... is back!`,
       description: 'High-energy party version of the classic farm song. Kids learn animal sounds while dancing to modern beats. Perfect for ages 2-6.',
       keywords: 'Old MacDonald, farm song for kids, animal sounds song, farm party song, toddler farm song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/old-macdonald-farm-party',
-      ogImage: 'https://alybouchnak.com/images/old-macdonald-farm-party-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/Old-McDonald-had-a-farm.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -874,7 +874,7 @@ Old Mac... is back!`,
       datePublished: '2026-03-06',
       isrcCode: 'GX8KD2658865',
       description: 'A high-energy party version of Old MacDonald with modern beats and animal sound effects.',
-      image: 'https://alybouchnak.com/images/old-macdonald-farm-party-cover.webp'
+      image: 'https://alybouchnak.com/images/Old-McDonald-had-a-farm.webp'
     }
   },
   {
@@ -883,7 +883,7 @@ Old Mac... is back!`,
     title: 'Five Little Monkeys (Jungle Party)',
     subtitle: 'Counting and jumping jungle song (Ages 2–6)',
     description: 'A lively jungle-themed version of "Five Little Monkeys" with energetic beats that encourage counting, jumping, and playful monkey movements.',
-    coverImage: '/images/five-little-monkeys-jungle-party-cover.webp',
+    coverImage: '/images/Five-little-monkeys-jumping-on-the-bed.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-01',
     duration: '2:25',
@@ -969,7 +969,7 @@ NO MORE JUMPING!`,
       description: 'Jungle party version of the classic counting song. Kids learn to count down from 5 while jumping and dancing. Ages 2-6.',
       keywords: 'five little monkeys, counting song for kids, monkey song, kids jumping song, toddler counting, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/five-little-monkeys-jungle-party',
-      ogImage: 'https://alybouchnak.com/images/five-little-monkeys-jungle-party-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/Five-little-monkeys-jumping-on-the-bed.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -991,7 +991,7 @@ NO MORE JUMPING!`,
       datePublished: '2026-02-01',
       isrcCode: 'GX8LD2671883',
       description: 'A jungle-themed version of Five Little Monkeys with energetic beats for counting and jumping.',
-      image: 'https://alybouchnak.com/images/five-little-monkeys-jungle-party-cover.webp'
+      image: 'https://alybouchnak.com/images/Five-little-monkeys-jumping-on-the-bed.webp'
     }
   },
   {
@@ -1000,7 +1000,7 @@ NO MORE JUMPING!`,
     title: 'The Wheels on the Bus (Party Ride)',
     subtitle: 'Transportation movement song (Ages 2–6)',
     description: 'An energetic party version of the classic "The Wheels on the Bus" with modern beats and fun sound effects that get children moving and singing about bus adventures.',
-    coverImage: '/images/wheels-on-the-bus-party-ride-cover.webp',
+    coverImage: '/images/The-Wheels-on-the-Bus--Party-Ride.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-03',
     duration: '2:19',
@@ -1097,7 +1097,7 @@ Thanks for the ride!`,
       description: 'Energetic party version of the classic bus song. Kids learn vehicle sounds while dancing to modern beats. Perfect for ages 2-6.',
       keywords: 'wheels on the bus, transportation song for kids, bus song, kids vehicle song, toddler movement song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/wheels-on-the-bus-party-ride',
-      ogImage: 'https://alybouchnak.com/images/wheels-on-the-bus-party-ride-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Wheels-on-the-Bus--Party-Ride.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1119,7 +1119,7 @@ Thanks for the ride!`,
       datePublished: '2026-02-03',
       isrcCode: 'GX8LD2630428',
       description: 'An energetic party version of the classic bus song with modern beats and fun sound effects.',
-      image: 'https://alybouchnak.com/images/wheels-on-the-bus-party-ride-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Wheels-on-the-Bus--Party-Ride.webp'
     }
   },
   {
@@ -1128,7 +1128,7 @@ Thanks for the ride!`,
     title: "If You're Happy and You Know It (Party Edition)",
     subtitle: 'Emotions and actions celebration song (Ages 2–6)',
     description: 'A high-energy party version of the classic "If You\'re Happy and You Know It" that encourages children to express emotions through movement and celebrate together.',
-    coverImage: '/images/happy-party-edition-cover.webp',
+    coverImage: '/images/If-you-happy-and-you-know-it.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-05',
     duration: '2:33',
@@ -1219,7 +1219,7 @@ See you next time!
       description: 'High-energy party version of the classic emotions song. Kids learn to express feelings through movement and celebration. Ages 2-6.',
       keywords: 'if youre happy and you know it, emotions song for kids, action song, clap your hands song, toddler celebration song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/happy-party-edition',
-      ogImage: 'https://alybouchnak.com/images/happy-party-edition-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/If-you-happy-and-you-know-it.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1241,7 +1241,7 @@ See you next time!
       datePublished: '2026-02-05',
       isrcCode: 'GX8LD2681741',
       description: 'A high-energy party version encouraging children to express emotions through movement and celebration.',
-      image: 'https://alybouchnak.com/images/happy-party-edition-cover.webp'
+      image: 'https://alybouchnak.com/images/If-you-happy-and-you-know-it.webp'
     }
   },
   {
@@ -1250,7 +1250,7 @@ See you next time!
     title: 'The Body Party (Head & Shoulders)',
     subtitle: 'Body parts movement song (Ages 2–6)',
     description: 'A party version of "Head, Shoulders, Knees and Toes" that gets children moving while learning body parts and developing coordination.',
-    coverImage: '/images/body-party-head-shoulders-cover.webp',
+    coverImage: '/images/head-shoulders-knees-and-toes.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-08',
     duration: '2:10',
@@ -1341,7 +1341,7 @@ We are healthy and strong!
       description: 'Party version of the classic body parts song. Kids learn head, shoulders, knees and toes while dancing. Ages 2-6.',
       keywords: 'head shoulders knees and toes, body parts song for kids, movement song, toddler body awareness, kids coordination song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/body-party-head-shoulders',
-      ogImage: 'https://alybouchnak.com/images/body-party-head-shoulders-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/head-shoulders-knees-and-toes.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1363,7 +1363,7 @@ We are healthy and strong!
       datePublished: '2026-02-08',
       isrcCode: 'GX8LD2631231',
       description: 'A party version teaching body parts with progressively faster tempos for fun coordination challenges.',
-      image: 'https://alybouchnak.com/images/body-party-head-shoulders-cover.webp'
+      image: 'https://alybouchnak.com/images/head-shoulders-knees-and-toes.webp'
     }
   },
   {
@@ -1372,7 +1372,7 @@ We are healthy and strong!
     title: 'The Alphabet Song',
     subtitle: 'Letter learning song (Ages 2–6)',
     description: 'A modern, upbeat version of the classic alphabet song that makes learning ABCs fun and engaging with contemporary beats and catchy melody.',
-    coverImage: '/images/alphabet-song-cover.webp',
+    coverImage: '/images/The-Alphabet-Song--Aly-Bouchnak.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-10',
     duration: '2:55',
@@ -1454,7 +1454,7 @@ A B C`,
       description: 'Modern upbeat alphabet song for kids. Learn ABCs with fun beats and letter examples. Perfect for early literacy ages 2-6.',
       keywords: 'alphabet song, ABC song for kids, learn letters song, kids educational music, toddler alphabet, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/alphabet-song',
-      ogImage: 'https://alybouchnak.com/images/alphabet-song-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Alphabet-Song--Aly-Bouchnak.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1476,7 +1476,7 @@ A B C`,
       datePublished: '2026-02-10',
       isrcCode: 'GX8LD2663207',
       description: 'A modern, upbeat alphabet song teaching ABCs with contemporary beats and letter examples.',
-      image: 'https://alybouchnak.com/images/alphabet-song-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Alphabet-Song--Aly-Bouchnak.webp'
     }
   },
   {
@@ -1485,7 +1485,7 @@ A B C`,
     title: 'The Duckie Song',
     subtitle: 'Water animal adventure song (Ages 2–6)',
     description: 'A sweet and playful song about a little duck\'s adventures, perfect for teaching about ducks and water animals while encouraging imagination.',
-    coverImage: '/images/duckie-song-cover.webp',
+    coverImage: '/images/The-Duckie-Song-Aly-Bouchnak.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-12',
     duration: '2:32',
@@ -1583,7 +1583,7 @@ Oh, how sweet she is,
       description: 'Sweet duck adventure song for kids. Learn about ducks and water animals through playful storytelling. Ages 2-6.',
       keywords: 'duck song for kids, duckie song, water animal song, pond song, kids animal adventure, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/duckie-song',
-      ogImage: 'https://alybouchnak.com/images/duckie-song-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Duckie-Song-Aly-Bouchnak.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1605,7 +1605,7 @@ Oh, how sweet she is,
       datePublished: '2026-02-12',
       isrcCode: 'GX8LD2660078',
       description: 'A sweet song about a little duck\'s adventures teaching about water animals and encouraging imagination.',
-      image: 'https://alybouchnak.com/images/duckie-song-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Duckie-Song-Aly-Bouchnak.webp'
     }
   },
   {
@@ -1614,7 +1614,7 @@ Oh, how sweet she is,
     title: 'Zakzooka The Bear',
     subtitle: 'Friendly bear adventure song (Ages 2–6)',
     description: 'An adventurous song about Zakzooka the bear and his forest friends, teaching about bears, friendship, and woodland animals through storytelling.',
-    coverImage: '/images/zakzooka-the-bear-cover.webp',
+    coverImage: '/images/Zakzooka-The-Bear--Aly-Bouchnak.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-14',
     duration: '2:21',
@@ -1708,7 +1708,7 @@ Zak, Zak, Zoo-Kaa...
       description: 'Adventurous bear song teaching friendship and forest animals. Follow Zakzooka through woodland adventures. Ages 2-6.',
       keywords: 'bear song for kids, forest adventure song, Zakzooka, woodland animals song, kids story song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/zakzooka-the-bear',
-      ogImage: 'https://alybouchnak.com/images/zakzooka-the-bear-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/Zakzooka-The-Bear--Aly-Bouchnak.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1730,17 +1730,17 @@ Zak, Zak, Zoo-Kaa...
       datePublished: '2026-02-14',
       isrcCode: 'GX8LD2691082',
       description: 'An adventurous song about Zakzooka the bear teaching about friendship and woodland animals through storytelling.',
-      image: 'https://alybouchnak.com/images/zakzooka-the-bear-cover.webp'
+      image: 'https://alybouchnak.com/images/Zakzooka-The-Bear--Aly-Bouchnak.webp'
     }
   },
-  // Tuned for Dreams Album (Sleep Music - UPC: 198391926950)
+  // Tuned for Dreams Album (Sleep Music - UPC: 5063893028990)
   {
     id: 12,
     slug: 'safe-container-calm-bedtime',
     title: 'The Safe Container | Calm Bedtime Routine',
     subtitle: 'Gentle sleep preparation song (Ages 0–3)',
     description: 'A soothing lullaby that creates a feeling of safety and security, helping children transition from active play to peaceful sleep through gentle melodies and calming rhythms.',
-    coverImage: '/images/safe-container-calm-bedtime-cover.webp',
+    coverImage: '/images/The-Safe-Container.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '2:44',
@@ -1795,7 +1795,7 @@ Mm-mm you are here`,
       description: 'Soothing lullaby for bedtime routine. Creates feelings of safety and security for peaceful sleep. Perfect for ages 0-3.',
       keywords: 'bedtime song, sleep music for kids, lullaby, calm bedtime routine, baby sleep aid, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/safe-container-calm-bedtime',
-      ogImage: 'https://alybouchnak.com/images/safe-container-calm-bedtime-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Safe-Container.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1817,7 +1817,7 @@ Mm-mm you are here`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2568126',
       description: 'A soothing lullaby creating feelings of safety and security for peaceful sleep.',
-      image: 'https://alybouchnak.com/images/safe-container-calm-bedtime-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Safe-Container.webp'
     }
   },
   {
@@ -1826,7 +1826,7 @@ Mm-mm you are here`,
     title: 'The Pendulum | Rocking Lullaby for Baby',
     subtitle: 'Soothing rocking motion song (Ages 0–2)',
     description: 'A gentle lullaby with rhythmic pendulum-like melodies that mimic the natural rocking motion, perfect for calming babies and promoting deep sleep.',
-    coverImage: '/images/pendulum-rocking-lullaby-cover.webp',
+    coverImage: '/images/The-Pendulum.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '2:50',
@@ -1883,7 +1883,7 @@ Side to side... in a peaceful bend`,
       description: 'Gentle rocking lullaby mimicking natural motion. Rhythmic melodies calm babies and promote deep sleep. Perfect for ages 0-2.',
       keywords: 'rocking lullaby, baby sleep song, infant sleep music, pendulum sleep aid, gentle rocking song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/pendulum-rocking-lullaby',
-      ogImage: 'https://alybouchnak.com/images/pendulum-rocking-lullaby-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Pendulum.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1905,7 +1905,7 @@ Side to side... in a peaceful bend`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2572277',
       description: 'A gentle lullaby with pendulum-like melodies mimicking natural rocking motion for calming babies.',
-      image: 'https://alybouchnak.com/images/pendulum-rocking-lullaby-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Pendulum.webp'
     }
   },
   {
@@ -1914,7 +1914,7 @@ Side to side... in a peaceful bend`,
     title: 'The Sacred Shush | Baby Shusher Sound',
     subtitle: 'Traditional shushing sleep aid (Ages 0–1)',
     description: 'Based on the traditional "shushing" technique used by parents worldwide, this track combines gentle shushing sounds with soft melodies to calm fussy babies.',
-    coverImage: '/images/sacred-shush-baby-shusher-cover.webp',
+    coverImage: '/images/The-Sacred-Shush.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '2:45',
@@ -1974,7 +1974,7 @@ Soft wind... always here`,
       description: 'Traditional shushing technique combined with soft melodies. Calms fussy babies and promotes sleep. Perfect for ages 0-1.',
       keywords: 'baby shusher, shushing sound, baby sleep aid, white noise for babies, infant calming, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/sacred-shush-baby-shusher',
-      ogImage: 'https://alybouchnak.com/images/sacred-shush-baby-shusher-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Sacred-Shush.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -1996,7 +1996,7 @@ Soft wind... always here`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2509998',
       description: 'Traditional shushing technique combined with soft melodies to calm fussy babies.',
-      image: 'https://alybouchnak.com/images/sacred-shush-baby-shusher-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Sacred-Shush.webp'
     }
   },
   {
@@ -2005,7 +2005,7 @@ Soft wind... always here`,
     title: 'The Ancient Tongue | Deep Sleep Humming',
     subtitle: 'Meditative humming lullaby (Ages 0–3)',
     description: 'A meditative track featuring gentle humming frequencies that resonate with the natural calming frequencies of the human voice, promoting deep and restorative sleep.',
-    coverImage: '/images/ancient-tongue-deep-sleep-humming-cover.webp',
+    coverImage: '/images/The-Ancient-Tongue.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '3:52',
@@ -2039,7 +2039,7 @@ Soft wind... always here`,
       description: 'Meditative humming frequencies for deep sleep. Vocal resonance promotes calm and restorative rest. Ages 0-3.',
       keywords: 'sleep humming, meditation for babies, deep sleep music, vocal resonance sleep, calming frequencies, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/ancient-tongue-deep-sleep-humming',
-      ogImage: 'https://alybouchnak.com/images/ancient-tongue-deep-sleep-humming-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Ancient-Tongue.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -2061,7 +2061,7 @@ Soft wind... always here`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2555627',
       description: 'Meditative humming frequencies resonating with natural calming frequencies to promote deep sleep.',
-      image: 'https://alybouchnak.com/images/ancient-tongue-deep-sleep-humming-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Ancient-Tongue.webp'
     }
   },
   {
@@ -2070,7 +2070,7 @@ Soft wind... always here`,
     title: 'The Infinite Loop | Continuous Sleep Aid',
     subtitle: 'Seamless looping sleep music (Ages 0–3)',
     description: 'Designed to loop seamlessly throughout the night, this track provides continuous gentle background music that maintains sleep without disruptive transitions.',
-    coverImage: '/images/infinite-loop-continuous-sleep-aid-cover.webp',
+    coverImage: '/images/The-Infinite-Loop.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '3:32',
@@ -2104,7 +2104,7 @@ Soft wind... always here`,
       description: 'Seamless looping sleep music for all-night use. Maintains peaceful sleep without disruptive transitions. Ages 0-3.',
       keywords: 'continuous sleep music, looping lullaby, ambient sleep, all night sleep aid, seamless sleep music, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/infinite-loop-continuous-sleep-aid',
-      ogImage: 'https://alybouchnak.com/images/infinite-loop-continuous-sleep-aid-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Infinite-Loop.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -2126,7 +2126,7 @@ Soft wind... always here`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2577222',
       description: 'Seamless looping sleep music providing continuous gentle background for all-night sleep.',
-      image: 'https://alybouchnak.com/images/infinite-loop-continuous-sleep-aid-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Infinite-Loop.webp'
     }
   },
   {
@@ -2135,7 +2135,7 @@ Soft wind... always here`,
     title: 'The Protective Shadow | Night Drone for Sleep',
     subtitle: 'Protective drone sleep music (Ages 0–3)',
     description: 'A protective drone frequency that creates a feeling of being watched over and safe, using low-frequency tones that mimic the comforting presence of a caregiver.',
-    coverImage: '/images/protective-shadow-night-drone-cover.webp',
+    coverImage: '/images/The-Protective-Shadow.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '2:45',
@@ -2199,7 +2199,7 @@ Low hum guarding through the way`,
       description: 'Protective drone frequency for sleep. Creates feeling of being watched over and safe. Low-frequency comfort tones. Ages 0-3.',
       keywords: 'sleep drone, protective sleep music, night drone for kids, low frequency sleep, anxiety reducing music, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/protective-shadow-night-drone',
-      ogImage: 'https://alybouchnak.com/images/protective-shadow-night-drone-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Protective-Shadow.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -2221,7 +2221,7 @@ Low hum guarding through the way`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2505077',
       description: 'Protective drone frequency creating a feeling of being watched over and safe during sleep.',
-      image: 'https://alybouchnak.com/images/protective-shadow-night-drone-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Protective-Shadow.webp'
     }
   },
   {
@@ -2230,7 +2230,7 @@ Low hum guarding through the way`,
     title: 'The Liquid Room | Brown Noise Womb Sound',
     subtitle: 'Womb-like brown noise sleep aid (Ages 0–1)',
     description: 'Recreates the familiar sounds of the womb with brown noise and liquid-like frequencies, providing newborns with the comforting sounds they heard before birth.',
-    coverImage: '/images/liquid-room-brown-noise-womb-cover.webp',
+    coverImage: '/images/The-Liquid-Room.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '3:53',
@@ -2267,7 +2267,7 @@ Low hum guarding through the way`,
       description: 'Womb-like brown noise for newborns. Recreates prenatal sounds for comfort and better sleep. Perfect for ages 0-1.',
       keywords: 'womb sounds, brown noise for babies, newborn sleep aid, prenatal sound recreation, infant white noise, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/liquid-room-brown-noise-womb',
-      ogImage: 'https://alybouchnak.com/images/liquid-room-brown-noise-womb-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Liquid-Room.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -2289,7 +2289,7 @@ Low hum guarding through the way`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2518383',
       description: 'Womb-like brown noise recreating familiar prenatal sounds for newborn comfort and sleep.',
-      image: 'https://alybouchnak.com/images/liquid-room-brown-noise-womb-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Liquid-Room.webp'
     }
   },
   {
@@ -2298,7 +2298,7 @@ Low hum guarding through the way`,
     title: 'The Dimming Light | Soft Sleepy Music',
     subtitle: 'Gentle sleep transition music (Ages 0–3)',
     description: 'Soft, gradually fading melodies that mimic the natural dimming of light at sunset, helping children transition from alertness to sleepiness naturally.',
-    coverImage: '/images/dimming-light-soft-sleepy-music-cover.webp',
+    coverImage: '/images/The-Dimming-Light.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-01-09',
     duration: '2:42',
@@ -2351,7 +2351,7 @@ Quiet world... begins to go`,
       description: 'Gentle fading melodies mimicking sunset. Helps children transition naturally to sleepiness. Ages 0-3.',
       keywords: 'sunset sleep music, dimming light lullaby, sleep transition music, twilight sleep aid, evening sleep song, Aly Bouchnak',
       canonical: 'https://alybouchnak.com/track/dimming-light-soft-sleepy-music',
-      ogImage: 'https://alybouchnak.com/images/dimming-light-soft-sleepy-music-cover.webp'
+      ogImage: 'https://alybouchnak.com/images/The-Dimming-Light.webp'
     },
     trackSchema: {
       '@context': 'https://schema.org',
@@ -2373,7 +2373,7 @@ Quiet world... begins to go`,
       datePublished: '2026-01-09',
       isrcCode: 'GXJ2E2542577',
       description: 'Soft, gradually fading melodies mimicking natural sunset dimming to help children transition to sleep.',
-      image: 'https://alybouchnak.com/images/dimming-light-soft-sleepy-music-cover.webp'
+      image: 'https://alybouchnak.com/images/The-Dimming-Light.webp'
     }
   }
 ];
