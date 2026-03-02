@@ -99,14 +99,14 @@ This album is built on principles of developmental psychology and music therapy:
       { number: 10, title: 'Zakzooka The Bear', duration: '3:25', description: 'Imaginative adventure song featuring a friendly bear character and nature exploration.', mood: 'Imaginative', slug: 'zakzooka-the-bear' }
     ],
     relatedAlbums: [
-      { id: 1, title: 'Tuned for Dreams', cover: '/images/dreams-cover.webp', description: 'Sleep album for peaceful nights', link: '#/album/tuned-for-dreams' },
-      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/the-blooms-house-classics-party-cover.webp', description: "Classic children's songs with modern twist", link: '#/album/the-blooms-house-classics-party' }
+      { id: 1, title: 'Tuned for Dreams', cover: '/images/tuned-for-dreams-cover', description: 'Sleep album for peaceful nights', link: '#/album/tuned-for-dreams' },
+      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp', description: "Classic children's songs with modern twist", link: '#/album/the-blooms-house-classics-party' }
     ],
     // Discography compatibility
     id: 1,
     type: 'Album',
     date: 'Jan 15, 2026',
-    image: '/images/blooms-house-volume-1-cover.webp',
+    image: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp',
     link: '#/album/the-blooms-house-volume-1',
     status: 'available' as const
   },
@@ -115,7 +115,7 @@ This album is built on principles of developmental psychology and music therapy:
     title: "The Bloom's House: Party Classics",
     subtitle: 'High-energy party versions of classic favorites',
     description: 'Energetic, modern takes on beloved classic children\'s songs, perfect for parties, celebrations, and active playtime with upbeat rhythms and contemporary sounds.',
-    coverImage: '/images/blooms-house-classics-party-cover.webp',
+    coverImage: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp',
     artist: 'Aly Bouchnak',
     releaseDate: '2026-04-24',
     genre: "Children's Party Music, Classic Remakes",
@@ -161,8 +161,8 @@ This album applies principles of music education and developmental psychology:\n
       { number: 12, title: 'Happy Birthday (Celebration Mix)', duration: '2:40', description: 'Modern birthday celebration song with party energy and group participation.', mood: 'Celebratory', slug: 'happy-birthday-mix' }
     ],
     relatedAlbums: [
-      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/the-blooms-house-volume-1-cover.webp', description: 'Original songs for daily routines', link: '#/album/the-blooms-house-volume-1' },
-      { id: 2, title: 'Tuned for Dreams', cover: '/images/dreams-cover.webp', description: 'Sleep album for peaceful nights', link: '#/album/tuned-for-dreams' }
+      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp', description: 'Original songs for daily routines', link: '#/album/the-blooms-house-volume-1' },
+      { id: 2, title: 'Tuned for Dreams', cover: '/images/tuned-for-dreams-cover.webp', description: 'Sleep album for peaceful nights', link: '#/album/tuned-for-dreams' }
     ],
     // Discography compatibility
     id: 2,
@@ -183,13 +183,13 @@ This album applies principles of music education and developmental psychology:\n
     genre: "Children's Sleep Music, Lullabies",
     ageRange: '0-3 years',
     mood: 'Calming',
-    spotifyUrl: 'https://open.spotify.com/album/placeholder',
-    appleMusicUrl: 'https://music.apple.com/album/placeholder',
-    youtubeUrl: 'https://youtube.com/playlist/placeholder',
+    spotifyUrl: 'https://open.spotify.com/album/3MWhQxXFD4F0WDlqhp9a4m',
+    appleMusicUrl: 'https://music.apple.com/us/album/tuned-for-dreams/1862214086',
+    youtubeUrl: 'https://youtube.com/playlist?list=OLAK5uy_kyFy2tayS40xowEFXNBqWdkFxccMau004&si=M6ZBWvtbKpm9xCO2',
     trackCount: 8,
     duration: '25:03',
     upc: '5063893028990',
-    amazonUrl: 'https://amazon.com/music/player/artists/B0FVYF53CC/aly-bouchnak',
+    amazonUrl: 'https://music.amazon.com/albums/B0G833ZYSZ',
     educationalBenefits: [
       { title: 'Sleep Routine', description: 'Establishes consistent bedtime rituals and healthy sleep habits.' },
       { title: 'Emotional Security', description: 'Provides comfort and safety through familiar, predictable sounds.' },
@@ -217,8 +217,8 @@ Parents report that using this album as part of a consistent bedtime routine has
       { number: 8, title: 'The Dimming Light', duration: '2:42', description: 'Gradually fading melodies that mimic sunset, helping transition naturally to sleepiness.', mood: 'Fading', slug: 'dimming-light-soft-sleepy-music' }
     ],
     relatedAlbums: [
-      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/the-blooms-house-volume-1-cover.webp', description: 'Original songs for daily routines', link: '#/album/the-blooms-house-volume-1' },
-      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/the-blooms-house-classics-party-cover.webp', description: "Classic children's songs with modern twist", link: '#/album/the-blooms-house-classics-party' }
+      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp', description: 'Original songs for daily routines', link: '#/album/the-blooms-house-volume-1' },
+      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp', description: "Classic children's songs with modern twist", link: '#/album/the-blooms-house-classics-party' }
     ],
     // Discography compatibility
     id: 3,
