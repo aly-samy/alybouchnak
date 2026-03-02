@@ -14,11 +14,50 @@
 // Apple MusicKit types
 declare global {
   interface Window {
-    MusicKit: typeof MusicKit;
+    MusicKit: MusicKitNamespace;
   }
 }
 
-// MusicKit Configuration
+// MusicKit namespace definition
+interface MusicKitNamespace {
+  configure: (config: { developerToken: string; app: { name: string; build: string } }) => Promise<MusicKitInstance>;
+  getInstance: () => MusicKitInstance;
+  MusicKitInstance: MusicKitInstance;
+}
+
+interface MusicKitInstance {
+  authorize: () => Promise<string>;
+  isAuthorized: boolean;
+  player: {
+    play: () => Promise<void>;
+    pause: () => Promise<void>;
+    stop: () => Promise<void>;
+    nowPlayingItem: MusicKitMediaItem | null;
+    playbackState: number;
+    addEventListener: (event: string, callback: () => void) => void;
+    removeEventListener: (event: string, callback: () => void) => void;
+  };
+  api: {
+    music: (path: string, options?: { term?: string; types?: string; limit?: string | number }) => Promise<{
+      data: { results?: Record<string, { data: MusicKitMediaItem[] }>; data?: MusicKitMediaItem[] }
+    }>;
+  };
+  setQueue: (options: { items: string[] | MusicKitMediaItem[] }) => Promise<void>;
+  play: () => Promise<void>;
+}
+
+interface MusicKitMediaItem {
+  id: string;
+  type: string;
+  attributes: {
+    name: string;
+    artistName: string;
+    artwork?: { url: string };
+    previews?: { url: string }[];
+    url?: string;
+  };
+}
+
 const MUSICKIT_CONFIG = {
   // This should be your actual Apple Developer Token
   // Generate this server-side in production!
@@ -30,7 +69,7 @@ const MUSICKIT_CONFIG = {
 };
 
 // MusicKit instance
-let musicKitInstance: MusicKit.MusicKitInstance | null = null;
+let musicKitInstance: MusicKitInstance | null = null;
 
 /**
  * Load MusicKit JS from Apple's CDN
@@ -65,7 +104,7 @@ export function loadMusicKitScript(): Promise<void> {
 /**
  * Initialize MusicKit instance
  */
-export async function initializeMusicKit(): Promise<MusicKit.MusicKitInstance | null> {
+export async function initializeMusicKit(): Promise<MusicKitInstance | null> {
   if (musicKitInstance) {
     return musicKitInstance;
   }
@@ -102,7 +141,7 @@ export async function searchAppleMusic(
   query: string,
   types: ('songs' | 'albums' | 'artists')[] = ['songs'],
   limit: number = 10
-): Promise<MusicKit.Resource[]> {
+): Promise<MusicKitMediaItem[]> {
   const musicKit = await initializeMusicKit();
   if (!musicKit) {
     return [];
@@ -112,13 +151,14 @@ export async function searchAppleMusic(
     const results = await musicKit.api.music('/v1/catalog/us/search', {
       term: query,
       types: types.join(','),
-      limit: limit.toString(),
+      limit,
     });
 
     // Flatten results from different types
-    const resources: MusicKit.Resource[] = [];
+    const resources: MusicKitMediaItem[] = [];
+    const responseData = results.data?.results;
     types.forEach(type => {
-      const typeResults = results.data?.results?.[type]?.data;
+      const typeResults = responseData?.[type as keyof typeof responseData]?.data as MusicKitMediaItem[] | undefined;
       if (typeResults) {
         resources.push(...typeResults);
       }
@@ -134,7 +174,7 @@ export async function searchAppleMusic(
 /**
  * Get song by ID
  */
-export async function getAppleMusicSong(songId: string): Promise<MusicKit.Resource | null> {
+export async function getAppleMusicSong(songId: string): Promise<MusicKitMediaItem | null> {
   const musicKit = await initializeMusicKit();
   if (!musicKit) {
     return null;
@@ -142,7 +182,7 @@ export async function getAppleMusicSong(songId: string): Promise<MusicKit.Resour
 
   try {
     const result = await musicKit.api.music(`/v1/catalog/us/songs/${songId}`);
-    return result.data?.data?.[0] || null;
+    return (result.data?.data as MusicKitMediaItem[] | undefined)?.[0] || null;
   } catch (error) {
     console.error('Error fetching Apple Music song:', error);
     return null;
@@ -152,7 +192,7 @@ export async function getAppleMusicSong(songId: string): Promise<MusicKit.Resour
 /**
  * Get album by ID
  */
-export async function getAppleMusicAlbum(albumId: string): Promise<MusicKit.Resource | null> {
+export async function getAppleMusicAlbum(albumId: string): Promise<MusicKitMediaItem | null> {
   const musicKit = await initializeMusicKit();
   if (!musicKit) {
     return null;
@@ -160,7 +200,7 @@ export async function getAppleMusicAlbum(albumId: string): Promise<MusicKit.Reso
 
   try {
     const result = await musicKit.api.music(`/v1/catalog/us/albums/${albumId}`);
-    return result.data?.data?.[0] || null;
+    return (result.data?.data as MusicKitMediaItem[] | undefined)?.[0] || null;
   } catch (error) {
     console.error('Error fetching Apple Music album:', error);
     return null;
@@ -180,13 +220,13 @@ export async function playAppleMusicSong(songId: string): Promise<boolean> {
   try {
     // Check if user is authorized
     if (musicKit.isAuthorized) {
-      await musicKit.setQueue({ song: songId });
+      await musicKit.setQueue({ items: [songId] });
       await musicKit.play();
       return true;
     } else {
       // Request authorization
       await musicKit.authorize();
-      await musicKit.setQueue({ song: songId });
+      await musicKit.setQueue({ items: [songId] });
       await musicKit.play();
       return true;
     }
@@ -207,12 +247,12 @@ export async function playAppleMusicAlbum(albumId: string): Promise<boolean> {
 
   try {
     if (musicKit.isAuthorized) {
-      await musicKit.setQueue({ album: albumId });
+      await musicKit.setQueue({ items: [albumId] });
       await musicKit.play();
       return true;
     } else {
       await musicKit.authorize();
-      await musicKit.setQueue({ album: albumId });
+      await musicKit.setQueue({ items: [albumId] });
       await musicKit.play();
       return true;
     }
@@ -225,8 +265,8 @@ export async function playAppleMusicAlbum(albumId: string): Promise<boolean> {
 /**
  * Get playback state
  */
-export function getPlaybackState(): MusicKit.PlaybackStates | null {
-  return musicKitInstance?.playbackState || null;
+export function getPlaybackState(): number | null {
+  return musicKitInstance?.player?.playbackState || null;
 }
 
 /**
@@ -256,5 +296,5 @@ export function extractAppleMusicId(url: string): string | null {
   return null;
 }
 
-// Re-export MusicKit types
-export type { MusicKit };
+// Re-export types
+export type { MusicKitNamespace, MusicKitInstance, MusicKitMediaItem };

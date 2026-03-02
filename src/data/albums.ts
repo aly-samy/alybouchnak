@@ -57,7 +57,7 @@ export const albums: Album[] = [
     description: 'A collection of lively, engaging songs designed specifically for toddlers, featuring animal sounds, movement activities, and educational content that supports early childhood development.',
     coverImage: '/images/blooms-house-volume-1-cover.webp',
     artist: 'Aly Bouchnak',
-    releaseDate: '2026-01-15',
+    releaseDate: '2026-05-29',
     genre: "Children's Music, Toddler Songs",
     ageRange: '2-6 years',
     mood: 'Playful',
@@ -65,8 +65,8 @@ export const albums: Album[] = [
     appleMusicUrl: 'https://music.apple.com/album/placeholder',
     youtubeUrl: 'https://youtube.com/playlist/placeholder',
     trackCount: 10,
-    duration: '32:45',
-    upc: '198391926947',
+    duration: '20:00',
+    upc: '0000',
     amazonUrl: 'https://amazon.com/music/player/artists/B0FVYF53CC/aly-bouchnak',
     otherUrl: 'https://push.fm/fl/alybouchnak',
     educationalBenefits: [
@@ -87,7 +87,7 @@ This album is built on principles of developmental psychology and music therapy:
 4. Functional Music Theory\nBased on research showing that music is most effective when it serves a purpose:\n• Transition songs reduce resistance to routine changes\n• Movement songs support gross motor development\n• Educational songs enhance learning retention\n• Emotional songs support social-emotional development\n
 5. Family-Centered Design\nMany tracks include elements that encourage family participation:\n• Call-and-response formats\n• Simple choreography for group activities\n• Relatable family scenarios\n• Inclusive language for diverse family structures`,
     tracks: [
-      { number: 1, title: 'Bock Bock Chicken', duration: '2:10', description: 'High-energy movement song with animal sounds and actions for gross motor skill development.', mood: 'Energetic', slug: 'bock-bock-chicken' },
+      { number: 1, title: 'Brave Hello', duration: '2:10', description: 'High-energy movement song with animal sounds and actions for gross motor skill development.', mood: 'Energetic', slug: 'bock-bock-chicken' },
       { number: 2, title: 'Boom Teka Boom (Wake Up Song)', duration: '2:35', description: 'Morning wake-up anthem with rhythmic energy to start the day positively.', mood: 'Upbeat', slug: 'boom-teka-boom' },
       { number: 3, title: 'The Funny Bunny Jump (Freeze Dance)', duration: '2:45', description: 'Interactive freeze dance game that builds listening skills and motor control.', mood: 'Playful', slug: 'the-funny-bunny-jump' },
       { number: 4, title: 'The Wise Mice (Memory Game)', duration: '3:20', description: 'Cumulative memory song that enhances sequencing and cognitive skills.', mood: 'Clever', slug: 'the-wise-mice' },
@@ -117,7 +117,7 @@ This album is built on principles of developmental psychology and music therapy:
     description: 'Energetic, modern takes on beloved classic children\'s songs, perfect for parties, celebrations, and active playtime with upbeat rhythms and contemporary sounds.',
     coverImage: '/images/blooms-house-classics-party-cover.webp',
     artist: 'Aly Bouchnak',
-    releaseDate: '2026-02-01',
+    releaseDate: '2026-04-01',
     genre: "Children's Party Music, Classic Remakes",
     ageRange: '2-6 years',
     mood: 'Energetic',

@@ -182,8 +182,8 @@ export async function searchSpotify(
   tracks?: { items: SpotifyTrack[] };
   albums?: { items: SpotifyAlbum[] };
   artists?: { items: SpotifyArtist[] };
-}> {
-  return spotifyRequest(`\/search?q=${encodeURIComponent(query)}&type=${type}&limit=${limit}`) || {};
+} | null> {
+  return spotifyRequest(`/search?q=${encodeURIComponent(query)}&type=${type}&limit=${limit}`);
 }
 
 /**
@@ -226,7 +226,7 @@ export function formatPlayCount(count: number): string {
  * Since Spotify doesn't provide bios, we'll use a placeholder
  * In production, you might want to integrate with Wikipedia API or MusicBrainz
  */
-export async function getArtistBio(artistName: string): Promise<string | null> {
+export async function getArtistBio(_artistName: string): Promise<string | null> {
   // This is a placeholder - in production, integrate with Wikipedia or MusicBrainz
   // For now, return null to use the bio from your data files
   return null;
