@@ -99,15 +99,15 @@ This album is built on principles of developmental psychology and music therapy:
       { number: 10, title: 'Zakzooka The Bear', duration: '3:25', description: 'Imaginative adventure song featuring a friendly bear character and nature exploration.', mood: 'Imaginative', slug: 'zakzooka-the-bear' }
     ],
     relatedAlbums: [
-      { id: 1, title: 'Tuned for Dreams', cover: '/images/tuned-for-dreams-cover', description: 'Sleep album for peaceful nights', link: '#/album/tuned-for-dreams' },
-      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp', description: "Classic children's songs with modern twist", link: '#/album/the-blooms-house-classics-party' }
+      { id: 1, title: 'Tuned for Dreams', cover: '/images/tuned-for-dreams-cover', description: 'Sleep album for peaceful nights', link: '/album/tuned-for-dreams' },
+      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp', description: "Classic children's songs with modern twist", link: '/album/the-blooms-house-classics-party' }
     ],
     // Discography compatibility
     id: 1,
     type: 'Album',
     date: 'Jan 15, 2026',
     image: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp',
-    link: '#/album/the-blooms-house-volume-1',
+    link: '/album/the-blooms-house-volume-1',
     status: 'available' as const
   },
   {
@@ -161,15 +161,15 @@ This album applies principles of music education and developmental psychology:\n
       { number: 12, title: 'Happy Birthday (Celebration Mix)', duration: '2:40', description: 'Modern birthday celebration song with party energy and group participation.', mood: 'Celebratory', slug: 'happy-birthday-mix' }
     ],
     relatedAlbums: [
-      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp', description: 'Original songs for daily routines', link: '#/album/the-blooms-house-volume-1' },
-      { id: 2, title: 'Tuned for Dreams', cover: '/images/tuned-for-dreams-cover.webp', description: 'Sleep album for peaceful nights', link: '#/album/tuned-for-dreams' }
+      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp', description: 'Original songs for daily routines', link: '/album/the-blooms-house-volume-1' },
+      { id: 2, title: 'Tuned for Dreams', cover: '/images/tuned-for-dreams-cover.webp', description: 'Sleep album for peaceful nights', link: '/album/tuned-for-dreams' }
     ],
     // Discography compatibility
     id: 2,
     type: 'Album',
     date: 'Feb 1, 2026',
     image: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp',
-    link: '#/album/the-blooms-house-classics-party',
+    link: '/album/the-blooms-house-classics-party',
     status: 'available' as const
   },
   {
@@ -217,15 +217,15 @@ Parents report that using this album as part of a consistent bedtime routine has
       { number: 8, title: 'The Dimming Light', duration: '2:42', description: 'Gradually fading melodies that mimic sunset, helping transition naturally to sleepiness.', mood: 'Fading', slug: 'dimming-light-soft-sleepy-music' }
     ],
     relatedAlbums: [
-      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp', description: 'Original songs for daily routines', link: '#/album/the-blooms-house-volume-1' },
-      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp', description: "Classic children's songs with modern twist", link: '#/album/the-blooms-house-classics-party' }
+      { id: 1, title: "The Bloom's House: Volume 1", cover: '/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp', description: 'Original songs for daily routines', link: '/album/the-blooms-house-volume-1' },
+      { id: 2, title: "The Bloom's House: Classics Party", cover: '/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp', description: "Classic children's songs with modern twist", link: '/album/the-blooms-house-classics-party' }
     ],
     // Discography compatibility
     id: 3,
     type: 'Album',
     date: 'Feb 15, 2026',
     image: '/images/tuned-for-dreams-cover.webp',
-    link: '#/album/tuned-for-dreams',
+    link: '/album/tuned-for-dreams',
     status: 'available' as const
   }
 ];
