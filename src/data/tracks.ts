@@ -2,7 +2,7 @@ export interface Track {
   // Internal identifier
   id: number;
   slug: string;
-  
+
   // Basic track info
   title: string;
   subtitle: string;
@@ -16,38 +16,38 @@ export interface Track {
   ageRange: string;
   mood: string;
   routine: 'Playtime' | 'Bedtime' | 'Mealtime' | 'Cleanup' | 'Transition' | 'Learning' | 'Celebration' | 'Movement';
-  
+
   // International codes
   isrc: string; // International Standard Recording Code
   upc: string;  // Universal Product Code (album)
-  
+
   // Album info
   album: string;
   albumUrl: string;
-  
+
   // Streaming URLs
   spotifyUrl: string;
   appleMusicUrl: string;
   youtubeUrl: string;
   amazonUrl?: string;
   otherUrl?: string; // Link to push.fm or other streaming platforms
-  
+
   // Lyrics (preview array for display, full text for SEO/lyrics page)
   lyricsPreview: string[];
   lyricsFull: string;
-  
+
   // Educational content
   educationalBenefits: {
     title: string;
     description: string;
   }[];
-  
+
   // Artist insights
   artistNote: string;
-  
+
   // Related tracks (by id)
   relatedTracks: number[];
-  
+
   // Complete SEO metadata
   seo: {
     title: string;
@@ -56,7 +56,7 @@ export interface Track {
     canonical: string;
     ogImage: string;
   };
-  
+
   // Schema.org structured data
   trackSchema: {
     '@context': string;
@@ -160,7 +160,7 @@ All day long`,
       { title: 'Social Skills', description: 'Encourages group participation and shared animal role-play experiences.' }
     ],
     artistNote: 'This song came from observing how fascinated children are by pets. I wanted to create something that celebrates the special bond between kids and their furry (or feathery, or scaly) friends.',
-    relatedTracks: [1, 3, 4],
+    relatedTracks: [10, 4, 11],
     seo: {
       title: 'Pet-Pop | The Animal Song | Kids Pet Song | Aly Bouchnak',
       description: 'Learn pet animal sounds with this fun movement song for kids ages 2-6. Perfect for pet-themed activities and learning about domestic animals.',
@@ -239,7 +239,7 @@ Boom teka boom, nice and slow`,
       { title: 'Energy Boost', description: 'Provides musical stimulation to increase alertness and engagement.' }
     ],
     artistNote: 'This song was inspired by watching parents struggle to wake up sleepy toddlers. I wanted to create something that makes the morning transition fun rather than a battle.',
-    relatedTracks: [1, 4, 7],
+    relatedTracks: [6, 4, 7],
     seo: {
       title: 'Boom Teka Boom | Wake Up Song for Kids | Morning Routine | Aly Bouchnak',
       description: 'Energetic wake-up song for toddlers. Perfect morning routine music to get kids moving and ready for the day.',
@@ -271,7 +271,7 @@ Boom teka boom, nice and slow`,
     }
   },
   {
-    id: 4,
+    id: 20,
     slug: 'the-funny-bunny-jump',
     title: 'The Funny Bunny Jump (Freeze Dance)',
     subtitle: 'Interactive freeze dance game for listening skills (Ages 2–6)',
@@ -323,7 +323,7 @@ When the music plays again!`,
       { title: 'Impulse Control', description: 'Builds self-regulation through freeze game mechanics.' }
     ],
     artistNote: 'Freeze dance has always been a favorite in my family. The Funny Bunny Jump combines the joy of movement with the developmental benefits of impulse control training.',
-    relatedTracks: [1, 3, 5],
+    relatedTracks: [2, 7, 10],
     seo: {
       title: 'The Funny Bunny Jump | Freeze Dance Song | Kids Movement | Aly Bouchnak',
       description: 'Interactive freeze dance song for kids. Build listening skills and motor control while hopping like a bunny.',
@@ -364,7 +364,7 @@ When the music plays again!`,
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-11',
     duration: '2:20',
-    bpm: 120,
+    bpm: 115,
     genre: "Children's Music, Educational, Memory Games",
     ageRange: '2-6 years',
     mood: 'Clever',
@@ -412,7 +412,7 @@ Wise mice memories make us giggle!`,
       { title: 'Cognitive Flexibility', description: 'Practices switching between remembering and adding new information.' }
     ],
     artistNote: 'Memory games are powerful tools for cognitive development. I created this cumulative song to make working memory training feel like play rather than work.',
-    relatedTracks: [3, 4, 6],
+    relatedTracks: [9, 2, 10],
     seo: {
       title: 'The Wise Mice | Memory Game Song | Cognitive Development | Aly Bouchnak',
       description: 'Cumulative memory song for kids ages 2-6. Build working memory and sequencing skills through playful mouse actions.',
@@ -496,7 +496,7 @@ Eating healthy is alright!`,
       { title: 'Cooperation', description: 'Encourages participation in family meal routines.' }
     ],
     artistNote: 'As a parent, I know the struggle of mealtime battles. This song transforms eating from a chore into a playful adventure with the Yummy Spoon.',
-    relatedTracks: [3, 5, 7],
+    relatedTracks: [3, 10, 11],
     seo: {
       title: 'The Yummy Spoon | Mealtime Song for Picky Eaters | Healthy Eating | Aly Bouchnak',
       description: 'Playful mealtime song to encourage healthy eating. Perfect for reducing picky eating and making meals fun for toddlers.',
@@ -537,7 +537,7 @@ Eating healthy is alright!`,
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-27',
     duration: '2:34',
-    bpm: 120,
+    bpm: 90,
     genre: "Children's Music, Family Songs",
     ageRange: '2-6 years',
     mood: 'Loving',
@@ -580,7 +580,7 @@ Grandparent love will never fade`,
       { title: 'Emotional Expression', description: 'Encourages expressing love and gratitude for family.' }
     ],
     artistNote: 'Grandparents hold such a special place in children\'s hearts. This song is my tribute to the Nannys and Papas who shower their grandchildren with unconditional love.',
-    relatedTracks: [3, 6, 7],
+    relatedTracks: [2, 6, 20],
     seo: {
       title: 'Nanny & Papa | Grandparent Song | Family Love | Aly Bouchnak',
       description: 'Heartwarming song celebrating grandparent relationships. Perfect for honoring Nanny and Papa bonds with children.',
@@ -612,7 +612,7 @@ Grandparent love will never fade`,
     }
   },
   {
-    id: 9,
+    id: 23,
     slug: 'mary-had-a-little-lamb-school-party',
     title: 'Mary Had a Little Lamb (School Party)',
     subtitle: 'Classic nursery rhyme with party twist (Ages 2–6)',
@@ -715,7 +715,7 @@ See you tomorrow!
       { title: 'Social Bonding', description: 'Promotes group singing and shared musical experiences.' }
     ],
     artistNote: 'Taking a beloved classic and giving it new life with modern production was a joy. I wanted to preserve the nostalgic essence while making it exciting for today\'s kids to dance to.',
-    relatedTracks: [4, 5, 6],
+    relatedTracks: [2, 4, 5],
     seo: {
       title: 'Mary Had a Little Lamb (School Party) | Classic Nursery Rhyme | Aly Bouchnak',
       description: 'A modern, upbeat take on the classic nursery rhyme. Perfect party version for kids ages 2-6 with dance beats and sing-along fun.',
@@ -846,7 +846,7 @@ Old Mac... is back!`,
       { title: 'Physical Activity', description: 'Encourages dancing and movement to the upbeat party rhythm.' }
     ],
     artistNote: 'This song brings back memories of singing this classic as a child. Adding modern beats and party energy makes it perfect for today\'s kids while keeping the educational value intact.',
-    relatedTracks: [3, 5, 6],
+    relatedTracks: [2, 5, 10],
     seo: {
       title: 'Old MacDonald Had a Farm (Farm Party) | Kids Farm Song | Aly Bouchnak',
       description: 'High-energy party version of the classic farm song. Kids learn animal sounds while dancing to modern beats. Perfect for ages 2-6.',
@@ -878,7 +878,7 @@ Old Mac... is back!`,
     }
   },
   {
-    id: 5,
+    id: 1,
     slug: 'five-little-monkeys-jungle-party',
     title: 'Five Little Monkeys (Jungle Party)',
     subtitle: 'Counting and jumping jungle song (Ages 2–6)',
@@ -887,7 +887,7 @@ Old Mac... is back!`,
     artist: 'Aly Bouchnak',
     releaseDate: '2026-02-01',
     duration: '2:25',
-    bpm: 135,
+    bpm: 124,
     genre: "Children's Pop, Counting Songs",
     ageRange: '2-6 years',
     mood: 'Playful',
@@ -963,7 +963,7 @@ NO MORE JUMPING!`,
       { title: 'Cause & Effect', description: 'Teaches consequences through the falling off the bed narrative.' }
     ],
     artistNote: 'The challenge was making the countdown engaging throughout. Adding the jungle party chorus gives kids something to look forward to between each verse.',
-    relatedTracks: [3, 4, 6],
+    relatedTracks: [10, 11, 6],
     seo: {
       title: 'Five Little Monkeys (Jungle Party) | Counting Song | Aly Bouchnak',
       description: 'Jungle party version of the classic counting song. Kids learn to count down from 5 while jumping and dancing. Ages 2-6.',
@@ -995,7 +995,7 @@ NO MORE JUMPING!`,
     }
   },
   {
-    id: 6,
+    id: 21,
     slug: 'wheels-on-the-bus-party-ride',
     title: 'The Wheels on the Bus (Party Ride)',
     subtitle: 'Transportation movement song (Ages 2–6)',
@@ -1245,7 +1245,7 @@ See you next time!
     }
   },
   {
-    id: 8,
+    id: 22,
     slug: 'body-party-head-shoulders',
     title: 'The Body Party (Head & Shoulders)',
     subtitle: 'Body parts movement song (Ages 2–6)',
@@ -2374,6 +2374,72 @@ Quiet world... begins to go`,
       isrcCode: 'GXJ2E2542577',
       description: 'Soft, gradually fading melodies mimicking natural sunset dimming to help children transition to sleep.',
       image: 'https://alybouchnak.com/images/The-Dimming-Light.webp'
+    }
+  },
+  {
+    id: 24,
+    slug: 'brave-hello',
+    title: 'Brave Hello',
+    subtitle: 'A Social-Emotional song for greetings and confidence (Ages 2–6)',
+    description: 'Helping little ones find their (Brave Hello) This track uses a gentle but bouncy rhythm to teach toddlers how to greet others with confidence, making social transitions easier for both kids and parents.',
+    coverImage: '/images/Brave-Hello--Aly-Bouchnak-Cover.webp',
+    artist: 'Aly Bouchnak',
+    releaseDate: '2026-05-22',
+    duration: '2:15',
+    bpm: 124,
+    genre: "Children's Music, SEL, Educational",
+    ageRange: '2-6 years',
+    mood: 'Confident & Encouraging',
+    routine: 'Transition',
+    isrc: 'TBD',
+    upc: 'TBD',
+    album: "The Bloom's House: Volume 1",
+    albumUrl: '/album/the-blooms-house-volume-1',
+    spotifyUrl: 'https://open.spotify.com/track/Placeholder',
+    appleMusicUrl: 'https://music.apple.com/us/song/Placeholder',
+    youtubeUrl: 'https://youtu.be/Placeholder',
+    amazonUrl: 'https://music.amazon.com/tracks/Placeholder',
+    lyricsPreview: [
+      "Deep breath in, and a smile so wide",
+      "I’ve got my 'Brave Hello' inside",
+      "Wave your hand, and say it clear"
+    ],
+    lyricsFull: "Deep breath in, and a smile so wide\nI’ve got my 'Brave Hello' inside\nWave your hand, and say it clear\nI’m so happy to be here!\n\nSometimes I feel a little shy\nWhen a new friend passes by\nBut I remember what to do\nI say 'Hello! How are you?'\n\nBrave Hello, Brave Hello\nWatch my confidence start to grow\nBrave Hello, Brave Hello\nEverywhere that I may go\n\nTo my teacher, to my friend\nOn the love, we can depend\nWith a wave and a happy face\nI feel brave in every place!",
+    educationalBenefits: [
+      { title: 'Social Confidence', description: 'Models positive greeting behaviors to reduce social anxiety.' },
+      { title: 'Emotional Regulation', description: `Uses deep breathing cues to help children manage 'shyness' or jitters.` },
+      { title: 'Communication Skills', description: 'Encourages clear verbal and non-verbal (waving) communication.' }
+    ],
+    artistNote: "I wrote 'Brave Hello' to be a 'pocket-tool' for parents. Meeting new people can be scary for a 3-year-old, so I wanted to give them a catchy rhythm they can hum to feel brave during those first-day-of-school moments.",
+    relatedTracks: [12, 13, 15],
+    seo: {
+      title: 'Brave Hello | Social-Emotional Song | Aly Bouchnak',
+      description: 'Helping little ones find their (Brave Hello) This track uses a gentle but bouncy rhythm to teach toddlers how to greet others with confidence, making social transitions easier for both kids and parents.',
+      keywords: 'social-emotional song, brave hello, toddler music, Aly Bouchnak',
+      canonical: 'https://alybouchnak.com/track/brave-hello',
+      ogImage: 'https://alybouchnak.com/images/Brave-Hello--Aly-Bouchnak-Cover.webp'
+    },
+    trackSchema: {
+      '@context': 'https://schema.org',
+      '@type': 'MusicRecording',
+      '@id': 'https://alybouchnak.com/track/brave-hello#recording',
+      name: 'Brave Hello | Social-Emotional Song',
+      url: 'https://alybouchnak.com/track/brave-hello',
+      duration: 'PT2M15S',
+      genre: "Children's Music, SEL, Educational",
+      byArtist: {
+        '@type': 'MusicGroup',
+        name: 'Aly Bouchnak'
+      },
+      inAlbum: {
+        '@type': 'MusicAlbum',
+        name: 'The Bloom\'s House: Volume 1',
+        '@id': 'https://alybouchnak.com/album/the-blooms-house-volume-1'
+      },
+      datePublished: '2026-05-22',
+      isrcCode: 'TBD',
+      description: 'A social-emotional song helping children build confidence in greetings.',
+      image: 'https://alybouchnak.com/images/Brave-Hello--Aly-Bouchnak-Cover.webp'
     }
   }
 ];
