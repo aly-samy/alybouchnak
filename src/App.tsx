@@ -1,11 +1,13 @@
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import Home from './pages/Home';
-import Discography from './pages/Discography';
-import FAQ from './pages/FAQ';
-import Contact from './pages/Contact';
-import DynamicTrackPage from './pages/DynamicTrackPage';
-import DynamicAlbumPage from './pages/DynamicAlbumPage';
+import { Suspense, lazy } from 'react';
+
+const Home = lazy(() => import('./pages/Home'));
+const Discography = lazy(() => import('./pages/Discography'));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const Contact = lazy(() => import('./pages/Contact'));
+const DynamicTrackPage = lazy(() => import('./pages/DynamicTrackPage'));
+const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
 import { initGA, trackPageView } from './lib/analytics';
 import { initPixel, trackPixelPageView } from './lib/pixel';
 
@@ -32,16 +34,18 @@ function App() {
   return (
     <HashRouter>
       <AnalyticsWrapper>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/discography" element={<Discography />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* Dynamic Track Routes - All tracks rendered from centralized data */}
-          <Route path="/track/:slug" element={<DynamicTrackPage />} />
-          {/* Dynamic Album Routes - All albums rendered from centralized data */}
-          <Route path="/album/:slug" element={<DynamicAlbumPage />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#C8F0F7]"><div className="w-12 h-12 border-4 border-[#F26B3A] border-t-transparent rounded-full animate-spin"></div></div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/discography" element={<Discography />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* Dynamic Track Routes - All tracks rendered from centralized data */}
+            <Route path="/track/:slug" element={<DynamicTrackPage />} />
+            {/* Dynamic Album Routes - All albums rendered from centralized data */}
+            <Route path="/album/:slug" element={<DynamicAlbumPage />} />
+          </Routes>
+        </Suspense>
       </AnalyticsWrapper>
     </HashRouter>
   );

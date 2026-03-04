@@ -12,7 +12,7 @@ function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Rele
   const release = new Date(releaseDate);
   const diffTime = release.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays > 14) return 'Upcoming';
   if (diffDays > 0) return 'Pre-Saves';
   return 'Released';
@@ -37,10 +37,10 @@ interface Release {
 const releases: Release[] = recentTracks.map((track, index) => ({
   id: index + 1,
   title: track.title,
-  date: new Date(track.releaseDate).toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
+  date: new Date(track.releaseDate).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
   }),
   description: track.description,
   image: track.coverImage,
@@ -164,6 +164,7 @@ const NewReleases = () => {
                   src={release.image}
                   alt={release.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-3 right-3 w-10 h-10 bg-[#F26B3A] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
@@ -220,6 +221,7 @@ const NewReleases = () => {
                   src="/images/dreams-cover.webp"
                   alt="Tuned for Dreams album cover"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-3 right-3 w-10 h-10 bg-[#240046] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
@@ -260,6 +262,7 @@ const NewReleases = () => {
                   src="/images/the-blooms-house-volume-1-cover.webp"
                   alt="The Bloom's House: Volume 1 album cover"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-3 right-3 w-10 h-10 bg-[#F26B3A] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
@@ -300,6 +303,7 @@ const NewReleases = () => {
                   src="/images/the-blooms-house-classics-party-cover.webp"
                   alt="The Bloom's House: Classics Party album cover"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-3 right-3 w-10 h-10 bg-[#F7E859] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">

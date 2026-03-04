@@ -43,7 +43,7 @@ function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Rele
   const release = new Date(releaseDate);
   const diffTime = release.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays > 14) return 'Upcoming';
   if (diffDays > 0) return 'Pre-Saves';
   return 'Released';
@@ -92,7 +92,7 @@ function createCombinedReleases(): CombinedRelease[] {
 const allReleases = createCombinedReleases();
 
 // Sort by release date (newest first)
-const sortByDate = (a: CombinedRelease, b: CombinedRelease) => 
+const sortByDate = (a: CombinedRelease, b: CombinedRelease) =>
   new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
 
 // Get unique values for filters
@@ -152,7 +152,7 @@ const discographySchema = {
               ? release.link
               : `https://alybouchnak.com${release.link}`,
             image: release.image
-              ? `https://alybouchnak.com${release.image}` 
+              ? `https://alybouchnak.com${release.image}`
               : undefined,
             datePublished: release.date,
             description: release.description,
@@ -173,7 +173,7 @@ const discographySchema = {
             ? release.link
             : `https://alybouchnak.com${release.link}`,
           image: release.image
-            ? `https://alybouchnak.com${release.image}` 
+            ? `https://alybouchnak.com${release.image}`
             : undefined,
           datePublished: release.date,
           description: release.description,
@@ -190,14 +190,14 @@ const Discography = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const daytimeRef = useRef<HTMLDivElement>(null);
   const sleepRef = useRef<HTMLDivElement>(null);
-  
+
   // Filter states for daytime section
   const [daytimeYearFilter, setDaytimeYearFilter] = useState<string>('all');
   const [daytimeGenreFilter, setDaytimeGenreFilter] = useState<string>('all');
   const [daytimeMoodFilter, setDaytimeMoodFilter] = useState<string>('all');
   const [daytimeRoutineFilter, setDaytimeRoutineFilter] = useState<string>('all');
   const [daytimeCurrentPage, setDaytimeCurrentPage] = useState(1);
-  
+
   // Pagination state for sleep section
   const [sleepCurrentPage, setSleepCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 12;
@@ -205,7 +205,7 @@ const Discography = () => {
   // Filter and sort daytime releases
   const filteredDaytimeReleases = useMemo(() => {
     let releases = allReleases.filter(r => DAYTIME_MOODS.includes(r.mood));
-    
+
     if (daytimeYearFilter !== 'all') {
       releases = releases.filter(r => new Date(r.releaseDate).getFullYear().toString() === daytimeYearFilter);
     }
@@ -218,7 +218,7 @@ const Discography = () => {
     if (daytimeRoutineFilter !== 'all') {
       releases = releases.filter(r => r.routine === daytimeRoutineFilter);
     }
-    
+
     return releases.sort(sortByDate);
   }, [daytimeYearFilter, daytimeGenreFilter, daytimeMoodFilter, daytimeRoutineFilter]);
 
@@ -355,7 +355,7 @@ const Discography = () => {
 
       {/* Grain overlay */}
       <div className="grain-overlay" />
-      
+
       <Navigation />
       <Breadcrumbs />
 
@@ -391,13 +391,13 @@ const Discography = () => {
                       src={album.image}
                       alt={album.title}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      loading="lazy"
                     />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full ${
-                        NIGHTTIME_MOODS.includes(album.mood) ? 'bg-[#240046] text-white' : 'bg-[#F26B3A] text-white'
-                      }`}>
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full ${NIGHTTIME_MOODS.includes(album.mood) ? 'bg-[#240046] text-white' : 'bg-[#F26B3A] text-white'
+                        }`}>
                         {NIGHTTIME_MOODS.includes(album.mood) ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
                         {album.mood}
                       </span>
@@ -493,9 +493,8 @@ const Discography = () => {
               {paginatedDaytimeReleases.map((release) => (
                 <article
                   key={release.id}
-                  className={`release-card card overflow-hidden ${
-                    release.status === 'Upcoming' ? 'border-2 border-dashed border-gray-300' : ''
-                  }`}
+                  className={`release-card card overflow-hidden ${release.status === 'Upcoming' ? 'border-2 border-dashed border-gray-300' : ''
+                    }`}
                 >
                   {release.image ? (
                     <div className="relative aspect-square overflow-hidden">
@@ -503,6 +502,7 @@ const Discography = () => {
                         src={release.image}
                         alt={release.title}
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        loading="lazy"
                       />
                     </div>
                   ) : (
@@ -510,7 +510,7 @@ const Discography = () => {
                       <Music className="w-16 h-16 text-[#2A2A2A]/30" />
                     </div>
                   )}
-                  
+
                   <div className="p-5">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#F26B3A]">
                       {release.type}
@@ -595,9 +595,10 @@ const Discography = () => {
                       src={release.image}
                       alt={release.title}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      loading="lazy"
                     />
                   </div>
-                  
+
                   <div className="p-5">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#F7E859]">
                       {release.type}

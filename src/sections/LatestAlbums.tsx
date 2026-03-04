@@ -12,7 +12,7 @@ function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Rele
   const release = new Date(releaseDate);
   const diffTime = release.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays > 14) return 'Upcoming';
   if (diffDays > 0) return 'Pre-Saves';
   return 'Released';
@@ -97,16 +97,16 @@ export default function LatestAlbums() {
                       src={album.image || album.coverImage}
                       alt={album.title}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      loading="lazy"
                     />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
                       <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full ${
-                          NIGHTTIME_MOODS.includes(album.mood)
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full ${NIGHTTIME_MOODS.includes(album.mood)
                             ? 'bg-[#240046] text-white'
                             : 'bg-[#F26B3A] text-white'
-                        }`}
+                          }`}
                       >
                         {NIGHTTIME_MOODS.includes(album.mood) ? (
                           <Moon className="w-4 h-4" />

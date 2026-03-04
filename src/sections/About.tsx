@@ -87,7 +87,7 @@ const About = () => {
               >
                 About The Artist
               </h2>
-              
+
               {/* Starbursts */}
               <div
                 ref={starburst1Ref}
@@ -105,9 +105,9 @@ const About = () => {
 
             <div ref={contentRef} className="space-y-6">
               <p className="text-base sm:text-lg text-[#2A2A2A] leading-relaxed">
-                <strong>Aly Bouchnak</strong> creates <strong>modern digital pop</strong> for millennial families. 
-                Based in "The Bloom's House" world, his music offers a "Balanced Stimulation" alternative 
-                to traditional nursery rhymes—upbeat enough for dance parties (120–125 BPM) but cognitively 
+                <strong>Aly Bouchnak</strong> creates <strong>modern digital pop</strong> for millennial families.
+                Based in "The Bloom's House" world, his music offers a "Balanced Stimulation" alternative
+                to traditional nursery rhymes—upbeat enough for dance parties (120–125 BPM) but cognitively
                 respectful for toddlers.
               </p>
 
@@ -117,7 +117,7 @@ const About = () => {
 
               <p className="text-base sm:text-lg text-[#2A2A2A] leading-relaxed">
                 Aly's mission is to be the <strong>Parenting Partner</strong> for families. Hits like{' '}
-                <em>The Yummy Spoon</em> and <em>Boom Teka Boom</em> are designed as "utility songs" 
+                <em>The Yummy Spoon</em> and <em>Boom Teka Boom</em> are designed as "utility songs"
                 to help parents manage daily routines like eating, waking up, and cleaning up.
               </p>
 
@@ -138,6 +138,7 @@ const About = () => {
                 src="/images/aly-bouchnak-hero.webp"
                 alt="Aly Bouchnak"
                 className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain rounded-full bg-gradient-to-br from-[#C8F0F7] to-[#F7E859]/30"
+                loading="lazy"
               />
             </div>
           </div>
