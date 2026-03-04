@@ -47,8 +47,8 @@ const Navigation = () => {
     <nav
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || !isHome
-          ? 'bg-white/90 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+        ? 'bg-white/90 backdrop-blur-md shadow-lg'
+        : 'bg-transparent'
         }`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
@@ -87,28 +87,28 @@ const Navigation = () => {
               FAQ
             </Link>
             <a
-              href="/#music"
+              href="#music"
               onClick={handleNavClick}
               className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
             >
               Music
             </a>
             <a
-              href="/#about"
+              href="#about"
               onClick={handleNavClick}
               className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
             >
               About
             </a>
             <a
-              href="/#playlist"
+              href="#playlist"
               onClick={handleNavClick}
               className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
             >
               Playlist
             </a>
             <a
-              href="/#contact"
+              href="#contact"
               onClick={handleNavClick}
               className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
             >
@@ -162,14 +162,14 @@ const Navigation = () => {
             FAQ
           </Link>
           <a
-            href="/#music"
+            href="#music"
             onClick={handleNavClick}
             className="block py-3 px-4 font-semibold text-[#101010] rounded-lg hover:bg-[#C8F0F7] transition-colors"
           >
             Music
           </a>
           <a
-            href="/#about"
+            href="#about"
             onClick={handleNavClick}
             className="block py-3 px-4 font-semibold text-[#101010] rounded-lg hover:bg-[#C8F0F7] transition-colors"
           >

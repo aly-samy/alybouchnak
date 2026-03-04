@@ -45,7 +45,7 @@ const releases: Release[] = recentTracks.map((track, index) => ({
   }),
   description: track.description,
   image: track.coverImage,
-  link: `#/track/${track.slug}`,
+  link: `/track/${track.slug}`,
   status: getReleaseStatus(track.releaseDate)
 }));
 

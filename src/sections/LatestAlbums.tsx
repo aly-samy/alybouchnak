@@ -104,8 +104,8 @@ export default function LatestAlbums() {
                     <div className="flex items-center gap-2 mb-3">
                       <span
                         className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full ${NIGHTTIME_MOODS.includes(album.mood)
-                            ? 'bg-[#240046] text-white'
-                            : 'bg-[#F26B3A] text-white'
+                          ? 'bg-[#240046] text-white'
+                          : 'bg-[#F26B3A] text-white'
                           }`}
                       >
                         {NIGHTTIME_MOODS.includes(album.mood) ? (
@@ -128,7 +128,7 @@ export default function LatestAlbums() {
                     </h3>
                     <p className="text-sm text-[#2A2A2A] mb-4">{album.description}</p>
                     <a
-                      href={album.link || `#/album/${album.slug}`}
+                      href={album.link || `/album/${album.slug}`}
                       className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#F26B3A] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
                     >
                       {getButtonText(status)}

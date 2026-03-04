@@ -4,6 +4,7 @@ import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import BloomQuizWizard from '../components/BloomQuizWizard';
 import './MeetTheBlooms.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function MeetTheBlooms() {
     const [toastMessage, setToastMessage] = useState<string | null>(null);
     const [isToastClosing, setIsToastClosing] = useState(false);
+    const [isQuizOpen, setIsQuizOpen] = useState(false);
     const toastTimerContext = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -103,7 +105,7 @@ export default function MeetTheBlooms() {
     const nextTrack = () => setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
     const previousTrack = () => setCurrentTrackIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
 
-    const startQuiz = () => showToast('Quiz coming soon! 🌟');
+    const startQuiz = () => setIsQuizOpen(true);
 
     const handleDownload = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -590,6 +592,11 @@ export default function MeetTheBlooms() {
 
                 {/* The meet the blooms container needs styling adjustments here since navigation overlaps or footer overlaps. The layout assumes footer is inside or outside? The user put footer inside the page in original html. Let's place it outside for the React structure, but give space. */}
             </div>
+
+            <BloomQuizWizard
+                isOpen={isQuizOpen}
+                onClose={() => setIsQuizOpen(false)}
+            />
 
             <Footer />
         </>

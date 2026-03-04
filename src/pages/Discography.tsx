@@ -68,7 +68,7 @@ function createCombinedReleases(): CombinedRelease[] {
     date: album.date || album.releaseDate,
     isTrack: false,
     image: album.image || album.coverImage,
-    link: album.link || `#/album/${album.slug}`,
+    link: album.link || `/album/${album.slug}`,
     genre: album.genre,
     mood: album.mood,
   }));
@@ -81,7 +81,7 @@ function createCombinedReleases(): CombinedRelease[] {
     date: track.releaseDate,
     isTrack: true,
     image: track.coverImage,
-    link: `#/track/${track.slug}`,
+    link: `/track/${track.slug}`,
     genre: track.genre,
     mood: track.mood,
   }));

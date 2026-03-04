@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Suspense, lazy } from 'react';
 
@@ -34,7 +34,7 @@ function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ScrollToTop />
       <AnalyticsWrapper>
         <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#C8F0F7]"><div className="w-12 h-12 border-4 border-[#F26B3A] border-t-transparent rounded-full animate-spin"></div></div>}>
@@ -51,7 +51,7 @@ function App() {
           </Routes>
         </Suspense>
       </AnalyticsWrapper>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
