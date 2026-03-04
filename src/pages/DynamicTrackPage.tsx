@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  Play, 
-  Music, 
-  Clock, 
-  Activity, 
-  Users, 
-  Zap, 
-  Sun, 
+import {
+  Play,
+  Music,
+  Clock,
+  Activity,
+  Users,
+  Zap,
+  Sun,
   ExternalLink,
   Youtube,
   Music2,
@@ -30,21 +30,21 @@ gsap.registerPlugin(ScrollTrigger);
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
   </svg>
 );
 
 // Apple Music icon component
 const AppleMusicIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.206.313-1.52.42-2.62 1.29-3.29 2.767-.363.79-.54 1.63-.564 2.496-.01.143-.017.287-.018.43V17.9c.01.146.017.293.027.44.043.724.123 1.444.31 2.14.42 1.52 1.29 2.62 2.77 3.29.79.363 1.63.54 2.5.564.143.01.287.017.43.018h12.06c.146-.01.293-.017.44-.027.724-.043 1.444-.123 2.14-.31 1.52-.42 2.62-1.29 3.29-2.77.363-.79.54-1.63.564-2.5.01-.143.017-.287.018-.43V6.554c-.01-.146-.017-.293-.027-.44zm-6.24 10.79V8.36c0-.23-.07-.45-.2-.63-.26-.35-.7-.52-1.14-.44l-5.7.98c-.48.08-.81.51-.81 1v8.14c-.88-.53-1.96-.76-3.1-.55-1.78.33-3.05 1.8-3.05 3.6 0 2.05 1.68 3.7 3.74 3.7 1.74 0 3.2-1.2 3.62-2.82.1-.38.15-.78.15-1.19v-6.7l4.26-.73v5.35c-.88-.52-1.95-.75-3.09-.54-1.78.33-3.05 1.8-3.05 3.6 0 2.05 1.68 3.7 3.74 3.7 1.88 0 3.43-1.39 3.69-3.2.04-.28.07-.56.07-.85z"/>
+    <path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.206.313-1.52.42-2.62 1.29-3.29 2.767-.363.79-.54 1.63-.564 2.496-.01.143-.017.287-.018.43V17.9c.01.146.017.293.027.44.043.724.123 1.444.31 2.14.42 1.52 1.29 2.62 2.77 3.29.79.363 1.63.54 2.5.564.143.01.287.017.43.018h12.06c.146-.01.293-.017.44-.027.724-.043 1.444-.123 2.14-.31 1.52-.42 2.62-1.29 3.29-2.77.363-.79.54-1.63.564-2.5.01-.143.017-.287.018-.43V6.554c-.01-.146-.017-.293-.027-.44zm-6.24 10.79V8.36c0-.23-.07-.45-.2-.63-.26-.35-.7-.52-1.14-.44l-5.7.98c-.48.08-.81.51-.81 1v8.14c-.88-.53-1.96-.76-3.1-.55-1.78.33-3.05 1.8-3.05 3.6 0 2.05 1.68 3.7 3.74 3.7 1.74 0 3.2-1.2 3.62-2.82.1-.38.15-.78.15-1.19v-6.7l4.26-.73v5.35c-.88-.52-1.95-.75-3.09-.54-1.78.33-3.05 1.8-3.05 3.6 0 2.05 1.68 3.7 3.74 3.7 1.88 0 3.43-1.39 3.69-3.2.04-.28.07-.56.07-.85z" />
   </svg>
 );
 
 function DynamicTrackPage() {
   const { slug } = useParams<{ slug: string }>();
   const trackData = getTrackBySlug(slug || '') as Track;
-  
+
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -63,19 +63,19 @@ function DynamicTrackPage() {
     trackContentView(trackData.title, "track");
 
     // Hero section animation
-    gsap.fromTo(heroRef.current, 
+    gsap.fromTo(heroRef.current,
       { opacity: 0, y: 50 },
       { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
     );
 
     // Content sections animation
-    gsap.fromTo(contentRef.current?.children || [], 
+    gsap.fromTo(contentRef.current?.children || [],
       { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.8, 
-        stagger: 0.2, 
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: contentRef.current,
@@ -137,7 +137,7 @@ function DynamicTrackPage() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <button 
+                    <button
                       onClick={() => setIsPlaying(!isPlaying)}
                       className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-200 shadow-lg"
                     >
@@ -155,15 +155,15 @@ function DynamicTrackPage() {
                     {trackData.genre}
                   </span>
                 </div>
-                
+
                 <h1 className="font-['Fredoka_One'] text-4xl sm:text-5xl lg:text-6xl text-[#101010] mb-4">
                   {trackData.title}
                 </h1>
-                
+
                 <p className="text-lg sm:text-xl text-[#2A2A2A] mb-6 font-medium">
                   {trackData.subtitle}
                 </p>
-                
+
                 <p className="text-base sm:text-lg text-[#2A2A2A]/80 mb-8 max-w-2xl">
                   {trackData.description}
                 </p>
@@ -242,7 +242,7 @@ function DynamicTrackPage() {
                       {/* Other Platforms - Hover Expand */}
                       <div className="flex items-center gap-2 group">
                         <span className="text-sm text-white/70 mr-2">Also on:</span>
-                        
+
                         {/* Apple Music */}
                         <a
                           href={trackData.appleMusicUrl}
@@ -358,7 +358,7 @@ function DynamicTrackPage() {
                     className="w-9 h-9 rounded-full bg-[#1DA1F2]/20 hover:bg-[#1DA1F2] text-[#1DA1F2] hover:text-white flex items-center justify-center transition-all duration-200"
                     title="Share on X/Twitter"
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                   </button>
                   <button
                     onClick={() => {
@@ -369,7 +369,7 @@ function DynamicTrackPage() {
                     className="w-9 h-9 rounded-full bg-[#4267B2]/20 hover:bg-[#4267B2] text-[#4267B2] hover:text-white flex items-center justify-center transition-all duration-200"
                     title="Share on Facebook"
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
                   </button>
                   <button
                     onClick={() => {
@@ -380,7 +380,7 @@ function DynamicTrackPage() {
                     className="w-9 h-9 rounded-full bg-[#0077B5]/20 hover:bg-[#0077B5] text-[#0077B5] hover:text-white flex items-center justify-center transition-all duration-200"
                     title="Share on LinkedIn"
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
                   </button>
                   <button
                     onClick={() => {
@@ -428,15 +428,17 @@ function DynamicTrackPage() {
               <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl text-[#101010] mb-8 text-center">
                 Lyrics
               </h2>
-              <div className="bg-white/80 rounded-3xl p-8 shadow-lg">
-                <div className="space-y-4 text-center">
-                  {trackData.lyricsPreview.map((line: string, index: number) => (
-                    <p key={index} className="text-lg text-[#2A2A2A] leading-relaxed">
-                      {line}
-                    </p>
-                  ))}
+              {trackData.lyricsPreview && trackData.lyricsPreview.length > 0 && (
+                <div className="bg-white/80 rounded-3xl p-8 shadow-lg">
+                  <div className="space-y-4 text-center">
+                    {trackData.lyricsPreview.map((line: string, index: number) => (
+                      <p key={index} className="text-lg text-[#2A2A2A] leading-relaxed">
+                        {line}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
@@ -458,23 +460,25 @@ function DynamicTrackPage() {
         </section>
 
         {/* Educational Value */}
-        <section className="py-16 bg-white/60">
-          <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl text-[#101010] mb-8 text-center">
-                Educational Benefits
-              </h2>
-              <div className="grid sm:grid-cols-2 gap-6">
-                {trackData.educationalBenefits.map((benefit, index) => (
-                  <div key={index} className="bg-white/80 rounded-3xl p-6 shadow-lg">
-                    <h3 className="font-semibold text-xl text-[#101010] mb-3">{benefit.title}</h3>
-                    <p className="text-[#2A2A2A]">{benefit.description}</p>
-                  </div>
-                ))}
+        {trackData.educationalBenefits && trackData.educationalBenefits.length > 0 && (
+          <section className="py-16 bg-white/60">
+            <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl text-[#101010] mb-8 text-center">
+                  Educational Benefits
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  {trackData.educationalBenefits.map((benefit, index) => (
+                    <div key={index} className="bg-white/80 rounded-3xl p-6 shadow-lg">
+                      <h3 className="font-semibold text-xl text-[#101010] mb-3">{benefit.title}</h3>
+                      <p className="text-[#2A2A2A]">{benefit.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </div>
 
       <Footer />

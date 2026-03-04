@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
 import { getAllTracks } from '../data/tracks';
+import LatestAlbums from './LatestAlbums';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -204,139 +205,7 @@ const NewReleases = () => {
 
         {/* Latest Albums Section */}
         <div className="mt-20">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h3 className="font-['Fredoka_One'] text-2xl sm:text-3xl lg:text-4xl text-[#101010] mb-4">
-              Latest Albums
-            </h3>
-            <p className="text-base sm:text-lg text-[#2A2A2A]">
-              Complete collections for every moment of your child's day.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Tuned for Dreams */}
-            <div className="card overflow-hidden group">
-              <div className="relative aspect-square overflow-hidden rounded-2xl mb-4">
-                <img
-                  src="/images/dreams-cover.webp"
-                  alt="Tuned for Dreams album cover"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 right-3 w-10 h-10 bg-[#240046] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                  <Play className="w-5 h-5 text-white ml-0.5" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#240046] text-white text-sm font-semibold rounded-full">
-                    Sleep
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
-                    8 Tracks
-                  </span>
-                </div>
-                <h3 className="font-['Fredoka_One'] text-lg text-[#101010] line-clamp-1">
-                  Tuned for Dreams
-                </h3>
-                <p className="text-sm text-[#F26B3A] font-semibold">
-                  Released: Jan 9, 2026
-                </p>
-                <p className="text-sm text-[#2A2A2A] line-clamp-2">
-                  A psychoacoustic sleep album designed on the ISO Principle, moving infants from wakefulness to deep sleep.
-                </p>
-                <a
-                  href="#/album/tuned-for-dreams"
-                  className="btn-primary w-full justify-center"
-                >
-                  Listen Now
-                </a>
-              </div>
-            </div>
-
-            {/* The Bloom's House: Volume 1 */}
-            <div className="card overflow-hidden group">
-              <div className="relative aspect-square overflow-hidden rounded-2xl mb-4">
-                <img
-                  src="/images/the-blooms-house-volume-1-cover.webp"
-                  alt="The Bloom's House: Volume 1 album cover"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 right-3 w-10 h-10 bg-[#F26B3A] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                  <Play className="w-5 h-5 text-white ml-0.5" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F26B3A] text-white text-sm font-semibold rounded-full">
-                    Playful
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
-                    10 Tracks
-                  </span>
-                </div>
-                <h3 className="font-['Fredoka_One'] text-lg text-[#101010] line-clamp-1">
-                  The Bloom's House: Volume 1
-                </h3>
-                <p className="text-sm text-[#F26B3A] font-semibold">
-                  Released: Dec 25, 2025
-                </p>
-                <p className="text-sm text-[#2A2A2A] line-clamp-2">
-                  A complete collection of fun, engaging songs for toddlers and preschoolers covering daily routines and developmental skills.
-                </p>
-                <a
-                  href="#/album/the-blooms-house-volume-1"
-                  className="btn-primary w-full justify-center"
-                >
-                  Listen Now
-                </a>
-              </div>
-            </div>
-
-            {/* The Bloom's House: Classics Party */}
-            <div className="card overflow-hidden group">
-              <div className="relative aspect-square overflow-hidden rounded-2xl mb-4">
-                <img
-                  src="/images/the-blooms-house-classics-party-cover.webp"
-                  alt="The Bloom's House: Classics Party album cover"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 right-3 w-10 h-10 bg-[#F7E859] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                  <Play className="w-5 h-5 text-white ml-0.5" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F7E859] text-[#101010] text-sm font-semibold rounded-full">
-                    Celebratory
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/60 text-[#101010] text-sm font-semibold rounded-full">
-                    12 Tracks
-                  </span>
-                </div>
-                <h3 className="font-['Fredoka_One'] text-lg text-[#101010] line-clamp-1">
-                  The Bloom's House: Classics Party
-                </h3>
-                <p className="text-sm text-[#F26B3A] font-semibold">
-                  Released: Feb 14, 2026
-                </p>
-                <p className="text-sm text-[#2A2A2A] line-clamp-2">
-                  A vibrant collection of classic children's songs transformed with contemporary pop production and playful energy for family dance parties.
-                </p>
-                <a
-                  href="#/album/the-blooms-house-classics-party"
-                  className="btn-primary w-full justify-center"
-                >
-                  Listen Now
-                </a>
-              </div>
-            </div>
-          </div>
+          <LatestAlbums />
         </div>
       </div>
     </section>

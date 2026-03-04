@@ -53,8 +53,8 @@ function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Rele
 function getReleaseType(item: typeof allAlbums[0] | typeof allTracks[0], isTrack: boolean): 'Album' | 'EP' | 'Single' {
   if (isTrack) return 'Single';
   const trackCount = (item as typeof allAlbums[0]).trackCount;
-  if (trackCount >= 8) return 'Album';
-  if (trackCount >= 4) return 'EP';
+  if (trackCount && trackCount >= 8) return 'Album';
+  if (trackCount && trackCount >= 4) return 'EP';
   return 'Single';
 }
 
@@ -81,7 +81,7 @@ function createCombinedReleases(): CombinedRelease[] {
     date: track.releaseDate,
     isTrack: true,
     image: track.coverImage,
-    link: track.albumUrl || `#/track/${track.slug}`,
+    link: `#/track/${track.slug}`,
     genre: track.genre,
     mood: track.mood,
   }));
@@ -336,10 +336,10 @@ const Discography = () => {
   // Get latest 3 albums for the Latest Albums section
   const latestAlbums = useMemo(() => {
     return allReleases
-      .filter(r => !r.isTrack)
+      .filter(r => r.type === 'Album' || r.type === 'EP')
       .sort(sortByDate)
       .slice(0, 3);
-  }, []);
+  }, [allReleases]);
 
   return (
     <div className="relative min-h-screen bg-[#C8F0F7]">

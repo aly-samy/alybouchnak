@@ -11,6 +11,7 @@ const DynamicTrackPage = lazy(() => import('./pages/DynamicTrackPage'));
 const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
 import { initGA, trackPageView } from './lib/analytics';
 import { initPixel, trackPixelPageView } from './lib/pixel';
+import ScrollToTop from './components/ScrollToTop';
 
 function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -34,6 +35,7 @@ function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <AnalyticsWrapper>
         <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-[#C8F0F7]"><div className="w-12 h-12 border-4 border-[#F26B3A] border-t-transparent rounded-full animate-spin"></div></div>}>
           <Routes>
