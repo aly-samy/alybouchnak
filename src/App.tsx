@@ -6,6 +6,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Discography = lazy(() => import('./pages/Discography'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Contact = lazy(() => import('./pages/Contact'));
+const MeetTheBlooms = lazy(() => import('./pages/MeetTheBlooms'));
 const DynamicTrackPage = lazy(() => import('./pages/DynamicTrackPage'));
 const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
 import { initGA, trackPageView } from './lib/analytics';
@@ -39,6 +40,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/discography" element={<Discography />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/meet-the-blooms" element={<MeetTheBlooms />} />
             <Route path="/contact" element={<Contact />} />
             {/* Dynamic Track Routes - All tracks rendered from centralized data */}
             <Route path="/track/:slug" element={<DynamicTrackPage />} />

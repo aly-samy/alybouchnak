@@ -1,0 +1,612 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+.meet-the-blooms-container {
+    --cream: #FFF8F0;
+    --soft-blue: #B5D8EB;
+    --gentle-pink: #F4C2C2;
+    --sage: #C5D5C0;
+    --warm-coral: #FF9B85;
+    --lavender: #D4C5E2;
+    --butter: #FFE5B4;
+    --text-dark: #5D4E37;
+    --text-light: #8B7355;
+    --white: #FFFFFF;
+    --shadow: rgba(93, 78, 55, 0.1);
+
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+.meet-the-blooms-container * {
+    box-sizing: border-box;
+}
+
+/* Typography */
+.meet-the-blooms-container h1, 
+.meet-the-blooms-container h2, 
+.meet-the-blooms-container h3 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.meet-the-blooms-container h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--text-dark);
+}
+
+.meet-the-blooms-container h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.meet-the-blooms-container h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+}
+
+/* Header Section */
+.meet-the-blooms-container .blooms-hero {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--soft-blue) 100%);
+    padding: 8rem 1rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.meet-the-blooms-container .blooms-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+    animation: gentleFloat 20s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(30px, 30px) rotate(5deg); }
+}
+
+.meet-the-blooms-container .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.meet-the-blooms-container .family-illustration {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    position: relative;
+    aspect-ratio: 16/9;
+    background: linear-gradient(145deg, #FFF5E6 0%, #FFE8D6 100%);
+    border-radius: 30px;
+    box-shadow: 0 20px 60px var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.meet-the-blooms-container .family-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: 
+        radial-gradient(circle at 20% 80%, var(--gentle-pink) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, var(--soft-blue) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, var(--sage) 0%, transparent 30%);
+}
+
+.meet-the-blooms-container .character-silhouette {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(0.5px);
+    transition: transform 0.3s ease;
+}
+
+.meet-the-blooms-container .silhouette-leo { width: 80px; height: 80px; background: var(--warm-coral); bottom: 30%; left: 15%; }
+.meet-the-blooms-container .silhouette-mia { width: 75px; height: 75px; background: var(--gentle-pink); bottom: 30%; left: 25%; }
+.meet-the-blooms-container .silhouette-layla { width: 65px; height: 65px; background: var(--lavender); bottom: 35%; left: 60%; }
+.meet-the-blooms-container .silhouette-theo { width: 55px; height: 55px; background: var(--soft-blue); bottom: 25%; left: 45%; }
+.meet-the-blooms-container .silhouette-max { width: 40px; height: 40px; background: var(--butter); bottom: 20%; left: 35%; }
+.meet-the-blooms-container .silhouette-grandpa { width: 70px; height: 70px; background: var(--sage); bottom: 30%; right: 15%; }
+.meet-the-blooms-container .silhouette-grandma { width: 65px; height: 65px; background: var(--gentle-pink); bottom: 30%; right: 25%; }
+
+.meet-the-blooms-container .pet-indicator {
+    position: absolute;
+    border-radius: 50%;
+    animation: gentleBounce 2s ease-in-out infinite;
+}
+
+@keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.meet-the-blooms-container .pet-doby { width: 35px; height: 35px; background: #D4A373; bottom: 15%; left: 20%; animation-delay: 0s; }
+.meet-the-blooms-container .pet-mila { width: 25px; height: 25px; background: #A8A8A8; bottom: 50%; right: 20%; animation-delay: 0.5s; }
+.meet-the-blooms-container .pet-coco { width: 20px; height: 20px; background: #FFD93D; top: 20%; left: 50%; animation-delay: 1s; }
+
+.meet-the-blooms-container .blooms-hero h1 {
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+}
+
+.meet-the-blooms-container .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--text-light);
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Section Styling */
+.meet-the-blooms-container .blooms-section {
+    padding: 4rem 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.meet-the-blooms-container .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.meet-the-blooms-container .section-tag {
+    display: inline-block;
+    background: var(--white);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px var(--shadow);
+}
+
+/* Character Grid */
+.meet-the-blooms-container .character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.meet-the-blooms-container .character-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px var(--shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.meet-the-blooms-container .character-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 20px 40px rgba(93, 78, 55, 0.15);
+}
+
+.meet-the-blooms-container .character-card:active {
+    transform: scale(0.98) !important;
+}
+
+.meet-the-blooms-container .card-visual {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meet-the-blooms-container .card-visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+}
+
+.meet-the-blooms-container .character-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.meet-the-blooms-container .character-card:hover .character-avatar {
+    transform: scale(1.1);
+}
+
+/* Avatar Styles per Character */
+.meet-the-blooms-container .avatar-max { background: linear-gradient(135deg, #FFE5B4 0%, #FFD93D 100%); }
+.meet-the-blooms-container .avatar-theo { background: linear-gradient(135deg, #B5D8EB 0%, #7EC8E3 100%); }
+.meet-the-blooms-container .avatar-layla { background: linear-gradient(135deg, #D4C5E2 0%, #B8A9C9 100%); }
+.meet-the-blooms-container .avatar-leo { background: linear-gradient(135deg, #FF9B85 0%, #FF7F6B 100%); }
+.meet-the-blooms-container .avatar-mia { background: linear-gradient(135deg, #F4C2C2 0%, #E8A5A5 100%); }
+.meet-the-blooms-container .avatar-grandparents { background: linear-gradient(135deg, #C5D5C0 0%, #A8C5A0 100%); }
+.meet-the-blooms-container .avatar-zayna { background: linear-gradient(135deg, #D4C5E2 0%, #C9B8E8 100%); }
+.meet-the-blooms-container .avatar-ciara { background: linear-gradient(135deg, #FF9B85 0%, #FFB4A2 100%); }
+.meet-the-blooms-container .avatar-kenji { background: linear-gradient(135deg, #B5D8EB 0%, #A8D5E5 100%); }
+.meet-the-blooms-container .avatar-amara { background: linear-gradient(135deg, #FFE5B4 0%, #F4C2C2 100%); }
+.meet-the-blooms-container .avatar-doby { background: linear-gradient(135deg, #D4A373 0%, #C9956C 100%); }
+.meet-the-blooms-container .avatar-mila { background: linear-gradient(135deg, #E8E8E8 0%, #D4D4D4 100%); }
+.meet-the-blooms-container .avatar-coco { background: linear-gradient(135deg, #FFD93D 0%, #FFC93D 100%); }
+
+.meet-the-blooms-container .card-content {
+    padding: 1.5rem 2rem 2rem;
+    position: relative;
+}
+
+.meet-the-blooms-container .character-role {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.meet-the-blooms-container .character-name {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.meet-the-blooms-container .character-bio {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.meet-the-blooms-container .character-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.meet-the-blooms-container .meta-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.meet-the-blooms-container .meta-label {
+    font-weight: 700;
+    color: var(--text-dark);
+    min-width: 100px;
+}
+
+.meet-the-blooms-container .meta-value {
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.meet-the-blooms-container .play-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--soft-blue) 0%, var(--gentle-pink) 100%);
+    border: none;
+    border-radius: 12px;
+    color: var(--text-dark);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.meet-the-blooms-container .play-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(181, 216, 235, 0.4);
+}
+
+.meet-the-blooms-container .play-button:active {
+    transform: scale(0.95);
+}
+
+/* Tier Styling */
+.meet-the-blooms-container .tier-1 .character-card {
+    border: 3px solid transparent;
+    background: linear-gradient(var(--white), var(--white)) padding-box,
+                linear-gradient(135deg, var(--soft-blue), var(--gentle-pink)) border-box;
+}
+
+.meet-the-blooms-container .tier-2 .character-card {
+    transform: scale(0.95) translateY(20px);
+}
+
+.meet-the-blooms-container .tier-2 .character-card:hover {
+    transform: scale(0.98) translateY(-8px) !important;
+}
+
+.meet-the-blooms-container .tier-3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.meet-the-blooms-container .tier-3 .character-card {
+    width: 100%;
+    max-width: 300px;
+    transform: scale(0.9) translateY(20px);
+}
+
+.meet-the-blooms-container .tier-3 .character-card:hover {
+    transform: scale(0.93) translateY(-8px) !important;
+}
+
+/* Interactive Elements */
+.meet-the-blooms-container .sound-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px var(--shadow);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.meet-the-blooms-container .character-card:hover .sound-indicator {
+    opacity: 1;
+}
+
+/* Mini Player */
+.meet-the-blooms-container .mini-player {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 100;
+    max-width: 90%;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+.meet-the-blooms-container .mini-player:hover {
+    transform: translateX(-50%) scale(1.05);
+}
+
+.meet-the-blooms-container .player-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.meet-the-blooms-container .player-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.meet-the-blooms-container .player-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.meet-the-blooms-container .player-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.meet-the-blooms-container .control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--soft-blue);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.meet-the-blooms-container .control-btn:hover {
+    background: var(--gentle-pink);
+    transform: scale(1.1);
+}
+
+/* Floating CTA */
+.meet-the-blooms-container .floating-cta {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--warm-coral) 0%, var(--gentle-pink) 100%);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: 0 5px 20px rgba(255, 155, 133, 0.4);
+    cursor: pointer;
+    z-index: 99;
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.meet-the-blooms-container .floating-cta:hover {
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 155, 133, 0.6);
+}
+
+/* Quiz Section */
+.meet-the-blooms-container .quiz-section {
+    background: linear-gradient(135deg, var(--lavender) 0%, var(--soft-blue) 100%);
+    border-radius: 30px;
+    padding: 3rem;
+    margin: 4rem auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.meet-the-blooms-container .quiz-button {
+    background: var(--white);
+    color: var(--text-dark);
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    box-shadow: 0 5px 20px var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.meet-the-blooms-container .quiz-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+/* Coloring Pages CTA */
+.meet-the-blooms-container .download-section {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 3rem;
+    margin: 3rem auto;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 10px 40px var(--shadow);
+}
+
+.meet-the-blooms-container .email-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.meet-the-blooms-container .email-input {
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--sage);
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    flex: 1;
+    min-width: 250px;
+}
+
+.meet-the-blooms-container .email-input:focus {
+    border-color: var(--soft-blue);
+}
+
+.meet-the-blooms-container .submit-btn {
+    background: var(--sage);
+    color: var(--text-dark);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.meet-the-blooms-container .submit-btn:hover {
+    background: var(--soft-blue);
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .meet-the-blooms-container .character-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .meet-the-blooms-container .mini-player {
+        width: 90%;
+        padding: 0.8rem 1rem;
+    }
+    
+    .meet-the-blooms-container .quiz-section, 
+    .meet-the-blooms-container .download-section {
+        margin: 2rem 1rem;
+        padding: 2rem 1rem;
+    }
+}
+
+/* Animations */
+@keyframes gentlePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.meet-the-blooms-container .listening {
+    animation: gentlePulse 2s ease-in-out infinite;
+}
+
+/* Slide Toast Animations */
+@keyframes bloomSlideDown {
+    from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+@keyframes bloomSlideUp {
+    from { transform: translateX(-50%) translateY(0); opacity: 1; }
+    to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+}
+
+.meet-the-blooms-container .toast-notification {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-dark);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    animation: bloomSlideDown 0.3s ease forwards;
+}
+
+.meet-the-blooms-container .toast-notification.hide {
+    animation: bloomSlideUp 0.3s ease forwards;
+}

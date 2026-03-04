@@ -46,20 +46,18 @@ const Navigation = () => {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || !isHome
-          ? 'bg-white/90 backdrop-blur-md shadow-lg' 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || !isHome
+          ? 'bg-white/90 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
-      }`}
+        }`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className={`font-['Fredoka_One'] text-xl lg:text-2xl transition-colors ${
-              isScrolled || !isHome ? 'text-[#101010]' : 'text-[#101010]'
-            }`}
+          <Link
+            to="/"
+            className={`font-['Fredoka_One'] text-xl lg:text-2xl transition-colors ${isScrolled || !isHome ? 'text-[#101010]' : 'text-[#101010]'
+              }`}
             onClick={handleNavClick}
           >
             Aly Bouchnak
@@ -69,17 +67,22 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             <Link
               to="/discography"
-              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${
-                isActive('/discography') ? 'text-[#F26B3A]' : 'text-[#101010]'
-              }`}
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/discography') ? 'text-[#F26B3A]' : 'text-[#101010]'
+                }`}
             >
               Discography
             </Link>
             <Link
+              to="/meet-the-blooms"
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/meet-the-blooms') ? 'text-[#F26B3A]' : 'text-[#101010]'
+                }`}
+            >
+              Meet The Blooms
+            </Link>
+            <Link
               to="/faq"
-              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${
-                isActive('/faq') ? 'text-[#F26B3A]' : 'text-[#101010]'
-              }`}
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/faq') ? 'text-[#F26B3A]' : 'text-[#101010]'
+                }`}
             >
               FAQ
             </Link>
@@ -130,26 +133,31 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg transition-all duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+        className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
       >
         <div className="px-4 py-4 space-y-2">
           <Link
             to="/discography"
             onClick={handleNavClick}
-            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${
-              isActive('/discography') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
-            }`}
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/discography') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+              }`}
           >
             Discography
           </Link>
           <Link
+            to="/meet-the-blooms"
+            onClick={handleNavClick}
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/meet-the-blooms') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+              }`}
+          >
+            Meet The Blooms
+          </Link>
+          <Link
             to="/faq"
             onClick={handleNavClick}
-            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${
-              isActive('/faq') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
-            }`}
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/faq') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+              }`}
           >
             FAQ
           </Link>
