@@ -21,7 +21,8 @@ const STATIC_ROUTES = [
     { url: '/faq', priority: 0.7, changefreq: 'monthly' },
     { url: '/contact', priority: 0.6, changefreq: 'monthly' },
     { url: '/privacy-policy', priority: 0.3, changefreq: 'yearly' },
-    { url: '/terms-of-service', priority: 0.3, changefreq: 'yearly' }
+    { url: '/terms-of-service', priority: 0.3, changefreq: 'yearly' },
+    { url: '/safety-policy', priority: 0.8, changefreq: 'monthly' }
 ];
 
 const DOMAIN = 'https://alybouchnak.com';

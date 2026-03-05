@@ -78,6 +78,13 @@ function processSSG() {
             description: "Review the terms of service for The Bloom's House. Guidelines for parents, intellectual property, and community standards.",
             image: `${DOMAIN}/images/Aly-bouchnak-profile.webp`,
             type: 'page'
+        },
+        {
+            slug: 'safety-policy',
+            title: "Safety & Values Commitment | Aly Bouchnak - The Bloom's House",
+            description: "Our commitment to 'Guilt-Free' entertainment. Balanced stimulation, strict privacy compliance, and content integrity for modern families.",
+            image: `${DOMAIN}/images/Blooms-Safety-Seal.webp`,
+            type: 'page'
         }
     ];
 

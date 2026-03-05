@@ -100,6 +100,25 @@ const Footer = () => {
                 Modern digital pop for kids & families. Creating "Balanced Stimulation"
                 music as a parenting partner.
               </p>
+
+              {/* Safety Seal */}
+              <div className="mb-8 p-1">
+                <a
+                  href="/safety-policy"
+                  className="group flex items-center gap-4 bg-white/40 hover:bg-white/60 backdrop-blur-sm rounded-2xl p-3 border border-white/40 transition-all hover:shadow-lg w-fit"
+                >
+                  <img
+                    src="/images/Blooms-Safety-Seal.webp"
+                    alt="Safety Seal"
+                    className="w-12 h-12 drop-shadow-sm group-hover:scale-110 transition-transform"
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold text-[#F26B3A] uppercase tracking-wider leading-none mb-1">Our Commitment</span>
+                    <span className="text-xs font-['Fredoka_One'] text-[#101010]">Safety Policy</span>
+                  </div>
+                </a>
+              </div>
+
               {/* Social icons */}
               <div className="flex gap-3">
                 {socialLinks.map((social) => (
