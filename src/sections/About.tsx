@@ -135,7 +135,7 @@ const About = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-[#F7E859] rounded-full blur-3xl opacity-30 scale-110" />
               <img
-                src="/images/aly-bouchnak-hero.webp"
+                src="/images/Aly-bouchnak-profile.webp"
                 alt="Aly Bouchnak"
                 className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain rounded-full bg-gradient-to-br from-[#C8F0F7] to-[#F7E859]/30"
                 loading="lazy"
