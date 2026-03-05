@@ -9,6 +9,8 @@ const Contact = lazy(() => import('./pages/Contact'));
 const MeetTheBlooms = lazy(() => import('./pages/MeetTheBlooms'));
 const DynamicTrackPage = lazy(() => import('./pages/DynamicTrackPage'));
 const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const AdminApp = lazy(() => import('./admin/AdminApp'));
 import { initGA, trackPageView } from './lib/analytics';
 import { initPixel, trackPixelPageView } from './lib/pixel';
@@ -49,6 +51,9 @@ function App() {
             <Route path="/track/:slug" element={<DynamicTrackPage />} />
             {/* Dynamic Album Routes - All albums rendered from centralized data */}
             <Route path="/album/:slug" element={<DynamicAlbumPage />} />
+            {/* Legal Pages */}
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             {/* Admin Dashboard - protected by password */}
             <Route path="/admin/*" element={<AdminApp />} />
           </Routes>

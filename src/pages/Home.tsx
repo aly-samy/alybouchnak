@@ -77,7 +77,7 @@ const artistSchema = {
 
   sameAs: [
     'https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8',
-    'https://music.apple.com/au/artist/aly-bouchnak/1840274949',
+    'https://music.apple.com/us/artist/aly-bouchnak/1840274949',
     'https://amazon.com/music/player/artists/B0FVYF53CC/aly-bouchnak',
     'https://www.youtube.com/@AlyBouchnak',
     'https://www.instagram.com/alybouchnak/',
@@ -104,7 +104,7 @@ const artistSchema = {
 
   foundingLocation: {
     '@type': 'Place',
-    name: 'Sydney, Australia'
+    name: 'Cairo, Egypt'
   },
 
   hasAlbum: {
@@ -129,7 +129,7 @@ function Home() {
       const pinned = ScrollTrigger.getAll()
         .filter(st => st.vars.pin)
         .sort((a, b) => a.start - b.start);
-      
+
       const maxScroll = ScrollTrigger.maxScroll(window);
       if (!maxScroll || pinned.length === 0) return;
 
@@ -169,22 +169,22 @@ function Home() {
 
   return (
     <div ref={mainRef} className="relative">
-<SEO
-  title="Aly Bouchnak | Modern Kids Pop, Nursery Rhymes & Family Dance Music"
-  description="Aly Bouchnak creates modern nursery rhymes and kids pop songs for toddlers and preschoolers. Stream movement-based family dance music from The Bloom’s House."
-  keywords="toddler music, preschool songs, nursery rhymes remix, kids dance songs, movement songs for toddlers, family dance music, educational kids music"
-  canonical="https://alybouchnak.com"
-  ogImage="https://alybouchnak.com/images/Aly-bouchnak-profile.webp"
-  ogType="website"
-  schemaData={artistSchema}
-/>
+      <SEO
+        title="Aly Bouchnak | Modern Kids Pop, Nursery Rhymes & Family Dance Music"
+        description="Aly Bouchnak creates modern nursery rhymes and kids pop songs for toddlers and preschoolers. Stream movement-based family dance music from The Bloom’s House."
+        keywords="toddler music, preschool songs, nursery rhymes remix, kids dance songs, movement songs for toddlers, family dance music, educational kids music"
+        canonical="https://alybouchnak.com"
+        ogImage="https://alybouchnak.com/images/Aly-bouchnak-profile.webp"
+        ogType="website"
+        schemaData={artistSchema}
+      />
 
       {/* Grain overlay */}
       <div className="grain-overlay" />
-      
+
       {/* Navigation */}
       <Navigation />
-      
+
       {/* Main content */}
       <main className="relative">
         <Hero />

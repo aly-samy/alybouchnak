@@ -19,7 +19,9 @@ const STATIC_ROUTES = [
     { url: '/discography', priority: 0.9, changefreq: 'weekly' },
     { url: '/meet-the-blooms', priority: 0.8, changefreq: 'monthly' },
     { url: '/faq', priority: 0.7, changefreq: 'monthly' },
-    { url: '/contact', priority: 0.6, changefreq: 'monthly' }
+    { url: '/contact', priority: 0.6, changefreq: 'monthly' },
+    { url: '/privacy-policy', priority: 0.3, changefreq: 'yearly' },
+    { url: '/terms-of-service', priority: 0.3, changefreq: 'yearly' }
 ];
 
 const DOMAIN = 'https://alybouchnak.com';

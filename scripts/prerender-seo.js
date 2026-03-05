@@ -62,18 +62,38 @@ function processSSG() {
     const baseHtml = fs.readFileSync(INDEX_HTML_PATH, 'utf8');
     const albums = extractDataFromTs(ALBUMS_FILE, 'album');
     const tracks = extractDataFromTs(TRACKS_FILE, 'track');
-    const allMedia = [...albums, ...tracks];
 
-    console.log(`Starting SSG Process for ${allMedia.length} dynamic routes...`);
+    // Add static pages that need custom SEO injection
+    const staticPages = [
+        {
+            slug: 'privacy-policy',
+            title: "Privacy Policy | Aly Bouchnak - The Bloom's House",
+            description: "Learn about how we protect your family's privacy at The Bloom's House. Our Kids-First data commitment and COPPA/GDPR compliance.",
+            image: `${DOMAIN}/images/Aly-bouchnak-profile.webp`,
+            type: 'page'
+        },
+        {
+            slug: 'terms-of-service',
+            title: "Terms of Service | Aly Bouchnak - The Bloom's House",
+            description: "Review the terms of service for The Bloom's House. Guidelines for parents, intellectual property, and community standards.",
+            image: `${DOMAIN}/images/Aly-bouchnak-profile.webp`,
+            type: 'page'
+        }
+    ];
+
+    const allMedia = [...albums, ...tracks, ...staticPages];
+
+    console.log(`Starting SSG Process for ${allMedia.length} routes...`);
 
     allMedia.forEach(media => {
         // Determine output directory e.g., dist/album/the-blooms-house-volume-1
-        const routeDir = path.join(DIST_DIR, media.type, media.slug);
+        const routePath = media.type === 'page' ? media.slug : path.join(media.type, media.slug);
+        const routeDir = path.join(DIST_DIR, routePath);
 
         // Create folders
         fs.mkdirSync(routeDir, { recursive: true });
 
-        const fullUrl = `${DOMAIN}/${media.type}/${media.slug}`;
+        const fullUrl = `${DOMAIN}/${routePath}`;
 
         // Schema.org generation matching SEO.tsx structure
         const schemaObj = {
@@ -123,13 +143,13 @@ function processSSG() {
         );
         injectedHtml = injectedHtml.replace(
             /<meta property="og:type" content="(.*?)"([^>]*)>/g,
-            `<meta property="og:type" content="${media.type === 'album' ? 'music.album' : 'music.song'}"$2>`
+            `<meta property="og:type" content="${media.type === 'album' ? 'music.album' : media.type === 'track' ? 'music.song' : 'website'}"$2>`
         );
 
         // 4. Replace Twitter Tags
         injectedHtml = injectedHtml.replace(
             /<meta name="twitter:title" content="(.*?)"([^>]*)>/g,
-            `<meta name="twitter:title" content="${media.title} | Aly Bouchnak"$2>`
+            `<meta name="twitter:title" content="${media.title}"$2>`
         );
         injectedHtml = injectedHtml.replace(
             /<meta name="twitter:description" content="(.*?)"([^>]*)>/g,
