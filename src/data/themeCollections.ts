@@ -1,4 +1,4 @@
-import { Album } from './albums';
+import type { Album } from './albums';
 
 export interface ThemeCollection extends Album {
     // Theme Collections share the same structure as Albums for now

@@ -5,9 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
     Play,
     Music,
-    Clock,
-    Activity,
-    Users,
     Sun,
     Moon,
     ChevronDown,
@@ -15,7 +12,6 @@ import {
     Disc,
     Volume2,
     Heart,
-    Link2,
     Music2
 } from 'lucide-react';
 import Navigation from '../sections/Navigation';

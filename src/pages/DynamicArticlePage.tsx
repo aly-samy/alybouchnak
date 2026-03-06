@@ -9,7 +9,6 @@ import {
     ArrowLeft,
     Share2,
     Tag,
-    Youtube,
     Music,
     Disc,
     ExternalLink,

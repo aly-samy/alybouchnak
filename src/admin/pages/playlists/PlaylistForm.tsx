@@ -6,7 +6,7 @@ import type { Playlist } from '../../../data/playlists';
 import { generatePlaylistsFile } from '../../lib/generatePlaylists';
 import { savePlaylistsToGitHub } from '../../lib/githubSave';
 import { toast } from 'sonner';
-import { Plus, Trash2, ArrowLeft, Github, Loader2, Info, Link2, Music, BookOpen } from 'lucide-react';
+import { Trash2, ArrowLeft, Github, Loader2, Info, Link2, Music, BookOpen } from 'lucide-react';
 
 type FormData = Playlist;
 

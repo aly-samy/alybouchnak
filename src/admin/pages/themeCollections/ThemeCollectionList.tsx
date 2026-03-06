@@ -4,7 +4,7 @@ import { themeCollections as initialCollections } from '../../../data/themeColle
 import type { ThemeCollection } from '../../../data/themeCollections';
 import { generateThemeCollectionsFile } from '../../lib/generateThemeCollections';
 import { saveThemeCollectionsToGitHub } from '../../lib/githubSave';
-import { Plus, Search, Pencil, Trash2, Github, Loader2, ExternalLink, Sparkles, Activity } from 'lucide-react';
+import { Plus, Search, Pencil, Trash2, Github, Loader2, Sparkles, Activity } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function ThemeCollectionList() {

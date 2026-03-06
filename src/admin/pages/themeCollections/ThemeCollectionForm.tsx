@@ -6,7 +6,7 @@ import type { ThemeCollection } from '../../../data/themeCollections';
 import { generateThemeCollectionsFile } from '../../lib/generateThemeCollections';
 import { saveThemeCollectionsToGitHub } from '../../lib/githubSave';
 import { toast } from 'sonner';
-import { Plus, Trash2, ArrowLeft, Github, Loader2, Sparkles, BookOpen, Brain, ListMusic, Globe } from 'lucide-react';
+import { Trash2, ArrowLeft, Github, Loader2, Sparkles, BookOpen, Brain, ListMusic, Globe } from 'lucide-react';
 
 type FormData = ThemeCollection;
 

@@ -1,4 +1,4 @@
-import { Album } from './albums';
+import type { Album } from './albums';
 
 export interface Playlist extends Album {
     // Playlists share the same structure as Albums for now

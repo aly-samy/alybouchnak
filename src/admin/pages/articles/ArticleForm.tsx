@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { articles as allArticlesData } from '../../../data/articles';
@@ -10,7 +10,6 @@ import { saveArticlesToGitHub } from '../../lib/githubSave';
 import { toast } from 'sonner';
 import {
     Plus,
-    Trash2,
     ArrowLeft,
     Github,
     Loader2,
@@ -87,10 +86,8 @@ export default function ArticleForm() {
     // Watch values for auto-schema generation
     const watchedTitle = watch('title');
     const watchedDesc = watch('description');
-    const watchedSlug = watch('slug');
     const watchedCover = watch('coverImage.url');
     const watchedDate = watch('datePublished');
-    const watchedCategory = watch('category');
     const watchedType = watch('type');
 
     // Auto-update schema and dates

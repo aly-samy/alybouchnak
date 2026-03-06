@@ -23,7 +23,7 @@ export const PixelEvents = {
   PURCHASE: "Purchase",
   LEAD: "Lead",
   COMPLETE_REGISTRATION: "CompleteRegistration",
-  
+
   // Custom events for music
   STREAM_CLICK: "StreamClick",
   ALBUM_VIEW: "AlbumView",
@@ -33,7 +33,7 @@ export const PixelEvents = {
 } as const;
 
 // Helper to track content view for retargeting
-export const trackContentView = (contentName: string, contentType: "track" | "album" | "page") => {
+export const trackContentView = (contentName: string, contentType: "track" | "album" | "page" | "playlist" | "theme-collection" | "article") => {
   trackPixelEvent(PixelEvents.VIEW_CONTENT, {
     content_name: contentName,
     content_type: contentType,
@@ -41,7 +41,7 @@ export const trackContentView = (contentName: string, contentType: "track" | "al
 };
 
 // Helper to track streaming clicks as Lead (for conversion optimization)
-export const trackStreamClick = (platform: string, contentName: string, contentType: "track" | "album") => {
+export const trackStreamClick = (platform: string, contentName: string, contentType: "track" | "album" | "playlist" | "theme-collection") => {
   trackPixelEvent(PixelEvents.LEAD, {
     content_name: contentName,
     content_type: contentType,

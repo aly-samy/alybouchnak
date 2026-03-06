@@ -23,6 +23,7 @@ export const trackEvent = (category: string, action: string, label?: string, val
 export const EventCategories = {
   STREAMING: "Streaming",
   ALBUM_STREAMING: "Album Streaming",
+  PLAYLIST_STREAMING: "Playlist Streaming",
   ENGAGEMENT: "Engagement",
   NAVIGATION: "Navigation",
   CONVERSION: "Conversion",
@@ -38,7 +39,7 @@ export const EventActions = {
   YOUTUBE_CLICK: "YouTube Click",
   AMAZON_CLICK: "Amazon Click",
   OTHER_PLATFORM_CLICK: "Other Platform Click",
-  
+
   // Engagement actions
   PLAY_EMBEDDED: "Play Embedded",
   SCROLL_25: "25% Scroll",
@@ -48,7 +49,7 @@ export const EventActions = {
   TIME_30S: "30s on Page",
   TIME_60S: "60s on Page",
   TIME_120S: "2min on Page",
-  
+
   // Conversion actions
   NEWSLETTER_SIGNUP: "Newsletter Signup",
   SHARE_CLICK: "Share Click",

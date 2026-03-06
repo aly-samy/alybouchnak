@@ -1,22 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
+    Play,
     Sparkles,
-    Music,
-    Clock,
-    Activity,
-    Users,
     Sun,
     Moon,
-    ChevronDown,
-    ExternalLink,
-    Disc,
-    Volume2,
-    Heart,
     BookOpen,
-    Music2
+    Activity,
+    Users,
+    Heart
 } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
@@ -25,7 +19,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import { getThemeCollectionBySlug } from '../data/themeCollections';
 import type { ThemeCollection } from '../data/themeCollections';
 import { trackEvent, EventCategories, EventActions } from '../lib/analytics';
-import { trackStreamClick, trackContentView } from '../lib/pixel';
+import { trackContentView } from '../lib/pixel';
 import { useEngagementTracking } from '../hooks/useEngagementTracking';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -36,7 +30,6 @@ function DynamicThemeCollectionPage() {
 
     const heroRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
-    const [expandedTrack, setExpandedTrack] = useState<number | null>(null);
 
     // Track engagement metrics
     useEngagementTracking(collectionData?.title || 'Theme Collection Page');

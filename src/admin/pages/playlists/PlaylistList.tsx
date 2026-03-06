@@ -4,7 +4,7 @@ import { playlists as initialPlaylists } from '../../../data/playlists';
 import type { Playlist } from '../../../data/playlists';
 import { generatePlaylistsFile } from '../../lib/generatePlaylists';
 import { savePlaylistsToGitHub } from '../../lib/githubSave';
-import { Plus, Search, Pencil, Trash2, Github, Loader2, ExternalLink, Library } from 'lucide-react';
+import { Plus, Search, Pencil, Trash2, Github, Loader2, ExternalLink, Library, Disc } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function PlaylistList() {

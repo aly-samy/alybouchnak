@@ -6,7 +6,7 @@ interface SEOProps {
   keywords?: string;
   canonical?: string;
   ogImage?: string;
-  ogType?: 'website' | 'music.song' | 'music.album' | 'music.playlist';
+  ogType?: 'website' | 'music.song' | 'music.album' | 'music.playlist' | 'article';
   schemaData?: Record<string, unknown>;
   noIndex?: boolean;
 }
