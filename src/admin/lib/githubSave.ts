@@ -42,3 +42,27 @@ export async function saveAlbumsToGitHub(content: string): Promise<void> {
         'Admin: Updated albums.ts via Admin Dashboard'
     );
 }
+
+export async function savePlaylistsToGitHub(content: string): Promise<void> {
+    await saveFile(
+        'src/data/playlists.ts',
+        content,
+        'Admin: Updated playlists.ts via Admin Dashboard'
+    );
+}
+
+export async function saveThemeCollectionsToGitHub(content: string): Promise<void> {
+    await saveFile(
+        'src/data/themeCollections.ts',
+        content,
+        'Admin: Updated themeCollections.ts via Admin Dashboard'
+    );
+}
+
+export async function saveArticlesToGitHub(content: string): Promise<void> {
+    await saveFile(
+        'src/data/articles.ts',
+        content,
+        'Admin: Updated articles.ts via Admin Dashboard'
+    );
+}

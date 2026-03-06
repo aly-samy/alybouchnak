@@ -9,6 +9,9 @@ const Contact = lazy(() => import('./pages/Contact'));
 const MeetTheBlooms = lazy(() => import('./pages/MeetTheBlooms'));
 const DynamicTrackPage = lazy(() => import('./pages/DynamicTrackPage'));
 const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
+const DynamicPlaylistPage = lazy(() => import('./pages/DynamicPlaylistPage'));
+const DynamicThemeCollectionPage = lazy(() => import('./pages/DynamicThemeCollectionPage'));
+const DynamicArticlePage = lazy(() => import('./pages/DynamicArticlePage'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const SafetyPolicy = lazy(() => import('./pages/SafetyPolicy'));
@@ -50,8 +53,12 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             {/* Dynamic Track Routes - All tracks rendered from centralized data */}
             <Route path="/track/:slug" element={<DynamicTrackPage />} />
-            {/* Dynamic Album Routes - All albums rendered from centralized data */}
+            {/* Dynamic Content Routes */}
             <Route path="/album/:slug" element={<DynamicAlbumPage />} />
+            <Route path="/playlist/:slug" element={<DynamicPlaylistPage />} />
+            <Route path="/theme-collection/:slug" element={<DynamicThemeCollectionPage />} />
+            <Route path="/article/:slug" element={<DynamicArticlePage />} />
+
             {/* Legal Pages */}
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />

@@ -1,11 +1,23 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from './lib/adminAuth';
-import { Music, Disc3, LayoutDashboard, LogOut, ExternalLink } from 'lucide-react';
+import {
+    Music,
+    Disc3,
+    LayoutDashboard,
+    LogOut,
+    ExternalLink,
+    Library,
+    Sparkles,
+    FileText
+} from 'lucide-react';
 
 const navItems = [
     { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
     { to: '/admin/tracks', label: 'Tracks', icon: Music, end: false },
     { to: '/admin/albums', label: 'Albums', icon: Disc3, end: false },
+    { to: '/admin/playlists', label: 'Playlists', icon: Library, end: false },
+    { to: '/admin/themes', label: 'Themes', icon: Sparkles, end: false },
+    { to: '/admin/articles', label: 'Articles & News', icon: FileText, end: false },
 ];
 
 export default function AdminLayout() {

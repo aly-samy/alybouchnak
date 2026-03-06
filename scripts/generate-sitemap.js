@@ -2,17 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Define ___dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import data dynamically using dynamic import since these are TypeScript files 
-// and we're building before we run Vite. The easiest way is to use a regex or register ts-node.
-// Since we don't have ts-node or want to add heaviness, we can read the raw TS files 
-// and regex out the slugs/dates.
-
 const ALBUMS_FILE = path.resolve(__dirname, '../src/data/albums.ts');
 const TRACKS_FILE = path.resolve(__dirname, '../src/data/tracks.ts');
+const PLAYLISTS_FILE = path.resolve(__dirname, '../src/data/playlists.ts');
+const THEMES_FILE = path.resolve(__dirname, '../src/data/themeCollections.ts');
+const ARTICLES_FILE = path.resolve(__dirname, '../src/data/articles.ts');
 
 const STATIC_ROUTES = [
     { url: '/', priority: 1.0, changefreq: 'weekly' },
@@ -28,22 +25,31 @@ const STATIC_ROUTES = [
 const DOMAIN = 'https://alybouchnak.com';
 
 function extractSlugsFromTs(filePath) {
+    if (!fs.existsSync(filePath)) return [];
     const content = fs.readFileSync(filePath, 'utf8');
     const items = [];
 
-    // Regex to extract slug and releaseDate from the object structures
     const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
     const dateRegex = /releaseDate:\s*['"]([^'"]+)['"]/g;
+    const pubDateRegex = /datePublished:\s*['"]([^'"]+)['"]/g;
 
-    let slugMatch, dateMatch;
+    let slugMatch;
     while ((slugMatch = slugRegex.exec(content)) !== null) {
-        // Attempting to match date in the same proximate block 
-        // This is simple so we just grab the next date match
-        dateMatch = dateRegex.exec(content);
+        // Special case for articles which use datePublished
+        let dateMatch;
+        if (filePath.includes('articles.ts')) {
+            const subContent = content.substring(slugMatch.index, slugMatch.index + 500);
+            const dMatch = pubDateRegex.exec(subContent);
+            dateMatch = dMatch ? dMatch[1].split('T')[0] : null;
+        } else {
+            const subContent = content.substring(slugMatch.index, slugMatch.index + 500);
+            const dMatch = dateRegex.exec(subContent);
+            dateMatch = dMatch ? dMatch[1] : null;
+        }
 
         items.push({
             slug: slugMatch[1],
-            date: dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0]
+            date: dateMatch || new Date().toISOString().split('T')[0]
         });
     }
 
@@ -53,47 +59,44 @@ function extractSlugsFromTs(filePath) {
 function buildSitemap() {
     const albums = extractSlugsFromTs(ALBUMS_FILE);
     const tracks = extractSlugsFromTs(TRACKS_FILE);
+    const playlists = extractSlugsFromTs(PLAYLISTS_FILE);
+    const themes = extractSlugsFromTs(THEMES_FILE);
+    const articles = extractSlugsFromTs(ARTICLES_FILE);
 
     const today = new Date().toISOString().split('T')[0];
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
     xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
 
-    // Add static routes
     STATIC_ROUTES.forEach(route => {
-        xml += `  <url>\n`;
-        xml += `    <loc>${DOMAIN}${route.url}</loc>\n`;
-        xml += `    <lastmod>${today}</lastmod>\n`;
-        xml += `    <changefreq>${route.changefreq}</changefreq>\n`;
-        xml += `    <priority>${route.priority.toFixed(1)}</priority>\n`;
-        xml += `  </url>\n`;
+        xml += `  <url>\n    <loc>${DOMAIN}${route.url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${route.changefreq}</changefreq>\n    <priority>${route.priority.toFixed(1)}</priority>\n  </url>\n`;
     });
 
-    // Add Album routes
-    albums.forEach(album => {
-        xml += `  <url>\n`;
-        xml += `    <loc>${DOMAIN}/album/${album.slug}</loc>\n`;
-        xml += `    <lastmod>${album.date}</lastmod>\n`;
-        xml += `    <changefreq>monthly</changefreq>\n`;
-        xml += `    <priority>0.8</priority>\n`;
-        xml += `  </url>\n`;
+    albums.forEach(a => {
+        xml += `  <url>\n    <loc>${DOMAIN}/album/${a.slug}</loc>\n    <lastmod>${a.date}</lastmod>\n    <priority>0.8</priority>\n  </url>\n`;
     });
 
-    // Add Track routes
-    tracks.forEach(track => {
-        xml += `  <url>\n`;
-        xml += `    <loc>${DOMAIN}/track/${track.slug}</loc>\n`;
-        xml += `    <lastmod>${track.date}</lastmod>\n`;
-        xml += `    <changefreq>monthly</changefreq>\n`;
-        xml += `    <priority>0.7</priority>\n`;
-        xml += `  </url>\n`;
+    tracks.forEach(t => {
+        xml += `  <url>\n    <loc>${DOMAIN}/track/${t.slug}</loc>\n    <lastmod>${t.date}</lastmod>\n    <priority>0.7</priority>\n  </url>\n`;
+    });
+
+    playlists.forEach(p => {
+        xml += `  <url>\n    <loc>${DOMAIN}/playlist/${p.slug}</loc>\n    <lastmod>${p.date}</lastmod>\n    <priority>0.8</priority>\n  </url>\n`;
+    });
+
+    themes.forEach(t => {
+        xml += `  <url>\n    <loc>${DOMAIN}/theme-collection/${t.slug}</loc>\n    <lastmod>${t.date}</lastmod>\n    <priority>0.8</priority>\n  </url>\n`;
+    });
+
+    articles.forEach(a => {
+        xml += `  <url>\n    <loc>${DOMAIN}/article/${a.slug}</loc>\n    <lastmod>${a.date}</lastmod>\n    <priority>0.9</priority>\n  </url>\n`;
     });
 
     xml += `</urlset>`;
 
     const outputPath = path.resolve(__dirname, '../public/sitemap.xml');
     fs.writeFileSync(outputPath, xml);
-    console.log(`Successfully generated sitemap.xml with ${STATIC_ROUTES.length + albums.length + tracks.length} URLs at ${outputPath}`);
+    console.log(`Successfully generated sitemap.xml with ${STATIC_ROUTES.length + albums.length + tracks.length + playlists.length + themes.length + articles.length} URLs`);
 }
 
 buildSitemap();

@@ -77,7 +77,8 @@ const Footer = () => {
   const quickLinks = [
     { label: 'Discography', href: '/discography' },
     { label: 'Meet The Blooms', href: '/meet-the-blooms' },
-    { label: 'Playlist', href: '#playlist' },
+    { label: 'Articles & News', href: '/articles' },
+    { label: 'Musical Themes', href: '/themes' },
     { label: 'Contact', href: '/contact' },
   ];
 

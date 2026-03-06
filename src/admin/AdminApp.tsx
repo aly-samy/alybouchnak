@@ -7,6 +7,12 @@ import TrackList from './pages/tracks/TrackList';
 import TrackForm from './pages/tracks/TrackForm';
 import AlbumList from './pages/albums/AlbumList';
 import AlbumForm from './pages/albums/AlbumForm';
+import PlaylistList from './pages/playlists/PlaylistList';
+import PlaylistForm from './pages/playlists/PlaylistForm';
+import ThemeCollectionList from './pages/themeCollections/ThemeCollectionList';
+import ThemeCollectionForm from './pages/themeCollections/ThemeCollectionForm';
+import ArticleList from './pages/articles/ArticleList';
+import ArticleForm from './pages/articles/ArticleForm';
 import { Toaster } from 'sonner';
 
 function AdminRoutes() {
@@ -26,6 +32,15 @@ function AdminRoutes() {
                 <Route path="albums" element={<AlbumList />} />
                 <Route path="albums/new" element={<AlbumForm />} />
                 <Route path="albums/:slug/edit" element={<AlbumForm />} />
+                <Route path="playlists" element={<PlaylistList />} />
+                <Route path="playlists/new" element={<PlaylistForm />} />
+                <Route path="playlists/:slug/edit" element={<PlaylistForm />} />
+                <Route path="themes" element={<ThemeCollectionList />} />
+                <Route path="themes/new" element={<ThemeCollectionForm />} />
+                <Route path="themes/:slug/edit" element={<ThemeCollectionForm />} />
+                <Route path="articles" element={<ArticleList />} />
+                <Route path="articles/new" element={<ArticleForm />} />
+                <Route path="articles/:slug/edit" element={<ArticleForm />} />
                 <Route path="*" element={<Navigate to="/admin" replace />} />
             </Route>
         </Routes>

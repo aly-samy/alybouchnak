@@ -1,0 +1,199 @@
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { themeCollections as allCollectionsData } from '../../../data/themeCollections';
+import type { ThemeCollection } from '../../../data/themeCollections';
+import { generateThemeCollectionsFile } from '../../lib/generateThemeCollections';
+import { saveThemeCollectionsToGitHub } from '../../lib/githubSave';
+import { toast } from 'sonner';
+import { Plus, Trash2, ArrowLeft, Github, Loader2, Sparkles, BookOpen, Brain, ListMusic, Globe } from 'lucide-react';
+
+type FormData = ThemeCollection;
+
+const TABS = [
+    { id: 'Discovery', icon: Sparkles },
+    { id: 'Narrative', icon: BookOpen },
+    { id: 'Science', icon: Brain },
+    { id: 'Tracks', icon: ListMusic },
+    { id: 'SEO', icon: Globe }
+] as const;
+
+const inputCls = "w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all";
+const textareaCls = `${inputCls} resize-y min-h-[120px]`;
+
+function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
+    return (
+        <div className="space-y-2">
+            <label className="block text-sm font-bold text-slate-400 tracking-wide uppercase px-1">{label}</label>
+            {children}
+            {hint && <p className="text-xs text-slate-500">{hint}</p>}
+        </div>
+    );
+}
+
+export default function ThemeCollectionForm() {
+    const { slug } = useParams<{ slug?: string }>();
+    const navigate = useNavigate();
+    const isNew = !slug;
+    const existing = isNew ? null : allCollectionsData.find(c => c.slug === slug);
+    const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('Discovery');
+    const [saving, setSaving] = useState(false);
+
+    const defaultValues: Partial<FormData> = existing || {
+        artist: 'Aly Bouchnak',
+        id: (allCollectionsData.length + 1),
+        status: 'available',
+        educationalBenefits: [{ title: '', description: '' }],
+        tracks: [{ title: '', duration: '' }],
+    };
+
+    const { register, control, handleSubmit } = useForm<FormData>({ defaultValues: defaultValues as FormData });
+    const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({ control, name: 'educationalBenefits' });
+    const { fields: trackFields, append: appendTrack, remove: removeTrack } = useFieldArray({ control, name: 'tracks' });
+
+    const onSubmit = async (data: FormData) => {
+        setSaving(true);
+        try {
+            let updated: ThemeCollection[];
+            if (isNew) updated = [...allCollectionsData, data];
+            else updated = allCollectionsData.map(c => (c.slug === slug ? data : c));
+
+            const content = generateThemeCollectionsFile(updated);
+            await saveThemeCollectionsToGitHub(content);
+            toast.success('✅ Updated Theme Collections on GitHub!');
+            navigate('/admin/themes');
+        } catch (err) {
+            console.error(err);
+            toast.error('❌ Failed to save collection.');
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    return (
+        <div className="p-8 max-w-5xl">
+            <div className="flex items-center gap-6 mb-10">
+                <button onClick={() => navigate('/admin/themes')} className="p-3 bg-slate-900 border border-slate-800 text-slate-400 hover:text-white rounded-2xl transition-all"><ArrowLeft /></button>
+                <div>
+                    <h1 className="text-3xl font-black text-white">{isNew ? 'New Musical Theme' : `Editing Theme: ${existing?.title}`}</h1>
+                    <p className="text-slate-500 mt-1">A themed journey across various tracks and albums.</p>
+                </div>
+            </div>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex gap-2 bg-slate-900/50 backdrop-blur-md p-2 rounded-[2.5rem] border border-slate-800 mb-10">
+                    {TABS.map(({ id, icon: Icon }) => (
+                        <button
+                            key={id}
+                            type="button"
+                            onClick={() => setActiveTab(id)}
+                            className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-[2rem] text-sm font-black transition-all ${activeTab === id
+                                ? 'bg-orange-500 text-white shadow-2xl shadow-orange-500/40'
+                                : 'text-slate-500 hover:text-slate-200 hover:bg-slate-800'}`}
+                        >
+                            <Icon className="w-5 h-5" />
+                            {id}
+                        </button>
+                    ))}
+                </div>
+
+                <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-10 space-y-8 shadow-2xl">
+                    {activeTab === 'Discovery' && (
+                        <>
+                            <div className="grid grid-cols-2 gap-8">
+                                <Field label="Full Title"><input {...register('title', { required: true })} className={inputCls} /></Field>
+                                <Field label="URL Slug"><input {...register('slug', { required: true })} className={inputCls} /></Field>
+                            </div>
+                            <Field label="Short Subtitle"><input {...register('subtitle')} className={inputCls} /></Field>
+                            <div className="grid grid-cols-2 gap-8">
+                                <Field label="Cover Image"><input {...register('coverImage')} className={inputCls} /></Field>
+                                <Field label="Target Age Range"><input {...register('ageRange')} placeholder="2-6 Years" className={inputCls} /></Field>
+                            </div>
+                            <div className="grid grid-cols-3 gap-8">
+                                <Field label="Primary Mood"><input {...register('mood')} className={inputCls} /></Field>
+                                <Field label="Total Items"><input {...register('trackCount', { valueAsNumber: true })} type="number" className={inputCls} /></Field>
+                                <Field label="Release Season"><input {...register('releaseDate')} placeholder="Spring 2026" className={inputCls} /></Field>
+                            </div>
+                        </>
+                    )}
+
+                    {activeTab === 'Narrative' && (
+                        <>
+                            <Field label="Musical Narrative (Main Description)"><textarea {...register('description')} className={textareaCls} rows={8} /></Field>
+                            <Field label="Artist Perspective"><textarea {...register('artistNote')} className={textareaCls} rows={6} /></Field>
+                            <div>
+                                <div className="flex items-center justify-between mb-4">
+                                    <label className="text-sm font-black text-slate-400 uppercase tracking-widest">Key Core Principles</label>
+                                    <button type="button" onClick={() => appendBenefit({ title: '', description: '' })} className="px-4 py-1.5 bg-orange-500/10 text-orange-500 rounded-full text-xs font-black">+ ADD PRINCIPLE</button>
+                                </div>
+                                <div className="space-y-4">
+                                    {benefitFields.map((f, i) => (
+                                        <div key={f.id} className="flex gap-4 items-start bg-slate-800/30 p-4 rounded-2xl border border-slate-800">
+                                            <div className="flex-1 space-y-3">
+                                                <input {...register(`educationalBenefits.${i}.title`)} placeholder="Principle Title" className={inputCls} />
+                                                <textarea {...register(`educationalBenefits.${i}.description`)} placeholder="Impact/Details" className={textareaCls} rows={2} />
+                                            </div>
+                                            <button type="button" onClick={() => removeBenefit(i)} className="p-3 text-slate-600 hover:text-red-400"><Trash2 /></button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    )}
+
+                    {activeTab === 'Science' && (
+                        <Field label="Developmental & Scientific Framework">
+                            <textarea {...register('scienceFramework')} className={textareaCls} rows={12} placeholder="Detail the evidence-based approach for this collection..." />
+                        </Field>
+                    )}
+
+                    {activeTab === 'Tracks' && (
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between">
+                                <label className="text-sm font-black text-slate-400 uppercase tracking-widest">Included Content Units</label>
+                                <button type="button" onClick={() => appendTrack({ title: '', duration: '' })} className="px-6 py-2 bg-orange-500 text-white rounded-full text-xs font-black shadow-lg">ADD ITEM</button>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {trackFields.map((f, i) => (
+                                    <div key={f.id} className="bg-slate-800/40 p-6 rounded-3xl border border-slate-700/50 space-y-4">
+                                        <div className="flex gap-4">
+                                            <div className="flex-1"><Field label="Title"><input {...register(`tracks.${i}.title`)} className={inputCls} /></Field></div>
+                                            <button type="button" onClick={() => removeTrack(i)} className="mt-8 text-slate-600 hover:text-red-400"><Trash2 /></button>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <Field label="Type/Mood"><input {...register(`tracks.${i}.mood`)} className={inputCls} /></Field>
+                                            <Field label="Time"><input {...register(`tracks.${i}.duration`)} className={inputCls} /></Field>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'SEO' && (
+                        <div className="space-y-8">
+                            <Field label="Primary Explore Link (Ex: Spotify)"><input {...register('spotifyUrl')} className={inputCls} /></Field>
+                            <div className="grid grid-cols-2 gap-8">
+                                <Field label="Internal Link Mapping"><input {...register('otherUrl')} placeholder="/explore/themed" className={inputCls} /></Field>
+                                <Field label="Status Flag">
+                                    <select {...register('status')} className={inputCls}>
+                                        <option value="available">Live Available</option>
+                                        <option value="coming-soon">Teaser Mode</option>
+                                    </select>
+                                </Field>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                <div className="mt-12 flex justify-between items-center bg-slate-900 border border-slate-800 p-8 rounded-[3rem] shadow-2xl">
+                    <button type="button" onClick={() => navigate('/admin/themes')} className="text-slate-500 font-bold hover:text-white transition-all">Discard Changes</button>
+                    <button type="submit" disabled={saving} className="flex items-center gap-4 px-12 py-5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black rounded-3xl shadow-2xl shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50">
+                        {saving ? <Loader2 className="animate-spin" /> : <Github />}
+                        {saving ? 'UPDATING...' : 'PUBLISH COLLECTIONS'}
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+}
