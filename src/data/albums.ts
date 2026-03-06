@@ -431,7 +431,8 @@ export const albums: Album[] = [
     "date": "Feb 15, 2026",
     "image": "/images/tuned-for-dreams-cover.webp",
     "link": "/album/tuned-for-dreams",
-    "status": "available"
+    "status": "available",
+    "otherUrl": "https://push.fm/fl/toned4dreams"
   }
 ];
 
