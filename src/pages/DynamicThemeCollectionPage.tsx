@@ -18,7 +18,6 @@ import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { getThemeCollectionBySlug } from '../data/themeCollections';
 import type { ThemeCollection } from '../data/themeCollections';
-import { trackEvent, EventCategories, EventActions } from '../lib/analytics';
 import { trackContentView } from '../lib/pixel';
 import { useEngagementTracking } from '../hooks/useEngagementTracking';
 
