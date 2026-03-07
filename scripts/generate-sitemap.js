@@ -73,26 +73,26 @@ function buildSitemap() {
     });
 
     albums.forEach(a => {
-        xml += `  <url>\n    <loc>${DOMAIN}/album/${a.slug}</loc>\n    <lastmod>${a.date}</lastmod>\n    <priority>0.8</priority>\n  </url>\n`;
+        xml += `  <url>\n    <loc>${DOMAIN}/album/${a.slug}</loc>\n    <lastmod>${a.date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
     });
 
     tracks.forEach(t => {
-        xml += `  <url>\n    <loc>${DOMAIN}/track/${t.slug}</loc>\n    <lastmod>${t.date}</lastmod>\n    <priority>0.7</priority>\n  </url>\n`;
+        xml += `  <url>\n    <loc>${DOMAIN}/track/${t.slug}</loc>\n    <lastmod>${t.date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
     });
 
     playlists.forEach(p => {
-        xml += `  <url>\n    <loc>${DOMAIN}/playlist/${p.slug}</loc>\n    <lastmod>${p.date}</lastmod>\n    <priority>0.8</priority>\n  </url>\n`;
+        xml += `  <url>\n    <loc>${DOMAIN}/playlist/${p.slug}</loc>\n    <lastmod>${p.date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
     });
 
     themes.forEach(t => {
-        xml += `  <url>\n    <loc>${DOMAIN}/theme-collection/${t.slug}</loc>\n    <lastmod>${t.date}</lastmod>\n    <priority>0.8</priority>\n  </url>\n`;
+        xml += `  <url>\n    <loc>${DOMAIN}/theme-collection/${t.slug}</loc>\n    <lastmod>${t.date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
     });
 
     articles.forEach(a => {
-        xml += `  <url>\n    <loc>${DOMAIN}/article/${a.slug}</loc>\n    <lastmod>${a.date}</lastmod>\n    <priority>0.9</priority>\n  </url>\n`;
+        xml += `  <url>\n    <loc>${DOMAIN}/article/${a.slug}</loc>\n    <lastmod>${a.date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.9</priority>\n  </url>\n`;
     });
 
-    xml += `</urlset>`;
+    xml += `</urlset>\n`;
 
     const outputPath = path.resolve(__dirname, '../public/sitemap.xml');
     fs.writeFileSync(outputPath, xml);
