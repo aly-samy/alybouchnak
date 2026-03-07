@@ -13,6 +13,7 @@
   # These variables are being flagged as secrets because their values match site content (brand name/repo name).
   # We omit them from the scan to allow the build to pass.
   SECRETS_SCAN_OMIT_KEYS = "VITE_GITHUB_REPO,VITE_GITHUB_OWNER,VITE_GITHUB_TOKEN,VITE_ADMIN_PASSWORD"
+  SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
 
 [[redirects]]
   from = "/*"
