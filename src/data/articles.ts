@@ -279,7 +279,7 @@ export const articles: Article[] = [
       "caption": "A calm, sleeping toddler resting peacefully."
     },
     "datePublished": "2026-03-07T09:00:00Z",
-    "dateModified": "2026-03-07T19:16:32.093Z",
+    "dateModified": "2026-03-07T19:17:00.936Z",
     "author": {
       "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
@@ -315,7 +315,7 @@ export const articles: Article[] = [
         "https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
       "datePublished": "2026-03-07T09:00:00Z",
-      "dateModified": "2026-03-07T19:16:32.093Z",
+      "dateModified": "2026-03-07T19:17:00.936Z",
       "author": [
         {
           "@type": "Person",
