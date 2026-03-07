@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Max's Sensory Shapes</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui-layer">
+            <h1 class="soft-title">Max's Sensory Shapes</h1>
+            <p class="soft-instructions">Tap or drag the shapes to play!</p>
+            <button id="restartBtn" class="soft-button hidden">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Audio placeholders (using dummy files or data URIs to avoid errors if missing) -->
+    <audio id="chimeSound" src="/audio/chime-soft.mp3" preload="auto"></audio>
+    <audio id="popSound" src="/audio/pop-soft.mp3" preload="auto"></audio>
+    <audio id="successSound" src="/audio/success-soft.mp3" preload="auto"></audio>
+    <audio id="bgm" src="/audio/max-theme-loop.mp3" loop preload="auto"></audio>
+
+    <script src="game.js"></script>
+</body>
+</html>

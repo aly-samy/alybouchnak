@@ -1,0 +1,99 @@
+/* Soft, warm, cozy aesthetic */
+:root {
+  --bg-color: #FDF6EC;
+  --text-color: #A07855;
+  --button-bg: #FFB347;
+  --button-text: #FFFFFF;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif; /* Soft, bubbly fallback */
+  user-select: none;
+  touch-action: none; /* Prevent scroll on touch */
+}
+
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#ui-layer {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  pointer-events: none; /* Let clicks pass through */
+}
+
+.soft-title {
+  color: var(--text-color);
+  font-size: 2.5rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  padding: 10px;
+  background: rgba(253, 246, 236, 0.8);
+  border-radius: 20px;
+}
+
+.soft-instructions {
+  color: #B59F84;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.soft-button {
+  pointer-events: auto; /* Clickable */
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background-color 0.2s;
+  font-family: inherit;
+  font-weight: bold;
+}
+
+.soft-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Add a gentle pulse animation to shapes if we were using CSS, but we use Canvas.
+   So let's add a soft vignette overlay for coziness */
+#game-container::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+  z-index: 2;
+}

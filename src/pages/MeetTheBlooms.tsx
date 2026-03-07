@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
@@ -15,6 +16,7 @@ export default function MeetTheBlooms() {
     const [isQuizOpen, setIsQuizOpen] = useState(false);
     const toastTimerContext = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+    const navigate = useNavigate();
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
@@ -191,7 +193,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Finding joy in the simplest things</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#sensory'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/max-sensory-shapes'); }}>
                                         <span>🧸</span> Explore with Max
                                     </button>
                                 </div>
@@ -223,7 +225,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Turning ordinary moments into imaginative games</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#adventures'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/theo-adventure'); }}>
                                         <span>🎮</span> Adventures with Theo
                                     </button>
                                 </div>
@@ -255,7 +257,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Helping little ones name their emotions</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#sel'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/layla-story'); }}>
                                         <span>📖</span> Stories with Layla
                                     </button>
                                 </div>
@@ -287,7 +289,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Morning guitar sessions in the living room</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#lullabies'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/leo-bedtime'); }}>
                                         <span>🌙</span> Bedtime with Leo
                                     </button>
                                 </div>
@@ -319,7 +321,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Family craft time around the kitchen table</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#creative'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/mia-creative'); }}>
                                         <span>🎨</span> Creative Time with Mia
                                     </button>
                                 </div>
@@ -357,7 +359,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Making old stories feel new and exciting</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#traditions'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/family-memory'); }}>
                                         <span>📚</span> Family Traditions
                                     </button>
                                 </div>
@@ -385,7 +387,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Layla – creative soulmates</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#friendship'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/zayna-world'); }}>
                                         <span>🌍</span> Celebrating Friends
                                     </button>
                                 </div>
@@ -413,7 +415,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Theo and Kenji – the adventure trio</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#dance'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/ciara-dance'); }}>
                                         <span>🎵</span> Dance Party
                                     </button>
                                 </div>
@@ -441,7 +443,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Theo and Ciara – he balances their energy</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#nature'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/kenji-nature'); }}>
                                         <span>🔍</span> Nature Explorers
                                     </button>
                                 </div>
@@ -469,7 +471,7 @@ export default function MeetTheBlooms() {
                                             <span className="meta-value">Max – they're learning together</span>
                                         </div>
                                     </div>
-                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); window.location.hash = '#baby'; }}>
+                                    <button className="play-button" onClick={(e) => { e.stopPropagation(); navigate('/play/amara-peekaboo'); }}>
                                         <span>👶</span> Baby Friends
                                     </button>
                                 </div>
