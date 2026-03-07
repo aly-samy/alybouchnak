@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Disc, ExternalLink, Sun, Moon } from 'lucide-react';
 import { getAllAlbums } from '../data/albums';
+import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,9 +94,11 @@ export default function LatestAlbums() {
                   className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                 >
                   <div className="aspect-square overflow-hidden">
-                    <img
-                      src={album.image || album.coverImage}
+                    <OptimizedImage
+                      src={album.image || album.coverImage || ''}
                       alt={album.title}
+                      width={600}
+                      height={600}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                       loading="lazy"
                     />

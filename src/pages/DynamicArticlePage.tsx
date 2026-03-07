@@ -17,6 +17,7 @@ import {
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
+import OptimizedImage from '../components/OptimizedImage';
 import { getArticleBySlug } from '../data/articles';
 import type { Article } from '../data/articles';
 import { tracks } from '../data/tracks';
@@ -147,9 +148,11 @@ function DynamicArticlePage() {
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 lg:mb-16">
                     <figure>
                         <div className="aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
-                            <img
+                            <OptimizedImage
                                 src={article.coverImage.url}
                                 alt={article.coverImage.caption}
+                                width={1200}
+                                height={600}
                                 className="w-full h-full object-cover"
                             />
                         </div>
@@ -221,7 +224,7 @@ function DynamicArticlePage() {
                                             className="related-entity group flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
                                         >
                                             <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
-                                                <img src={track.coverImage} alt={track.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                                                <OptimizedImage src={track.coverImage} alt={track.title} width={100} height={100} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <h4 className="font-bold text-slate-900 text-sm truncate">{track.title}</h4>
@@ -248,7 +251,7 @@ function DynamicArticlePage() {
                                     {relatedAlbumsData.map(album => (
                                         <div key={album.slug} className="related-entity">
                                             <div className="aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg group">
-                                                <img src={album.coverImage} alt={album.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                                <OptimizedImage src={album.coverImage} alt={album.title} width={400} height={400} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                             </div>
                                             <h4 className="font-bold text-lg mb-1">{album.title}</h4>
                                             <p className="text-white/60 text-sm mb-4 line-clamp-2">{album.subtitle}</p>

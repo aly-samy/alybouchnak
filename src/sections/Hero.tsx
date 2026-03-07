@@ -2,6 +2,7 @@ import { useEffect, useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Music, ExternalLink } from 'lucide-react';
+import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -222,11 +223,12 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Avatar image */}
-              <img
+              <OptimizedImage
                 ref={avatarRef}
                 src="/images/aly-bouchnak-hero.webp"
                 alt="Aly Bouchnak"
+                width={800}
+                height={800}
                 fetchPriority="high"
                 loading="eager"
                 className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto object-contain animate-float"

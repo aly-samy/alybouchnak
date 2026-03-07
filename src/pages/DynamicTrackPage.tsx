@@ -19,6 +19,7 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import OptimizedImage from '../components/OptimizedImage';
 import { getTrackBySlug } from '../data/tracks';
 import type { Track } from '../data/tracks';
 import { trackEvent, EventCategories, EventActions } from '../lib/analytics';
@@ -131,9 +132,11 @@ function DynamicTrackPage() {
               {/* Cover Art */}
               <div className="w-full max-w-sm mx-auto lg:mx-0 flex-shrink-0">
                 <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                  <img
+                  <OptimizedImage
                     src={trackData.coverImage}
                     alt={`${trackData.title} track cover`}
+                    width={800}
+                    height={800}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

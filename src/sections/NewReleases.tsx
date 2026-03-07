@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
 import { getAllTracks } from '../data/tracks';
 import LatestAlbums from './LatestAlbums';
+import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -161,9 +162,11 @@ const NewReleases = () => {
             >
               {/* Cover image */}
               <div className="relative aspect-square overflow-hidden rounded-2xl mb-4">
-                <img
+                <OptimizedImage
                   src={release.image}
                   alt={release.title}
+                  width={600}
+                  height={600}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />

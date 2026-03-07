@@ -16,6 +16,7 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import OptimizedImage from '../components/OptimizedImage';
 import { getThemeCollectionBySlug } from '../data/themeCollections';
 import type { ThemeCollection } from '../data/themeCollections';
 import { trackContentView } from '../lib/pixel';
@@ -108,9 +109,11 @@ function DynamicThemeCollectionPage() {
                             {/* Collection Cover */}
                             <div className="w-full max-w-md flex-shrink-0">
                                 <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-500 border-8 border-white">
-                                    <img
+                                    <OptimizedImage
                                         src={collectionData.coverImage}
                                         alt={`${collectionData.title} collection`}
+                                        width={800}
+                                        height={800}
                                         className="w-full h-full object-cover"
                                         loading="eager"
                                     />
