@@ -22,7 +22,7 @@ function extractDataFromTs(filePath, type) {
 
     // A simplistic parse that captures blocks of objects
     // Split by slug for cleaner chunks
-    const blocks = content.split('slug:');
+    const blocks = content.split(/(?:"slug"|slug):/);
     blocks.shift();
 
     blocks.forEach(block => {
@@ -32,11 +32,11 @@ function extractDataFromTs(filePath, type) {
                 return match ? (match[2] || match[1]) : '';
             };
 
-            const slug = block.match(/["'](.*?)["']/)?.[1];
-            const title = getVal(/title:\s*(["'])(.*?)\1/);
-            let desc = getVal(/description:\s*(["'])(.*?)\1/);
-            if (!desc) desc = getVal(/description:\s*`([^`]+)`/);
-            const cover = getVal(/coverImage:\s*(["'])(.*?)\1/) || getVal(/url:\s*(["'])(.*?)\1/);
+            const slug = block.match(/^\s*["']([^"']+)["']/)?.[1];
+            const title = getVal(/(?:"title"|title):\s*(["'])(.*?)\1/);
+            let desc = getVal(/(?:"description"|description):\s*(["'])(.*?)\1/);
+            if (!desc) desc = getVal(/(?:"description"|description):\s*`([^`]+)`/);
+            const cover = getVal(/(?:"coverImage"|coverImage|url|"url"):\s*(["'])(.*?)\1/);
 
             if (slug && title) {
                 items.push({

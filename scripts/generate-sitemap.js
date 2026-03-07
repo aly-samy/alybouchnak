@@ -29,9 +29,9 @@ function extractSlugsFromTs(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
     const items = [];
 
-    const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
-    const dateRegex = /releaseDate:\s*['"]([^'"]+)['"]/g;
-    const pubDateRegex = /datePublished:\s*['"]([^'"]+)['"]/g;
+    const slugRegex = /(?:"slug"|slug):\s*['"]([^'"]+)['"]/g;
+    const dateRegex = /(?:"releaseDate"|releaseDate):\s*['"]([^'"]+)['"]/g;
+    const pubDateRegex = /(?:"datePublished"|datePublished):\s*['"]([^'"]+)['"]/g;
 
     let slugMatch;
     while ((slugMatch = slugRegex.exec(content)) !== null) {
