@@ -1,0 +1,207 @@
+/* Soft, warm, cozy aesthetic */
+:root {
+  --bg-color: #FDF6EC;
+  --text-color: #A07855;
+  --button-bg: #F4C2C2; /* Soft pink for Mia */
+  --button-text: #FFFFFF;
+  --outline-color: #7E634E; /* Soft brown for coloring book outlines */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif; /* Soft, bubbly fallback */
+  user-select: none;
+  touch-action: none; /* Prevent scroll on touch */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+#ui-layer {
+  text-align: center;
+  padding-top: 5vh;
+  z-index: 10;
+  pointer-events: none; /* Let clicks pass through if needed, but here it's top */
+}
+
+.soft-title {
+  color: var(--text-color);
+  font-size: 2.2rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+  padding: 10px;
+  background: rgba(253, 246, 236, 0.9);
+  border-radius: 20px;
+}
+
+.soft-instructions {
+  color: #B59F84;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+#canvas-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+#drawing-board {
+  width: 80vmin;
+  height: 80vmin;
+  max-width: 400px;
+  max-height: 400px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 4px solid #EADDCD;
+  transition: transform 0.3s ease;
+}
+
+/* The SVG itself */
+svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Coloring regions */
+.colorable {
+  fill: #FFFFFF;
+  stroke: var(--outline-color);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill 0.2s ease-out;
+}
+
+/* Add a hover effect for mouse users, though kids use touch mostly */
+.colorable:hover {
+  filter: brightness(0.95);
+}
+
+/* The active bouncy animation when colored */
+@keyframes softBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.colored {
+  animation: softBounce 0.3s ease;
+}
+
+/* Palette container at the bottom */
+#palette-container {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background-color: #FFFFFF;
+  border-radius: 40px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 90%;
+}
+
+/* Color swatches */
+.swatch {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 4px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+}
+
+.swatch:active {
+  transform: scale(0.9);
+}
+
+.swatch.selected {
+  transform: scale(1.15);
+  border-color: var(--text-color);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15), inset 0 -3px 5px rgba(0,0,0,0.1);
+}
+
+.soft-button {
+  pointer-events: auto; /* Clickable */
+  position: absolute;
+  bottom: 20px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background-color 0.2s;
+  font-family: inherit;
+  font-weight: bold;
+  z-index: 20;
+}
+
+.soft-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Win animation */
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.win-pulse {
+  animation: floatUp 2s ease-in-out infinite;
+}
+
+/* Subtle background texture */
+#game-container::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.01) 2px, transparent 2px);
+  background-size: 30px 30px;
+  z-index: 1;
+}
