@@ -142,6 +142,16 @@ export default function LatestAlbums() {
               );
             })}
           </div>
+
+          {/* CTA */}
+          <div className="mt-12 text-center">
+            <a
+              href="/discography"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#4CAF50] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            >
+              See All Albums
+            </a>
+          </div>
         </div>
       </div>
     </section>

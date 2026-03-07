@@ -3,7 +3,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
 import { getAllTracks } from '../data/tracks';
-import LatestAlbums from './LatestAlbums';
 import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -206,9 +205,14 @@ const NewReleases = () => {
           ))}
         </div>
 
-        {/* Latest Albums Section */}
-        <div className="mt-20">
-          <LatestAlbums />
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <a
+            href="/discography"
+            className="inline-flex items-center justify-center px-8 py-4 bg-[#F26B3A] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+          >
+            Explore Full Discography
+          </a>
         </div>
       </div>
     </section>

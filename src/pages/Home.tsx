@@ -8,6 +8,8 @@ import About from '../sections/About';
 import MoodSupport from '../sections/MoodSupport';
 import NewReleases from '../sections/NewReleases';
 import LatestAlbums from '../sections/LatestAlbums';
+import LatestPlaylists from '../sections/LatestPlaylists';
+import LatestThemes from '../sections/LatestThemes';
 import Playlist from '../sections/Playlist';
 import Testimonials from '../sections/Testimonials';
 import Support from '../sections/Support';
@@ -193,6 +195,8 @@ function Home() {
         <MoodSupport />
         <NewReleases />
         <LatestAlbums />
+        <LatestPlaylists />
+        <LatestThemes />
         <Playlist />
         <Testimonials />
         <Support />
