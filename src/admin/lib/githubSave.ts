@@ -27,6 +27,30 @@ async function saveFile(path: string, content: string, message: string) {
     });
 }
 
+// Separate function for binary files like images
+async function saveBinaryFile(path: string, base64Content: string, message: string) {
+    const octokit = getOctokit();
+
+    let sha: string | undefined;
+    try {
+        const { data } = await octokit.repos.getContent({ owner, repo, path });
+        if (Array.isArray(data)) throw new Error('Path is a directory, not a file');
+        sha = data.sha;
+    } catch (e: any) {
+        // File might not exist yet, which is fine for new images
+        if (e.status !== 404) throw e;
+    }
+
+    await octokit.repos.createOrUpdateFileContents({
+        owner,
+        repo,
+        path,
+        message,
+        content: base64Content, // Already base64 from file reader
+        sha,
+    });
+}
+
 export async function saveTracksToGitHub(content: string): Promise<void> {
     await saveFile(
         'src/data/tracks.ts',
@@ -64,5 +88,37 @@ export async function saveArticlesToGitHub(content: string): Promise<void> {
         'src/data/articles.ts',
         content,
         'Admin: Updated articles.ts via Admin Dashboard'
+    );
+}
+
+export async function saveGenresToGitHub(content: string): Promise<void> {
+    await saveFile(
+        'src/data/genres.ts',
+        content,
+        'Admin: Updated genres.ts via Admin Dashboard'
+    );
+}
+
+export async function saveMoodsToGitHub(content: string): Promise<void> {
+    await saveFile(
+        'src/data/moods.ts',
+        content,
+        'Admin: Updated moods.ts via Admin Dashboard'
+    );
+}
+
+export async function saveRoutinesToGitHub(content: string): Promise<void> {
+    await saveFile(
+        'src/data/routines.ts',
+        content,
+        'Admin: Updated routines.ts via Admin Dashboard'
+    );
+}
+
+export async function saveImageToGitHub(path: string, base64Content: string): Promise<void> {
+    await saveBinaryFile(
+        path,
+        base64Content,
+        `Admin: Uploaded image ${path} via Admin Dashboard`
     );
 }

@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { tracks as allTracksData } from '../../../data/tracks';
 import type { Track } from '../../../data/tracks';
 import { albums } from '../../../data/albums';
 import { generateTracksFile } from '../../lib/generateTracks';
-import { saveTracksToGitHub } from '../../lib/githubSave';
+import { saveTracksToGitHub, saveGenresToGitHub, saveMoodsToGitHub, saveRoutinesToGitHub, saveImageToGitHub } from '../../lib/githubSave';
+import { generateGenresFile, generateMoodsFile, generateRoutinesFile } from '../../lib/generateLists';
+import { genres as initialGenres } from '../../../data/genres';
+import { moods as initialMoods } from '../../../data/moods';
+import { routines as initialRoutines } from '../../../data/routines';
 import { toast } from 'sonner';
 import {
     Plus, Trash2, ArrowLeft, Github, Loader2, Save,
-    Music, Link2, FileText, Search
+    Music, Link2, FileText, Search, Upload
 } from 'lucide-react';
 
 type FormData = Omit<Track, 'id'> & { id: number };
-
-const ROUTINE_OPTIONS = ['Playtime', 'Bedtime', 'Mealtime', 'Cleanup', 'Transition', 'Learning', 'Celebration', 'Movement'] as const;
 
 const TABS = [
     { id: 'basic', label: 'Basic Info', icon: Music },
@@ -47,6 +49,12 @@ export default function TrackForm() {
     const existing = isNew ? null : allTracksData.find(t => t.id === Number(id));
     const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('basic');
     const [saving, setSaving] = useState(false);
+
+    const [localGenres, setLocalGenres] = useState<string[]>([...initialGenres]);
+    const [localMoods, setLocalMoods] = useState<string[]>([...initialMoods]);
+    const [localRoutines, setLocalRoutines] = useState<string[]>([...initialRoutines]);
+    const [imageFile, setImageFile] = useState<{ name: string, base64: string } | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const defaultValues: Partial<FormData> = existing || {
         id: Math.max(...allTracksData.map(t => t.id)) + 1,
@@ -87,6 +95,47 @@ export default function TrackForm() {
         name: 'educationalBenefits',
     });
 
+    const handleAddOption = (
+        value: string,
+        list: string[],
+        setList: React.Dispatch<React.SetStateAction<string[]>>,
+        fieldName: keyof FormData
+    ) => {
+        if (value === '__ADD_NEW__') {
+            const newValue = window.prompt(`Enter new ${fieldName}:`);
+            if (newValue && newValue.trim() !== '') {
+                const trimmed = newValue.trim();
+                // Add if not exists
+                if (!list.includes(trimmed)) {
+                    setList([...list, trimmed]);
+                }
+                setValue(fieldName, trimmed as any, { shouldDirty: true });
+            } else {
+                setValue(fieldName, '' as any);
+            }
+        }
+    };
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64String = reader.result as string;
+            // Get base64 content only
+            const base64Content = base64String.split(',')[1];
+
+            setImageFile({
+                name: file.name,
+                base64: base64Content
+            });
+
+            setValue('coverImage', `/images/${file.name}`, { shouldValidate: true, shouldDirty: true });
+        };
+        reader.readAsDataURL(file);
+    };
+
     // Auto-fill SEO and Schema from basic fields
     const watchTitle = watch('title');
     const watchSlug = watch('slug');
@@ -95,31 +144,74 @@ export default function TrackForm() {
     const watchDuration = watch('duration');
     const watchReleaseDate = watch('releaseDate');
     const watchCoverImage = watch('coverImage');
+    const watchIsrc = watch('isrc');
 
     useEffect(() => {
-        if (!isNew || !watchTitle || !watchSlug) return;
         const baseUrl = 'https://alybouchnak.com';
-        const trackUrl = `${baseUrl}/track/${watchSlug}`;
-        setValue('seo.title', `${watchTitle} | Kids Song | Aly Bouchnak`);
-        setValue('seo.canonical', trackUrl);
-        setValue('seo.ogImage', watchCoverImage ? `${baseUrl}${watchCoverImage}` : '');
-        setValue('trackSchema.@id', `${trackUrl}#recording`);
-        setValue('trackSchema.name', watchTitle);
-        setValue('trackSchema.url', trackUrl);
+
+        // Find album URL
+        let albumUrlStr = '';
+        if (watchAlbum) {
+            const matchedAlbum = albums.find(a => a.title === watchAlbum);
+            if (matchedAlbum) {
+                albumUrlStr = `/album/${matchedAlbum.slug}`;
+            }
+        }
+
+        // Always sync genre, isrc, schema.inAlbum
         setValue('trackSchema.genre', watchGenre || '');
-        setValue('trackSchema.image', watchCoverImage ? `${baseUrl}${watchCoverImage}` : '');
+        setValue('trackSchema.isrcCode', watchIsrc || '');
         setValue('trackSchema.inAlbum.name', watchAlbum || '');
-        setValue('trackSchema.datePublished', watchReleaseDate || '');
+        if (albumUrlStr) {
+            setValue('albumUrl', albumUrlStr);
+            setValue('trackSchema.inAlbum.@id', `${baseUrl}${albumUrlStr}`);
+        }
+
+        // Auto generation for NEW tracks, but also sync the schema IDs if title/slug change
+        if (watchTitle && watchSlug) {
+            const trackUrl = `${baseUrl}/track/${watchSlug}`;
+
+            // Only auto-fill SEO title and canonical if new
+            if (isNew) {
+                setValue('seo.title', `${watchTitle} | Kids Song | Aly Bouchnak`);
+                setValue('seo.canonical', trackUrl);
+                setValue('seo.ogImage', watchCoverImage ? `${baseUrl}${watchCoverImage}` : '');
+
+                setValue('trackSchema.name', watchTitle);
+                setValue('trackSchema.url', trackUrl);
+                setValue('trackSchema.image', watchCoverImage ? `${baseUrl}${watchCoverImage}` : '');
+                setValue('trackSchema.datePublished', watchReleaseDate || '');
+            }
+
+            setValue('trackSchema.@id', `${trackUrl}#recording`);
+        }
+
         // Convert duration M:SS → PTxMxS
         if (watchDuration && /^\d+:\d+$/.test(watchDuration)) {
             const [m, s] = watchDuration.split(':').map(Number);
             setValue('trackSchema.duration', `PT${m}M${s}S`);
         }
-    }, [watchTitle, watchSlug, watchAlbum, watchGenre, watchDuration, watchReleaseDate, watchCoverImage, isNew, setValue]);
+    }, [watchTitle, watchSlug, watchAlbum, watchGenre, watchDuration, watchReleaseDate, watchCoverImage, watchIsrc, isNew, setValue]);
 
     const onSubmit = async (data: FormData) => {
         setSaving(true);
         try {
+            // Check if lists changed and need saving
+            if (localGenres.length > initialGenres.length) {
+                await saveGenresToGitHub(generateGenresFile(localGenres));
+            }
+            if (localMoods.length > initialMoods.length) {
+                await saveMoodsToGitHub(generateMoodsFile(localMoods));
+            }
+            if (localRoutines.length > initialRoutines.length) {
+                await saveRoutinesToGitHub(generateRoutinesFile(localRoutines));
+            }
+
+            // Save Image if uploaded
+            if (imageFile) {
+                await saveImageToGitHub(`public/images/${imageFile.name}`, imageFile.base64);
+            }
+
             let updatedTracks: Track[];
             if (isNew) {
                 updatedTracks = [...allTracksData, data as Track];
@@ -128,6 +220,7 @@ export default function TrackForm() {
             }
             const content = generateTracksFile(updatedTracks);
             await saveTracksToGitHub(content);
+
             toast.success('✅ Track saved to GitHub! Redeploy triggered.', { duration: 5000 });
             navigate('/admin/tracks');
         } catch (err) {
@@ -210,7 +303,25 @@ export default function TrackForm() {
                                     <input {...register('artist')} className={inputCls} />
                                 </Field>
                                 <Field label="Cover Image Path">
-                                    <input {...register('coverImage')} placeholder="/images/my-track.webp" className={inputCls} />
+                                    <div className="flex gap-2">
+                                        <input {...register('coverImage')} placeholder="/images/my-track.webp" className={inputCls} />
+                                        <button
+                                            type="button"
+                                            onClick={() => fileInputRef.current?.click()}
+                                            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-slate-300 hover:text-white hover:bg-slate-700 transition flex items-center shrink-0"
+                                            title="Upload Image"
+                                        >
+                                            <Upload className="w-4 h-4" />
+                                        </button>
+                                        <input
+                                            type="file"
+                                            ref={fileInputRef}
+                                            onChange={handleImageChange}
+                                            accept="image/webp, image/jpeg, image/png"
+                                            className="hidden"
+                                        />
+                                    </div>
+                                    {imageFile && <p className="text-xs text-green-400 mt-1">Ready to upload: {imageFile.name}</p>}
                                 </Field>
                             </div>
 
@@ -228,7 +339,18 @@ export default function TrackForm() {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <Field label="Genre">
-                                    <input {...register('genre')} placeholder="Children's Music, Educational" className={inputCls} />
+                                    <select
+                                        {...register('genre')}
+                                        className={inputCls}
+                                        onChange={(e) => {
+                                            handleAddOption(e.target.value, localGenres, setLocalGenres, 'genre');
+                                            register('genre').onChange(e);
+                                        }}
+                                    >
+                                        <option value="">Select Genre...</option>
+                                        {localGenres.map(g => <option key={g} value={g}>{g}</option>)}
+                                        <option value="__ADD_NEW__">+ Add New Genre...</option>
+                                    </select>
                                 </Field>
                                 <Field label="Age Range">
                                     <input {...register('ageRange')} placeholder="2-6 years" className={inputCls} />
@@ -237,11 +359,31 @@ export default function TrackForm() {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <Field label="Mood">
-                                    <input {...register('mood')} placeholder="Playful" className={inputCls} />
+                                    <select
+                                        {...register('mood')}
+                                        className={inputCls}
+                                        onChange={(e) => {
+                                            handleAddOption(e.target.value, localMoods, setLocalMoods, 'mood');
+                                            register('mood').onChange(e);
+                                        }}
+                                    >
+                                        <option value="">Select Mood...</option>
+                                        {localMoods.map(m => <option key={m} value={m}>{m}</option>)}
+                                        <option value="__ADD_NEW__">+ Add New Mood...</option>
+                                    </select>
                                 </Field>
                                 <Field label="Routine">
-                                    <select {...register('routine')} className={inputCls}>
-                                        {ROUTINE_OPTIONS.map(r => <option key={r} value={r}>{r}</option>)}
+                                    <select
+                                        {...register('routine')}
+                                        className={inputCls}
+                                        onChange={(e) => {
+                                            handleAddOption(e.target.value, localRoutines, setLocalRoutines, 'routine');
+                                            register('routine').onChange(e);
+                                        }}
+                                    >
+                                        <option value="">Select Routine...</option>
+                                        {localRoutines.map(r => <option key={r} value={r}>{r}</option>)}
+                                        <option value="__ADD_NEW__">+ Add New Routine...</option>
                                     </select>
                                 </Field>
                             </div>
@@ -258,11 +400,12 @@ export default function TrackForm() {
                             <div className="grid grid-cols-2 gap-4">
                                 <Field label="Album">
                                     <select {...register('album')} className={inputCls}>
+                                        <option value="">Select Album...</option>
                                         {albumOptions.map(a => <option key={a} value={a}>{a}</option>)}
                                     </select>
                                 </Field>
-                                <Field label="Album URL">
-                                    <input {...register('albumUrl')} placeholder="/album/the-blooms-house-volume-1" className={inputCls} />
+                                <Field label="Album URL (Auto-generated)">
+                                    <input {...register('albumUrl')} readOnly className={`${inputCls} opacity-60`} />
                                 </Field>
                             </div>
 
@@ -270,23 +413,27 @@ export default function TrackForm() {
                                 <textarea {...register('artistNote')} placeholder="Artist's personal note about this track…" className={textareaCls} rows={4} />
                             </Field>
 
-                            <Field label="Related Track IDs (comma separated)" hint="e.g. 1, 3, 5">
+                            <Field label="Related Tracks (Hold Ctrl/Cmd to select multiple)" hint="Select from existing tracks">
                                 <Controller
                                     control={control}
                                     name="relatedTracks"
                                     render={({ field }) => (
-                                        <input
-                                            className={inputCls}
-                                            value={field.value?.join(', ') || ''}
-                                            onChange={e => {
-                                                const vals = e.target.value
-                                                    .split(',')
-                                                    .map(s => parseInt(s.trim()))
-                                                    .filter(n => !isNaN(n));
-                                                field.onChange(vals);
+                                        <select
+                                            multiple
+                                            className={`${inputCls} min-h-[120px]`}
+                                            value={field.value?.map(String) || []}
+                                            onChange={(e) => {
+                                                const selected = Array.from(e.target.selectedOptions, option => Number(option.value));
+                                                field.onChange(selected);
                                             }}
-                                            placeholder="1, 2, 3"
-                                        />
+                                            size={6}
+                                        >
+                                            {allTracksData.filter(t => t.id !== Number(id)).map(t => (
+                                                <option key={t.id} value={t.id.toString()}>
+                                                    {t.id}: {t.title}
+                                                </option>
+                                            ))}
+                                        </select>
                                     )}
                                 />
                             </Field>
@@ -394,7 +541,7 @@ export default function TrackForm() {
                     {activeTab === 'seo' && (
                         <>
                             <p className="text-sm text-slate-400 bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3">
-                                💡 These fields are <strong className="text-slate-200">auto-filled from Basic Info</strong> when creating a new track. Edit them below to customize.
+                                💡 Schema generated automatically from your basic info. Edit SEO fields below to customize.
                             </p>
 
                             <div className="space-y-4">
@@ -414,8 +561,6 @@ export default function TrackForm() {
                                 <Field label="Name"><input {...register('trackSchema.name')} className={inputCls} /></Field>
                                 <Field label="URL"><input {...register('trackSchema.url')} className={inputCls} /></Field>
                                 <Field label="Duration (ISO 8601, e.g. PT2M30S)"><input {...register('trackSchema.duration')} className={inputCls} /></Field>
-                                <Field label="Genre"><input {...register('trackSchema.genre')} className={inputCls} /></Field>
-                                <Field label="ISRC Code"><input {...register('trackSchema.isrcCode')} className={inputCls} /></Field>
                                 <Field label="Date Published"><input {...register('trackSchema.datePublished')} type="date" className={inputCls} /></Field>
                                 <Field label="Description"><textarea {...register('trackSchema.description')} className={textareaCls} rows={2} /></Field>
                                 <Field label="Image URL"><input {...register('trackSchema.image')} className={inputCls} /></Field>
