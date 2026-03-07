@@ -2,13 +2,16 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Suspense, lazy } from 'react';
 
-const Home = lazy(() => import('./pages/Home'));
+import Home from './pages/Home';
 const Discography = lazy(() => import('./pages/Discography'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Contact = lazy(() => import('./pages/Contact'));
 const MeetTheBlooms = lazy(() => import('./pages/MeetTheBlooms'));
 const DynamicTrackPage = lazy(() => import('./pages/DynamicTrackPage'));
 const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
+const Playlists = lazy(() => import('./pages/Playlists'));
+const ThemeCollections = lazy(() => import('./pages/ThemeCollections'));
+const Articles = lazy(() => import('./pages/Articles'));
 const DynamicPlaylistPage = lazy(() => import('./pages/DynamicPlaylistPage'));
 const DynamicThemeCollectionPage = lazy(() => import('./pages/DynamicThemeCollectionPage'));
 const DynamicArticlePage = lazy(() => import('./pages/DynamicArticlePage'));
@@ -54,6 +57,9 @@ function App() {
             {/* Dynamic Track Routes - All tracks rendered from centralized data */}
             <Route path="/track/:slug" element={<DynamicTrackPage />} />
             {/* Dynamic Content Routes */}
+            <Route path="/playlists" element={<Playlists />} />
+            <Route path="/theme-collections" element={<ThemeCollections />} />
+            <Route path="/articles" element={<Articles />} />
             <Route path="/album/:slug" element={<DynamicAlbumPage />} />
             <Route path="/playlist/:slug" element={<DynamicPlaylistPage />} />
             <Route path="/theme-collection/:slug" element={<DynamicThemeCollectionPage />} />

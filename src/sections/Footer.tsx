@@ -76,9 +76,11 @@ const Footer = () => {
 
   const quickLinks = [
     { label: 'Discography', href: '/discography' },
+    { label: 'Playlist', href: '/playlists' },
+    { label: 'Songs By Theme', href: '/theme-collections' },
     { label: 'Meet The Blooms', href: '/meet-the-blooms' },
-    { label: 'Articles & News', href: '/articles' },
-    { label: 'Musical Themes', href: '/themes' },
+    { label: 'About', href: '/#about' },
+    { label: 'Blog', href: '/articles' },
     { label: 'Contact', href: '/contact' },
   ];
 
@@ -201,6 +203,9 @@ const Footer = () => {
                 © 2026 Aly Bouchnak Music. | The Bloom's House. All rights reserved.
               </p>
               <div className="flex gap-6">
+                <a href="/faq" className="text-sm text-[#2A2A2A]/70 hover:text-[#F26B3A] transition-colors">
+                  FAQ
+                </a>
                 <a href="/privacy-policy" className="text-sm text-[#2A2A2A]/70 hover:text-[#F26B3A] transition-colors">
                   Privacy Policy
                 </a>

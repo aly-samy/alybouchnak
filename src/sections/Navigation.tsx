@@ -73,6 +73,20 @@ const Navigation = () => {
               Discography
             </Link>
             <Link
+              to="/playlists"
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/playlists') ? 'text-[#F26B3A]' : 'text-[#101010]'
+                }`}
+            >
+              Playlist
+            </Link>
+            <Link
+              to="/theme-collections"
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/theme-collections') ? 'text-[#F26B3A]' : 'text-[#101010]'
+                }`}
+            >
+              Songs By Theme
+            </Link>
+            <Link
               to="/meet-the-blooms"
               className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/meet-the-blooms') ? 'text-[#F26B3A]' : 'text-[#101010]'
                 }`}
@@ -80,40 +94,27 @@ const Navigation = () => {
               Meet The Blooms
             </Link>
             <Link
-              to="/faq"
-              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/faq') ? 'text-[#F26B3A]' : 'text-[#101010]'
+              to="/#about"
+              onClick={handleNavClick}
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/#about') ? 'text-[#F26B3A]' : 'text-[#101010]'
                 }`}
             >
-              FAQ
-            </Link>
-            <a
-              href="#music"
-              onClick={handleNavClick}
-              className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
-            >
-              Music
-            </a>
-            <a
-              href="#about"
-              onClick={handleNavClick}
-              className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
-            >
               About
-            </a>
-            <a
-              href="#playlist"
-              onClick={handleNavClick}
-              className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
+            </Link>
+            <Link
+              to="/articles"
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/articles') ? 'text-[#F26B3A]' : 'text-[#101010]'
+                }`}
             >
-              Playlist
-            </a>
-            <a
-              href="#contact"
-              onClick={handleNavClick}
-              className="text-sm font-semibold text-[#101010] transition-colors hover:text-[#F26B3A]"
+              Blog
+            </Link>
+            <Link
+              to="/contact"
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/contact') ? 'text-[#F26B3A]' : 'text-[#101010]'
+                }`}
             >
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -146,6 +147,22 @@ const Navigation = () => {
             Discography
           </Link>
           <Link
+            to="/playlists"
+            onClick={handleNavClick}
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/playlists') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+              }`}
+          >
+            Playlist
+          </Link>
+          <Link
+            to="/theme-collections"
+            onClick={handleNavClick}
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/theme-collections') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+              }`}
+          >
+            Songs By Theme
+          </Link>
+          <Link
             to="/meet-the-blooms"
             onClick={handleNavClick}
             className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/meet-the-blooms') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
@@ -154,41 +171,29 @@ const Navigation = () => {
             Meet The Blooms
           </Link>
           <Link
-            to="/faq"
+            to="/#about"
             onClick={handleNavClick}
-            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/faq') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/#about') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
               }`}
           >
-            FAQ
-          </Link>
-          <a
-            href="#music"
-            onClick={handleNavClick}
-            className="block py-3 px-4 font-semibold text-[#101010] rounded-lg hover:bg-[#C8F0F7] transition-colors"
-          >
-            Music
-          </a>
-          <a
-            href="#about"
-            onClick={handleNavClick}
-            className="block py-3 px-4 font-semibold text-[#101010] rounded-lg hover:bg-[#C8F0F7] transition-colors"
-          >
             About
-          </a>
-          <a
-            href="/#playlist"
+          </Link>
+          <Link
+            to="/articles"
             onClick={handleNavClick}
-            className="block py-3 px-4 font-semibold text-[#101010] rounded-lg hover:bg-[#C8F0F7] transition-colors"
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/articles') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+              }`}
           >
-            Playlist
-          </a>
-          <a
-            href="/#contact"
+            Blog
+          </Link>
+          <Link
+            to="/contact"
             onClick={handleNavClick}
-            className="block py-3 px-4 font-semibold text-[#101010] rounded-lg hover:bg-[#C8F0F7] transition-colors"
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/contact') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+              }`}
           >
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

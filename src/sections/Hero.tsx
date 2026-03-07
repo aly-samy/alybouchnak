@@ -20,26 +20,28 @@ const Hero = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // Clouds fade in
+      // Clouds drop in smoothly instead of fading
       tl.fromTo(cloudsRef.current,
-        { opacity: 0, scale: 1.06 },
-        { opacity: 1, scale: 1, duration: 0.6 },
+        { y: -30, scale: 1.06 },
+        { y: 0, scale: 1, duration: 0.6 },
         0
       );
 
       // Headline words stagger
       if (headlineRef.current) {
         const words = headlineRef.current.querySelectorAll('.word');
+        // Change initial state to slightly visible out of position to trigger paint early
         tl.fromTo(words,
-          { y: 40, opacity: 0, rotate: -2 },
+          { y: 40, opacity: 0.2, rotate: -2 },
           { y: 0, opacity: 1, rotate: 0, duration: 0.6, stagger: 0.03 },
           0.2
         );
       }
 
       // Subheadline
+      // Subheadline drops in
       tl.fromTo(subheadlineRef.current,
-        { y: 18, opacity: 0 },
+        { y: 18, opacity: 0.1 },
         { y: 0, opacity: 1, duration: 0.6 },
         0.5
       );
@@ -48,7 +50,7 @@ const Hero = () => {
       if (pillsRef.current) {
         const pills = pillsRef.current.querySelectorAll('.age-pill');
         tl.fromTo(pills,
-          { x: -60, opacity: 0 },
+          { x: -60, opacity: 0.1 },
           { x: 0, opacity: 1, duration: 0.5, stagger: 0.08 },
           0.6
         );
@@ -56,21 +58,21 @@ const Hero = () => {
 
       // CTA
       tl.fromTo(ctaRef.current,
-        { y: 10, opacity: 0 },
+        { y: 10, opacity: 0.1 },
         { y: 0, opacity: 1, duration: 0.4 },
         0.8
       );
 
       // Badge pop in
       tl.fromTo(badgeRef.current,
-        { scale: 0.2, rotate: -24, opacity: 0 },
+        { scale: 0.2, rotate: -24, opacity: 0.1 },
         { scale: 1, rotate: -12, opacity: 1, duration: 0.7, ease: 'back.out(1.8)' },
         0.5
       );
 
       // Avatar slide up
       tl.fromTo(avatarRef.current,
-        { y: '18vh', opacity: 0 },
+        { y: '18vh', opacity: 0.1 },
         { y: 0, opacity: 1, duration: 0.9 },
         0.3
       );
@@ -171,8 +173,8 @@ const Hero = () => {
                 ref={subheadlineRef}
                 className="text-base sm:text-lg lg:text-xl text-[#2A2A2A] leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
               >
-                Aly Bouchnak is a children's music artist known for upbeat digital pop songs 
-                for toddlers and families, including tracks like "The Wise Mice" and playlists 
+                Aly Bouchnak is a children's music artist known for upbeat digital pop songs
+                for toddlers and families, including tracks like "The Wise Mice" and playlists
                 such as "Bouncy Beats: Toddler Dance Party."
               </p>
 
@@ -225,6 +227,8 @@ const Hero = () => {
                 ref={avatarRef}
                 src="/images/aly-bouchnak-hero.webp"
                 alt="Aly Bouchnak"
+                fetchPriority="high"
+                loading="eager"
                 className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto object-contain animate-float"
                 style={{ marginBottom: '-5vh' }}
               />

@@ -26,31 +26,29 @@ const DOMAIN = 'https://alybouchnak.com';
 
 function extractSlugsFromTs(filePath) {
     if (!fs.existsSync(filePath)) return [];
+
+    // Use dynamic import or a simpler regex match to get slugs.
+    // The previous implementation had scoping issues and incorrect date extraction logic.
     const content = fs.readFileSync(filePath, 'utf8');
     const items = [];
 
+    // Find all occurrences of slug: "something" or slug: 'something'
     const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
-    const dateRegex = /releaseDate:\s*['"]([^'"]+)['"]/g;
-    const pubDateRegex = /datePublished:\s*['"]([^'"]+)['"]/g;
+    let match;
 
-    let slugMatch;
-    while ((slugMatch = slugRegex.exec(content)) !== null) {
-        // Special case for articles which use datePublished
-        let dateMatch;
-        if (filePath.includes('articles.ts')) {
-            const subContent = content.substring(slugMatch.index, slugMatch.index + 500);
-            const dMatch = pubDateRegex.exec(subContent);
-            dateMatch = dMatch ? dMatch[1].split('T')[0] : null;
-        } else {
-            const subContent = content.substring(slugMatch.index, slugMatch.index + 500);
-            const dMatch = dateRegex.exec(subContent);
-            dateMatch = dMatch ? dMatch[1] : null;
-        }
+    while ((match = slugRegex.exec(content)) !== null) {
+        const slug = match[1];
 
-        items.push({
-            slug: slugMatch[1],
-            date: dateMatch || new Date().toISOString().split('T')[0]
-        });
+        // Find the block of text around this slug to look for a date
+        const blockStart = Math.max(0, match.index - 200);
+        const blockEnd = Math.min(content.length, match.index + 500);
+        const block = content.substring(blockStart, blockEnd);
+
+        // Try to find releaseDate or datePublished near the slug
+        const dateMatch = block.match(/(?:releaseDate|datePublished):\s*['"]([^T'"]+)(?:T[^'"]*)?['"]/);
+        const date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
+
+        items.push({ slug, date });
     }
 
     return items;

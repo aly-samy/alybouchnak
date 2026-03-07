@@ -23,6 +23,7 @@ export interface Album {
   }[];
   // Extended content for album pages
   artistNote?: string;
+  curatorNote?: string;
   scienceFramework?: string;
   tracks?: {
     number?: number;
@@ -47,6 +48,7 @@ export interface Album {
   link?: string;
   status?: 'available' | 'coming-soon';
   lyrics?: string;
+  albumSchema?: any; // To support JSON-LD schema
 }
 
 export const albums: Album[] = [

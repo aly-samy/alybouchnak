@@ -17,38 +17,51 @@ const ARTICLES_FILE = path.resolve(__dirname, '../src/data/articles.ts');
 
 function extractDataFromTs(filePath, type) {
     if (!fs.existsSync(filePath)) return [];
+
+    // We'll use dynamic regex to extract blocks that have a `slug` so we know it's a valid object
     const content = fs.readFileSync(filePath, 'utf8');
-    let items = [];
+    const items = [];
 
-    // A simplistic parse that captures blocks of objects
-    // Split by slug for cleaner chunks
-    const blocks = content.split('slug:');
-    blocks.shift();
+    // Find all occurrences of slug: "something", 'slug': 'something', etc.
+    const slugRegex = /['"]?slug['"]?:\s*['"]([^'"]+)['"]/g;
+    let match;
+    let fileMatchCount = 0;
 
-    blocks.forEach(block => {
-        try {
-            const getVal = (regex) => {
-                const match = regex.exec(block);
-                return match ? (match[2] || match[1]) : '';
-            };
+    while ((match = slugRegex.exec(content)) !== null) {
+        const slug = match[1];
 
-            const slug = block.match(/["'](.*?)["']/)?.[1];
-            const title = getVal(/title:\s*(["'])(.*?)\1/);
-            let desc = getVal(/description:\s*(["'])(.*?)\1/);
-            if (!desc) desc = getVal(/description:\s*`([^`]+)`/);
-            const cover = getVal(/coverImage:\s*(["'])(.*?)\1/) || getVal(/url:\s*(["'])(.*?)\1/);
+        // Find the block of text around this slug
+        const blockStart = Math.max(0, match.index - 200);
+        const blockEnd = Math.min(content.length, match.index + 800);
+        const block = content.substring(blockStart, blockEnd);
 
-            if (slug && title) {
-                items.push({
-                    slug,
-                    title,
-                    description: desc || `Explore ${title} - Guilt-free entertainment for modern families.`,
-                    image: cover ? (cover.startsWith('http') ? cover : (cover.startsWith('/') ? `${DOMAIN}${cover}` : `${DOMAIN}/${cover}`)) : `${DOMAIN}/images/placeholder.webp`,
-                    type
-                });
-            }
-        } catch (e) { }
-    });
+        // Extract basic data using regex
+        const getVal = (regex) => {
+            const m = regex.exec(block);
+            return m ? (m[2] || m[1]) : '';
+        };
+
+        const title = getVal(/['"]?(?:title|headline)['"]?:\s*(["'])(.*?)\1/);
+        let desc = getVal(/['"]?description['"]?:\s*(["'])(.*?)\1/);
+        if (!desc) desc = getVal(/['"]?description['"]?:\s*`([^`]+)`/);
+
+        // Image URL could be coverImage: "url" or within an object coverImage: { url: "..." }
+        let cover = getVal(/['"]?(?:coverImage|image)['"]?[\s\w{:]*?['"]?url['"]?:\s*(["'])(.*?)\1/);
+        if (!cover) cover = getVal(/['"]?(?:coverImage|image)['"]?:\s*(["'])(.*?)\1/);
+
+        if (slug && title) {
+            fileMatchCount++;
+            items.push({
+                slug,
+                title,
+                description: desc || `Explore ${title} - Guilt-free entertainment for modern families.`,
+                image: cover ? (cover.startsWith('http') ? cover : (cover.startsWith('/') ? `${DOMAIN}${cover}` : `${DOMAIN}/${cover}`)) : `${DOMAIN}/images/placeholder.webp`,
+                type
+            });
+        }
+    }
+
+    console.log(`Extracted ${fileMatchCount} items from ${path.basename(filePath)}`);
 
     return items;
 }

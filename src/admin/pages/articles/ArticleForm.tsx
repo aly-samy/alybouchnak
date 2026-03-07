@@ -225,7 +225,22 @@ export default function ArticleForm() {
                             <Field label="Featured YouTube Video ID" hint="Only the ID from the URL (e.g. dQw4w9WgXcQ)">
                                 <div className="relative">
                                     <Youtube className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500" />
-                                    <input {...register('connections.youtubeVideoId')} className={`${inputCls} pl-10`} />
+                                    <input
+                                        {...register('connections.youtubeVideoId')}
+                                        className={`${inputCls} pl-10`}
+                                        placeholder="e.g. dQw4w9WgXcQ or https://youtube.com/watch?v=..."
+                                        onBlur={(e) => {
+                                            const val = e.target.value;
+                                            if (val.includes('youtube.com') || val.includes('youtu.be')) {
+                                                // Extract ID
+                                                const match = val.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+                                                if (match && match[1]) {
+                                                    setValue('connections.youtubeVideoId', match[1]);
+                                                    toast.success('Extracted YouTube Video ID!');
+                                                }
+                                            }
+                                        }}
+                                    />
                                 </div>
                             </Field>
 
