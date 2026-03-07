@@ -1,5 +1,3 @@
-import { Album } from './albums';
-
 export interface Playlist {
   slug: string;
   title: string;
@@ -79,13 +77,13 @@ export const playlists: Playlist[] = [
       {
         "title": "Boom Teka Boom (Wake Up Song)",
         "duration": "2:00",
-        "number": null,
+        "number": undefined,
         "description": "A high-energy wake-up song with rhythmic beats to start the day positively. "
       },
       {
         "title": "Pet-Pop | The Animal Song",
         "duration": "2:00",
-        "number": null,
+        "number": undefined,
         "description": "A lively song about different pets and their sounds."
       }
     ],
@@ -103,7 +101,10 @@ export const playlists: Playlist[] = [
     "amazonUrl": "#",
     "otherUrl": "https://push.fm/fl/bouncy-beats",
     "artistNote": "",
-    "scienceFramework": ""
+    "scienceFramework": "",
+    "trackCount": 4,
+    "duration": "8:00",
+    "upc": ""
   }
 ];
 

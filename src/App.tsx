@@ -16,6 +16,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const SafetyPolicy = lazy(() => import('./pages/SafetyPolicy'));
 const AdminApp = lazy(() => import('./admin/AdminApp'));
+const GameLoader = lazy(() => import('./components/GameLoader'));
 import { initGA, trackPageView } from './lib/analytics';
 import { initPixel, trackPixelPageView } from './lib/pixel';
 import ScrollToTop from './components/ScrollToTop';
@@ -63,6 +64,19 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/safety-policy" element={<SafetyPolicy />} />
+
+            {/* Games Routes */}
+            <Route path="/play/max-sensory-shapes" element={<GameLoader gamePath="/games/MaxSensoryShapes/index.html" gameTitle="Max's Sensory Shapes" />} />
+            <Route path="/play/theo-adventure" element={<GameLoader gamePath="/games/TheoAdventure/index.html" gameTitle="Theo's Adventures" />} />
+            <Route path="/play/layla-story" element={<GameLoader gamePath="/games/LaylaStory/index.html" gameTitle="Layla's Stories" />} />
+            <Route path="/play/leo-bedtime" element={<GameLoader gamePath="/games/LeoBedtime/index.html" gameTitle="Bedtime with Leo" />} />
+            <Route path="/play/mia-creative" element={<GameLoader gamePath="/games/MiaCreative/index.html" gameTitle="Creative Time with Mia" />} />
+            <Route path="/play/family-memory" element={<GameLoader gamePath="/games/GrandparentsMemory/index.html" gameTitle="Family Memory Match" />} />
+            <Route path="/play/zayna-world" element={<GameLoader gamePath="/games/ZaynaWorld/index.html" gameTitle="Zayna's World" />} />
+            <Route path="/play/ciara-dance" element={<GameLoader gamePath="/games/CiaraDance/index.html" gameTitle="Dance with Ciara" />} />
+            <Route path="/play/kenji-nature" element={<GameLoader gamePath="/games/KenjiNature/index.html" gameTitle="Kenji's Nature Explorer" />} />
+            <Route path="/play/amara-peekaboo" element={<GameLoader gamePath="/games/AmaraPeekaboo/index.html" gameTitle="Amara's Peekaboo" />} />
+
             {/* Admin Dashboard - protected by password */}
             <Route path="/admin/*" element={<AdminApp />} />
           </Routes>

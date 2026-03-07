@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Creative Time with Mia</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="game-container">
+
+        <div id="ui-layer">
+            <h1 class="soft-title">Mia's Creative Coloring</h1>
+            <p class="soft-instructions">Pick a color and tap the picture!</p>
+        </div>
+
+        <div id="canvas-area">
+            <!-- SVG will be injected here -->
+            <div id="drawing-board"></div>
+
+            <div id="palette-container">
+                <!-- Color swatches will be injected here -->
+            </div>
+        </div>
+
+        <button id="restartBtn" class="soft-button hidden">Paint Again</button>
+    </div>
+
+    <!-- Audio placeholders (using dummy files or data URIs to avoid errors if missing) -->
+    <audio id="chimeSound" src="/audio/chime-soft.mp3" preload="auto"></audio>
+    <audio id="popSound" src="/audio/pop-soft.mp3" preload="auto"></audio>
+    <audio id="successSound" src="/audio/success-soft.mp3" preload="auto"></audio>
+    <audio id="bgm" src="/audio/mia-theme-loop.mp3" loop preload="auto"></audio>
+
+    <script src="game.js"></script>
+</body>
+</html>
