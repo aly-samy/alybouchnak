@@ -19,6 +19,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import OptimizedImage from '../components/OptimizedImage';
 import { getThemeCollectionBySlug } from '../data/themeCollections';
 import type { ThemeCollection } from '../data/themeCollections';
+import { tracks as allTracks } from '../data/tracks';
 import { trackContentView } from '../lib/pixel';
 import { useEngagementTracking } from '../hooks/useEngagementTracking';
 
@@ -27,6 +28,11 @@ gsap.registerPlugin(ScrollTrigger);
 function DynamicThemeCollectionPage() {
     const { slug } = useParams<{ slug: string }>();
     const collectionData = getThemeCollectionBySlug(slug || '') as ThemeCollection;
+
+    // Resolve tracks from IDs
+    const collectionTracks = collectionData?.trackIds
+        ? collectionData.trackIds.map(id => allTracks.find(t => t.id === id)).filter(Boolean) as typeof allTracks
+        : [];
 
     const heroRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -187,18 +193,21 @@ function DynamicThemeCollectionPage() {
                             )}
 
                             {/* Items in this collection */}
-                            {collectionData.tracks && collectionData.tracks.length > 0 && (
+                            {collectionTracks.length > 0 && (
                                 <section className="content-section bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-gray-100">
                                     <h2 className="font-['Fredoka_One'] text-2xl text-[#101010] mb-8">Included in this Journey</h2>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {collectionData.tracks.map((track, index) => (
-                                            <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-[#F26B3A]/30 transition-colors">
+                                        {collectionTracks.map((track, index) => (
+                                            <div key={track.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-[#F26B3A]/30 transition-colors">
                                                 <div className="w-12 h-12 bg-[#F26B3A] text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-sm">
                                                     {index + 1}
                                                 </div>
-                                                <div>
-                                                    <h4 className="font-bold text-[#101010] text-lg">{track.title}</h4>
-                                                    <p className="text-sm text-gray-500 italic">{track.mood}</p>
+                                                <div className="flex-1 min-w-0">
+                                                    <h4 className="font-bold text-[#101010] text-lg truncate">{track.title}</h4>
+                                                    <p className="text-sm text-gray-500 italic truncate">{track.genre}</p>
+                                                </div>
+                                                <div className="text-sm font-bold text-[#2A2A2A]/50 pr-2">
+                                                    {track.duration}
                                                 </div>
                                             </div>
                                         ))}

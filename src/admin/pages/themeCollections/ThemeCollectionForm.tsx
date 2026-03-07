@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { themeCollections as allCollectionsData } from '../../../data/themeCollections';
 import type { ThemeCollection } from '../../../data/themeCollections';
+import { tracks as allTracks } from '../../../data/tracks';
 import { generateThemeCollectionsFile } from '../../lib/generateThemeCollections';
 import { saveThemeCollectionsToGitHub } from '../../lib/githubSave';
 import { toast } from 'sonner';
@@ -43,13 +44,13 @@ export default function ThemeCollectionForm() {
         artist: 'Aly Bouchnak',
         id: (allCollectionsData.length + 1),
         status: 'available',
+        category: 'Routine & Utility',
         educationalBenefits: [{ title: '', description: '' }],
-        tracks: [{ title: '', duration: '' }],
+        trackIds: [],
     };
 
-    const { register, control, handleSubmit } = useForm<FormData>({ defaultValues: defaultValues as FormData });
+    const { register, control, handleSubmit, watch, setValue } = useForm<FormData>({ defaultValues: defaultValues as FormData });
     const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({ control, name: 'educationalBenefits' });
-    const { fields: trackFields, append: appendTrack, remove: removeTrack } = useFieldArray({ control, name: 'tracks' });
 
     const onSubmit = async (data: FormData) => {
         setSaving(true);
@@ -106,11 +107,21 @@ export default function ThemeCollectionForm() {
                             </div>
                             <Field label="Short Subtitle"><input {...register('subtitle')} className={inputCls} /></Field>
                             <div className="grid grid-cols-2 gap-8">
-                                <Field label="Cover Image"><input {...register('coverImage')} className={inputCls} /></Field>
+                                <Field label="Category">
+                                    <select {...register('category', { required: true })} className={inputCls}>
+                                        <option value="Routine & Utility">Routine & Utility</option>
+                                        <option value="Mood & Energy">Mood & Energy</option>
+                                        <option value="Adventure & Event">Adventure & Event</option>
+                                        <option value="Signature Collections">Signature Collections</option>
+                                    </select>
+                                </Field>
                                 <Field label="Target Age Range"><input {...register('ageRange')} placeholder="2-6 Years" className={inputCls} /></Field>
                             </div>
-                            <div className="grid grid-cols-3 gap-8">
+                            <div className="grid grid-cols-2 gap-8 mt-8">
                                 <Field label="Primary Mood"><input {...register('mood')} className={inputCls} /></Field>
+                                <Field label="Cover Image"><input {...register('coverImage')} className={inputCls} /></Field>
+                            </div>
+                            <div className="grid grid-cols-2 gap-8 mt-8">
                                 <Field label="Total Items"><input {...register('trackCount', { valueAsNumber: true })} type="number" className={inputCls} /></Field>
                                 <Field label="Release Season"><input {...register('releaseDate')} placeholder="Spring 2026" className={inputCls} /></Field>
                             </div>
@@ -149,24 +160,34 @@ export default function ThemeCollectionForm() {
 
                     {activeTab === 'Tracks' && (
                         <div className="space-y-6">
-                            <div className="flex items-center justify-between">
-                                <label className="text-sm font-black text-slate-400 uppercase tracking-widest">Included Content Units</label>
-                                <button type="button" onClick={() => appendTrack({ title: '', duration: '' })} className="px-6 py-2 bg-orange-500 text-white rounded-full text-xs font-black shadow-lg">ADD ITEM</button>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {trackFields.map((f, i) => (
-                                    <div key={f.id} className="bg-slate-800/40 p-6 rounded-3xl border border-slate-700/50 space-y-4">
-                                        <div className="flex gap-4">
-                                            <div className="flex-1"><Field label="Title"><input {...register(`tracks.${i}.title`)} className={inputCls} /></Field></div>
-                                            <button type="button" onClick={() => removeTrack(i)} className="mt-8 text-slate-600 hover:text-red-400"><Trash2 /></button>
-                                        </div>
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <Field label="Type/Mood"><input {...register(`tracks.${i}.mood`)} className={inputCls} /></Field>
-                                            <Field label="Time"><input {...register(`tracks.${i}.duration`)} className={inputCls} /></Field>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                            <Field label="Included Tracks (Multi-Select)" hint="Select from your master track library">
+                                <div className="bg-slate-800/40 p-4 rounded-2xl border border-slate-800 space-y-2 max-h-[500px] overflow-y-auto">
+                                    {allTracks.map(track => {
+                                        const current = watch('trackIds') || [];
+                                        const isChecked = current.includes(track.id);
+                                        return (
+                                            <label key={track.id} className="flex items-center gap-3 p-3 hover:bg-slate-800/80 rounded-xl cursor-pointer transition-colors group">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={isChecked}
+                                                    onChange={(e) => {
+                                                        const val = e.target.checked
+                                                            ? [...current, track.id]
+                                                            : current.filter(id => id !== track.id);
+                                                        setValue('trackIds', val);
+                                                        setValue('trackCount', val.length); // Auto-update total items count
+                                                    }}
+                                                    className="w-5 h-5 rounded border-slate-700 bg-slate-900 text-orange-500 focus:ring-orange-500/20"
+                                                />
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm text-slate-200 font-bold group-hover:text-orange-400 transition-colors">{track.title}</span>
+                                                    <span className="text-xs text-slate-500">{track.duration} • {track.genre}</span>
+                                                </div>
+                                            </label>
+                                        );
+                                    })}
+                                </div>
+                            </Field>
                         </div>
                     )}
 
