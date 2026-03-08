@@ -169,7 +169,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[0] = el; }} onClick={(e) => playSound(e, 'giggle')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE5B4 100%)' }}>
                                     <div className="character-avatar avatar-max">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>👶</div>
+                                        <img src="/images/Max-Bloom.webp" alt="Max Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -201,7 +201,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[1] = el; }} onClick={(e) => playSound(e, 'letsplay')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #E8F4F8 0%, #B5D8EB 100%)' }}>
                                     <div className="character-avatar avatar-theo">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>🚀</div>
+                                        <img src="/images/Theo-Bloom.webp" alt="Theo Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -233,7 +233,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[2] = el; }} onClick={(e) => playSound(e, 'piano')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F0E6F6 0%, #D4C5E2 100%)' }}>
                                     <div className="character-avatar avatar-layla">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>🎨</div>
+                                        <img src="/images/Layla-Bloom.webp" alt="Layla Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -265,7 +265,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[3] = el; }} onClick={(e) => playSound(e, 'ukulele')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFE8E0 0%, #FF9B85 100%)' }}>
                                     <div className="character-avatar avatar-leo">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>🎸</div>
+                                        <img src="/images/Leo-Bloom.webp" alt="Leo Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -297,7 +297,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[4] = el; }} onClick={(e) => playSound(e, 'comfort')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FCE8E8 0%, #F4C2C2 100%)' }}>
                                     <div className="character-avatar avatar-mia">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>🌈</div>
+                                        <img src="/images/Mia-Bloom.webp" alt="Mia Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -339,7 +339,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[5] = el; }} onClick={(e) => playSound(e, 'chuckle')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #E8F0E5 0%, #C5D5C0 100%)' }}>
                                     <div className="character-avatar avatar-grandparents">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.5rem' }}>👴👵</div>
+                                        <img src="/images/Arthur-and-Rose-Bloom.webp" alt="Grandpa Arthur & Grandma Rose" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -367,7 +367,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[6] = el; }} onClick={(e) => playSound(e, 'yalla')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F0E8F8 0%, #D4C5E2 100%)' }}>
                                     <div className="character-avatar avatar-zayna">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>🌟</div>
+                                        <img src="/images/Zayna.webp" alt="Zayna" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -395,7 +395,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[7] = el; }} onClick={(e) => playSound(e, 'giggle')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFE8E0 0%, #FF9B85 100%)' }}>
                                     <div className="character-avatar avatar-ciara">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>💃</div>
+                                        <img src="/images/Ciara.webp" alt="Ciara" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -423,7 +423,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[8] = el; }} onClick={(e) => playSound(e, 'wonder')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #E0F0F8 0%, #B5D8EB 100%)' }}>
                                     <div className="character-avatar avatar-kenji">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>🌿</div>
+                                        <img src="/images/Kenji.webp" alt="Kenji" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -451,7 +451,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[9] = el; }} onClick={(e) => playSound(e, 'babygiggle')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFF0E8 0%, #FFE5B4 100%)' }}>
                                     <div className="character-avatar avatar-amara">
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4rem' }}>🧸</div>
+                                        <img src="/images/Amara.webp" alt="Amara" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -489,7 +489,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[10] = el; }} onClick={(e) => playSound(e, 'woof')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F5E6D3 0%, #D4A373 100%)', height: '180px' }}>
                                     <div className="character-avatar avatar-doby" style={{ width: '120px', height: '120px' }}>
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>🐕</div>
+                                        <img src="/images/Doby.webp" alt="Doby" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -510,7 +510,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[11] = el; }} onClick={(e) => playSound(e, 'meow')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F0F0F0 0%, #D4D4D4 100%)', height: '180px' }}>
                                     <div className="character-avatar avatar-mila" style={{ width: '120px', height: '120px' }}>
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>🐈</div>
+                                        <img src="/images/Mila.webp" alt="Mila" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -531,7 +531,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[12] = el; }} onClick={(e) => playSound(e, 'chirp')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFF8E0 0%, #FFD93D 100%)', height: '180px' }}>
                                     <div className="character-avatar avatar-coco" style={{ width: '120px', height: '120px' }}>
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>🐦</div>
+                                        <img src="/images/Coco.webp" alt="Coco" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
