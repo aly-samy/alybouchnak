@@ -75,7 +75,7 @@ export const articles: Article[] = [
       "caption": "Children interacting with pet animals"
     },
     "datePublished": "2026-03-01T08:00:00Z",
-    "dateModified": "2026-03-08T02:19:41.838Z",
+    "dateModified": "2026-03-02T14:30:00Z",
     "author": {
       "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
@@ -94,16 +94,10 @@ export const articles: Article[] = [
     },
     "connections": {
       "relatedTracks": [
-        19,
-        2,
-        5,
-        10,
-        11,
-        20
+        19
       ],
       "relatedAlbums": [
-        "bouncy-beats",
-        "the-blooms-house-volume-1"
+        "bouncy-beats"
       ],
       "youtubeVideoId": "dQw4w9WgXcQ"
     },
@@ -115,7 +109,7 @@ export const articles: Article[] = [
         "https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
       "datePublished": "2026-03-01T08:00:00Z",
-      "dateModified": "2026-03-08T02:19:41.838Z",
+      "dateModified": "2026-03-02T14:30:00Z",
       "author": [
         {
           "@type": "Person",
