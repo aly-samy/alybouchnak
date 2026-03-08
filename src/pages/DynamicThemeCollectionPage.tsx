@@ -36,6 +36,7 @@ function DynamicThemeCollectionPage() {
 
     const heroRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const bgRef = useRef<HTMLDivElement>(null);
 
     // Track engagement metrics
     useEngagementTracking(collectionData?.title || 'Theme Collection Page');
@@ -56,6 +57,20 @@ function DynamicThemeCollectionPage() {
                     ease: 'power3.out',
                 }
             );
+
+            // Background parallax
+            if (bgRef.current) {
+                gsap.to(bgRef.current, {
+                    yPercent: 30,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: heroRef.current,
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true,
+                    },
+                });
+            }
 
             if (contentRef.current) {
                 const sections = contentRef.current.querySelectorAll('.content-section');
@@ -105,65 +120,78 @@ function DynamicThemeCollectionPage() {
 
             <Navigation />
 
-            <main className="pt-20">
-                <Breadcrumbs />
+            <main className="relative">
+                {/* Blurred Parallax Background for Hero */}
+                <div className="absolute top-0 left-0 right-0 h-[850px] lg:h-[700px] z-0 overflow-hidden">
+                    <div
+                        ref={bgRef}
+                        className="absolute inset-[-20%] bg-cover bg-center blur-2xl scale-125 opacity-70"
+                        style={{ backgroundImage: `url(${collectionData.coverImage})` }}
+                    />
+                    <div className="absolute inset-0 bg-black/60" />
+                    <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#F7E859] to-transparent" />
+                </div>
 
-                {/* Hero Section */}
-                <section ref={heroRef} className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-                    <div className="max-w-6xl mx-auto">
-                        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
-                            {/* Collection Cover */}
-                            <div className="w-full max-w-md flex-shrink-0">
-                                <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-500 border-8 border-white">
-                                    <OptimizedImage
-                                        src={collectionData.coverImage}
-                                        alt={`${collectionData.title} collection`}
-                                        width={800}
-                                        height={800}
-                                        className="w-full h-full object-cover"
-                                        loading="eager"
-                                    />
-                                </div>
-                            </div>
+                <div className="relative z-10 pt-20">
+                    <Breadcrumbs />
 
-                            {/* Collection Info */}
-                            <div className="flex-1 text-center lg:text-left">
-                                <div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-4">
-                                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F26B3A] text-white text-sm font-semibold rounded-full shadow-sm">
-                                        <Sparkles className="w-4 h-4" />
-                                        THEME COLLECTION
-                                    </span>
-                                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white text-[#240046] text-sm font-semibold rounded-full shadow-sm">
-                                        <MoodIcon className="w-4 h-4" />
-                                        {collectionData.mood}
-                                    </span>
-                                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#C8F0F7] text-[#101010] text-sm font-semibold rounded-full shadow-sm">
-                                        {collectionData.trackCount} Items
-                                    </span>
+                    {/* Hero Section */}
+                    <section ref={heroRef} className="relative px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
+                                {/* Collection Cover */}
+                                <div className="w-full max-w-md flex-shrink-0">
+                                    <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-500 border-8 border-white">
+                                        <OptimizedImage
+                                            src={collectionData.coverImage}
+                                            alt={`${collectionData.title} collection`}
+                                            width={800}
+                                            height={800}
+                                            className="w-full h-full object-cover"
+                                            loading="eager"
+                                        />
+                                    </div>
                                 </div>
 
-                                <h1 className="font-['Fredoka_One'] text-4xl sm:text-5xl lg:text-7xl text-[#101010] mb-4">
-                                    {collectionData.title}
-                                </h1>
-                                <p className="text-xl sm:text-2xl text-[#2A2A2A]/80 mb-8 max-w-2xl">
-                                    {collectionData.subtitle}
-                                </p>
+                                {/* Collection Info */}
+                                <div className="flex-1 text-center lg:text-left">
+                                    <div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-4">
+                                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F26B3A] text-white text-sm font-semibold rounded-full shadow-sm">
+                                            <Sparkles className="w-4 h-4" />
+                                            THEME COLLECTION
+                                        </span>
+                                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white text-[#240046] text-sm font-semibold rounded-full shadow-sm">
+                                            <MoodIcon className="w-4 h-4" />
+                                            {collectionData.mood}
+                                        </span>
+                                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#C8F0F7] text-[#101010] text-sm font-semibold rounded-full shadow-sm">
+                                            {collectionData.trackCount} Items
+                                        </span>
+                                    </div>
 
-                                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                                    <a
-                                        href={collectionData.spotifyUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-8 py-4 bg-[#101010] text-white font-bold rounded-2xl hover:bg-[#2A2A2A] transition-all duration-200 shadow-xl"
-                                    >
-                                        <Play className="w-6 h-6" />
-                                        Explore Theme
-                                    </a>
+                                    <h1 className="font-['Fredoka_One'] text-4xl sm:text-5xl lg:text-7xl text-[#101010] mb-4">
+                                        {collectionData.title}
+                                    </h1>
+                                    <p className="text-xl sm:text-2xl text-[#2A2A2A]/80 mb-8 max-w-2xl">
+                                        {collectionData.subtitle}
+                                    </p>
+
+                                    <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                                        <a
+                                            href={collectionData.spotifyUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-8 py-4 bg-[#101010] text-white font-bold rounded-2xl hover:bg-[#2A2A2A] transition-all duration-200 shadow-xl"
+                                        >
+                                            <Play className="w-6 h-6" />
+                                            Explore Theme
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
 
                 {/* Content Breakdown */}
                 <section ref={contentRef} className="px-4 sm:px-6 lg:px-8 pb-20">

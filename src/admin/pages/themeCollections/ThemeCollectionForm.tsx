@@ -9,7 +9,7 @@ import { saveThemeCollectionsToGitHub } from '../../lib/githubSave';
 import { toast } from 'sonner';
 import { Trash2, ArrowLeft, Github, Loader2, Sparkles, BookOpen, Brain, ListMusic, Globe } from 'lucide-react';
 
-type FormData = ThemeCollection;
+type FormData = Omit<ThemeCollection, 'id'> & { id?: number, ageFrom?: string, ageTo?: string };
 
 const TABS = [
     { id: 'Discovery', icon: Sparkles },
@@ -40,11 +40,27 @@ export default function ThemeCollectionForm() {
     const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('Discovery');
     const [saving, setSaving] = useState(false);
 
-    const defaultValues: Partial<FormData> = existing || {
+    let defaultAgeFrom = '0';
+    let defaultAgeTo = '16';
+    if (existing?.ageRange) {
+        const match = existing.ageRange.match(/(\d+)\s*-\s*(\d+)/);
+        if (match) {
+            defaultAgeFrom = match[1];
+            defaultAgeTo = match[2];
+        }
+    }
+
+    const defaultValues: Partial<FormData> = existing ? {
+        ...existing,
+        ageFrom: defaultAgeFrom,
+        ageTo: defaultAgeTo
+    } : {
         artist: 'Aly Bouchnak',
         id: (allCollectionsData.length + 1),
         status: 'available',
         category: 'Routine & Utility',
+        ageFrom: defaultAgeFrom,
+        ageTo: defaultAgeTo,
         educationalBenefits: [{ title: '', description: '' }],
         trackIds: [],
     };
@@ -55,9 +71,14 @@ export default function ThemeCollectionForm() {
     const onSubmit = async (data: FormData) => {
         setSaving(true);
         try {
+            data.ageRange = `${data.ageFrom}-${data.ageTo} years`;
+            const payload = { ...data };
+            delete payload.ageFrom;
+            delete payload.ageTo;
+
             let updated: ThemeCollection[];
-            if (isNew) updated = [...allCollectionsData, data];
-            else updated = allCollectionsData.map(c => (c.slug === slug ? data : c));
+            if (isNew) updated = [...allCollectionsData, payload as ThemeCollection];
+            else updated = allCollectionsData.map(c => (c.slug === slug ? (payload as ThemeCollection) : c));
 
             const content = generateThemeCollectionsFile(updated);
             await saveThemeCollectionsToGitHub(content);
@@ -115,7 +136,18 @@ export default function ThemeCollectionForm() {
                                         <option value="Signature Collections">Signature Collections</option>
                                     </select>
                                 </Field>
-                                <Field label="Target Age Range"><input {...register('ageRange')} placeholder="2-6 Years" className={inputCls} /></Field>
+                                <Field label="Target Age Range">
+                                    <div className="flex items-center gap-2">
+                                        <select {...register('ageFrom')} className={inputCls}>
+                                            {Array.from({ length: 17 }).map((_, i) => <option key={`from-${i}`} value={i}>{i}</option>)}
+                                        </select>
+                                        <span className="text-slate-400">to</span>
+                                        <select {...register('ageTo')} className={inputCls}>
+                                            {Array.from({ length: 17 }).map((_, i) => <option key={`to-${i}`} value={i}>{i}</option>)}
+                                        </select>
+                                        <span className="text-slate-400">years</span>
+                                    </div>
+                                </Field>
                             </div>
                             <div className="grid grid-cols-2 gap-8 mt-8">
                                 <Field label="Primary Mood"><input {...register('mood')} className={inputCls} /></Field>

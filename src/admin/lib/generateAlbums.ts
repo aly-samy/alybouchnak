@@ -26,14 +26,7 @@ const ALBUM_INTERFACE = `export interface Album {
   // Extended content for album pages
   artistNote?: string;
   scienceFramework?: string;
-  tracks?: {
-    number?: number;
-    title: string;
-    duration: string;
-    description?: string;
-    mood?: string;
-    slug?: string;
-  }[];
+  trackIds?: number[];
   relatedAlbums?: {
     id: number;
     title: string;
@@ -62,6 +55,6 @@ export function getAllAlbums(): Album[] {
 `;
 
 export function generateAlbumsFile(albums: Album[]): string {
-    const dataString = JSON.stringify(albums, null, 2);
-    return `${ALBUM_INTERFACE}\n\nexport const albums: Album[] = ${dataString};\n${ALBUM_FUNCTIONS}`;
+  const dataString = JSON.stringify(albums, null, 2);
+  return `${ALBUM_INTERFACE}\n\nexport const albums: Album[] = ${dataString};\n${ALBUM_FUNCTIONS}`;
 }

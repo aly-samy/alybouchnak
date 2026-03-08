@@ -12,9 +12,7 @@ const PLAYLIST_INTERFACE = `export interface Playlist {
   ageRange: string;
   mood: string;
   spotifyUrl: string;
-  appleMusicUrl: string;
   youtubeUrl: string;
-  amazonUrl?: string;
   otherUrl?: string; // Link to push.fm or other streaming platforms
   trackCount: number;
   duration: string;
@@ -27,12 +25,11 @@ const PLAYLIST_INTERFACE = `export interface Playlist {
   artistNote?: string;
   scienceFramework?: string;
   tracks?: {
-    number?: number;
-    title: string;
-    duration: string;
+    trackId?: number;
+    title?: string;
+    duration?: string;
     description?: string;
-    mood?: string;
-    slug?: string;
+    link?: string;
   }[];
   relatedAlbums?: {
     id: number;
@@ -62,7 +59,7 @@ export function getAllPlaylists(): Playlist[] {
 `;
 
 export function generatePlaylistsFile(playlists: Playlist[]): string {
-    const dataString = JSON.stringify(playlists, null, 2);
-    // Add import if needed, but here we define the interface in the file to match albums.ts pattern
-    return `import { Album } from './albums';\n\n${PLAYLIST_INTERFACE}\n\nexport const playlists: Playlist[] = ${dataString};\n${PLAYLIST_FUNCTIONS}`;
+  const dataString = JSON.stringify(playlists, null, 2);
+  // Add import if needed, but here we define the interface in the file to match albums.ts pattern
+  return `import { Album } from './albums';\n\n${PLAYLIST_INTERFACE}\n\nexport const playlists: Playlist[] = ${dataString};\n${PLAYLIST_FUNCTIONS}`;
 }

@@ -16,7 +16,7 @@ import {
     Music, Link2, FileText, Search, Upload
 } from 'lucide-react';
 
-type FormData = Omit<Track, 'id'> & { id: number };
+type FormData = Omit<Track, 'id'> & { id: number, ageFrom?: string, ageTo?: string };
 
 const TABS = [
     { id: 'basic', label: 'Basic Info', icon: Music },
@@ -56,10 +56,26 @@ export default function TrackForm() {
     const [imageFile, setImageFile] = useState<{ name: string, base64: string } | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const defaultValues: Partial<FormData> = existing || {
+    let defaultAgeFrom = '0';
+    let defaultAgeTo = '16';
+    if (existing?.ageRange) {
+        const match = existing.ageRange.match(/(\d+)\s*-\s*(\d+)/);
+        if (match) {
+            defaultAgeFrom = match[1];
+            defaultAgeTo = match[2];
+        }
+    }
+
+    const defaultValues: Partial<FormData> = existing ? {
+        ...existing,
+        ageFrom: defaultAgeFrom,
+        ageTo: defaultAgeTo
+    } : {
         id: Math.max(...allTracksData.map(t => t.id)) + 1,
         artist: 'Aly Bouchnak',
         routine: 'Playtime',
+        ageFrom: defaultAgeFrom,
+        ageTo: defaultAgeTo,
         lyricsPreview: [''],
         educationalBenefits: [{ title: '', description: '' }],
         relatedTracks: [],
@@ -212,11 +228,16 @@ export default function TrackForm() {
                 await saveImageToGitHub(`public/images/${imageFile.name}`, imageFile.base64);
             }
 
+            data.ageRange = `${data.ageFrom}-${data.ageTo} years`;
+            const payload = { ...data };
+            delete payload.ageFrom;
+            delete payload.ageTo;
+
             let updatedTracks: Track[];
             if (isNew) {
-                updatedTracks = [...allTracksData, data as Track];
+                updatedTracks = [...allTracksData, payload as Track];
             } else {
-                updatedTracks = allTracksData.map(t => (t.id === data.id ? (data as Track) : t));
+                updatedTracks = allTracksData.map(t => (t.id === payload.id ? (payload as Track) : t));
             }
             const content = generateTracksFile(updatedTracks);
             await saveTracksToGitHub(content);
@@ -353,7 +374,16 @@ export default function TrackForm() {
                                     </select>
                                 </Field>
                                 <Field label="Age Range">
-                                    <input {...register('ageRange')} placeholder="2-6 years" className={inputCls} />
+                                    <div className="flex items-center gap-2">
+                                        <select {...register('ageFrom')} className={inputCls}>
+                                            {Array.from({ length: 17 }).map((_, i) => <option key={`from-${i}`} value={i}>{i}</option>)}
+                                        </select>
+                                        <span className="text-slate-400">to</span>
+                                        <select {...register('ageTo')} className={inputCls}>
+                                            {Array.from({ length: 17 }).map((_, i) => <option key={`to-${i}`} value={i}>{i}</option>)}
+                                        </select>
+                                        <span className="text-slate-400">years</span>
+                                    </div>
                                 </Field>
                             </div>
 

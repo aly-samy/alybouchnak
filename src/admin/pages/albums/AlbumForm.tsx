@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { albums as allAlbumsData } from '../../../data/albums';
+import { tracks as allTracksData } from '../../../data/tracks';
 import type { Album } from '../../../data/albums';
 import { generateAlbumsFile } from '../../lib/generateAlbums';
-import { saveAlbumsToGitHub } from '../../lib/githubSave';
+import { saveAlbumsToGitHub, saveImageToGitHub, saveGenresToGitHub, saveMoodsToGitHub } from '../../lib/githubSave';
+import { generateGenresFile, generateMoodsFile } from '../../lib/generateLists';
+import { genres as initialGenres } from '../../../data/genres';
+import { moods as initialMoods } from '../../../data/moods';
 import { toast } from 'sonner';
-import { Plus, Trash2, ArrowLeft, Github, Loader2 } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, Github, Loader2, Upload, ChevronUp, ChevronDown } from 'lucide-react';
 
-type FormData = Album;
+type FormData = Omit<Album, 'id'> & { id: number, ageFrom?: string, ageTo?: string };
 
 const TABS = ['Basic Info', 'Streaming Links', 'Track Listing', 'Content'] as const;
 
@@ -33,29 +37,86 @@ export default function AlbumForm() {
     const [activeTab, setActiveTab] = useState<typeof TABS[number]>('Basic Info');
     const [saving, setSaving] = useState(false);
 
-    const defaultValues: Partial<FormData> = existing || {
+    const [localGenres, setLocalGenres] = useState<string[]>([...initialGenres]);
+    const [localMoods, setLocalMoods] = useState<string[]>([...initialMoods]);
+    const [imageFile, setImageFile] = useState<{ name: string, base64: string } | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    let defaultAgeFrom = '0';
+    let defaultAgeTo = '16';
+    if (existing?.ageRange) {
+        const match = existing.ageRange.match(/(\d+)\s*-\s*(\d+)/);
+        if (match) {
+            defaultAgeFrom = match[1];
+            defaultAgeTo = match[2];
+        }
+    }
+
+    const defaultValues: Partial<FormData> = existing ? {
+        ...existing,
+        ageFrom: defaultAgeFrom,
+        ageTo: defaultAgeTo
+    } : {
         artist: 'Aly Bouchnak',
         id: (allAlbumsData.length + 1),
         status: 'available' as const,
+        ageFrom: defaultAgeFrom,
+        ageTo: defaultAgeTo,
         educationalBenefits: [{ title: '', description: '' }],
-        tracks: [{ title: '', duration: '' }],
+        trackIds: [],
     };
 
-    const { register, control, handleSubmit } = useForm<FormData>({
+    const { register, control, handleSubmit, setValue, watch } = useForm<FormData>({
         defaultValues: defaultValues as FormData,
     });
 
     const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({ control, name: 'educationalBenefits' });
-    const { fields: trackFields, append: appendTrack, remove: removeTrack } = useFieldArray({ control, name: 'tracks' });
+    const trackIds = watch('trackIds') || [];
+
+    const handleAddOption = (value: string, list: string[], setList: any, fieldName: keyof FormData) => {
+        if (value === '__ADD_NEW__') {
+            const newValue = window.prompt(`Enter new ${fieldName}:`);
+            if (newValue && newValue.trim() !== '') {
+                const trimmed = newValue.trim();
+                if (!list.includes(trimmed)) setList([...list, trimmed]);
+                setValue(fieldName, trimmed as any, { shouldDirty: true });
+            } else {
+                setValue(fieldName, '' as any);
+            }
+        }
+    };
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64String = reader.result as string;
+            const base64Content = base64String.split(',')[1];
+            setImageFile({ name: file.name, base64: base64Content });
+            setValue('coverImage', `/images/${file.name}`, { shouldValidate: true, shouldDirty: true });
+        };
+        reader.readAsDataURL(file);
+    };
 
     const onSubmit = async (data: FormData) => {
         setSaving(true);
         try {
+            data.ageRange = `${data.ageFrom}-${data.ageTo} years`;
+            const payload = { ...data };
+            delete payload.ageFrom;
+            delete payload.ageTo;
+
+            if (localGenres.length > initialGenres.length) await saveGenresToGitHub(generateGenresFile(localGenres));
+            if (localMoods.length > initialMoods.length) await saveMoodsToGitHub(generateMoodsFile(localMoods));
+            if (imageFile) await saveImageToGitHub(`public/images/${imageFile.name}`, imageFile.base64);
+
             let updatedAlbums: Album[];
             if (isNew) {
-                updatedAlbums = [...allAlbumsData, data];
+                updatedAlbums = [...allAlbumsData, payload as Album];
             } else {
-                updatedAlbums = allAlbumsData.map(a => (a.slug === data.slug ? data : a));
+                updatedAlbums = allAlbumsData.map(a => (a.slug === payload.slug ? (payload as Album) : a));
             }
             const content = generateAlbumsFile(updatedAlbums);
             await saveAlbumsToGitHub(content);
@@ -95,8 +156,8 @@ export default function AlbumForm() {
                             type="button"
                             onClick={() => setActiveTab(tab)}
                             className={`flex-1 px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeTab === tab
-                                    ? 'bg-orange-500/15 text-orange-400 border border-orange-500/20'
-                                    : 'text-slate-400 hover:text-slate-200'
+                                ? 'bg-orange-500/15 text-orange-400 border border-orange-500/20'
+                                : 'text-slate-400 hover:text-slate-200'
                                 }`}
                         >
                             {tab}
@@ -121,7 +182,21 @@ export default function AlbumForm() {
                             <Field label="Description"><textarea {...register('description')} className={textareaCls} /></Field>
                             <div className="grid grid-cols-2 gap-4">
                                 <Field label="Artist"><input {...register('artist')} className={inputCls} /></Field>
-                                <Field label="Cover Image Path"><input {...register('coverImage')} placeholder="/images/my-album.webp" className={inputCls} /></Field>
+                                <Field label="Cover Image Path">
+                                    <div className="flex gap-2">
+                                        <input {...register('coverImage')} placeholder="/images/my-album.webp" className={inputCls} />
+                                        <button
+                                            type="button"
+                                            onClick={() => fileInputRef.current?.click()}
+                                            className="px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-slate-300 hover:text-white hover:bg-slate-700 transition flex items-center shrink-0"
+                                            title="Upload Image"
+                                        >
+                                            <Upload className="w-4 h-4" />
+                                        </button>
+                                        <input type="file" ref={fileInputRef} onChange={handleImageChange} accept="image/webp, image/jpeg, image/png" className="hidden" />
+                                    </div>
+                                    {imageFile && <p className="text-xs text-green-400 mt-1">Ready: {imageFile.name}</p>}
+                                </Field>
                             </div>
                             <div className="grid grid-cols-3 gap-4">
                                 <Field label="Release Date"><input {...register('releaseDate')} type="date" className={inputCls} /></Field>
@@ -129,11 +204,48 @@ export default function AlbumForm() {
                                 <Field label="Duration"><input {...register('duration')} placeholder="25:00" className={inputCls} /></Field>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <Field label="Genre"><input {...register('genre')} className={inputCls} /></Field>
-                                <Field label="Age Range"><input {...register('ageRange')} placeholder="0-3 years" className={inputCls} /></Field>
+                                <Field label="Genre">
+                                    <select
+                                        {...register('genre')}
+                                        className={inputCls}
+                                        onChange={(e) => {
+                                            handleAddOption(e.target.value, localGenres, setLocalGenres, 'genre');
+                                            register('genre').onChange(e);
+                                        }}
+                                    >
+                                        <option value="">Select Genre...</option>
+                                        {localGenres.map(g => <option key={g} value={g}>{g}</option>)}
+                                        <option value="__ADD_NEW__">+ Add New Genre...</option>
+                                    </select>
+                                </Field>
+                                <Field label="Age Range">
+                                    <div className="flex items-center gap-2">
+                                        <select {...register('ageFrom')} className={inputCls}>
+                                            {Array.from({ length: 17 }).map((_, i) => <option key={`from-${i}`} value={i}>{i}</option>)}
+                                        </select>
+                                        <span className="text-slate-400">to</span>
+                                        <select {...register('ageTo')} className={inputCls}>
+                                            {Array.from({ length: 17 }).map((_, i) => <option key={`to-${i}`} value={i}>{i}</option>)}
+                                        </select>
+                                        <span className="text-slate-400">years</span>
+                                    </div>
+                                </Field>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <Field label="Mood"><input {...register('mood')} className={inputCls} /></Field>
+                                <Field label="Mood">
+                                    <select
+                                        {...register('mood')}
+                                        className={inputCls}
+                                        onChange={(e) => {
+                                            handleAddOption(e.target.value, localMoods, setLocalMoods, 'mood');
+                                            register('mood').onChange(e);
+                                        }}
+                                    >
+                                        <option value="">Select Mood...</option>
+                                        {localMoods.map(m => <option key={m} value={m}>{m}</option>)}
+                                        <option value="__ADD_NEW__">+ Add New Mood...</option>
+                                    </select>
+                                </Field>
                                 <Field label="UPC"><input {...register('upc')} className={inputCls} /></Field>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
@@ -180,6 +292,7 @@ export default function AlbumForm() {
                                 ['appleMusicUrl', 'Apple Music URL'],
                                 ['youtubeUrl', 'YouTube URL'],
                                 ['amazonUrl', 'Amazon Music URL'],
+                                ['otherUrl', 'Other URL (push.fm etc.)'],
                             ].map(([name, label]) => (
                                 <Field key={name} label={label}>
                                     <input {...register(name as keyof FormData)} placeholder="https://…" className={inputCls} />
@@ -192,30 +305,63 @@ export default function AlbumForm() {
                         <div>
                             <div className="flex items-center justify-between mb-3">
                                 <label className="text-sm font-medium text-slate-300">Tracks in this Album</label>
-                                <button type="button" onClick={() => appendTrack({ title: '', duration: '' })}
+                                <button type="button" onClick={() => {
+                                    const newArr = [...trackIds, allTracksData[0]?.id || 0];
+                                    setValue('trackIds', newArr, { shouldDirty: true });
+                                    setValue('trackCount', newArr.length);
+                                }}
                                     className="flex items-center gap-1 text-xs text-orange-400 hover:text-orange-300 px-2 py-1 rounded-lg hover:bg-orange-500/10 transition-all">
                                     <Plus className="w-3 h-3" /> Add Track
                                 </button>
                             </div>
                             <div className="space-y-3">
-                                {trackFields?.map((f, i) => (
-                                    <div key={f.id} className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-3">
-                                        <div className="grid grid-cols-3 gap-3">
-                                            <Field label="#"><input {...register(`tracks.${i}.number`, { valueAsNumber: true })} type="number" className={inputCls} defaultValue={i + 1} /></Field>
-                                            <div className="col-span-2"><Field label="Title"><input {...register(`tracks.${i}.title`)} className={inputCls} /></Field></div>
+                                {trackIds.map((tid, i) => (
+                                    <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 flex gap-3 items-center">
+                                        <span className="text-slate-500 font-bold w-6">{i + 1}.</span>
+                                        <div className="flex-1">
+                                            <select
+                                                value={tid}
+                                                onChange={(e) => {
+                                                    const newArr = [...trackIds];
+                                                    newArr[i] = Number(e.target.value);
+                                                    setValue('trackIds', newArr, { shouldDirty: true });
+                                                }}
+                                                className={inputCls}
+                                            >
+                                                <option value={0}>Select a track...</option>
+                                                {allTracksData.map(t => (
+                                                    <option key={t.id} value={t.id}>{t.title} ({t.duration})</option>
+                                                ))}
+                                            </select>
                                         </div>
-                                        <div className="grid grid-cols-3 gap-3">
-                                            <Field label="Duration"><input {...register(`tracks.${i}.duration`)} placeholder="2:30" className={inputCls} /></Field>
-                                            <Field label="Mood"><input {...register(`tracks.${i}.mood`)} className={inputCls} /></Field>
-                                            <Field label="Slug"><input {...register(`tracks.${i}.slug`)} className={inputCls} /></Field>
-                                        </div>
-                                        <div className="flex gap-2 items-end">
-                                            <div className="flex-1"><Field label="Description"><input {...register(`tracks.${i}.description`)} className={inputCls} /></Field></div>
-                                            <button type="button" onClick={() => removeTrack(i)}
-                                                className="p-2.5 mb-0.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all shrink-0">
-                                                <Trash2 className="w-4 h-4" />
+                                        <div className="flex flex-col gap-1">
+                                            <button type="button" onClick={() => {
+                                                if (i > 0) {
+                                                    const newArr = [...trackIds];
+                                                    [newArr[i - 1], newArr[i]] = [newArr[i], newArr[i - 1]];
+                                                    setValue('trackIds', newArr, { shouldDirty: true });
+                                                }
+                                            }} className="text-slate-500 hover:text-white disabled:opacity-30" disabled={i === 0}>
+                                                <ChevronUp className="w-4 h-4" />
+                                            </button>
+                                            <button type="button" onClick={() => {
+                                                if (i < trackIds.length - 1) {
+                                                    const newArr = [...trackIds];
+                                                    [newArr[i + 1], newArr[i]] = [newArr[i], newArr[i + 1]];
+                                                    setValue('trackIds', newArr, { shouldDirty: true });
+                                                }
+                                            }} className="text-slate-500 hover:text-white disabled:opacity-30" disabled={i === trackIds.length - 1}>
+                                                <ChevronDown className="w-4 h-4" />
                                             </button>
                                         </div>
+                                        <button type="button" onClick={() => {
+                                            const newArr = [...trackIds];
+                                            newArr.splice(i, 1);
+                                            setValue('trackIds', newArr, { shouldDirty: true });
+                                            setValue('trackCount', newArr.length);
+                                        }} className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all shrink-0">
+                                            <Trash2 className="w-4 h-4" />
+                                        </button>
                                     </div>
                                 ))}
                             </div>

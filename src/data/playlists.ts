@@ -1,54 +1,33 @@
-
-
 export interface Playlist {
+  id?: number;
   slug: string;
   title: string;
   subtitle: string;
   description: string;
   coverImage: string;
   artist: string;
-  releaseDate: string;
+  status: 'available' | 'coming-soon';
   genre: string;
   ageRange: string;
   mood: string;
-  spotifyUrl: string;
-  appleMusicUrl: string;
-  youtubeUrl: string;
-  amazonUrl?: string;
-  otherUrl?: string; // Link to push.fm or other streaming platforms
-  trackCount: number;
-  duration: string;
-  upc: string;
-  educationalBenefits: {
-    title: string;
-    description: string;
-  }[];
-  // Extended content for playlist pages
+  curatorNote?: string;
   artistNote?: string;
   scienceFramework?: string;
-  tracks?: {
-    number?: number;
-    title: string;
-    duration: string;
-    description?: string;
-    mood?: string;
-    slug?: string;
-  }[];
-  relatedAlbums?: {
-    id: number;
-    title: string;
-    cover: string;
-    description: string;
-    link: string;
-  }[];
-  // For Discography compatibility
-  id?: number;
+  releaseDate?: string;
+  spotifyUrl: string;
+  appleMusicUrl?: string;
+  youtubeUrl: string;
+  amazonUrl?: string;
+  otherUrl?: string;
+  upc?: string;
+  trackCount: number;
+  duration: string;
+  educationalBenefits: { title: string; description: string; }[];
+  tracks?: { trackId?: number; title?: string; duration?: string; description?: string; link?: string; }[];
   type?: string;
   date?: string;
   image?: string;
   link?: string;
-  status?: 'available' | 'coming-soon';
-  lyrics?: string;
 }
 
 export const playlists: Playlist[] = [
@@ -65,28 +44,16 @@ export const playlists: Playlist[] = [
     ],
     "tracks": [
       {
-        "title": "Old MacDonald Had a Farm (Farm Party)",
-        "duration": "2:00",
-        "number": 1,
-        "description": "A high-energy party version of \"Old MacDonald Had a Farm\" "
+        "trackId": 4
       },
       {
-        "title": "Mary Had a Little Lamb (School Party)",
-        "duration": "2:00",
-        "number": 2,
-        "description": "A fresh, upbeat take on the classic nursery rhyme \"Mary Had a Little Lamb\""
+        "trackId": 23
       },
       {
-        "title": "Boom Teka Boom (Wake Up Song)",
-        "duration": "2:00",
-        "number": 3,
-        "description": "A high-energy wake-up song with rhythmic beats to start the day positively. "
+        "trackId": 3
       },
       {
-        "title": "Pet-Pop | The Animal Song",
-        "duration": "2:00",
-        "number": 4,
-        "description": "A lively song about different pets and their sounds."
+        "trackId": 2
       }
     ],
     "title": "Bouncy Beats",
@@ -121,16 +88,13 @@ export const playlists: Playlist[] = [
     ],
     "tracks": [
       {
-        "title": "Gentle Rainfall over the Bloom's House",
-        "duration": "4:30",
-        "number": 1,
-        "description": "Brown noise masked as a soothing rainstorm."
+        "trackId": 22
       },
       {
         "title": "Lullaby for a Tired Toddler",
         "duration": "5:15",
-        "number": 2,
-        "description": "Slow, descending melodies to induce sleep."
+        "description": "Slow, descending melodies to induce sleep.",
+        "link": ""
       }
     ],
     "title": "Calm Dreams",
@@ -165,16 +129,13 @@ export const playlists: Playlist[] = [
     ],
     "tracks": [
       {
-        "title": "The Clean Up Countdown",
-        "duration": "2:30",
-        "number": 1,
-        "description": "A fun, fast-paced song to get toys put away."
+        "trackId": 22
       },
       {
         "title": "Brusha Brusha",
         "duration": "2:00",
-        "number": 2,
-        "description": "The exact length needed for proper tooth brushing."
+        "description": "The exact length needed for proper tooth brushing.",
+        "link": ""
       }
     ],
     "title": "Daily Routines",
@@ -198,10 +159,5 @@ export const playlists: Playlist[] = [
   }
 ];
 
-export function getPlaylistBySlug(slug: string): Playlist | undefined {
-  return playlists.find(playlist => playlist.slug === slug);
-}
-
-export function getAllPlaylists(): Playlist[] {
-  return playlists;
-}
+export function getPlaylistBySlug(slug: string): Playlist | undefined { return playlists.find(playlist => playlist.slug === slug); }
+export function getAllPlaylists(): Playlist[] { return playlists; }

@@ -7,7 +7,6 @@ import SpotifyPlayer from '../sections/SpotifyPlayer';
 import About from '../sections/About';
 import MoodSupport from '../sections/MoodSupport';
 import NewReleases from '../sections/NewReleases';
-import LatestAlbums from '../sections/LatestAlbums';
 import LatestPlaylists from '../sections/LatestPlaylists';
 import LatestThemes from '../sections/LatestThemes';
 import Playlist from '../sections/Playlist';
@@ -194,7 +193,6 @@ function Home() {
         <About />
         <MoodSupport />
         <NewReleases />
-        <LatestAlbums />
         <LatestPlaylists />
         <LatestThemes />
         <Playlist />
