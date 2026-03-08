@@ -338,9 +338,13 @@ export const articles: Article[] = [
             ],
             "datePublished": "2026-03-20T09:00:00Z",
             "dateModified": "2026-03-20T09:00:00Z",
-            "author":,
-            "about":
-    }
+            "author": [{
+                "@type": "Person",
+                "name": "Aly Bouchnak",
+                "url": "https://alybouchnak.com/about"
+            }],
+            "about": []
+        }
     }
 
 
