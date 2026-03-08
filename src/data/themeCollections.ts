@@ -1,4 +1,3 @@
-import { Album } from './albums';
 
 export interface ThemeCollection {
   slug: string;
@@ -24,6 +23,7 @@ export interface ThemeCollection {
     description: string;
   }[];
   // Extended content for collection pages
+  curatorNote?: string;
   artistNote?: string;
   scienceFramework?: string;
   category: 'Routine & Utility' | 'Mood & Energy' | 'Adventure & Event' | 'Signature Collections';
