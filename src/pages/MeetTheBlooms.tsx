@@ -140,16 +140,7 @@ export default function MeetTheBlooms() {
 
                         <div className="family-illustration">
                             <div className="family-scene">
-                                <div className="character-silhouette silhouette-leo"></div>
-                                <div className="character-silhouette silhouette-mia"></div>
-                                <div className="character-silhouette silhouette-layla"></div>
-                                <div className="character-silhouette silhouette-theo"></div>
-                                <div className="character-silhouette silhouette-max"></div>
-                                <div className="character-silhouette silhouette-grandpa"></div>
-                                <div className="character-silhouette silhouette-grandma"></div>
-                                <div className="pet-indicator pet-doby"></div>
-                                <div className="pet-indicator pet-mila"></div>
-                                <div className="pet-indicator pet-coco"></div>
+                                <img src="/images/The-Bloom's-Family.webp" alt="The Bloom's Family" style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
                             </div>
                         </div>
                     </div>
