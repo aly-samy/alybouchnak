@@ -7,7 +7,7 @@ const ARTICLE_INTERFACE = `export interface Article {
   title: string;
   description: string;
   content: string;
-  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity';
+  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity' | 'NeuroParenting';
   coverImage: {
     url: string;
     width: number;
@@ -72,6 +72,6 @@ export function getAllArticles(): Article[] {
 `;
 
 export function generateArticlesFile(articles: Article[]): string {
-    const dataString = JSON.stringify(articles, null, 2);
-    return `${ARTICLE_INTERFACE}\n\nexport const articles: Article[] = ${dataString};\n${ARTICLE_FUNCTIONS}`;
+  const dataString = JSON.stringify(articles, null, 2);
+  return `${ARTICLE_INTERFACE}\n\nexport const articles: Article[] = ${dataString};\n${ARTICLE_FUNCTIONS}`;
 }

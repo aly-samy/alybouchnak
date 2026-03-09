@@ -5,7 +5,7 @@ export interface Article {
   title: string;
   description: string;
   content: string;
-  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity';
+  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity' | 'NeuroParenting';
   coverImage: {
     url: string;
     width: number;
