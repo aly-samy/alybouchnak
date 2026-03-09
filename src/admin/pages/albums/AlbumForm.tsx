@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 import { albums as allAlbumsData } from '../../../data/albums';
 import { tracks as allTracksData } from '../../../data/tracks';
 import type { Album } from '../../../data/albums';
