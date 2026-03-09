@@ -78,7 +78,7 @@ export const playlists: Playlist[] = [
     "slug": "Bouncy-Beats-Toddler-Dance-Party",
     "subtitle": "Toddler Dance Party",
     "description": "The definitive 'guilt-free' playlist for Development-Conscious Millennial Parents.",
-    "coverImage": "/images/Bouncy-Beats-playlist.webp",
+    "coverImage": "https://images.unsplash.com/photo-1543329994-3a5c1ab6109e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "ageRange": "2-6 years",
     "mood": "Playful",
     "releaseDate": "2025-10-10",
