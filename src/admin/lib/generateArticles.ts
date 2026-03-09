@@ -7,7 +7,7 @@ const ARTICLE_INTERFACE = `export interface Article {
   title: string;
   description: string;
   content: string;
-  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity' | 'NeuroParenting';
+  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity';
   coverImage: {
     url: string;
     width: number;
