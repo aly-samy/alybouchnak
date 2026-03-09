@@ -2,6 +2,7 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Sparkles } from 'lucide-react';
+import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -134,11 +135,12 @@ const About = () => {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-[#F7E859] rounded-full blur-3xl opacity-30 scale-110" />
-              <img
+              <OptimizedImage
                 src="/images/Aly-bouchnak-profile.webp"
                 alt="Aly Bouchnak"
-                width="384"
-                height="384"
+                width={384}
+                height={384}
+                sizes="(max-width: 768px) 16rem, 24rem"
                 className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain rounded-full bg-gradient-to-br from-[#C8F0F7] to-[#F7E859]/30"
                 loading="lazy"
               />

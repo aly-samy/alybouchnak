@@ -229,6 +229,7 @@ const Hero = () => {
                 alt="Aly Bouchnak"
                 width={800}
                 height={800}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 fetchPriority="high"
                 loading="eager"
                 className="relative z-10 w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto object-contain animate-float"

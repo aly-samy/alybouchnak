@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
+import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,11 +63,12 @@ const SafetyPolicy = () => {
                 <div ref={headingRef} className="pt-32 pb-12 bg-[#F26B3A]">
                     <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 text-center text-white">
                         <div className="flex justify-center mb-6">
-                            <img
+                            <OptimizedImage
                                 src="/images/Blooms-Safety-Seal.webp"
                                 alt="The Bloom's House Safety Seal"
-                                width="128"
-                                height="128"
+                                width={128}
+                                height={128}
+                                sizes="128px"
                                 className="w-24 h-24 sm:w-32 sm:h-32 drop-shadow-2xl"
                             />
                         </div>
@@ -170,11 +172,12 @@ const SafetyPolicy = () => {
                                     {/* Section 4 */}
                                     <section className="bg-gradient-to-br from-[#F26B3A] to-[#F28C3A] rounded-[2.5rem] p-8 sm:p-12 text-white shadow-xl relative overflow-hidden">
                                         {/* Decorative seal in background */}
-                                        <img
+                                        <OptimizedImage
                                             src="/images/Blooms-Safety-Seal.webp"
                                             alt=""
-                                            width="192"
-                                            height="192"
+                                            width={192}
+                                            height={192}
+                                            sizes="192px"
                                             className="absolute -right-12 -bottom-12 w-48 h-48 opacity-10 pointer-events-none"
                                         />
 

@@ -1,6 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -110,11 +111,12 @@ const Footer = () => {
                   href="/safety-policy"
                   className="group flex items-center gap-4 bg-white/40 hover:bg-white/60 backdrop-blur-sm rounded-2xl p-3 border border-white/40 transition-all hover:shadow-lg w-fit"
                 >
-                  <img
+                  <OptimizedImage
                     src="/images/Blooms-Safety-Seal.webp"
                     alt="Safety Seal"
-                    width="48"
-                    height="48"
+                    width={48}
+                    height={48}
+                    sizes="48px"
                     className="w-12 h-12 drop-shadow-sm group-hover:scale-110 transition-transform"
                   />
                   <div className="flex flex-col">
