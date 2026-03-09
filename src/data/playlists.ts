@@ -72,12 +72,6 @@ export const playlists: Playlist[] = [
       },
       {
         "trackId": 2
-      },
-      {
-        "trackId": 8
-      },
-      {
-        "trackId": 5
       }
     ],
     "title": "Bouncy Beats",
@@ -85,16 +79,16 @@ export const playlists: Playlist[] = [
     "subtitle": "Toddler Dance Party",
     "description": "The definitive 'guilt-free' playlist for Development-Conscious Millennial Parents.",
     "coverImage": "/images/Bouncy-Beats-playlist.webp",
-    "ageRange": "2-8 years",
+    "ageRange": "2-6 years",
     "mood": "Playful",
     "releaseDate": "2025-10-10",
     "spotifyUrl": "https://open.spotify.com/playlist/0lPuabF1uMFlFJEOMo4PhR",
     "appleMusicUrl": "https://music.apple.com/us/artist/aly-bouchnak/1684496150",
-    "youtubeUrl": "https://youtube.com/playlist?list=PL5v2lAOKURyACHKsvDZOfTy0Yj-T4uWwi",
+    "youtubeUrl": "https://youtube.com/playlist",
     "amazonUrl": "#",
     "otherUrl": "https://push.fm/fl/bouncy-beats",
-    "artistNote": "<p>I&nbsp;created&nbsp;these&nbsp;songs&nbsp;to&nbsp;get&nbsp;kids&nbsp;moving&nbsp;and&nbsp;practicing&nbsp;language&nbsp;simultaneously.</p>",
-    "scienceFramework": "<p>Focuses&nbsp;on&nbsp;gross&nbsp;motor&nbsp;skill&nbsp;development.</p>",
+    "artistNote": "I created these songs to get kids moving and practicing language simultaneously.",
+    "scienceFramework": "Focuses on gross motor skill development.",
     "trackCount": 4,
     "duration": "8:00",
     "upc": "198765432109"
