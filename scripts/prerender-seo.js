@@ -123,7 +123,7 @@ function processSSG() {
             "url": fullUrl
         };
 
-        const schemaScript = `\n    <script type="application/ld+json">\n      ${JSON.stringify(schema)}\n    </script>\n  </head>`;
+        const schemaScript = `\n    <script type="application/ld+json" data-seo="schema">\n      ${JSON.stringify(schema)}\n    </script>\n  </head>`;
         injectedHtml = injectedHtml.replace('</head>', schemaScript);
 
         fs.writeFileSync(path.join(routeDir, 'index.html'), injectedHtml);

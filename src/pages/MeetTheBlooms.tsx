@@ -157,18 +157,22 @@ export default function MeetTheBlooms() {
                         '@type': 'Person',
                         'name': 'Aly Bouchnak'
                     },
+                    'url': 'https://alybouchnak.com/meet-the-blooms',
+                    'sameAs': [
+                        'https://www.youtube.com/@alybouchnak'
+                    ],
                     'character': [
-                        { '@type': 'Person', 'name': 'Max Bloom' },
-                        { '@type': 'Person', 'name': 'Theo Bloom' },
-                        { '@type': 'Person', 'name': 'Layla Bloom' },
-                        { '@type': 'Person', 'name': 'Leo Bloom' },
-                        { '@type': 'Person', 'name': 'Mia Bloom' },
-                        { '@type': 'Person', 'name': 'Arthur Bloom' },
-                        { '@type': 'Person', 'name': 'Rose Bloom' },
-                        { '@type': 'Person', 'name': 'Zayna' },
-                        { '@type': 'Person', 'name': 'Ciara' },
-                        { '@type': 'Person', 'name': 'Kenji' },
-                        { '@type': 'Person', 'name': 'Amara' }
+                        { '@type': 'Person', 'name': 'Max Bloom', 'description': "Max sees the world with fresh eyes every single day.", 'image': 'https://alybouchnak.com/images/Max-Bloom.webp' },
+                        { '@type': 'Person', 'name': 'Theo Bloom', 'description': "Theo has energy for days and a heart just as big.", 'image': 'https://alybouchnak.com/images/Theo-Bloom.webp' },
+                        { '@type': 'Person', 'name': 'Layla Bloom', 'description': "Layla is the big sister everyone wishes they had.", 'image': 'https://alybouchnak.com/images/Layla-Bloom.webp' },
+                        { '@type': 'Person', 'name': 'Leo Bloom', 'description': "Leo believes the best moments in life are the quiet ones.", 'image': 'https://alybouchnak.com/images/Leo-Bloom.webp' },
+                        { '@type': 'Person', 'name': 'Mia Bloom', 'description': "Mia has a special gift for turning everyday moments into memories.", 'image': 'https://alybouchnak.com/images/Mia-Bloom.webp' },
+                        { '@type': 'Person', 'name': 'Arthur Bloom', 'description': "Grandpa Arthur tells the best stories.", 'image': 'https://alybouchnak.com/images/Arthur-and-Rose-Bloom.webp' },
+                        { '@type': 'Person', 'name': 'Rose Bloom', 'description': "Grandma Rose's kitchen is where family traditions come to life.", 'image': 'https://alybouchnak.com/images/Arthur-and-Rose-Bloom.webp' },
+                        { '@type': 'Person', 'name': 'Zayna', 'description': "Zayna is proud of her Egyptian heritage.", 'image': 'https://alybouchnak.com/images/Zayna.webp' },
+                        { '@type': 'Person', 'name': 'Ciara', 'description': "Ciara brings Irish American charm and endless energy.", 'image': 'https://alybouchnak.com/images/Ciara.webp' },
+                        { '@type': 'Person', 'name': 'Kenji', 'description': "Kenji is the one who stops to notice the little things.", 'image': 'https://alybouchnak.com/images/Kenji.webp' },
+                        { '@type': 'Person', 'name': 'Amara', 'description': "Amara and Max understand each other in that special way that babies do.", 'image': 'https://alybouchnak.com/images/Amara.webp' }
                     ]
                 }}
             />

@@ -40,7 +40,6 @@ const artistSchema = {
     "Digital Pop"
   ],
 
-  inLanguage: "en",
   areaServed: {
     '@type': 'AdministrativeArea',
     name: 'Worldwide'
@@ -106,13 +105,6 @@ const artistSchema = {
   foundingLocation: {
     '@type': 'Place',
     name: 'Cairo, Egypt'
-  },
-
-  hasAlbum: {
-    '@type': 'MusicAlbum',
-    '@id': 'https://alybouchnak.com/album/the-blooms-house-volume-1#album',
-    name: "The Bloom's House: Volume 1",
-    url: 'https://alybouchnak.com/album/the-blooms-house-volume-1'
   },
 
   mainEntityOfPage: {

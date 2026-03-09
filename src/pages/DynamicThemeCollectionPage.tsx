@@ -109,13 +109,41 @@ function DynamicThemeCollectionPage() {
 
     const MoodIcon = collectionData.mood === 'Calm' ? Moon : Sun;
 
+    const playlistSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'MusicPlaylist',
+        'name': collectionData.title,
+        'description': collectionData.description,
+        'numTracks': collectionData.trackCount,
+        'track': collectionTracks.map(track => {
+            let isoDuration = "PT0M0S";
+            if (track.duration) {
+                const parts = (track.duration as string).split(':');
+                if (parts.length === 2) isoDuration = `PT${parts[0]}M${parts[1]}S`;
+                else if (parts.length === 3) isoDuration = `PT${parts[0]}H${parts[1]}M${parts[2]}S`;
+            }
+
+            return {
+                '@type': 'MusicRecording',
+                'name': track.title,
+                'duration': isoDuration,
+                'url': `https://alybouchnak.com/track/${track.slug}`,
+                'byArtist': track.artist || 'Aly Bouchnak',
+                ...(track.album ? { 'inAlbum': track.album } : {})
+            };
+        })
+    };
+
     return (
         <div className="relative min-h-screen bg-[#F7E859]">
             <SEO
                 title={`${collectionData.title} | Themed Musical Journeys | Aly Bouchnak`}
                 description={collectionData.description}
                 keywords={`${collectionData.title}, themed music, kids collection, Aly Bouchnak, children's development`}
+                canonical={`https://alybouchnak.com/theme-collection/${collectionData.slug}`}
                 ogImage={`https://alybouchnak.com${collectionData.coverImage}`}
+                ogType="music.playlist"
+                schemaData={playlistSchema}
             />
 
             <Navigation />

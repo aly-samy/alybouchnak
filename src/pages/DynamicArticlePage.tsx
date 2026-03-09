@@ -91,6 +91,24 @@ function DynamicArticlePage() {
     const relatedTracksData = tracks.filter(t => article.connections.relatedTracks.includes(t.id));
     const relatedAlbumsData = albums.filter(a => article.connections.relatedAlbums.includes(a.slug));
 
+    // Enhance schema with required BlogPosting/NewsArticle properties
+    const enhancedArticleSchema = {
+        ...article.articleSchema,
+        description: article.description,
+        mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://alybouchnak.com/article/${article.slug}`
+        },
+        publisher: {
+            "@type": "Organization",
+            "name": "The Bloom's House",
+            "logo": {
+                "@type": "ImageObject",
+                url: "https://alybouchnak.com/images/logo.png"
+            }
+        }
+    };
+
     return (
         <div className="relative min-h-screen bg-slate-50">
             <SEO
@@ -100,7 +118,7 @@ function DynamicArticlePage() {
                 canonical={`https://alybouchnak.com/article/${article.slug}`}
                 ogImage={article.coverImage.url}
                 ogType="article"
-                schemaData={article.articleSchema}
+                schemaData={enhancedArticleSchema}
             />
 
             <Navigation />

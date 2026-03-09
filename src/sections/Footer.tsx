@@ -80,7 +80,7 @@ const Footer = () => {
     { label: 'Playlist', href: '/playlists' },
     { label: 'Songs By Theme', href: '/theme-collections' },
     { label: 'Meet The Blooms', href: '/meet-the-blooms' },
-    { label: 'About', href: '/#about' },
+    { label: 'About', href: '/about' },
     { label: 'Blog', href: '/articles' },
     { label: 'Contact', href: '/contact' },
   ];
@@ -209,6 +209,9 @@ const Footer = () => {
               <div className="flex gap-6">
                 <a href="/faq" className="text-sm text-[#2A2A2A]/70 hover:text-[#F26B3A] transition-colors">
                   FAQ
+                </a>
+                <a href="/epk" className="text-sm text-[#2A2A2A]/70 hover:text-[#F26B3A] transition-colors">
+                  EPK
                 </a>
                 <a href="/privacy-policy" className="text-sm text-[#2A2A2A]/70 hover:text-[#F26B3A] transition-colors">
                   Privacy Policy

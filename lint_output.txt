@@ -1,0 +1,119 @@
+
+> my-app@0.0.0 lint
+> eslint .
+
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\migrate.ts
+   52:9   error  'tIds' is never reassigned. Use 'const' instead  prefer-const
+   54:37  error  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+   60:46  error  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+   98:9   error  'tIds' is never reassigned. Use 'const' instead  prefer-const
+  100:37  error  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\netlify\functions\submission-created.ts
+  14:17  error  'name' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\admin\lib\adminAuth.tsx
+  39:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\admin\lib\githubSave.ts
+  39:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\admin\pages\albums\AlbumForm.tsx
+  87:70  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  93:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  95:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\admin\pages\articles\ArticleForm.tsx
+   95:134  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  255:96   error  Unnecessary escape character: \/          no-useless-escape
+  255:154  error  Unnecessary escape character: \/          no-useless-escape
+  330:79   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\admin\pages\playlists\PlaylistForm.tsx
+   92:70  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   98:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  100:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\admin\pages\tracks\TrackForm.tsx
+  128:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  130:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  618:58  error  '_data' is defined but never used         @typescript-eslint/no-unused-vars
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\Breadcrumbs.tsx
+  29:11  error  Unexpected lexical declaration in case block  no-case-declarations
+  37:11  error  Unexpected lexical declaration in case block  no-case-declarations
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\badge.tsx
+  46:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\button-group.tsx
+  82:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\button.tsx
+  62:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\form.tsx
+  159:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\navigation-menu.tsx
+  167:3  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\sidebar.tsx
+  611:26  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\sidebar.tsx:611:26
+  609 |   // Random width between 50 to 90%.
+  610 |   const width = React.useMemo(() => {
+> 611 |     return `${Math.floor(Math.random() * 40) + 50}%`
+      |                          ^^^^^^^^^^^^^ Cannot call impure function
+  612 |   }, [])
+  613 |
+  614 |   return (  react-hooks/purity
+  725:3   error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\components\ui\toggle.tsx
+  45:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\data\albums.ts
+  33:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\lib\spotifyApi.ts
+  229:36  error  '_artistName' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\pages\Articles.tsx
+  30:9  error  Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. This dependency may be mutated later, which could cause the value to change unexpectedly.
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\pages\Articles.tsx:30:9
+  28 |         }
+  29 |         return filtered;
+> 30 |     }, [sortedArticles, categoryFilter]);
+     |         ^^^^^^^^^^^^^^ This dependency may be modified later
+  31 |
+  32 |     // Separate featured article (latest) from the rest for layout purposes
+  33 |     const featuredArticle = categoryFilter === 'all' && filteredArticles.length > 0 ? filteredArticles[0] : null;  react-hooks/preserve-manual-memoization
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\pages\Discography.tsx
+  342:6  warning  React Hook useMemo has an unnecessary dependency: 'allReleases'. Either exclude it or remove the dependency array. Outer scope values like 'allReleases' aren't valid dependencies because mutating them doesn't re-render the component  react-hooks/exhaustive-deps
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\pages\Playlists.tsx
+  27:9  error  Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. This dependency may be mutated later, which could cause the value to change unexpectedly.
+
+D:\Work\Aly Bouchnak\website one-page\Full App\app\alybouchnak\src\pages\Playlists.tsx:27:9
+  25 |         }
+  26 |         return filtered;
+> 27 |     }, [playlists, moodFilter]);
+     |         ^^^^^^^^^ This dependency may be modified later
+  28 |
+  29 |     const schemaData = {
+  30 |         '@context': 'https://schema.org',  react-hooks/preserve-manual-memoization
+
+Γ£û 36 problems (35 errors, 1 warning)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+

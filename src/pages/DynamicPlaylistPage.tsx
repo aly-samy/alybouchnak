@@ -125,10 +125,23 @@ function DynamicPlaylistPage() {
         'track': playlistData.tracks?.map(t => {
             const isInternal = !!t.trackId;
             const track = isInternal ? allTracksData.find(x => x.id === t.trackId) : null;
+
+            // Convert MM:SS to PT#M#S
+            let isoDuration = "PT0M0S";
+            const duration = track ? track.duration : t.duration;
+            if (duration) {
+                const parts = (duration as string).split(':');
+                if (parts.length === 2) isoDuration = `PT${parts[0]}M${parts[1]}S`;
+                else if (parts.length === 3) isoDuration = `PT${parts[0]}H${parts[1]}M${parts[2]}S`;
+            }
+
             return {
                 '@type': 'MusicRecording',
                 'name': track ? track.title : t.title,
-                'duration': track ? track.duration : t.duration
+                'duration': isoDuration,
+                'url': track ? `https://alybouchnak.com/track/${track.slug}` : (t.link || ''),
+                'byArtist': track ? track.artist : 'Aly Bouchnak',
+                ...(track && track.album ? { 'inAlbum': track.album } : {})
             };
         }) || []
     };
@@ -141,6 +154,7 @@ function DynamicPlaylistPage() {
                 keywords={`${playlistData.title}, Aly Bouchnak, ${playlistData.genre}, children's music, toddler playlist, kids music`}
                 canonical={`https://alybouchnak.com/playlist/${playlistData.slug}`}
                 ogImage={`https://alybouchnak.com${playlistData.coverImage}`}
+                ogType="music.playlist"
                 schemaData={playlistSchema}
             />
 

@@ -91,8 +91,7 @@ export default function About() {
                     "https://x.com/aly_bouchnak",
                     "https://www.tiktok.com/@alybouchnak"
                 ],
-                "alternateName": ["Uncle Aly", "Ali Boshnak", "Ali Boschnak", "Aly Boshnak"],
-                "genre": ["Kindie", "Children's Pop"]
+                "alternateName": ["Uncle Aly", "Ali Boshnak", "Ali Boschnak", "Aly Boshnak"]
             },
             {
                 "@type": "WebSite",
@@ -103,6 +102,16 @@ export default function About() {
                 "potentialAction": {
                     "@type": "ListenAction",
                     "target": "https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8"
+                }
+            },
+            {
+                "@type": "AboutPage",
+                "@id": "https://alybouchnak.com/about",
+                "name": "About Uncle Aly & The Bloom's House",
+                "description": "Meet Uncle Aly. The Bloom's House offers balanced stimulation & a guilt-free Cocomelon alternative.",
+                "url": "https://alybouchnak.com/about",
+                "mainEntity": {
+                    "@id": "https://alybouchnak.com/#organization"
                 }
             }
         ]

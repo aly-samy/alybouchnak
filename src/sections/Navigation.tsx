@@ -94,9 +94,9 @@ const Navigation = () => {
               Meet The Blooms
             </Link>
             <Link
-              to="/#about"
+              to="/about"
               onClick={handleNavClick}
-              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/#about') ? 'text-[#F26B3A]' : 'text-[#101010]'
+              className={`text-sm font-semibold transition-colors hover:text-[#F26B3A] ${isActive('/about') ? 'text-[#F26B3A]' : 'text-[#101010]'
                 }`}
             >
               About
@@ -171,9 +171,9 @@ const Navigation = () => {
             Meet The Blooms
           </Link>
           <Link
-            to="/#about"
+            to="/about"
             onClick={handleNavClick}
-            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/#about') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
+            className={`block py-3 px-4 font-semibold rounded-lg hover:bg-[#C8F0F7] transition-colors ${isActive('/about') ? 'text-[#F26B3A] bg-[#C8F0F7]' : 'text-[#101010]'
               }`}
           >
             About

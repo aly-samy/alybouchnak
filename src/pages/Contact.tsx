@@ -106,7 +106,18 @@ const Contact = () => {
           "@type": "ContactPage",
           "name": "Contact Aly Bouchnak",
           "description": "Contact form for Aly Bouchnak, Children's Music Artist.",
-          "url": "https://alybouchnak.com/contact"
+          "url": "https://alybouchnak.com/contact",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "The Bloom's House",
+            "email": "hello@alybouchnak.com",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "hello@alybouchnak.com",
+              "contactType": "Customer Support",
+              "url": "https://alybouchnak.com/contact"
+            }
+          }
         }}
       />
 

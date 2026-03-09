@@ -118,13 +118,49 @@ function DynamicAlbumPage() {
 
   const MoodIcon = albumData.mood === 'Calm' ? Moon : Sun;
 
+  const albumSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicAlbum',
+    'byArtist': {
+      '@type': 'MusicGroup',
+      'name': 'Aly Bouchnak'
+    },
+    'genre': albumData.genre,
+    'image': `https://alybouchnak.com${albumData.coverImage}`,
+    'name': albumData.title,
+    'description': albumData.description,
+    'numTracks': albumData.trackCount,
+    'url': `https://alybouchnak.com/album/${albumData.slug}`,
+    'track': albumData.trackIds?.map(id => {
+      const track = allTracksData.find(t => t.id === id);
+      if (!track) return null;
+
+      let isoDuration = "PT0M0S";
+      if (track.duration) {
+        const parts = track.duration.split(':');
+        if (parts.length === 2) isoDuration = `PT${parts[0]}M${parts[1]}S`;
+        else if (parts.length === 3) isoDuration = `PT${parts[0]}H${parts[1]}M${parts[2]}S`;
+      }
+
+      return {
+        '@type': 'MusicRecording',
+        'name': track.title,
+        'duration': isoDuration,
+        'url': `https://alybouchnak.com/track/${track.slug}`
+      };
+    }).filter(Boolean) || []
+  };
+
   return (
     <div className="relative min-h-screen bg-[#C8F0F7]">
       <SEO
         title={`${albumData.title} | Aly Bouchnak`}
         description={albumData.description}
         keywords={`${albumData.title}, Aly Bouchnak, ${albumData.genre}, children's music, toddler songs, kids album`}
+        canonical={`https://alybouchnak.com/album/${albumData.slug}`}
         ogImage={`https://alybouchnak.com${albumData.coverImage}`}
+        ogType="music.album"
+        schemaData={albumSchema}
       />
 
       <Navigation />

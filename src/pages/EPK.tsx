@@ -32,31 +32,6 @@ export default function EPK() {
         return () => ctx.revert();
     }, []);
 
-    const FactRow = ({ label, value }: { label: string; value: React.ReactNode }) => (
-        <div className="flex flex-col sm:flex-row py-3 border-b border-gray-100 last:border-0">
-            <div className="sm:w-1/3 text-sm font-bold text-gray-500 uppercase tracking-wider mb-1 sm:mb-0">
-                {label}
-            </div>
-            <div className="sm:w-2/3 text-gray-800 font-medium">
-                {value}
-            </div>
-        </div>
-    );
-
-    const CatalogItem = ({ title, date, code, type }: { title: string; date: string; code: string; type: 'ISRC' | 'UPC' }) => (
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-                <p className="font-bold text-gray-900">{title}</p>
-                <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
-                    <Calendar className="w-4 h-4" /> {date}
-                </p>
-            </div>
-            <div className="bg-gray-50 px-4 py-2 rounded-lg text-right">
-                <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">{type}</p>
-                <p className="font-mono text-gray-800 font-medium">{code}</p>
-            </div>
-        </div>
-    );
 
     return (
         <>
@@ -228,4 +203,30 @@ const UserIcon = () => (
         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
     </svg>
+);
+
+const FactRow = ({ label, value }: { label: string; value: React.ReactNode }) => (
+    <div className="flex flex-col sm:flex-row py-3 border-b border-gray-100 last:border-0">
+        <div className="sm:w-1/3 text-sm font-bold text-gray-500 uppercase tracking-wider mb-1 sm:mb-0">
+            {label}
+        </div>
+        <div className="sm:w-2/3 text-gray-800 font-medium">
+            {value}
+        </div>
+    </div>
+);
+
+const CatalogItem = ({ title, date, code, type }: { title: string; date: string; code: string; type: 'ISRC' | 'UPC' }) => (
+    <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <p className="font-bold text-gray-900">{title}</p>
+            <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+                <Calendar className="w-4 h-4" /> {date}
+            </p>
+        </div>
+        <div className="bg-gray-50 px-4 py-2 rounded-lg text-right">
+            <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">{type}</p>
+            <p className="font-mono text-gray-800 font-medium">{code}</p>
+        </div>
+    </div>
 );
