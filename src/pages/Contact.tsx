@@ -101,6 +101,13 @@ const Contact = () => {
         canonical="https://alybouchnak.com/contact"
         ogImage="https://alybouchnak.com/images/aly-bouchnak-contact.webp"
         ogType="website"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact Aly Bouchnak",
+          "description": "Contact form for Aly Bouchnak, Children's Music Artist.",
+          "url": "https://alybouchnak.com/contact"
+        }}
       />
 
       <div ref={sectionRef} className="relative min-h-screen bg-[#C8F0F7]">

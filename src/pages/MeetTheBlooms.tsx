@@ -146,6 +146,31 @@ export default function MeetTheBlooms() {
             <SEO
                 title="Meet The Blooms | The Bloom's House"
                 description="Meet the Bloom family – Max, Theo, Layla, Leo, and Mia – and their friends Zayna, Ciara, Kenji, and more! Discover who sings your favorite songs."
+                canonical="https://alybouchnak.com/meet-the-blooms"
+                ogType="website"
+                schemaData={{
+                    '@context': 'https://schema.org',
+                    '@type': 'CreativeWorkSeries',
+                    'name': "The Bloom's House",
+                    'description': "A children's musical series featuring the Bloom family and their friends.",
+                    'author': {
+                        '@type': 'Person',
+                        'name': 'Aly Bouchnak'
+                    },
+                    'character': [
+                        { '@type': 'Person', 'name': 'Max Bloom' },
+                        { '@type': 'Person', 'name': 'Theo Bloom' },
+                        { '@type': 'Person', 'name': 'Layla Bloom' },
+                        { '@type': 'Person', 'name': 'Leo Bloom' },
+                        { '@type': 'Person', 'name': 'Mia Bloom' },
+                        { '@type': 'Person', 'name': 'Arthur Bloom' },
+                        { '@type': 'Person', 'name': 'Rose Bloom' },
+                        { '@type': 'Person', 'name': 'Zayna' },
+                        { '@type': 'Person', 'name': 'Ciara' },
+                        { '@type': 'Person', 'name': 'Kenji' },
+                        { '@type': 'Person', 'name': 'Amara' }
+                    ]
+                }}
             />
             <Navigation />
 

@@ -13,6 +13,8 @@ import ThemeCollectionList from './pages/themeCollections/ThemeCollectionList';
 import ThemeCollectionForm from './pages/themeCollections/ThemeCollectionForm';
 import ArticleList from './pages/articles/ArticleList';
 import ArticleForm from './pages/articles/ArticleForm';
+import FaqList from './pages/faqs/FaqList';
+import FaqForm from './pages/faqs/FaqForm';
 import { Toaster } from 'sonner';
 
 function AdminRoutes() {
@@ -41,6 +43,9 @@ function AdminRoutes() {
                 <Route path="articles" element={<ArticleList />} />
                 <Route path="articles/new" element={<ArticleForm />} />
                 <Route path="articles/:slug/edit" element={<ArticleForm />} />
+                <Route path="faqs" element={<FaqList />} />
+                <Route path="faqs/new" element={<FaqForm />} />
+                <Route path="faqs/:id/edit" element={<FaqForm />} />
                 <Route path="*" element={<Navigate to="/admin" replace />} />
             </Route>
         </Routes>

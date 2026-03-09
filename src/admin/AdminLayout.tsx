@@ -8,7 +8,8 @@ import {
     ExternalLink,
     Library,
     Sparkles,
-    FileText
+    FileText,
+    HelpCircle
 } from 'lucide-react';
 
 const navItems = [
@@ -18,6 +19,7 @@ const navItems = [
     { to: '/admin/playlists', label: 'Playlists', icon: Library, end: false },
     { to: '/admin/themes', label: 'Themes', icon: Sparkles, end: false },
     { to: '/admin/articles', label: 'Articles & News', icon: FileText, end: false },
+    { to: '/admin/faqs', label: 'FAQs', icon: HelpCircle, end: false },
 ];
 
 export default function AdminLayout() {

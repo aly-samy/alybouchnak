@@ -115,6 +115,14 @@ export async function saveRoutinesToGitHub(content: string): Promise<void> {
     );
 }
 
+export async function saveFaqsToGitHub(content: string): Promise<void> {
+    await saveFile(
+        'src/data/faqs.ts',
+        content,
+        'Admin: Updated faqs.ts via Admin Dashboard'
+    );
+}
+
 export async function saveImageToGitHub(path: string, base64Content: string): Promise<void> {
     await saveBinaryFile(
         path,

@@ -6,6 +6,8 @@ import Home from './pages/Home';
 const Discography = lazy(() => import('./pages/Discography'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Contact = lazy(() => import('./pages/Contact'));
+const About = lazy(() => import('./pages/About'));
+const EPK = lazy(() => import('./pages/EPK'));
 const MeetTheBlooms = lazy(() => import('./pages/MeetTheBlooms'));
 const DynamicTrackPage = lazy(() => import('./pages/DynamicTrackPage'));
 const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
@@ -55,6 +57,8 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/meet-the-blooms" element={<MeetTheBlooms />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/epk" element={<EPK />} />
             {/* Dynamic Track Routes - All tracks rendered from centralized data */}
             <Route path="/track/:slug" element={<DynamicTrackPage />} />
             {/* Dynamic Content Routes */}

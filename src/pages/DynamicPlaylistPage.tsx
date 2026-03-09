@@ -116,13 +116,32 @@ function DynamicPlaylistPage() {
 
     const MoodIcon = playlistData.mood === 'Calm' ? Moon : Sun;
 
+    const playlistSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'MusicPlaylist',
+        'name': playlistData.title,
+        'description': playlistData.description,
+        'numTracks': playlistData.trackCount,
+        'track': playlistData.tracks?.map(t => {
+            const isInternal = !!t.trackId;
+            const track = isInternal ? allTracksData.find(x => x.id === t.trackId) : null;
+            return {
+                '@type': 'MusicRecording',
+                'name': track ? track.title : t.title,
+                'duration': track ? track.duration : t.duration
+            };
+        }) || []
+    };
+
     return (
         <div className="relative min-h-screen bg-[#C8F0F7]">
             <SEO
                 title={`${playlistData.title} | Aly Bouchnak Playlists`}
                 description={playlistData.description}
                 keywords={`${playlistData.title}, Aly Bouchnak, ${playlistData.genre}, children's music, toddler playlist, kids music`}
+                canonical={`https://alybouchnak.com/playlist/${playlistData.slug}`}
                 ogImage={`https://alybouchnak.com${playlistData.coverImage}`}
+                schemaData={playlistSchema}
             />
 
             <Navigation />

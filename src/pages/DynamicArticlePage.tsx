@@ -97,14 +97,11 @@ function DynamicArticlePage() {
                 title={article.seo.title}
                 description={article.seo.description}
                 keywords={article.seo.keywords.join(', ')}
+                canonical={`https://alybouchnak.com/article/${article.slug}`}
                 ogImage={article.coverImage.url}
                 ogType="article"
+                schemaData={article.articleSchema}
             />
-
-            {/* JSON-LD Schema defined directly in component to ensure it's picked up by crawlers */}
-            <script type="application/ld+json">
-                {JSON.stringify(article.articleSchema)}
-            </script>
 
             <Navigation />
 
