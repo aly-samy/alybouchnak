@@ -170,6 +170,7 @@ function DynamicTrackPage() {
                         alt={`${trackData.title} track cover`}
                         width={800}
                         height={800}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

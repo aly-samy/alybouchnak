@@ -4,6 +4,7 @@ import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import OptimizedImage from '../components/OptimizedImage';
 import BloomQuizWizard from '../components/BloomQuizWizard';
 import './MeetTheBlooms.css';
 
@@ -13,6 +14,8 @@ export default function MeetTheBlooms() {
     const [toastMessage, setToastMessage] = useState<string | null>(null);
     const [isToastClosing, setIsToastClosing] = useState(false);
     const [isQuizOpen, setIsQuizOpen] = useState(false);
+    const [email, setEmail] = useState('');
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const toastTimerContext = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -110,12 +113,30 @@ export default function MeetTheBlooms() {
 
     const startQuiz = () => setIsQuizOpen(true);
 
-    const handleDownload = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleDownload = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const target = e.target as HTMLFormElement;
-        const input = target.querySelector('input') as HTMLInputElement;
-        showToast(`Coloring pages sent to ${input.value}! 🎨`);
-        target.reset();
+        if (!email || isFormSubmitting) return;
+
+        setIsFormSubmitting(true);
+
+        const formData = new URLSearchParams();
+        formData.append('form-name', 'coloring-pages');
+        formData.append('email', email);
+
+        try {
+            await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            });
+            showToast(`Coloring pages sent to ${email}! 🎨`);
+            setEmail('');
+        } catch (err) {
+            console.error(err);
+            showToast('Oops! Something went wrong. Try again.');
+        } finally {
+            setIsFormSubmitting(false);
+        }
     };
 
     const subscribe = () => showToast('Thanks for subscribing! 🔔');
@@ -143,7 +164,7 @@ export default function MeetTheBlooms() {
 
                         <div className="family-illustration">
                             <div className="family-scene">
-                                <img src="/images/The-Bloom's-Family.webp" alt="The Bloom's Family" style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
+                                <OptimizedImage src="/images/The-Bloom's-Family.webp" alt="The Bloom's Family" width={1200} height={800} sizes="(max-width: 1024px) 100vw, 800px" className="w-full h-auto object-contain" />
                             </div>
                         </div>
                     </div>
@@ -163,7 +184,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[0] = el; }} onClick={(e) => playSound(e, 'giggle', 'max.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE5B4 100%)' }}>
                                     <div className="character-avatar avatar-max">
-                                        <img src="/images/Max-Bloom.webp" alt="Max Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Max-Bloom.webp" alt="Max Bloom" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -195,7 +216,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[1] = el; }} onClick={(e) => playSound(e, 'letsplay', 'Theo.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #E8F4F8 0%, #B5D8EB 100%)' }}>
                                     <div className="character-avatar avatar-theo">
-                                        <img src="/images/Theo-Bloom.webp" alt="Theo Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Theo-Bloom.webp" alt="Theo Bloom" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -227,7 +248,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[2] = el; }} onClick={(e) => playSound(e, 'piano', 'Layla.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F0E6F6 0%, #D4C5E2 100%)' }}>
                                     <div className="character-avatar avatar-layla">
-                                        <img src="/images/Layla-Bloom.webp" alt="Layla Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Layla-Bloom.webp" alt="Layla Bloom" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -259,7 +280,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[3] = el; }} onClick={(e) => playSound(e, 'ukulele', 'Leo.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFE8E0 0%, #FF9B85 100%)' }}>
                                     <div className="character-avatar avatar-leo">
-                                        <img src="/images/Leo-Bloom.webp" alt="Leo Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Leo-Bloom.webp" alt="Leo Bloom" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -291,7 +312,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[4] = el; }} onClick={(e) => playSound(e, 'comfort', 'Mia.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FCE8E8 0%, #F4C2C2 100%)' }}>
                                     <div className="character-avatar avatar-mia">
-                                        <img src="/images/Mia-Bloom.webp" alt="Mia Bloom" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Mia-Bloom.webp" alt="Mia Bloom" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -333,7 +354,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[5] = el; }} onClick={(e) => playSound(e, 'chuckle', 'Arthur-and-Rose.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #E8F0E5 0%, #C5D5C0 100%)' }}>
                                     <div className="character-avatar avatar-grandparents">
-                                        <img src="/images/Arthur-and-Rose-Bloom.webp" alt="Grandpa Arthur & Grandma Rose" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Arthur-and-Rose-Bloom.webp" alt="Grandpa Arthur & Grandma Rose" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -361,7 +382,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[6] = el; }} onClick={(e) => playSound(e, 'yalla', 'Zayna.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F0E8F8 0%, #D4C5E2 100%)' }}>
                                     <div className="character-avatar avatar-zayna">
-                                        <img src="/images/Zayna.webp" alt="Zayna" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Zayna.webp" alt="Zayna" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -389,7 +410,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[7] = el; }} onClick={(e) => playSound(e, 'giggle', 'Ciara.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFE8E0 0%, #FF9B85 100%)' }}>
                                     <div className="character-avatar avatar-ciara">
-                                        <img src="/images/Ciara.webp" alt="Ciara" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Ciara.webp" alt="Ciara" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -417,7 +438,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[8] = el; }} onClick={(e) => playSound(e, 'wonder', 'Kenji.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #E0F0F8 0%, #B5D8EB 100%)' }}>
                                     <div className="character-avatar avatar-kenji">
-                                        <img src="/images/Kenji.webp" alt="Kenji" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Kenji.webp" alt="Kenji" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -445,7 +466,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[9] = el; }} onClick={(e) => playSound(e, 'babygiggle', 'Amara.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFF0E8 0%, #FFE5B4 100%)' }}>
                                     <div className="character-avatar avatar-amara">
-                                        <img src="/images/Amara.webp" alt="Amara" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Amara.webp" alt="Amara" width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -483,7 +504,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[10] = el; }} onClick={(e) => playSound(e, 'woof', 'Doby.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F5E6D3 0%, #D4A373 100%)', height: '180px' }}>
                                     <div className="character-avatar avatar-doby" style={{ width: '120px', height: '120px' }}>
-                                        <img src="/images/Doby.webp" alt="Doby" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Doby.webp" alt="Doby" width={120} height={120} sizes="120px" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -504,7 +525,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[11] = el; }} onClick={(e) => playSound(e, 'meow', 'Mila.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #F0F0F0 0%, #D4D4D4 100%)', height: '180px' }}>
                                     <div className="character-avatar avatar-mila" style={{ width: '120px', height: '120px' }}>
-                                        <img src="/images/Mila.webp" alt="Mila" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Mila.webp" alt="Mila" width={120} height={120} sizes="120px" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -525,7 +546,7 @@ export default function MeetTheBlooms() {
                             <article className="character-card" ref={(el) => { characterCardsRef.current[12] = el; }} onClick={(e) => playSound(e, 'chirp', 'Coco.mp3')}>
                                 <div className="card-visual" style={{ background: 'linear-gradient(135deg, #FFF8E0 0%, #FFD93D 100%)', height: '180px' }}>
                                     <div className="character-avatar avatar-coco" style={{ width: '120px', height: '120px' }}>
-                                        <img src="/images/Coco.webp" alt="Coco" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <OptimizedImage src="/images/Coco.webp" alt="Coco" width={120} height={120} sizes="120px" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="sound-indicator">🔊</div>
                                 </div>
@@ -555,9 +576,30 @@ export default function MeetTheBlooms() {
                     <section className="download-section">
                         <h3 style={{ marginBottom: '0.5rem' }}>🎨 Free Coloring Pages</h3>
                         <p style={{ color: 'var(--text-light)', marginBottom: '1rem' }}>Download line art of each character and the whole family. Perfect for little artists!</p>
-                        <form className="email-form" onSubmit={handleDownload}>
-                            <input type="email" className="email-input" placeholder="Enter your email for coloring pages..." required />
-                            <button type="submit" className="submit-btn">Get Free Pages</button>
+                        <form
+                            className="email-form"
+                            name="coloring-pages"
+                            data-netlify="true"
+                            netlify-honeypot="bot-field"
+                            onSubmit={handleDownload}
+                        >
+                            <input type="hidden" name="form-name" value="coloring-pages" />
+                            <p style={{ display: 'none' }}>
+                                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                            </p>
+                            <input
+                                type="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="email-input"
+                                placeholder="Enter your email for coloring pages..."
+                                required
+                                disabled={isFormSubmitting}
+                            />
+                            <button type="submit" className="submit-btn" disabled={isFormSubmitting}>
+                                {isFormSubmitting ? 'Sending...' : 'Get Free Pages'}
+                            </button>
                         </form>
                     </section>
                 </main>

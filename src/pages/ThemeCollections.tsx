@@ -84,6 +84,7 @@ const ThemeCollections = () => {
                                                 alt={collection.title}
                                                 width={600}
                                                 height={400}
+                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
                                             <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">

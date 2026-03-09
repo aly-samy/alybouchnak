@@ -9,8 +9,9 @@ const Newsletter = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  
+
   const [email, setEmail] = useState('');
+  const [isSubmitError, setIsSubmitError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useLayoutEffect(() => {
@@ -51,10 +52,26 @@ const Newsletter = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      // In a real implementation, this would submit to ConvertKit
-    }
+    if (!email) return;
+
+    // Encode form data for Netlify
+    const formData = new URLSearchParams();
+    formData.append('form-name', 'newsletter');
+    formData.append('email', email);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
+    })
+      .then(() => {
+        setIsSubmitted(true);
+        setIsSubmitError(false);
+      })
+      .catch((error) => {
+        console.error('Form submission error:', error);
+        setIsSubmitError(true);
+      });
   };
 
   return (
@@ -70,7 +87,7 @@ const Newsletter = () => {
               <Mail className="w-5 h-5 text-[#F26B3A]" />
               <span className="text-sm font-semibold text-[#F26B3A]">Newsletter</span>
             </div>
-            
+
             <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl lg:text-5xl text-[#101010] mb-4">
               Join Our Community of Music-Loving Families
             </h2>
@@ -83,12 +100,23 @@ const Newsletter = () => {
           {!isSubmitted ? (
             <form
               ref={formRef}
+              name="newsletter"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto"
             >
+              <input type="hidden" name="form-name" value="newsletter" />
+              <p className="hidden">
+                <label>
+                  Don’t fill this out if you're human: <input name="bot-field" />
+                </label>
+              </p>
+
               <div className="flex-1 relative">
                 <input
                   type="email"
+                  name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address"
@@ -107,10 +135,14 @@ const Newsletter = () => {
               </button>
             </form>
           ) : (
-            <div className="flex items-center justify-center gap-3 text-[#101010] bg-white/50 rounded-full py-4 px-8 max-w-lg mx-auto">
+            <div className="flex items-center justify-center gap-3 text-[#101010] bg-white/50 rounded-full py-4 px-8 max-w-lg mx-auto border-2 border-green-400">
               <CheckCircle className="w-6 h-6 text-green-500" />
-              <span className="font-semibold">Success! Check your email to confirm.</span>
+              <span className="font-semibold text-green-800">Welcome to the Bloom's House! Check your email to confirm.</span>
             </div>
+          )}
+
+          {isSubmitError && (
+            <p className="text-red-500 font-semibold mt-4 text-sm animate-pulse">There was an issue subscribing. Please try again later!</p>
           )}
 
           {/* Privacy note */}

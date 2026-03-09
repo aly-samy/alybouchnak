@@ -154,6 +154,7 @@ function DynamicArticlePage() {
                                 alt={article.coverImage.caption}
                                 width={1200}
                                 height={600}
+                                sizes="100vw"
                                 className="w-full h-full object-cover"
                             />
                         </div>
@@ -232,7 +233,7 @@ function DynamicArticlePage() {
                                             className="related-entity group flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
                                         >
                                             <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
-                                                <OptimizedImage src={track.coverImage} alt={track.title} width={100} height={100} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+                                                <OptimizedImage src={track.coverImage} alt={track.title} width={100} height={100} sizes="100px" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <h4 className="font-bold text-slate-900 text-sm truncate">{track.title}</h4>
@@ -259,7 +260,7 @@ function DynamicArticlePage() {
                                     {relatedAlbumsData.map(album => (
                                         <div key={album.slug} className="related-entity">
                                             <div className="aspect-square rounded-2xl overflow-hidden mb-4 shadow-lg group">
-                                                <OptimizedImage src={album.coverImage} alt={album.title} width={400} height={400} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                                <OptimizedImage src={album.coverImage} alt={album.title} width={400} height={400} sizes="(max-width: 1024px) 100vw, 33vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                             </div>
                                             <h4 className="font-bold text-lg mb-1">{album.title}</h4>
                                             <p className="text-white/60 text-sm mb-4 line-clamp-2">{album.subtitle}</p>

@@ -6,6 +6,7 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import OptimizedImage from '../components/OptimizedImage';
 import { getAllArticles } from '../data/articles';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -104,9 +105,12 @@ const Articles = () => {
                             </div>
                             <div className="grid grid-cols-1 lg:grid-cols-2">
                                 <div className="aspect-video lg:aspect-auto h-full overflow-hidden">
-                                    <img
+                                    <OptimizedImage
                                         src={featuredArticle.coverImage.url}
                                         alt={featuredArticle.title}
+                                        width={800}
+                                        height={600}
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
                                 </div>
@@ -139,9 +143,12 @@ const Articles = () => {
                                 className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
                             >
                                 <div className="relative aspect-video overflow-hidden">
-                                    <img
+                                    <OptimizedImage
                                         src={article.coverImage.url}
                                         alt={article.title}
+                                        width={400}
+                                        height={300}
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
                                 </div>

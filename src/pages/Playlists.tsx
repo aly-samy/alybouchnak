@@ -6,6 +6,7 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import OptimizedImage from '../components/OptimizedImage';
 import { getAllPlaylists } from '../data/playlists';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -90,9 +91,12 @@ const Playlists = () => {
                             >
                                 <div className="relative aspect-square rounded-2xl overflow-hidden mb-6">
                                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
-                                    <img
+                                    <OptimizedImage
                                         src={playlist.coverImage}
                                         alt={playlist.title}
+                                        width={400}
+                                        height={400}
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity">

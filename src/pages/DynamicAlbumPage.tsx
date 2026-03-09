@@ -156,6 +156,7 @@ function DynamicAlbumPage() {
                       alt={`${albumData.title} album cover`}
                       width={800}
                       height={800}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="w-full h-full object-cover"
                       loading="eager"
                     />
@@ -576,6 +577,7 @@ function DynamicAlbumPage() {
                           alt={related.title}
                           width={400}
                           height={400}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                           loading="lazy"
                         />

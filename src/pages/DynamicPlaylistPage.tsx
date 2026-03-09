@@ -154,6 +154,7 @@ function DynamicPlaylistPage() {
                                             alt={`${playlistData.title} cover`}
                                             width={800}
                                             height={800}
+                                            sizes="(max-width: 1024px) 100vw, 50vw"
                                             className="w-full h-full object-cover"
                                             loading="eager"
                                         />
