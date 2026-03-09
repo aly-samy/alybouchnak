@@ -1,33 +1,51 @@
+import { Album } from './albums';
+
 export interface Playlist {
-  id?: number;
   slug: string;
   title: string;
   subtitle: string;
   description: string;
   coverImage: string;
   artist: string;
-  status: 'available' | 'coming-soon';
+  releaseDate: string;
   genre: string;
   ageRange: string;
   mood: string;
-  curatorNote?: string;
-  artistNote?: string;
-  scienceFramework?: string;
-  releaseDate?: string;
   spotifyUrl: string;
-  appleMusicUrl?: string;
   youtubeUrl: string;
-  amazonUrl?: string;
-  otherUrl?: string;
-  upc?: string;
+  otherUrl?: string; // Link to push.fm or other streaming platforms
   trackCount: number;
   duration: string;
-  educationalBenefits: { title: string; description: string; }[];
-  tracks?: { trackId?: number; title?: string; duration?: string; description?: string; link?: string; }[];
+  upc: string;
+  educationalBenefits: {
+    title: string;
+    description: string;
+  }[];
+  // Extended content for playlist pages
+  artistNote?: string;
+  scienceFramework?: string;
+  tracks?: {
+    trackId?: number;
+    title?: string;
+    duration?: string;
+    description?: string;
+    link?: string;
+  }[];
+  relatedAlbums?: {
+    id: number;
+    title: string;
+    cover: string;
+    description: string;
+    link: string;
+  }[];
+  // For Discography compatibility
+  id?: number;
   type?: string;
   date?: string;
   image?: string;
   link?: string;
+  status?: 'available' | 'coming-soon';
+  lyrics?: string;
 }
 
 export const playlists: Playlist[] = [
@@ -54,23 +72,29 @@ export const playlists: Playlist[] = [
       },
       {
         "trackId": 2
+      },
+      {
+        "trackId": 8
+      },
+      {
+        "trackId": 5
       }
     ],
     "title": "Bouncy Beats",
     "slug": "Bouncy-Beats-Toddler-Dance-Party",
     "subtitle": "Toddler Dance Party",
     "description": "The definitive 'guilt-free' playlist for Development-Conscious Millennial Parents.",
-    "coverImage": "https://images.unsplash.com/photo-1543329994-3a5c1ab6109e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    "ageRange": "2-6 years",
+    "coverImage": "/images/Bouncy-Beats-playlist.webp",
+    "ageRange": "2-8 years",
     "mood": "Playful",
     "releaseDate": "2025-10-10",
     "spotifyUrl": "https://open.spotify.com/playlist/0lPuabF1uMFlFJEOMo4PhR",
     "appleMusicUrl": "https://music.apple.com/us/artist/aly-bouchnak/1684496150",
-    "youtubeUrl": "https://youtube.com/playlist",
+    "youtubeUrl": "https://youtube.com/playlist?list=PL5v2lAOKURyACHKsvDZOfTy0Yj-T4uWwi",
     "amazonUrl": "#",
     "otherUrl": "https://push.fm/fl/bouncy-beats",
-    "artistNote": "I created these songs to get kids moving and practicing language simultaneously.",
-    "scienceFramework": "Focuses on gross motor skill development.",
+    "artistNote": "<p>I&nbsp;created&nbsp;these&nbsp;songs&nbsp;to&nbsp;get&nbsp;kids&nbsp;moving&nbsp;and&nbsp;practicing&nbsp;language&nbsp;simultaneously.</p>",
+    "scienceFramework": "<p>Focuses&nbsp;on&nbsp;gross&nbsp;motor&nbsp;skill&nbsp;development.</p>",
     "trackCount": 4,
     "duration": "8:00",
     "upc": "198765432109"
@@ -159,5 +183,10 @@ export const playlists: Playlist[] = [
   }
 ];
 
-export function getPlaylistBySlug(slug: string): Playlist | undefined { return playlists.find(playlist => playlist.slug === slug); }
-export function getAllPlaylists(): Playlist[] { return playlists; }
+export function getPlaylistBySlug(slug: string): Playlist | undefined {
+  return playlists.find(playlist => playlist.slug === slug);
+}
+
+export function getAllPlaylists(): Playlist[] {
+  return playlists;
+}
