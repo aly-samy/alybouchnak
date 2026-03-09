@@ -19,7 +19,7 @@ const About = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
-          end: 'bottom 20%',
+          end: 'bottom 70%',
           scrub: 0.4,
         }
       });
@@ -43,7 +43,7 @@ const About = () => {
         const paragraphs = contentRef.current.querySelectorAll('p, h3');
         scrollTl.fromTo(paragraphs,
           { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.25, stagger: 0.08 },
+          { y: 0, opacity: 1, duration: 0.1, stagger: 0.05 },
           0.15
         );
       }
@@ -119,7 +119,7 @@ const About = () => {
                 Aly's mission is to be the <strong>Parenting Partner</strong> for families. Hits like{' '}
                 <em>The Yummy Spoon</em> and <em>Boom Teka Boom</em> are designed as "utility songs"
                 to help parents manage daily routines like eating, waking up, and cleaning up.
-              </p>
+                <br /></p>
 
               <button className="btn-primary mt-6">
                 Meet the world
@@ -144,7 +144,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 

@@ -16,8 +16,8 @@ const MoodSupport = () => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 80%',
-          end: 'bottom 20%',
+          start: 'top 100%',
+          end: 'bottom 75%',
           scrub: 0.4,
         }
       });
@@ -83,7 +83,7 @@ const MoodSupport = () => {
             Support for Every Mood
           </h2>
           <p className="text-base sm:text-lg text-[#2A2A2A] leading-relaxed">
-            Parenting is a 24-hour job. We created a musical ecosystem that moves with your child's energy, 
+            Parenting is a 24-hour job. We created a musical ecosystem that moves with your child's energy,
             from the morning wake-up call to the final goodnight.
           </p>
         </div>
@@ -109,7 +109,7 @@ const MoodSupport = () => {
             </p>
 
             <p className="card-item text-sm text-[#2A2A2A]/80 mb-6">
-              When you need to get the "wiggles" out or turn a grumpy morning into a dance party, 
+              When you need to get the "wiggles" out or turn a grumpy morning into a dance party,
               we use <strong>Digital Pop</strong> beats (120–130 BPM).
             </p>
 
@@ -153,7 +153,7 @@ const MoodSupport = () => {
             </p>
 
             <p className="card-item text-sm text-white/70 mb-6">
-              We use the <strong>ISO Principle</strong> to gradually lower your child's heart rate. 
+              We use the <strong>ISO Principle</strong> to gradually lower your child's heart rate.
               Our lullabies utilize Brown Noise and descending melodies to signal safety.
             </p>
 
