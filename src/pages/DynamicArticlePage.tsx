@@ -18,6 +18,7 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import OptimizedImage from '../components/OptimizedImage';
+import { DiscussionEmbed } from 'disqus-react';
 import { getArticleBySlug } from '../data/articles';
 import type { Article } from '../data/articles';
 import { tracks } from '../data/tracks';
@@ -204,6 +205,19 @@ function DynamicArticlePage() {
                                     #{tag}
                                 </span>
                             ))}
+                        </div>
+
+                        {/* Disqus Comments */}
+                        <div className="mt-16 pt-8 border-t border-slate-200">
+                            <h3 className="text-2xl font-['Fredoka_One'] text-slate-900 mb-8">Join the Discussion</h3>
+                            <DiscussionEmbed
+                                shortname="alybouchnak"
+                                config={{
+                                    url: typeof window !== 'undefined' ? window.location.href : '',
+                                    identifier: article.id.toString(),
+                                    title: article.title,
+                                }}
+                            />
                         </div>
                     </div>
 
