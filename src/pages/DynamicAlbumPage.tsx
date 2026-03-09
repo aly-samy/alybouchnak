@@ -425,7 +425,7 @@ function DynamicAlbumPage() {
                   A Note from the Artist
                 </h2>
                 <div
-                  className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                  className="quill-content text-[#2A2A2A]"
                   dangerouslySetInnerHTML={{ __html: albumData.artistNote }}
                 />
               </section>
@@ -439,7 +439,7 @@ function DynamicAlbumPage() {
                   The Science Behind the Music
                 </h2>
                 <div
-                  className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                  className="quill-content text-[#2A2A2A]"
                   dangerouslySetInnerHTML={{ __html: albumData.scienceFramework }}
                 />
               </section>

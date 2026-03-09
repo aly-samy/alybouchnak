@@ -252,7 +252,7 @@ function DynamicPlaylistPage() {
                                     Why I Created This
                                 </h2>
                                 <div
-                                    className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                                    className="quill-content text-[#2A2A2A]"
                                     dangerouslySetInnerHTML={{ __html: playlistData.artistNote }}
                                 />
                             </section>
@@ -266,7 +266,7 @@ function DynamicPlaylistPage() {
                                     Curator's Note
                                 </h2>
                                 <div
-                                    className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                                    className="quill-content text-[#2A2A2A]"
                                     dangerouslySetInnerHTML={{ __html: playlistData.curatorNote }}
                                 />
                             </section>
@@ -280,7 +280,7 @@ function DynamicPlaylistPage() {
                                     Scientific Value
                                 </h2>
                                 <div
-                                    className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                                    className="quill-content text-[#2A2A2A]"
                                     dangerouslySetInnerHTML={{ __html: playlistData.scienceFramework }}
                                 />
                             </section>

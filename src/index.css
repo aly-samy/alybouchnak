@@ -98,6 +98,78 @@
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   }
+
+  /* Global Rich Text Formatting (ReactQuill Content) */
+  .quill-content {
+    @apply prose prose-lg prose-slate max-w-none w-full mx-auto;
+  }
+
+  /* High-end Typographic Scale */
+  .quill-content h1, 
+  .quill-content h2, 
+  .quill-content h3, 
+  .quill-content h4 {
+    font-family: 'Fredoka One', cursive;
+    @apply text-slate-900 mt-12 mb-6 leading-tight tracking-normal;
+  }
+  
+  .quill-content h2 { @apply text-3xl sm:text-4xl; }
+  .quill-content h3 { @apply text-2xl sm:text-3xl mt-10; }
+  
+  /* Readable Paragraphs */
+  .quill-content p {
+    @apply text-slate-700 leading-[1.8] mb-6 text-[1.125rem];
+  }
+
+  .quill-content strong {
+    @apply text-slate-900 font-bold bg-slate-100 px-1 py-0.5 rounded-md;
+  }
+
+  /* Elegant Blockquotes */
+  .quill-content blockquote {
+    @apply border-l-4 border-[#F26B3A] bg-orange-50/50 pl-6 pr-4 py-4 rounded-r-2xl my-8 italic text-slate-700 shadow-sm relative overflow-hidden;
+  }
+  
+  .quill-content blockquote p {
+    @apply m-0 text-xl font-medium text-slate-800;
+  }
+
+  .quill-content blockquote::before {
+    content: '"';
+    @apply absolute top-0 left-4 text-6xl text-[#F26B3A] opacity-20 font-serif leading-none;
+  }
+
+  /* Premium Media Containers */
+  .quill-content img {
+    @apply rounded-3xl shadow-xl w-full object-cover my-10 border border-slate-200 transition-transform duration-500 hover:shadow-2xl;
+  }
+  
+  .quill-content iframe {
+    @apply rounded-3xl shadow-xl w-full aspect-video my-10 border border-slate-200 bg-black;
+  }
+
+  /* List Architecture */
+  .quill-content ul, 
+  .quill-content ol {
+    @apply pl-6 mb-8 space-y-3;
+  }
+
+  .quill-content li {
+    @apply text-slate-700 leading-[1.7] text-[1.125rem] relative pl-2;
+  }
+  
+  .quill-content ul > li::marker {
+    @apply text-[#F26B3A] text-lg;
+  }
+  
+  .quill-content ol > li::marker {
+    @apply font-bold text-slate-900;
+  }
+
+  /* Link Styling */
+  .quill-content a {
+    @apply text-[#F26B3A] font-bold no-underline transition-all border-b-2 border-transparent hover:border-[#F26B3A];
+  }
 }
 
 @layer utilities {

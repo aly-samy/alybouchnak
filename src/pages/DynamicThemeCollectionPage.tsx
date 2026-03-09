@@ -204,7 +204,7 @@ function DynamicThemeCollectionPage() {
                                     Musical Narrative
                                 </h2>
                                 <div
-                                    className="prose prose-xl max-w-none text-[#2A2A2A] leading-relaxed"
+                                    className="quill-content text-[#2A2A2A]"
                                     dangerouslySetInnerHTML={{ __html: collectionData.description }}
                                 />
                             </section>
@@ -216,7 +216,7 @@ function DynamicThemeCollectionPage() {
                                         Developmental Value
                                     </h2>
                                     <div
-                                        className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                                        className="quill-content text-[#2A2A2A]"
                                         dangerouslySetInnerHTML={{ __html: collectionData.scienceFramework }}
                                     />
                                 </section>
@@ -273,7 +273,7 @@ function DynamicThemeCollectionPage() {
                                 <div className="content-section bg-white p-8 rounded-3xl shadow-lg border border-gray-100 rotate-1">
                                     <Heart className="w-10 h-10 text-[#F26B3A] mb-4" />
                                     <div
-                                        className="text-[#2A2A2A] italic leading-relaxed line-clamp-6"
+                                        className="quill-content text-[#2A2A2A]"
                                         dangerouslySetInnerHTML={{ __html: collectionData.artistNote }}
                                     />
                                 </div>

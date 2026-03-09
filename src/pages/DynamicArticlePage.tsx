@@ -168,14 +168,7 @@ function DynamicArticlePage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
                     {/* Main Content Area */}
                     <div ref={contentRef} className="lg:col-span-8">
-                        <div className="prose prose-lg prose-slate max-w-none 
-              prose-headings:font-['Fredoka_One'] prose-headings:text-slate-900 
-              prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-              prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6
-              prose-strong:text-slate-900 prose-strong:font-bold
-              prose-ul:list-disc prose-ul:pl-6
-              prose-img:rounded-3xl prose-img:shadow-lg">
-
+                        <div className="quill-content">
                             <div dangerouslySetInnerHTML={{ __html: article.content }} />
 
                             {/* Related YouTube Video */}
