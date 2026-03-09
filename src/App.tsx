@@ -18,6 +18,7 @@ const DynamicArticlePage = lazy(() => import('./pages/DynamicArticlePage'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const SafetyPolicy = lazy(() => import('./pages/SafetyPolicy'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 const AdminApp = lazy(() => import('./admin/AdminApp'));
 import { initGA, trackPageView } from './lib/analytics';
 import { initPixel, trackPixelPageView } from './lib/pixel';
@@ -71,6 +72,9 @@ function App() {
             <Route path="/safety-policy" element={<SafetyPolicy />} />
             {/* Admin Dashboard - protected by password */}
             <Route path="/admin/*" element={<AdminApp />} />
+
+            {/* 404 Catch-All Route */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </AnalyticsWrapper>
