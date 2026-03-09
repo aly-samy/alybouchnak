@@ -424,9 +424,10 @@ function DynamicAlbumPage() {
                   <Heart className="w-6 h-6 text-[#9333ea]" />
                   A Note from the Artist
                 </h2>
-                <div className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line">
-                  {albumData.artistNote}
-                </div>
+                <div
+                  className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                  dangerouslySetInnerHTML={{ __html: albumData.artistNote }}
+                />
               </section>
             )}
 
@@ -437,9 +438,10 @@ function DynamicAlbumPage() {
                   <Activity className="w-6 h-6 text-[#0891b2]" />
                   The Science Behind the Music
                 </h2>
-                <div className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line">
-                  {albumData.scienceFramework}
-                </div>
+                <div
+                  className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                  dangerouslySetInnerHTML={{ __html: albumData.scienceFramework }}
+                />
               </section>
             )}
 

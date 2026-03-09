@@ -12,7 +12,9 @@ import {
     Disc,
     Volume2,
     Heart,
-    Music2
+    Music2,
+    Star,
+    Activity
 } from 'lucide-react';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
@@ -249,9 +251,38 @@ function DynamicPlaylistPage() {
                                     <Heart className="w-6 h-6 text-[#F26B3A]" />
                                     Why I Created This
                                 </h2>
-                                <div className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line">
-                                    {playlistData.artistNote}
-                                </div>
+                                <div
+                                    className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                                    dangerouslySetInnerHTML={{ __html: playlistData.artistNote }}
+                                />
+                            </section>
+                        )}
+
+                        {/* Curator Note */}
+                        {playlistData.curatorNote && (
+                            <section className="content-section bg-gradient-to-br from-[#1DB954]/10 to-[#1ed760]/10 rounded-2xl p-6 lg:p-8 border-2 border-[#1DB954]/20">
+                                <h2 className="font-['Fredoka_One'] text-2xl text-[#101010] mb-4 flex items-center gap-2">
+                                    <Star className="w-6 h-6 text-[#1DB954]" />
+                                    Curator's Note
+                                </h2>
+                                <div
+                                    className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                                    dangerouslySetInnerHTML={{ __html: playlistData.curatorNote }}
+                                />
+                            </section>
+                        )}
+
+                        {/* Science Framework */}
+                        {playlistData.scienceFramework && (
+                            <section className="content-section bg-gradient-to-br from-[#06b6d4]/10 to-[#67e8f9]/10 rounded-2xl p-6 lg:p-8 border-2 border-[#06b6d4]/20">
+                                <h2 className="font-['Fredoka_One'] text-2xl text-[#083344] mb-4 flex items-center gap-2">
+                                    <Activity className="w-6 h-6 text-[#0891b2]" />
+                                    Scientific Value
+                                </h2>
+                                <div
+                                    className="prose prose-lg max-w-none text-[#2A2A2A] whitespace-pre-line"
+                                    dangerouslySetInnerHTML={{ __html: playlistData.scienceFramework }}
+                                />
                             </section>
                         )}
 

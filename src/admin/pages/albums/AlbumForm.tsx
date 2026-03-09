@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { albums as allAlbumsData } from '../../../data/albums';
 import { tracks as allTracksData } from '../../../data/tracks';
 import type { Album } from '../../../data/albums';
@@ -18,6 +20,15 @@ const TABS = ['Basic Info', 'Streaming Links', 'Track Listing', 'Content'] as co
 
 const inputCls = "w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 transition-all";
 const textareaCls = `${inputCls} resize-y min-h-[100px]`;
+
+const quillModules = {
+    toolbar: [
+        [{ 'header': [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        ['clean']
+    ],
+};
 
 function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
     return (
@@ -369,14 +380,30 @@ export default function AlbumForm() {
                     )}
 
                     {activeTab === 'Content' && (
-                        <>
+                        <div className="space-y-6">
                             <Field label="Artist Note">
-                                <textarea {...register('artistNote')} className={textareaCls} rows={8} placeholder="Personal note about this album…" />
+                                <Controller
+                                    name="artistNote"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <div className="bg-white rounded-xl text-black overflow-hidden">
+                                            <ReactQuill theme="snow" modules={quillModules} {...field} />
+                                        </div>
+                                    )}
+                                />
                             </Field>
                             <Field label="Science Framework">
-                                <textarea {...register('scienceFramework')} className={textareaCls} rows={8} placeholder="The science behind the album…" />
+                                <Controller
+                                    name="scienceFramework"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <div className="bg-white rounded-xl text-black overflow-hidden">
+                                            <ReactQuill theme="snow" modules={quillModules} {...field} />
+                                        </div>
+                                    )}
+                                />
                             </Field>
-                        </>
+                        </div>
                     )}
                 </div>
 

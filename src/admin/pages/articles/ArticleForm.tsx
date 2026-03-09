@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { articles as allArticlesData } from '../../../data/articles';
 import type { Article } from '../../../data/articles';
 import { tracks } from '../../../data/tracks';
@@ -36,6 +38,15 @@ const TABS = [
 
 const inputCls = "w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 transition-all";
 const textareaCls = `${inputCls} resize-y min-h-[120px]`;
+
+const quillModules = {
+    toolbar: [
+        [{ 'header': [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        ['link', 'image', 'video', 'clean']
+    ],
+};
 
 function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
     return (
@@ -197,8 +208,16 @@ export default function ArticleForm() {
                     )}
 
                     {activeTab === 'Content' && (
-                        <Field label="Main Article Body (Supports HTML/Markdown Strings)">
-                            <textarea {...register('content')} className={`${textareaCls} min-h-[400px] font-mono p-6`} placeholder="<h1>Your Content Here</h1>..." />
+                        <Field label="Main Article Body (Rich Text)">
+                            <Controller
+                                name="content"
+                                control={control}
+                                render={({ field }) => (
+                                    <div className="bg-white rounded-xl text-black overflow-hidden h-[450px]">
+                                        <ReactQuill theme="snow" modules={quillModules} {...field} className="h-[408px]" />
+                                    </div>
+                                )}
+                            />
                         </Field>
                     )}
 

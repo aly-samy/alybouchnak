@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { themeCollections as allCollectionsData } from '../../../data/themeCollections';
 import type { ThemeCollection } from '../../../data/themeCollections';
 import { tracks as allTracks } from '../../../data/tracks';
@@ -21,6 +23,15 @@ const TABS = [
 
 const inputCls = "w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all";
 const textareaCls = `${inputCls} resize-y min-h-[120px]`;
+
+const quillModules = {
+    toolbar: [
+        [{ 'header': [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        ['link', 'clean']
+    ],
+};
 
 function Field({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) {
     return (
@@ -161,9 +172,29 @@ export default function ThemeCollectionForm() {
                     )}
 
                     {activeTab === 'Narrative' && (
-                        <>
-                            <Field label="Musical Narrative (Main Description)"><textarea {...register('description')} className={textareaCls} rows={8} /></Field>
-                            <Field label="Artist Perspective"><textarea {...register('artistNote')} className={textareaCls} rows={6} /></Field>
+                        <div className="space-y-6">
+                            <Field label="Musical Narrative (Main Description)">
+                                <Controller
+                                    name="description"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <div className="bg-white rounded-xl text-black overflow-hidden">
+                                            <ReactQuill theme="snow" modules={quillModules} {...field} />
+                                        </div>
+                                    )}
+                                />
+                            </Field>
+                            <Field label="Artist Perspective">
+                                <Controller
+                                    name="artistNote"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <div className="bg-white rounded-xl text-black overflow-hidden">
+                                            <ReactQuill theme="snow" modules={quillModules} {...field} />
+                                        </div>
+                                    )}
+                                />
+                            </Field>
                             <div>
                                 <div className="flex items-center justify-between mb-4">
                                     <label className="text-sm font-black text-slate-400 uppercase tracking-widest">Key Core Principles</label>
@@ -181,12 +212,20 @@ export default function ThemeCollectionForm() {
                                     ))}
                                 </div>
                             </div>
-                        </>
+                        </div>
                     )}
 
                     {activeTab === 'Science' && (
                         <Field label="Developmental & Scientific Framework">
-                            <textarea {...register('scienceFramework')} className={textareaCls} rows={12} placeholder="Detail the evidence-based approach for this collection..." />
+                            <Controller
+                                name="scienceFramework"
+                                control={control}
+                                render={({ field }) => (
+                                    <div className="bg-white rounded-xl text-black overflow-hidden">
+                                        <ReactQuill theme="snow" modules={quillModules} {...field} />
+                                    </div>
+                                )}
+                            />
                         </Field>
                     )}
 
