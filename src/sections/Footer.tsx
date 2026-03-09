@@ -113,6 +113,8 @@ const Footer = () => {
                   <img
                     src="/images/Blooms-Safety-Seal.webp"
                     alt="Safety Seal"
+                    width="48"
+                    height="48"
                     className="w-12 h-12 drop-shadow-sm group-hover:scale-110 transition-transform"
                   />
                   <div className="flex flex-col">

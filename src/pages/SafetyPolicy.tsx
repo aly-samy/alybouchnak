@@ -65,6 +65,8 @@ const SafetyPolicy = () => {
                             <img
                                 src="/images/Blooms-Safety-Seal.webp"
                                 alt="The Bloom's House Safety Seal"
+                                width="128"
+                                height="128"
                                 className="w-24 h-24 sm:w-32 sm:h-32 drop-shadow-2xl"
                             />
                         </div>
@@ -171,6 +173,8 @@ const SafetyPolicy = () => {
                                         <img
                                             src="/images/Blooms-Safety-Seal.webp"
                                             alt=""
+                                            width="192"
+                                            height="192"
                                             className="absolute -right-12 -bottom-12 w-48 h-48 opacity-10 pointer-events-none"
                                         />
 

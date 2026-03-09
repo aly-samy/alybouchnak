@@ -61,12 +61,12 @@ const Support = () => {
               <Heart className="w-5 h-5 text-[#F26B3A]" />
               <span className="text-sm font-semibold text-[#F26B3A]">Support Independent Music</span>
             </div>
-            
+
             <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl lg:text-5xl text-[#101010] mb-4">
               Join the Mission
             </h2>
             <p className="text-base sm:text-lg text-[#2A2A2A] max-w-2xl mx-auto">
-              We are 100% independent. If our "guilt-free" music helps your family, 
+              We are 100% independent. If our "guilt-free" music helps your family,
               consider becoming a <strong>Parenting Partner</strong>.
             </p>
           </div>
@@ -82,12 +82,13 @@ const Support = () => {
               className="w-full border-0 rounded-xl"
               height="600"
               title="alybouchnak"
+              loading="lazy"
             />
           </div>
 
           {/* Additional support text */}
           <p className="mt-8 text-sm text-[#2A2A2A]/70">
-            Your support helps us create more "Balanced Stimulation" music for families everywhere. 
+            Your support helps us create more "Balanced Stimulation" music for families everywhere.
             Every contribution makes a difference!
           </p>
         </div>

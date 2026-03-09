@@ -137,6 +137,8 @@ const About = () => {
               <img
                 src="/images/Aly-bouchnak-profile.webp"
                 alt="Aly Bouchnak"
+                width="384"
+                height="384"
                 className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain rounded-full bg-gradient-to-br from-[#C8F0F7] to-[#F7E859]/30"
                 loading="lazy"
               />
