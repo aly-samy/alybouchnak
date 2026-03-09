@@ -149,7 +149,7 @@ export const articles: Article[] = [
       "caption": "A sleeping toddler"
     },
     "datePublished": "2026-02-15T09:00:00Z",
-    "dateModified": "2026-03-09T02:53:08.351Z",
+    "dateModified": "2026-02-15T09:00:00Z",
     "author": {
       "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
@@ -170,15 +170,11 @@ export const articles: Article[] = [
     "connections": {
       "relatedTracks": [
         12,
-        13,
-        19,
-        16
+        13
       ],
       "relatedAlbums": [
-        "deep-sleep-album",
-        "tuned-for-dreams"
-      ],
-      "youtubeVideoId": ""
+        "deep-sleep-album"
+      ]
     },
     "articleSchema": {
       "@context": "https://schema.org",
@@ -188,7 +184,7 @@ export const articles: Article[] = [
         "https://images.unsplash.com/photo-1512438257223-950eed158652?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
       "datePublished": "2026-02-15T09:00:00Z",
-      "dateModified": "2026-03-09T02:53:08.351Z",
+      "dateModified": "2026-02-15T09:00:00Z",
       "author": [
         {
           "@type": "Person",
