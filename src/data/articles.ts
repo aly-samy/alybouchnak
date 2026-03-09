@@ -5,7 +5,7 @@ export interface Article {
   title: string;
   description: string;
   content: string;
-  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity' | 'NeuroParenting';
+  category: 'News' | 'Resources' | 'Press' | 'Educational' | 'Music News' | 'Parenting' | 'Activity';
   coverImage: {
     url: string;
     width: number;
@@ -149,7 +149,7 @@ export const articles: Article[] = [
       "caption": "A sleeping toddler"
     },
     "datePublished": "2026-02-15T09:00:00Z",
-    "dateModified": "2026-02-15T09:00:00Z",
+    "dateModified": "2026-03-09T02:53:08.351Z",
     "author": {
       "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
@@ -170,11 +170,15 @@ export const articles: Article[] = [
     "connections": {
       "relatedTracks": [
         12,
-        13
+        13,
+        19,
+        16
       ],
       "relatedAlbums": [
-        "deep-sleep-album"
-      ]
+        "deep-sleep-album",
+        "tuned-for-dreams"
+      ],
+      "youtubeVideoId": ""
     },
     "articleSchema": {
       "@context": "https://schema.org",
@@ -184,7 +188,7 @@ export const articles: Article[] = [
         "https://images.unsplash.com/photo-1512438257223-950eed158652?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
       "datePublished": "2026-02-15T09:00:00Z",
-      "dateModified": "2026-02-15T09:00:00Z",
+      "dateModified": "2026-03-09T02:53:08.351Z",
       "author": [
         {
           "@type": "Person",
