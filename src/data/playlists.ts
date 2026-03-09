@@ -1,5 +1,3 @@
-import { Album } from './albums';
-
 export interface Playlist {
   slug: string;
   title: string;
@@ -12,7 +10,9 @@ export interface Playlist {
   ageRange: string;
   mood: string;
   spotifyUrl: string;
+  appleMusicUrl?: string;
   youtubeUrl: string;
+  amazonUrl?: string;
   otherUrl?: string; // Link to push.fm or other streaming platforms
   trackCount: number;
   duration: string;
@@ -22,6 +22,7 @@ export interface Playlist {
     description: string;
   }[];
   // Extended content for playlist pages
+  curatorNote?: string;
   artistNote?: string;
   scienceFramework?: string;
   tracks?: {
