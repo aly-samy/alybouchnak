@@ -54,18 +54,29 @@ export const handler: Handler = async (event: HandlerEvent) => {
             payload = JSON.parse(event.body);
         }
 
+        // Helper: normalize payload for Postgres
+        // - Converts empty strings to null
+        // - Strips explicit id on POST (let serial handle it)
+        const normalizePayload = (data: any, stripId = false): any => {
+            const out: any = stripId ? {} : { ...data };
+            for (const key of Object.keys(data)) {
+                if (stripId && key === 'id') continue;
+                const val = data[key];
+                if (val === '' || val === undefined) {
+                    out[key] = null;
+                } else if (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(val)) {
+                    // Full ISO datetime — keep as-is; Postgres timestamp handles it
+                    out[key] = val;
+                } else {
+                    out[key] = val;
+                }
+            }
+            return out;
+        };
+
         // --- POST (CREATE) ---
         if (httpMethod === 'POST') {
-            const insertPayload = { ...payload };
-            delete insertPayload.id; // Let Postgres serial handle ID generation
-
-            // Convert empty strings to null to prevent Postgres type errors for dates/numbers
-            Object.keys(insertPayload).forEach(key => {
-                if (insertPayload[key] === '') {
-                    insertPayload[key] = null;
-                }
-            });
-
+            const insertPayload = normalizePayload(payload, true);
             const result = await db.insert(table).values(insertPayload).returning();
             return { statusCode: 201, body: JSON.stringify((result as any[])[0]) };
         }
@@ -75,14 +86,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
             const id = parseInt(idParam, 10) || payload.id;
             if (!id) return { statusCode: 400, body: JSON.stringify({ error: 'ID is required for UPDATE' }) };
 
-            const updatePayload = { ...payload };
-            // Convert empty strings to null to prevent Postgres type errors
-            Object.keys(updatePayload).forEach(key => {
-                if (updatePayload[key] === '') {
-                    updatePayload[key] = null;
-                }
-            });
-
+            const updatePayload = normalizePayload(payload);
             const result = await db.update(table).set(updatePayload).where(eq(table.id, id)).returning();
             return { statusCode: 200, body: JSON.stringify((result as any[])[0]) };
         }

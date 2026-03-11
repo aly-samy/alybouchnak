@@ -6,6 +6,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import type { ThemeCollection } from '../../../data/themeCollections';
 import { useNeonData } from '../../lib/useNeonData';
 import { toast } from 'sonner';
+import { normalizeFormDates } from '../../lib/dateUtils';
 import { Trash2, ArrowLeft, Loader2, Sparkles, BookOpen, Brain, ListMusic, Globe, Save } from 'lucide-react';
 
 type FormData = Omit<ThemeCollection, 'id'> & { id?: number, ageFrom?: string, ageTo?: string };
@@ -87,7 +88,7 @@ export default function ThemeCollectionForm() {
     // Populate form once existing data loads
     useEffect(() => {
         if (existing) {
-            reset({ ...existing, ageFrom: defaultAgeFrom, ageTo: defaultAgeTo });
+            reset(normalizeFormDates({ ...existing, ageFrom: defaultAgeFrom, ageTo: defaultAgeTo }, ['releaseDate']));
         }
     }, [existing, reset, defaultAgeFrom, defaultAgeTo]);
 

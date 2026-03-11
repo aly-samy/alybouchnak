@@ -6,6 +6,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import type { Article } from '../../../data/articles';
 import { useNeonData } from '../../lib/useNeonData';
 import { toast } from 'sonner';
+import { normalizeFormDates } from '../../lib/dateUtils';
 import {
     Plus,
     ArrowLeft,
@@ -102,7 +103,7 @@ export default function ArticleForm() {
 
     // Populate form once existing data loads
     useEffect(() => {
-        if (existing) reset(existing);
+        if (existing) reset(normalizeFormDates(existing, ['datePublished', 'dateModified']));
     }, [existing, reset]);
 
     if (!isNew && (articlesLoading || !existing)) {

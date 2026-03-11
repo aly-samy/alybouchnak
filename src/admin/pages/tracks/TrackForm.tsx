@@ -5,6 +5,7 @@ import type { Track } from '../../../data/tracks';
 import { useNeonData } from '../../lib/useNeonData';
 import { albums as staticAlbums } from '../../../data/albums';
 import { saveImageToGitHub } from '../../lib/githubSave';
+import { normalizeFormDates } from '../../lib/dateUtils';
 
 import { genres as initialGenres } from '../../../data/genres';
 import { moods as initialMoods } from '../../../data/moods';
@@ -110,11 +111,11 @@ export default function TrackForm() {
     // Populate the form once the existing data finishes loading
     useEffect(() => {
         if (existing) {
-            reset({
+            reset(normalizeFormDates({
                 ...existing,
                 ageFrom: defaultAgeFrom,
                 ageTo: defaultAgeTo
-            });
+            }, ['releaseDate']));
         }
     }, [existing, reset, defaultAgeFrom, defaultAgeTo]);
 

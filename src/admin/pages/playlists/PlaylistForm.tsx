@@ -7,6 +7,7 @@ import type { Playlist } from '../../../data/playlists';
 import { useNeonData } from '../../lib/useNeonData';
 import { saveImageToGitHub } from '../../lib/githubSave';
 
+import { normalizeFormDates } from '../../lib/dateUtils';
 import { genres as initialGenres } from '../../../data/genres';
 import { moods as initialMoods } from '../../../data/moods';
 import { toast } from 'sonner';
@@ -95,7 +96,7 @@ export default function PlaylistForm() {
     // Populate form once existing data loads
     useEffect(() => {
         if (existing) {
-            reset({ ...existing, ageFrom: defaultAgeFrom, ageTo: defaultAgeTo });
+            reset(normalizeFormDates({ ...existing, ageFrom: defaultAgeFrom, ageTo: defaultAgeTo }, ['releaseDate']));
         }
     }, [existing, reset, defaultAgeFrom, defaultAgeTo]);
 
