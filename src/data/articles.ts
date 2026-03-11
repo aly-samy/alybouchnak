@@ -383,6 +383,65 @@ export const articles: Article[] = [
       ],
       "about": []
     }
+  },
+  {
+    "id": 6,
+    "type": "NewsArticle",
+    "category": "Press",
+    "author": {
+      "name": "Aly Bouchnak",
+      "url": "https://alybouchnak.com/about",
+      "role": "Composer & Educator"
+    },
+    "coverImage": {
+      "url": "/images/the-yummy-spoon-ep-release-aly-bouchnak-blooms-house.webp",
+      "width": 1200,
+      "height": 675,
+      "caption": "The 3D felt-style avatar of Aly Bouchnak introduces 'The Yummy Spoon,' a digital pop utility song designed to make mealtime easier for parents and fun for toddlers"
+    },
+    "connections": {
+      "relatedTracks": [
+        8,
+        6,
+        5,
+        3,
+        2
+      ],
+      "relatedAlbums": [
+        "the-blooms-house-volume-1"
+      ],
+      "youtubeVideoId": "NpgZc4itpNs"
+    },
+    "seo": {
+      "title": "\"The Yummy Spoon\" to the Rescue: Aly Bouchnak Launches New \"Parenting Partner\" EP to Solve Mealtime Meltdowns | Aly Bouchnak",
+      "description": "Struggling with toddler mealtime? Aly Bouchnak releases 'The Yummy Spoon' EP, featuring modern digital pop songs designed to turn eating into a fun, rhythmic game. Stream the latest from The Bloom's House: Volume 1 and join the Bouncy Beats for Little Feet community.",
+      "keywords": [],
+      "ogType": "article",
+      "readingTime": "3 min"
+    },
+    "datePublished": "2026-03-11T02:30",
+    "dateModified": "2026-03-11T00:42:51.559Z",
+    "articleSchema": {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "\"The Yummy Spoon\" to the Rescue: Aly Bouchnak Launches New \"Parenting Partner\" EP to Solve Mealtime Meltdowns",
+      "image": [
+        "/images/the-yummy-spoon-ep-release-aly-bouchnak-blooms-house.webp"
+      ],
+      "datePublished": "2026-03-11T02:30",
+      "dateModified": "2026-03-11T00:42:51.559Z",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Aly Bouchnak",
+          "url": "https://alybouchnak.com/about"
+        }
+      ]
+    },
+    "title": "\"The Yummy Spoon\" to the Rescue: Aly Bouchnak Launches New \"Parenting Partner\" EP to Solve Mealtime Meltdowns",
+    "slug": "the-yummy-spoon-ep-release-aly-bouchnak-blooms-house",
+    "description": "Struggling with toddler mealtime? Aly Bouchnak releases 'The Yummy Spoon' EP, featuring modern digital pop songs designed to turn eating into a fun, rhythmic game. Stream the latest from The Bloom's House: Volume 1 and join the Bouncy Beats for Little Feet community.",
+    "content": "<p><strong>GIZA,&nbsp;EGYPT</strong>&nbsp;—&nbsp;Independent&nbsp;kids&#39;&nbsp;music&nbsp;artist&nbsp;<strong>Aly&nbsp;Bouchnak</strong>&nbsp;is&nbsp;proud&nbsp;to&nbsp;announce&nbsp;the&nbsp;release&nbsp;of&nbsp;<strong>&quot;The&nbsp;Yummy&nbsp;Spoon&quot;&nbsp;EP</strong>,&nbsp;available&nbsp;March&nbsp;11,&nbsp;2026,&nbsp;on&nbsp;all&nbsp;major&nbsp;streaming&nbsp;platforms.&nbsp;This&nbsp;three-track&nbsp;release&nbsp;serves&nbsp;as&nbsp;a&nbsp;key&nbsp;milestone&nbsp;in&nbsp;the&nbsp;&quot;waterfall&quot;&nbsp;lead-up&nbsp;to&nbsp;his&nbsp;highly&nbsp;anticipated&nbsp;debut&nbsp;album,&nbsp;<strong><em>The&nbsp;Bloom’s&nbsp;House:&nbsp;Volume&nbsp;1</em></strong>,&nbsp;scheduled&nbsp;for&nbsp;late&nbsp;May&nbsp;2026.</p><p></p><h3>Solving&nbsp;the&nbsp;&quot;Mealtime&nbsp;Struggle&quot;&nbsp;Through&nbsp;Music</h3><p>Following&nbsp;the&nbsp;viral&nbsp;success&nbsp;of&nbsp;his&nbsp;breakout&nbsp;hit&nbsp;&quot;Bock&nbsp;Bock&nbsp;Bock&nbsp;Chicken&quot;&nbsp;,&nbsp;Aly&nbsp;Bouchnak&nbsp;continues&nbsp;his&nbsp;mission&nbsp;to&nbsp;provide&nbsp;<strong>&quot;Balanced&nbsp;Stimulation&quot;</strong>&nbsp;for&nbsp;modern&nbsp;families.&nbsp;&quot;The&nbsp;Yummy&nbsp;Spoon&quot;&nbsp;is&nbsp;a&nbsp;&quot;utility&nbsp;song&quot;—a&nbsp;track&nbsp;specifically&nbsp;engineered&nbsp;to&nbsp;help&nbsp;parents&nbsp;navigate&nbsp;the&nbsp;daily&nbsp;challenge&nbsp;of&nbsp;feeding&nbsp;picky&nbsp;toddlers.</p><p></p><p>By&nbsp;personifying&nbsp;the&nbsp;spoon&nbsp;as&nbsp;a&nbsp;&quot;balloon&quot;&nbsp;and&nbsp;an&nbsp;&quot;airplane,&quot;&nbsp;the&nbsp;song&nbsp;turns&nbsp;a&nbsp;high-chair&nbsp;routine&nbsp;into&nbsp;a&nbsp;rhythmic,&nbsp;125&nbsp;BPM&nbsp;digital&nbsp;pop&nbsp;game&nbsp;that&nbsp;reduces&nbsp;parental&nbsp;stress&nbsp;and&nbsp;engages&nbsp;the&nbsp;child’s&nbsp;imagination.</p><p></p><blockquote>&quot;I’m&nbsp;a&nbsp;musician-dad&nbsp;who&nbsp;got&nbsp;tired&nbsp;of&nbsp;&#39;Screen&nbsp;Time&nbsp;Guilt,&#39;&quot;&nbsp;says&nbsp;Aly&nbsp;Bouchnak.&nbsp;&quot;My&nbsp;kids&nbsp;wanted&nbsp;bouncy&nbsp;music,&nbsp;but&nbsp;I&nbsp;wanted&nbsp;the&nbsp;calm&nbsp;of&nbsp;high-quality&nbsp;storytelling.&nbsp;I&nbsp;created&nbsp;&#39;The&nbsp;Yummy&nbsp;Spoon&#39;&nbsp;to&nbsp;be&nbsp;a&nbsp;&#39;guilt-free&#39;&nbsp;tool&nbsp;that&nbsp;actually&nbsp;helps&nbsp;parents&nbsp;get&nbsp;through&nbsp;the&nbsp;5&nbsp;PM&nbsp;dinner&nbsp;rush.&quot;&nbsp;</blockquote><h3></h3><h3>An&nbsp;Algorithmic&nbsp;&quot;Waterfall&quot;&nbsp;Release</h3><p>The&nbsp;EP&nbsp;utilizes&nbsp;a&nbsp;strategic&nbsp;&quot;stacking&quot;&nbsp;method&nbsp;to&nbsp;maximize&nbsp;discovery&nbsp;on&nbsp;Spotify.&nbsp;The&nbsp;tracklist&nbsp;includes:</p><ol><li><strong>The&nbsp;Yummy&nbsp;Spoon</strong>&nbsp;(New&nbsp;Release)&nbsp;</li><li>The&nbsp;Wise&nbsp;Mice&nbsp;(Memory&nbsp;Game)</li><li>Nanny&nbsp;&amp;&nbsp;Papa</li><li><strong>Boom&nbsp;Teka&nbsp;Boom</strong>&nbsp;(The&nbsp;&quot;Wake-Up&quot;&nbsp;Utility&nbsp;Hit)&nbsp;</li><li><strong>Pet-Pop</strong>&nbsp;(The&nbsp;Animal&nbsp;Sound&nbsp;Favorite)&nbsp;</li></ol><p></p><p>This&nbsp;release&nbsp;structure&nbsp;ensures&nbsp;that&nbsp;every&nbsp;new&nbsp;listener&nbsp;of&nbsp;&quot;The&nbsp;Yummy&nbsp;Spoon&quot;&nbsp;is&nbsp;automatically&nbsp;funneled&nbsp;into&nbsp;Aly’s&nbsp;growing&nbsp;catalog,&nbsp;building&nbsp;the&nbsp;momentum&nbsp;needed&nbsp;to&nbsp;ignite&nbsp;Spotify&#39;s&nbsp;discovery&nbsp;algorithms.</p><p></p><h3>Visualizing&nbsp;the&nbsp;&quot;3D&nbsp;Plushie&nbsp;World&quot;</h3><p>Consistent&nbsp;with&nbsp;the&nbsp;brand&#39;s&nbsp;unique&nbsp;identity,&nbsp;the&nbsp;artwork&nbsp;for&nbsp;&quot;The&nbsp;Yummy&nbsp;Spoon&quot;&nbsp;features&nbsp;Aly&#39;s&nbsp;signature&nbsp;<strong>3D&nbsp;Plushie&nbsp;World</strong>.&nbsp;The&nbsp;characters&nbsp;are&nbsp;rendered&nbsp;in&nbsp;high-quality&nbsp;felt&nbsp;and&nbsp;wool&nbsp;textures,&nbsp;providing&nbsp;a&nbsp;warm,&nbsp;tactile&nbsp;aesthetic&nbsp;that&nbsp;stands&nbsp;out&nbsp;in&nbsp;a&nbsp;market&nbsp;of&nbsp;flat&nbsp;2D&nbsp;animations.</p><p></p><p><strong>About&nbsp;Aly&nbsp;Bouchnak:</strong></p><p>Aly&nbsp;Bouchnak&nbsp;creates&nbsp;modern&nbsp;digital&nbsp;pop&nbsp;for&nbsp;toddlers&nbsp;and&nbsp;their&nbsp;families.&nbsp;Known&nbsp;as&nbsp;the&nbsp;&quot;Favorite&nbsp;Musical&nbsp;Uncle,&quot;&nbsp;his&nbsp;brand,&nbsp;<em>The&nbsp;Bloom&#39;s&nbsp;House</em>,&nbsp;serves&nbsp;as&nbsp;a&nbsp;&quot;Parenting&nbsp;Partner&quot;&nbsp;for&nbsp;development-conscious&nbsp;Millennial&nbsp;parents&nbsp;seeking&nbsp;high-energy,&nbsp;cognitively&nbsp;respectful&nbsp;music.</p><p></p><p><strong>Press&nbsp;Contact:</strong></p><p><strong>Website:</strong>&nbsp;<a href=\"https://alybouchnak.com/\" rel=\"noopener noreferrer\" target=\"_blank\">alybouchnak.com</a></p><p><strong>Spotify&nbsp;Playlist:</strong>&nbsp;<a href=\"https://open.spotify.com/playlist/0lPuabF1uMFlFJEOMo4PhR?si=TnSCl-itQ-KcWMUDiglORA&amp;pi=PUnwGYffQ0mZj\" rel=\"noopener noreferrer\" target=\"_blank\">Bouncy&nbsp;Beats:&nbsp;Toddler&nbsp;Dance&nbsp;Party</a>&nbsp;<strong>Instagram/TikTok:</strong>&nbsp;@alybouchnak&nbsp;</p>"
   }
 ];
 
