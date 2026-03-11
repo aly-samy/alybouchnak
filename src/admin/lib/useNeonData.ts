@@ -6,7 +6,7 @@ export function useNeonData<T extends { id?: number }>(resourcePath: string) {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
-    const token = import.meta.env.VITE_GITHUB_TOKEN || '';
+    const token = import.meta.env.VITE_ADMIN_PASSWORD || '';
 
     const fetchData = async () => {
         setLoading(true);

@@ -9,7 +9,8 @@ export const handler: Handler = async (event: HandlerEvent) => {
         return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
     }
 
-    const adminToken = process.env.VITE_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+    // Use VITE_ADMIN_PASSWORD as the server-side guard (already set in Netlify dashboard)
+    const adminToken = process.env.VITE_ADMIN_PASSWORD;
 
     // Protect mutations (POST, PUT, DELETE)
     if (event.httpMethod !== 'GET') {
