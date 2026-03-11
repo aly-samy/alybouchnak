@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
@@ -64,9 +64,7 @@ export default function ThemeCollectionForm() {
         }
     }
 
-    if (!isNew && (collectionsLoading || !existing)) {
-        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
-    }
+    // Loader moved below hooks to obey React's Rules of Hooks
 
     const defaultValues: Partial<FormData> = existing ? {
         ...existing,
@@ -83,8 +81,19 @@ export default function ThemeCollectionForm() {
         trackIds: [],
     };
 
-    const { register, control, handleSubmit, watch, setValue } = useForm<FormData>({ defaultValues: defaultValues as FormData });
+    const { register, control, handleSubmit, watch, setValue, reset } = useForm<FormData>({ defaultValues: defaultValues as FormData });
     const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({ control, name: 'educationalBenefits' });
+
+    // Populate form once existing data loads
+    useEffect(() => {
+        if (existing) {
+            reset({ ...existing, ageFrom: defaultAgeFrom, ageTo: defaultAgeTo });
+        }
+    }, [existing, reset, defaultAgeFrom, defaultAgeTo]);
+
+    if (!isNew && (collectionsLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     const onSubmit = async (data: FormData) => {
         setSaving(true);

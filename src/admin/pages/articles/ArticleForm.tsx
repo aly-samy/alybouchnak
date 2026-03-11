@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
@@ -70,10 +70,7 @@ export default function ArticleForm() {
     const existing = isNew ? null : allArticlesData?.find(a => a.slug === slug);
     const formKey = isNew ? 'new-form' : `edit-form-${existing?.id}`;
 
-    // Show loader until basic data is there
-    if (!isNew && (articlesLoading || !existing)) {
-        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
-    }
+    // Loader moved below hooks to obey React's Rules of Hooks
 
     const defaultValues: Partial<FormData> = existing || {
         id: allArticlesData.length ? Math.max(...allArticlesData.map(a => a.id || 0)) + 1 : 1,
@@ -100,8 +97,17 @@ export default function ArticleForm() {
         }
     };
 
-    const { register, control, handleSubmit, watch, setValue } = useForm<FormData>({ defaultValues: defaultValues as FormData });
+    const { register, control, handleSubmit, watch, setValue, reset } = useForm<FormData>({ defaultValues: defaultValues as FormData });
     const { fields: keywordFields, append: appendKeyword, remove: removeKeyword } = useFieldArray({ control, name: 'seo.keywords' as any });
+
+    // Populate form once existing data loads
+    useEffect(() => {
+        if (existing) reset(existing);
+    }, [existing, reset]);
+
+    if (!isNew && (articlesLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     // Watch values for auto-schema generation
     const watchedTitle = watch('title');

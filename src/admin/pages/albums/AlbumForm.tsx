@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
@@ -67,9 +67,7 @@ export default function AlbumForm() {
         }
     }
 
-    if (!isNew && (albumsLoading || !existing)) {
-        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
-    }
+    // Loader moved below hooks to obey React's Rules of Hooks
 
     const defaultValues: Partial<FormData> = existing ? {
         ...existing,
@@ -85,9 +83,16 @@ export default function AlbumForm() {
         trackIds: [],
     };
 
-    const { register, control, handleSubmit, setValue, watch } = useForm<FormData>({
+    const { register, control, handleSubmit, setValue, watch, reset } = useForm<FormData>({
         defaultValues: defaultValues as FormData,
     });
+
+    // Populate form once existing data loads
+    useEffect(() => {
+        if (existing) {
+            reset({ ...existing, ageFrom: defaultAgeFrom, ageTo: defaultAgeTo });
+        }
+    }, [existing, reset, defaultAgeFrom, defaultAgeTo]);
 
     const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({ control, name: 'educationalBenefits' });
     const trackIds = watch('trackIds') || [];
@@ -118,6 +123,10 @@ export default function AlbumForm() {
         };
         reader.readAsDataURL(file);
     };
+
+    if (!isNew && (albumsLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     const onSubmit = async (data: FormData) => {
         setSaving(true);

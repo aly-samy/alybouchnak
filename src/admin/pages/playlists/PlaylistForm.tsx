@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
@@ -47,7 +47,7 @@ export default function PlaylistForm() {
     const navigate = useNavigate();
     const isNew = !slug;
 
-    const { data: allPlaylistsData, loading: playlistsLoading, saveItem } = useNeonData<Playlist>('playlists');
+    const { data: allPlaylistsData, saveItem } = useNeonData<Playlist>('playlists');
     const { data: allTracksData } = useNeonData<any>('tracks');
 
     const existing = isNew ? null : allPlaylistsData?.find(p => p.slug === slug);
@@ -71,9 +71,7 @@ export default function PlaylistForm() {
         }
     }
 
-    if (!isNew && (playlistsLoading || !existing)) {
-        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
-    }
+    // Loader moved below hooks to obey React's Rules of Hooks
 
     const defaultValues: Partial<FormData> = existing ? {
         ...existing,
@@ -90,9 +88,16 @@ export default function PlaylistForm() {
         tracks: [{ trackId: 0, title: '', duration: '', description: '', link: '' }],
     };
 
-    const { register, control, handleSubmit, setValue, watch } = useForm<FormData>({
+    const { register, control, handleSubmit, setValue, watch, reset } = useForm<FormData>({
         defaultValues: defaultValues as FormData,
     });
+
+    // Populate form once existing data loads
+    useEffect(() => {
+        if (existing) {
+            reset({ ...existing, ageFrom: defaultAgeFrom, ageTo: defaultAgeTo });
+        }
+    }, [existing, reset, defaultAgeFrom, defaultAgeTo]);
 
     const { fields: benefitFields, append: appendBenefit, remove: removeBenefit } = useFieldArray({ control, name: 'educationalBenefits' });
     const { fields: trackFields, append: appendTrack, remove: removeTrack, swap: swapTrack } = useFieldArray({ control, name: 'tracks' });

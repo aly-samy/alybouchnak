@@ -56,8 +56,17 @@ export const handler: Handler = async (event: HandlerEvent) => {
 
         // --- POST (CREATE) ---
         if (httpMethod === 'POST') {
-            // Check for missing ID because Drizzle needs it if not serial default (we use serial but sometimes ID is provided)
-            const result = await db.insert(table).values(payload).returning();
+            const insertPayload = { ...payload };
+            delete insertPayload.id; // Let Postgres serial handle ID generation
+
+            // Convert empty strings to null to prevent Postgres type errors for dates/numbers
+            Object.keys(insertPayload).forEach(key => {
+                if (insertPayload[key] === '') {
+                    insertPayload[key] = null;
+                }
+            });
+
+            const result = await db.insert(table).values(insertPayload).returning();
             return { statusCode: 201, body: JSON.stringify((result as any[])[0]) };
         }
 
@@ -66,7 +75,15 @@ export const handler: Handler = async (event: HandlerEvent) => {
             const id = parseInt(idParam, 10) || payload.id;
             if (!id) return { statusCode: 400, body: JSON.stringify({ error: 'ID is required for UPDATE' }) };
 
-            const result = await db.update(table).set(payload).where(eq(table.id, id)).returning();
+            const updatePayload = { ...payload };
+            // Convert empty strings to null to prevent Postgres type errors
+            Object.keys(updatePayload).forEach(key => {
+                if (updatePayload[key] === '') {
+                    updatePayload[key] = null;
+                }
+            });
+
+            const result = await db.update(table).set(updatePayload).where(eq(table.id, id)).returning();
             return { statusCode: 200, body: JSON.stringify((result as any[])[0]) };
         }
 

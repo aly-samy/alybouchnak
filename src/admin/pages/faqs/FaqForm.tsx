@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import type { FAQ } from '../../../data/faqs';
@@ -19,9 +19,7 @@ export default function FaqForm() {
     const existing = isNew ? null : allFaqsData?.find(f => f.id === existingId);
     const formKey = isNew ? 'new-faq' : `edit-faq-${existing?.id}`;
 
-    if (!isNew && (faqsLoading || !existing)) {
-        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
-    }
+    // Loader moved below hooks to obey React's Rules of Hooks
 
     const defaultValues: Partial<FAQ> = existing || {
         id: allFaqsData.length > 0 ? Math.max(...allFaqsData.map(f => f.id!)) + 1 : 1,
@@ -30,7 +28,16 @@ export default function FaqForm() {
         answer: ''
     };
 
-    const { register, handleSubmit } = useForm<FAQ>({ defaultValues: defaultValues as FAQ });
+    const { register, handleSubmit, reset } = useForm<FAQ>({ defaultValues: defaultValues as FAQ });
+
+    // Populate form once existing data loads
+    useEffect(() => {
+        if (existing) reset(existing);
+    }, [existing, reset]);
+
+    if (!isNew && (faqsLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     const onSubmit = async (data: FAQ) => {
         setSaving(true);

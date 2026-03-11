@@ -71,10 +71,7 @@ export default function TrackForm() {
         }
     }
 
-    if (!isNew && (tracksLoading || !existing)) {
-        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
-    }
-
+    // Loader moved below to obey Rules of Hooks
     const defaultValues: Partial<FormData> = existing ? {
         ...existing,
         ageFrom: defaultAgeFrom,
@@ -106,9 +103,20 @@ export default function TrackForm() {
         },
     };
 
-    const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm<FormData>({
+    const { register, control, handleSubmit, watch, setValue, formState: { errors }, reset } = useForm<FormData>({
         defaultValues: defaultValues as FormData,
     });
+
+    // Populate the form once the existing data finishes loading
+    useEffect(() => {
+        if (existing) {
+            reset({
+                ...existing,
+                ageFrom: defaultAgeFrom,
+                ageTo: defaultAgeTo
+            });
+        }
+    }, [existing, reset, defaultAgeFrom, defaultAgeTo]);
 
     const { fields: previewFields, append: appendPreview, remove: removePreview } = useFieldArray({
         control,
@@ -217,6 +225,10 @@ export default function TrackForm() {
             setValue('trackSchema.duration', `PT${m}M${s}S`);
         }
     }, [watchTitle, watchSlug, watchAlbum, watchGenre, watchDuration, watchReleaseDate, watchCoverImage, watchIsrc, isNew, setValue]);
+
+    if (!isNew && (tracksLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     const onSubmit = async (data: FormData) => {
         setSaving(true);
