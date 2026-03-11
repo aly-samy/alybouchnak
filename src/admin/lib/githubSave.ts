@@ -1,54 +1,25 @@
-import { Octokit } from '@octokit/rest';
+async function apiCall(payload: any) {
+    const response = await fetch('/.netlify/functions/github-crud', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    });
 
-const owner = import.meta.env.VITE_GITHUB_OWNER as string;
-const repo = import.meta.env.VITE_GITHUB_REPO as string;
-const token = import.meta.env.VITE_GITHUB_TOKEN as string;
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to save via API webhook');
+    }
 
-function getOctokit() {
-    return new Octokit({ auth: token });
+    return response.json();
 }
 
 async function saveFile(path: string, content: string, message: string) {
-    const octokit = getOctokit();
-
-    // 1. Get current SHA of the file
-    const { data } = await octokit.repos.getContent({ owner, repo, path });
-    if (Array.isArray(data)) throw new Error('Path is a directory, not a file');
-    const sha = data.sha;
-
-    // 2. Push the updated content (Base64 encoded)
-    await octokit.repos.createOrUpdateFileContents({
-        owner,
-        repo,
-        path,
-        message,
-        content: btoa(unescape(encodeURIComponent(content))), // UTF-8 safe Base64
-        sha,
-    });
+    await apiCall({ action: 'saveFile', path, content, message });
 }
 
 // Separate function for binary files like images
 async function saveBinaryFile(path: string, base64Content: string, message: string) {
-    const octokit = getOctokit();
-
-    let sha: string | undefined;
-    try {
-        const { data } = await octokit.repos.getContent({ owner, repo, path });
-        if (Array.isArray(data)) throw new Error('Path is a directory, not a file');
-        sha = data.sha;
-    } catch (e: any) {
-        // File might not exist yet, which is fine for new images
-        if (e.status !== 404) throw e;
-    }
-
-    await octokit.repos.createOrUpdateFileContents({
-        owner,
-        repo,
-        path,
-        message,
-        content: base64Content, // Already base64 from file reader
-        sha,
-    });
+    await apiCall({ action: 'saveBinaryFile', path, base64Content, message });
 }
 
 export async function saveTracksToGitHub(content: string): Promise<void> {
