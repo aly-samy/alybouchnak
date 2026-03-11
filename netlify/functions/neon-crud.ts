@@ -59,6 +59,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
         // - Converts empty strings to null
         // - Strips explicit id on POST (let serial handle it)
         // - Filters out any keys that don't exist as columns in the Drizzle table
+        // - Converts date strings to Date objects (Drizzle PgTimestamp needs Date, not string)
         const tableColumnNames = new Set(Object.keys(table));
         const normalizePayload = (data: any, stripId = false): any => {
             const out: any = {};
@@ -66,8 +67,12 @@ export const handler: Handler = async (event: HandlerEvent) => {
                 if (stripId && key === 'id') continue;
                 if (!tableColumnNames.has(key)) continue; // Skip unknown columns
                 const val = data[key];
-                if (val === '' || val === undefined) {
+                if (val === '' || val === undefined || val === null) {
                     out[key] = null;
+                } else if (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}/.test(val)) {
+                    // Date string (yyyy-MM-dd or full ISO) → convert to Date object for Drizzle
+                    const d = new Date(val);
+                    out[key] = isNaN(d.getTime()) ? null : d;
                 } else {
                     out[key] = val;
                 }
