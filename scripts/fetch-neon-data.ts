@@ -1,7 +1,6 @@
+import 'dotenv/config';
 import fs from 'fs';
 import path, { resolve } from 'path';
-import * as dotenv from 'dotenv';
-dotenv.config({ path: resolve(process.cwd(), '.env') });
 
 import { db } from '../src/db/index.js';
 import * as schema from '../src/db/schema.js';
@@ -12,8 +11,6 @@ import { generateThemeCollectionsFile } from '../src/admin/lib/generateThemeColl
 import { generatePlaylistsFile } from '../src/admin/lib/generatePlaylists.js';
 import { generateFaqsFile } from '../src/admin/lib/generateFaqs.js';
 import { generateArticlesFile } from '../src/admin/lib/generateArticles.js';
-
-dotenv.config({ path: resolve(process.cwd(), '.env') });
 
 async function fetchData() {
     console.log('🌐 Fetching data from Neon DB...');

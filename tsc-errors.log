@@ -1,0 +1,7 @@
+src/admin/pages/albums/AlbumForm.tsx(8,29): error TS2724: '"../../lib/githubSave"' has no exported member named 'saveGenresToGitHub'. Did you mean 'saveImageToGitHub'?
+src/admin/pages/albums/AlbumForm.tsx(8,49): error TS2305: Module '"../../lib/githubSave"' has no exported member 'saveMoodsToGitHub'.
+src/admin/pages/playlists/PlaylistForm.tsx(8,29): error TS2724: '"../../lib/githubSave"' has no exported member named 'saveGenresToGitHub'. Did you mean 'saveImageToGitHub'?
+src/admin/pages/playlists/PlaylistForm.tsx(8,49): error TS2305: Module '"../../lib/githubSave"' has no exported member 'saveMoodsToGitHub'.
+src/admin/pages/tracks/TrackForm.tsx(7,10): error TS2724: '"../../lib/githubSave"' has no exported member named 'saveGenresToGitHub'. Did you mean 'saveImageToGitHub'?
+src/admin/pages/tracks/TrackForm.tsx(7,30): error TS2305: Module '"../../lib/githubSave"' has no exported member 'saveMoodsToGitHub'.
+src/admin/pages/tracks/TrackForm.tsx(7,49): error TS2305: Module '"../../lib/githubSave"' has no exported member 'saveRoutinesToGitHub'.

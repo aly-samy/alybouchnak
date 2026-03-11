@@ -5,8 +5,8 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import type { Album } from '../../../data/albums';
 import { useNeonData } from '../../lib/useNeonData';
-import { saveImageToGitHub, saveGenresToGitHub, saveMoodsToGitHub } from '../../lib/githubSave';
-import { generateGenresFile, generateMoodsFile } from '../../lib/generateLists';
+import { saveImageToGitHub } from '../../lib/githubSave';
+
 import { genres as initialGenres } from '../../../data/genres';
 import { moods as initialMoods } from '../../../data/moods';
 import { toast } from 'sonner';
@@ -127,8 +127,7 @@ export default function AlbumForm() {
             delete payload.ageFrom;
             delete payload.ageTo;
 
-            if (localGenres.length > initialGenres.length) await saveGenresToGitHub(generateGenresFile(localGenres));
-            if (localMoods.length > initialMoods.length) await saveMoodsToGitHub(generateMoodsFile(localMoods));
+
             if (imageFile) await saveImageToGitHub(`public/images/${imageFile.name}`, imageFile.base64);
 
             await saveItem(payload as any, isNew);

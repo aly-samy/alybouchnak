@@ -4,8 +4,8 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import type { Track } from '../../../data/tracks';
 import { useNeonData } from '../../lib/useNeonData';
 import { albums as staticAlbums } from '../../../data/albums';
-import { saveGenresToGitHub, saveMoodsToGitHub, saveRoutinesToGitHub, saveImageToGitHub } from '../../lib/githubSave';
-import { generateGenresFile, generateMoodsFile, generateRoutinesFile } from '../../lib/generateLists';
+import { saveImageToGitHub } from '../../lib/githubSave';
+
 import { genres as initialGenres } from '../../../data/genres';
 import { moods as initialMoods } from '../../../data/moods';
 import { routines as initialRoutines } from '../../../data/routines';
@@ -221,16 +221,7 @@ export default function TrackForm() {
     const onSubmit = async (data: FormData) => {
         setSaving(true);
         try {
-            // Check if lists changed and need saving
-            if (localGenres.length > initialGenres.length) {
-                await saveGenresToGitHub(generateGenresFile(localGenres));
-            }
-            if (localMoods.length > initialMoods.length) {
-                await saveMoodsToGitHub(generateMoodsFile(localMoods));
-            }
-            if (localRoutines.length > initialRoutines.length) {
-                await saveRoutinesToGitHub(generateRoutinesFile(localRoutines));
-            }
+
 
             // Save Image if uploaded
             if (imageFile) {
