@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -35,8 +35,42 @@ function DynamicArticlePage() {
     const headerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [isSubscribing, setIsSubscribing] = useState(false);
+    const [subscribeSuccess, setSubscribeSuccess] = useState(false);
+    const [subscribeError, setSubscribeError] = useState('');
+
     // Track engagement
     useEngagementTracking(article?.title || 'Article Page');
+
+    const handleSubscribe = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email || !firstName) return;
+
+        setIsSubscribing(true);
+        setSubscribeError('');
+
+        try {
+            const res = await fetch('/.netlify/functions/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, firstName, parentType: 'Parent' }),
+            });
+            if (res.ok) {
+                setSubscribeSuccess(true);
+                setEmail('');
+                setFirstName('');
+            } else {
+                throw new Error('Subscription failed');
+            }
+        } catch (err) {
+            console.error(err);
+            setSubscribeError('Oops, try again!');
+        } finally {
+            setIsSubscribing(false);
+        }
+    };
 
     useEffect(() => {
         if (!article) return;
@@ -296,9 +330,42 @@ function DynamicArticlePage() {
                         <div className="bg-[#F26B3A] rounded-[2rem] p-8 text-white shadow-xl shadow-orange-500/20">
                             <h3 className="font-['Fredoka_One'] text-xl mb-4">Stay Connected</h3>
                             <p className="text-sm opacity-90 mb-6">Join the Founder's Club for early access to songs and developmental resources.</p>
-                            <button className="w-full py-3 bg-white text-[#F26B3A] font-bold rounded-xl hover:bg-[#F7E859] transition-colors shadow-lg">
-                                Join the Club
-                            </button>
+
+                            {!subscribeSuccess ? (
+                                <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
+                                    <input
+                                        type="text"
+                                        placeholder="First Name"
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        required
+                                        className="w-full px-4 py-3 rounded-xl border-none text-[#101010] text-sm focus:outline-none focus:ring-2 focus:ring-[#F7E859]"
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="Email Address"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                        className="w-full px-4 py-3 rounded-xl border-none text-[#101010] text-sm focus:outline-none focus:ring-2 focus:ring-[#F7E859]"
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={isSubscribing}
+                                        className="w-full mt-2 py-3 bg-white text-[#F26B3A] font-bold rounded-xl hover:bg-[#F7E859] hover:text-[#101010] transition-colors shadow-lg flex items-center justify-center"
+                                    >
+                                        {isSubscribing ? (
+                                            <div className="w-5 h-5 border-2 border-[#F26B3A]/30 border-t-[#F26B3A] rounded-full animate-spin"></div>
+                                        ) : 'Join the Club'}
+                                    </button>
+                                    {subscribeError && <p className="text-white text-xs mt-1 text-center font-semibold">{subscribeError}</p>}
+                                </form>
+                            ) : (
+                                <div className="bg-white/20 border border-white/40 rounded-xl p-4 text-center">
+                                    <p className="font-bold text-lg mb-1">🎉 Welcome!</p>
+                                    <p className="text-sm">You are now part of the club. Check your email!</p>
+                                </div>
+                            )}
                         </div>
                     </aside>
                 </div>

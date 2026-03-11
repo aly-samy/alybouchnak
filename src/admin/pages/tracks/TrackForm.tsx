@@ -1,18 +1,17 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { tracks as allTracksData } from '../../../data/tracks';
 import type { Track } from '../../../data/tracks';
-import { albums } from '../../../data/albums';
-import { generateTracksFile } from '../../lib/generateTracks';
-import { saveTracksToGitHub, saveGenresToGitHub, saveMoodsToGitHub, saveRoutinesToGitHub, saveImageToGitHub } from '../../lib/githubSave';
+import { useNeonData } from '../../lib/useNeonData';
+import { albums as staticAlbums } from '../../../data/albums';
+import { saveGenresToGitHub, saveMoodsToGitHub, saveRoutinesToGitHub, saveImageToGitHub } from '../../lib/githubSave';
 import { generateGenresFile, generateMoodsFile, generateRoutinesFile } from '../../lib/generateLists';
 import { genres as initialGenres } from '../../../data/genres';
 import { moods as initialMoods } from '../../../data/moods';
 import { routines as initialRoutines } from '../../../data/routines';
 import { toast } from 'sonner';
 import {
-    Plus, Trash2, ArrowLeft, Github, Loader2, Save,
+    Plus, Trash2, ArrowLeft, Loader2, Save,
     Music, Link2, FileText, Search, Upload
 } from 'lucide-react';
 
@@ -46,7 +45,13 @@ export default function TrackForm() {
     const navigate = useNavigate();
     const isNew = !id;
 
-    const existing = isNew ? null : allTracksData.find(t => t.id === Number(id));
+    const { data: allTracksData, loading: tracksLoading, saveItem } = useNeonData<Track>('tracks');
+    const { data: albumsData } = useNeonData<any>('albums');
+
+    const albums = albumsData?.length > 0 ? albumsData : staticAlbums;
+    const existing = isNew ? null : allTracksData?.find(t => t.id === Number(id));
+    const formKey = isNew ? 'new-trk' : `edit-trk-${existing?.id}`;
+
     const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('basic');
     const [saving, setSaving] = useState(false);
 
@@ -66,12 +71,16 @@ export default function TrackForm() {
         }
     }
 
+    if (!isNew && (tracksLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
+
     const defaultValues: Partial<FormData> = existing ? {
         ...existing,
         ageFrom: defaultAgeFrom,
         ageTo: defaultAgeTo
     } : {
-        id: Math.max(...allTracksData.map(t => t.id)) + 1,
+        id: allTracksData.length > 0 ? Math.max(...allTracksData.map(t => t.id)) + 1 : 1,
         artist: 'Aly Bouchnak',
         routine: 'Playtime',
         ageFrom: defaultAgeFrom,
@@ -233,20 +242,13 @@ export default function TrackForm() {
             delete payload.ageFrom;
             delete payload.ageTo;
 
-            let updatedTracks: Track[];
-            if (isNew) {
-                updatedTracks = [...allTracksData, payload as Track];
-            } else {
-                updatedTracks = allTracksData.map(t => (t.id === payload.id ? (payload as Track) : t));
-            }
-            const content = generateTracksFile(updatedTracks);
-            await saveTracksToGitHub(content);
+            await saveItem(payload as any, isNew);
 
-            toast.success('✅ Track saved to GitHub! Redeploy triggered.', { duration: 5000 });
+            toast.success('✅ Track saved to Neon DB!');
             navigate('/admin/tracks');
         } catch (err) {
             console.error(err);
-            toast.error('❌ GitHub save failed. Check console for details.');
+            toast.error('❌ DB Save failed. Check console for details.');
         } finally {
             setSaving(false);
         }
@@ -255,7 +257,7 @@ export default function TrackForm() {
     const albumOptions = albums.map(a => a.title);
 
     return (
-        <div className="p-8 max-w-4xl">
+        <div key={formKey} className="p-8 max-w-4xl">
             {/* Header */}
             <div className="flex items-center gap-4 mb-8">
                 <button
@@ -458,7 +460,7 @@ export default function TrackForm() {
                                             }}
                                             size={6}
                                         >
-                                            {allTracksData.filter(t => t.id !== Number(id)).map(t => (
+                                            {allTracksData?.filter(t => t.id !== Number(id)).map(t => (
                                                 <option key={t.id} value={t.id.toString()}>
                                                     {t.id}: {t.title}
                                                 </option>
@@ -616,22 +618,20 @@ export default function TrackForm() {
                         <button
                             type="button"
                             onClick={handleSubmit(async (_data) => {
-                                // Save locally only (no GitHub push)
-                                toast.info('Changes staged locally. Click "Save to GitHub" in the track list to publish.', { duration: 4000 });
+                                toast.info('Changes discarded.');
                                 navigate('/admin/tracks');
                             })}
                             className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded-xl text-sm font-medium transition-all"
                         >
-                            <Save className="w-4 h-4" />
-                            Save Draft
+                            Discard Changes
                         </button>
                         <button
                             type="submit"
                             disabled={saving}
                             className="flex items-center gap-2 px-5 py-2.5 bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-orange-500/25"
                         >
-                            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                            {saving ? 'Saving…' : 'Save to GitHub'}
+                            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                            {saving ? 'Saving…' : 'Save Track'}
                         </button>
                     </div>
                 </div>

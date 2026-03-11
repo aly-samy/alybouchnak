@@ -3,16 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { albums as allAlbumsData } from '../../../data/albums';
-import { tracks as allTracksData } from '../../../data/tracks';
 import type { Album } from '../../../data/albums';
-import { generateAlbumsFile } from '../../lib/generateAlbums';
-import { saveAlbumsToGitHub, saveImageToGitHub, saveGenresToGitHub, saveMoodsToGitHub } from '../../lib/githubSave';
+import { useNeonData } from '../../lib/useNeonData';
+import { saveImageToGitHub, saveGenresToGitHub, saveMoodsToGitHub } from '../../lib/githubSave';
 import { generateGenresFile, generateMoodsFile } from '../../lib/generateLists';
 import { genres as initialGenres } from '../../../data/genres';
 import { moods as initialMoods } from '../../../data/moods';
 import { toast } from 'sonner';
-import { Plus, Trash2, ArrowLeft, Github, Loader2, Upload, ChevronUp, ChevronDown } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, Loader2, Upload, ChevronUp, ChevronDown, Save } from 'lucide-react';
 
 type FormData = Omit<Album, 'id'> & { id: number, ageFrom?: string, ageTo?: string };
 
@@ -44,7 +42,13 @@ export default function AlbumForm() {
     const { slug } = useParams<{ slug?: string }>();
     const navigate = useNavigate();
     const isNew = !slug;
-    const existing = isNew ? null : allAlbumsData.find(a => a.slug === slug);
+
+    const { data: allAlbumsData, loading: albumsLoading, saveItem } = useNeonData<Album>('albums');
+    const { data: allTracksData } = useNeonData<any>('tracks');
+
+    const existing = isNew ? null : allAlbumsData?.find(a => a.slug === slug);
+    const formKey = isNew ? 'new-album' : `edit-album-${existing?.id}`;
+
     const [activeTab, setActiveTab] = useState<typeof TABS[number]>('Basic Info');
     const [saving, setSaving] = useState(false);
 
@@ -61,6 +65,10 @@ export default function AlbumForm() {
             defaultAgeFrom = match[1];
             defaultAgeTo = match[2];
         }
+    }
+
+    if (!isNew && (albumsLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
     }
 
     const defaultValues: Partial<FormData> = existing ? {
@@ -123,26 +131,19 @@ export default function AlbumForm() {
             if (localMoods.length > initialMoods.length) await saveMoodsToGitHub(generateMoodsFile(localMoods));
             if (imageFile) await saveImageToGitHub(`public/images/${imageFile.name}`, imageFile.base64);
 
-            let updatedAlbums: Album[];
-            if (isNew) {
-                updatedAlbums = [...allAlbumsData, payload as Album];
-            } else {
-                updatedAlbums = allAlbumsData.map(a => (a.slug === payload.slug ? (payload as Album) : a));
-            }
-            const content = generateAlbumsFile(updatedAlbums);
-            await saveAlbumsToGitHub(content);
-            toast.success('✅ Album saved to GitHub! Redeploy triggered.', { duration: 5000 });
+            await saveItem(payload as any, isNew);
+            toast.success('✅ Album saved to Neon DB automatically!', { duration: 5000 });
             navigate('/admin/albums');
         } catch (err) {
             console.error(err);
-            toast.error('❌ GitHub save failed.');
+            toast.error('❌ DB save failed.');
         } finally {
             setSaving(false);
         }
     };
 
     return (
-        <div className="p-8 max-w-4xl">
+        <div key={formKey} className="p-8 max-w-4xl">
             <div className="flex items-center gap-4 mb-8">
                 <button
                     onClick={() => navigate('/admin/albums')}
@@ -414,8 +415,8 @@ export default function AlbumForm() {
                     </button>
                     <button type="submit" disabled={saving}
                         className="flex items-center gap-2 px-5 py-2.5 bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-orange-500/25">
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                        {saving ? 'Saving…' : 'Save to GitHub'}
+                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                        {saving ? 'Saving…' : 'Save to Neon'}
                     </button>
                 </div>
             </form>

@@ -25,6 +25,7 @@ const THEME_INTERFACE = `export interface ThemeCollection {
   }[];
   // Extended content for collection pages
   artistNote?: string;
+  curatorNote?: string;
   scienceFramework?: string;
   category: 'Routine & Utility' | 'Mood & Energy' | 'Adventure & Event' | 'Signature Collections';
   trackIds: number[];
@@ -56,6 +57,6 @@ export function getAllThemeCollections(): ThemeCollection[] {
 `;
 
 export function generateThemeCollectionsFile(collections: ThemeCollection[]): string {
-  const dataString = JSON.stringify(collections, null, 2);
-  return `import { Album } from './albums';\n\n${THEME_INTERFACE}\n\nexport const themeCollections: ThemeCollection[] = ${dataString};\n${THEME_FUNCTIONS}`;
+  const dataString = JSON.stringify(collections, (_, value) => value === null ? undefined : value, 2);
+  return `${THEME_INTERFACE}\n\nexport const themeCollections: ThemeCollection[] = ${dataString};\n${THEME_FUNCTIONS}`;
 }

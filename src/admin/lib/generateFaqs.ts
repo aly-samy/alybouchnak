@@ -18,6 +18,6 @@ export function getAllFaqs(): FAQ[] {
 `;
 
 export function generateFaqsFile(faqs: FAQ[]): string {
-    const dataString = JSON.stringify(faqs, null, 2);
-    return `${FAQ_INTERFACE}\n\nexport const faqs: FAQ[] = ${dataString};\n${FAQ_FUNCTIONS}`;
+  const dataString = JSON.stringify(faqs, (_, value) => value === null ? undefined : value, 2);
+  return `${FAQ_INTERFACE}\n\nexport const faqs: FAQ[] = ${dataString};\n${FAQ_FUNCTIONS}`;
 }

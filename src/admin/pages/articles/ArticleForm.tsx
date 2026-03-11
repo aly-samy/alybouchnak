@@ -3,12 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { articles as allArticlesData } from '../../../data/articles';
 import type { Article } from '../../../data/articles';
-import { tracks } from '../../../data/tracks';
-import { albums } from '../../../data/albums';
-import { generateArticlesFile } from '../../lib/generateArticles';
-import { saveArticlesToGitHub } from '../../lib/githubSave';
+import { useNeonData } from '../../lib/useNeonData';
 import { toast } from 'sonner';
 import {
     Plus,
@@ -62,12 +58,25 @@ export default function ArticleForm() {
     const { slug } = useParams<{ slug?: string }>();
     const navigate = useNavigate();
     const isNew = !slug;
-    const existing = isNew ? null : allArticlesData.find(a => a.slug === slug);
+
+    // Fetch data dynamically
+    const { data: allArticlesData, loading: articlesLoading, saveItem } = useNeonData<Article>('articles');
+    const { data: tracks } = useNeonData<any>('tracks');
+    const { data: albums } = useNeonData<any>('albums');
+
     const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('Basic');
     const [saving, setSaving] = useState(false);
 
+    const existing = isNew ? null : allArticlesData?.find(a => a.slug === slug);
+    const formKey = isNew ? 'new-form' : `edit-form-${existing?.id}`;
+
+    // Show loader until basic data is there
+    if (!isNew && (articlesLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
+
     const defaultValues: Partial<FormData> = existing || {
-        id: (allArticlesData.length + 1),
+        id: allArticlesData.length ? Math.max(...allArticlesData.map(a => a.id || 0)) + 1 : 1,
         type: 'NewsArticle',
         category: 'News',
         author: {
@@ -120,20 +129,15 @@ export default function ArticleForm() {
     const onSubmit = async (data: FormData) => {
         setSaving(true);
         try {
-            // Ensure schema is updated
             data.dateModified = new Date().toISOString();
+            data.articleSchema = data.articleSchema || {};
             data.articleSchema.dateModified = data.dateModified;
             data.articleSchema.headline = data.title;
-            data.articleSchema.image = [data.coverImage.url];
+            data.articleSchema.image = [data.coverImage?.url || ''];
             data.articleSchema.datePublished = data.datePublished;
 
-            let updated: Article[];
-            if (isNew) updated = [...allArticlesData, data];
-            else updated = allArticlesData.map(a => (a.id === data.id ? data : a));
-
-            const content = generateArticlesFile(updated);
-            await saveArticlesToGitHub(content);
-            toast.success('✅ Article Published to GitHub!');
+            await saveItem(data, isNew);
+            toast.success('✅ Article Published to Neon!');
             navigate('/admin/articles');
         } catch (err) {
             console.error(err);
@@ -144,7 +148,7 @@ export default function ArticleForm() {
     };
 
     return (
-        <div className="p-8 max-w-5xl">
+        <div key={formKey} className="p-8 max-w-5xl">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                     <button onClick={() => navigate('/admin/articles')} className="p-2 text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-xl"><ArrowLeft /></button>

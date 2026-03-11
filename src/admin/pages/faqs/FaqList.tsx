@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { faqs, type FAQ } from '../../../data/faqs';
-import { generateFaqsFile } from '../../lib/generateFaqs';
-import { saveFaqsToGitHub } from '../../lib/githubSave';
-import { toast } from 'sonner';
-import { Search, Plus, Trash2, Edit2, HelpCircle } from 'lucide-react';
+import type { FAQ } from '../../../data/faqs';
+import { useNeonData } from '../../lib/useNeonData';
+
+import { Search, Plus, Trash2, Edit2, HelpCircle, Loader2 } from 'lucide-react';
 
 export default function FaqList() {
     const navigate = useNavigate();
+    const { data: faqs, loading, deleteItem } = useNeonData<FAQ>('faqs');
     const [search, setSearch] = useState('');
     const [isDeleting, setIsDeleting] = useState<number | null>(null);
 
@@ -19,20 +19,17 @@ export default function FaqList() {
     const handleDelete = async (faqToDelete: FAQ) => {
         if (!confirm(`Are you sure you want to delete "${faqToDelete.question}"?`)) return;
 
-        setIsDeleting(faqToDelete.id);
+        setIsDeleting(faqToDelete.id!);
         try {
-            const updated = faqs.filter(f => f.id !== faqToDelete.id);
-            const content = generateFaqsFile(updated);
-            await saveFaqsToGitHub(content);
-            toast.success('FAQ deleted successfully!');
-            setTimeout(() => window.location.reload(), 1000);
-        } catch (error) {
-            console.error(error);
-            toast.error('Failed to delete FAQ');
+            await deleteItem(faqToDelete.id!);
         } finally {
             setIsDeleting(null);
         }
     };
+
+    if (loading) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     return (
         <div className="p-8 max-w-7xl mx-auto">

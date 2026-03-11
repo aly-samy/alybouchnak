@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { faqs as allFaqsData, type FAQ } from '../../../data/faqs';
-import { generateFaqsFile } from '../../lib/generateFaqs';
-import { saveFaqsToGitHub } from '../../lib/githubSave';
+import type { FAQ } from '../../../data/faqs';
+import { useNeonData } from '../../lib/useNeonData';
 import { toast } from 'sonner';
 import { ArrowLeft, Loader2, Save } from 'lucide-react';
 
@@ -12,12 +11,20 @@ export default function FaqForm() {
     const navigate = useNavigate();
     const isNew = !id;
     const existingId = id ? parseInt(id, 10) : null;
-    const existing = isNew ? null : allFaqsData.find(f => f.id === existingId);
+
+    const { data: allFaqsData, loading: faqsLoading, saveItem } = useNeonData<FAQ>('faqs');
 
     const [saving, setSaving] = useState(false);
 
+    const existing = isNew ? null : allFaqsData?.find(f => f.id === existingId);
+    const formKey = isNew ? 'new-faq' : `edit-faq-${existing?.id}`;
+
+    if (!isNew && (faqsLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
+
     const defaultValues: Partial<FAQ> = existing || {
-        id: allFaqsData.length > 0 ? Math.max(...allFaqsData.map(f => f.id)) + 1 : 1,
+        id: allFaqsData.length > 0 ? Math.max(...allFaqsData.map(f => f.id!)) + 1 : 1,
         category: 'General',
         question: '',
         answer: ''
@@ -28,16 +35,8 @@ export default function FaqForm() {
     const onSubmit = async (data: FAQ) => {
         setSaving(true);
         try {
-            let updated: FAQ[];
-            if (isNew) {
-                updated = [...allFaqsData, data];
-            } else {
-                updated = allFaqsData.map(f => (f.id === data.id ? data : f));
-            }
-
-            const content = generateFaqsFile(updated);
-            await saveFaqsToGitHub(content);
-            toast.success('✅ FAQ Saved to GitHub!');
+            await saveItem(data, isNew);
+            toast.success('✅ FAQ Saved to Neon!');
             navigate('/admin/faqs');
         } catch (err) {
             console.error(err);
@@ -50,7 +49,7 @@ export default function FaqForm() {
     const inputCls = "w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 transition-all";
 
     return (
-        <div className="p-8 max-w-4xl mx-auto">
+        <div key={formKey} className="p-8 max-w-4xl mx-auto">
             <div className="flex items-center gap-4 mb-8">
                 <button onClick={() => navigate('/admin/faqs')} className="p-2 text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-xl">
                     <ArrowLeft className="w-5 h-5" />

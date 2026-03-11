@@ -20,6 +20,7 @@ const DynamicArticlePage = lazy(() => import('./pages/DynamicArticlePage'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const SafetyPolicy = lazy(() => import('./pages/SafetyPolicy'));
+const ManageSubscription = lazy(() => import('./pages/ManageSubscription'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const AdminApp = lazy(() => import('./admin/AdminApp'));
 import { initGA, trackPageView } from './lib/analytics';
@@ -74,6 +75,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/safety-policy" element={<SafetyPolicy />} />
+            <Route path="/manage-subscription" element={<ManageSubscription />} />
             {/* Admin Dashboard - protected by password */}
             <Route path="/admin/*" element={<AdminApp />} />
 

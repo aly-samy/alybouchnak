@@ -3,16 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { playlists as allPlaylistsData } from '../../../data/playlists';
-import { tracks as allTracksData } from '../../../data/tracks';
 import type { Playlist } from '../../../data/playlists';
-import { generatePlaylistsFile } from '../../lib/generatePlaylists';
-import { savePlaylistsToGitHub, saveImageToGitHub, saveGenresToGitHub, saveMoodsToGitHub } from '../../lib/githubSave';
+import { useNeonData } from '../../lib/useNeonData';
+import { saveImageToGitHub, saveGenresToGitHub, saveMoodsToGitHub } from '../../lib/githubSave';
 import { generateGenresFile, generateMoodsFile } from '../../lib/generateLists';
 import { genres as initialGenres } from '../../../data/genres';
 import { moods as initialMoods } from '../../../data/moods';
 import { toast } from 'sonner';
-import { Trash2, ArrowLeft, Github, Loader2, Music, Link2, ListMusic, FileText, Upload, ChevronUp, ChevronDown } from 'lucide-react';
+import { Trash2, ArrowLeft, Loader2, Music, Link2, ListMusic, FileText, Upload, ChevronUp, ChevronDown, Save } from 'lucide-react';
 
 type FormData = Omit<Playlist, 'id'> & { id: number, ageFrom?: string, ageTo?: string };
 
@@ -48,7 +46,13 @@ export default function PlaylistForm() {
     const { slug } = useParams<{ slug?: string }>();
     const navigate = useNavigate();
     const isNew = !slug;
-    const existing = isNew ? null : allPlaylistsData.find(p => p.slug === slug);
+
+    const { data: allPlaylistsData, loading: playlistsLoading, saveItem } = useNeonData<Playlist>('playlists');
+    const { data: allTracksData } = useNeonData<any>('tracks');
+
+    const existing = isNew ? null : allPlaylistsData?.find(p => p.slug === slug);
+    const formKey = isNew ? 'new-pl' : `edit-pl-${existing?.id}`;
+
     const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('Basic Info');
     const [saving, setSaving] = useState(false);
 
@@ -65,6 +69,10 @@ export default function PlaylistForm() {
             defaultAgeFrom = match[1];
             defaultAgeTo = match[2];
         }
+    }
+
+    if (!isNew && (playlistsLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
     }
 
     const defaultValues: Partial<FormData> = existing ? {
@@ -135,26 +143,19 @@ export default function PlaylistForm() {
             if (localMoods.length > initialMoods.length) await saveMoodsToGitHub(generateMoodsFile(localMoods));
             if (imageFile) await saveImageToGitHub(`public/images/${imageFile.name}`, imageFile.base64);
 
-            let updatedPlaylists: Playlist[];
-            if (isNew) {
-                updatedPlaylists = [...allPlaylistsData, payload as Playlist];
-            } else {
-                updatedPlaylists = allPlaylistsData.map(p => (p.slug === payload.slug ? (payload as Playlist) : p));
-            }
-            const content = generatePlaylistsFile(updatedPlaylists);
-            await savePlaylistsToGitHub(content);
-            toast.success('✅ Playlist synced with GitHub!');
+            await saveItem(payload as any, isNew);
+            toast.success('✅ Playlist saved to Neon DB!');
             navigate('/admin/playlists');
         } catch (err) {
             console.error(err);
-            toast.error('❌ GitHub sync failed.');
+            toast.error('❌ DB Save failed.');
         } finally {
             setSaving(false);
         }
     };
 
     return (
-        <div className="p-8 max-w-4xl">
+        <div key={formKey} className="p-8 max-w-4xl">
             <div className="flex items-center gap-4 mb-8">
                 <button
                     onClick={() => navigate('/admin/playlists')}
@@ -369,8 +370,8 @@ export default function PlaylistForm() {
                 <div className="mt-8 flex justify-end gap-4">
                     <button type="button" onClick={() => navigate('/admin/playlists')} className="px-6 py-2.5 text-slate-400 hover:text-slate-200 font-medium">Cancel</button>
                     <button type="submit" disabled={saving} className="flex items-center gap-2 px-8 py-2.5 bg-orange-500 hover:bg-orange-400 text-white rounded-xl font-bold shadow-xl shadow-orange-500/20 disabled:opacity-50">
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                        {saving ? 'Syncing...' : 'Sync to GitHub'}
+                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                        {saving ? 'Saving...' : 'Save to Neon'}
                     </button>
                 </div>
             </form>

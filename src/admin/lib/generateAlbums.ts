@@ -55,6 +55,6 @@ export function getAllAlbums(): Album[] {
 `;
 
 export function generateAlbumsFile(albums: Album[]): string {
-  const dataString = JSON.stringify(albums, null, 2);
+  const dataString = JSON.stringify(albums, (_, value) => value === null ? undefined : value, 2);
   return `${ALBUM_INTERFACE}\n\nexport const albums: Album[] = ${dataString};\n${ALBUM_FUNCTIONS}`;
 }

@@ -62,6 +62,6 @@ export function getAllPlaylists(): Playlist[] {
 `;
 
 export function generatePlaylistsFile(playlists: Playlist[]): string {
-  const dataString = JSON.stringify(playlists, null, 2);
+  const dataString = JSON.stringify(playlists, (_, value) => value === null ? undefined : value, 2);
   return `${PLAYLIST_INTERFACE}\n\nexport const playlists: Playlist[] = ${dataString};\n${PLAYLIST_FUNCTIONS}`;
 }

@@ -15,6 +15,7 @@ export default function MeetTheBlooms() {
     const [isToastClosing, setIsToastClosing] = useState(false);
     const [isQuizOpen, setIsQuizOpen] = useState(false);
     const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const toastTimerContext = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -115,22 +116,23 @@ export default function MeetTheBlooms() {
 
     const handleDownload = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!email || isFormSubmitting) return;
+        if (!email || !firstName || isFormSubmitting) return;
 
         setIsFormSubmitting(true);
 
-        const formData = new URLSearchParams();
-        formData.append('form-name', 'coloring-pages');
-        formData.append('email', email);
-
         try {
-            await fetch('/', {
+            const res = await fetch('/.netlify/functions/subscribe', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: formData.toString()
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, firstName, parentType: 'Parent' }),
             });
-            showToast(`Coloring pages sent to ${email}! 🎨`);
-            setEmail('');
+            if (res.ok) {
+                showToast(`Coloring pages sent to ${email}! 🎨`);
+                setEmail('');
+                setFirstName('');
+            } else {
+                throw new Error('Subscription failed');
+            }
         } catch (err) {
             console.error(err);
             showToast('Oops! Something went wrong. Try again.');
@@ -607,22 +609,24 @@ export default function MeetTheBlooms() {
                         <p style={{ color: 'var(--text-light)', marginBottom: '1rem' }}>Download line art of each character and the whole family. Perfect for little artists!</p>
                         <form
                             className="email-form"
-                            name="coloring-pages"
-                            data-netlify="true"
-                            netlify-honeypot="bot-field"
                             onSubmit={handleDownload}
                         >
-                            <input type="hidden" name="form-name" value="coloring-pages" />
-                            <p style={{ display: 'none' }}>
-                                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                            </p>
+                            <input
+                                type="text"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                className="email-input"
+                                placeholder="First Name"
+                                required
+                                disabled={isFormSubmitting}
+                                style={{ marginBottom: '0.5rem' }}
+                            />
                             <input
                                 type="email"
-                                name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="email-input"
-                                placeholder="Enter your email for coloring pages..."
+                                placeholder="Email Address"
                                 required
                                 disabled={isFormSubmitting}
                             />

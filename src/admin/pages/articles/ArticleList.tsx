@@ -1,44 +1,30 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { articles as initialArticles } from '../../../data/articles';
 import type { Article } from '../../../data/articles';
-import { generateArticlesFile } from '../../lib/generateArticles';
-import { saveArticlesToGitHub } from '../../lib/githubSave';
-import { Plus, Search, Pencil, Trash2, Github, Loader2, ExternalLink, FileText, Newspaper, BookCopy } from 'lucide-react';
-import { toast } from 'sonner';
+import { useNeonData } from '../../lib/useNeonData';
+import { Plus, Search, Pencil, Trash2, Loader2, ExternalLink, FileText, Newspaper, BookCopy } from 'lucide-react';
+
 
 export default function ArticleList() {
-    const [articles, setArticles] = useState<Article[]>(initialArticles);
+    const { data: articles, loading, deleteItem } = useNeonData<Article>('articles');
     const [query, setQuery] = useState('');
-    const [saving, setSaving] = useState(false);
     const [deleteId, setDeleteId] = useState<number | null>(null);
     const navigate = useNavigate();
 
     const filtered = articles.filter(a =>
         a.title.toLowerCase().includes(query.toLowerCase()) ||
-        a.slug.includes(query.toLowerCase())
+        a.slug.toLowerCase().includes(query.toLowerCase())
     );
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (deleteId === null) return;
-        setArticles(prev => prev.filter(a => a.id !== deleteId));
+        await deleteItem(deleteId);
         setDeleteId(null);
-        toast.success('Article removed locally — remember to sync');
     };
 
-    const handleSave = async () => {
-        setSaving(true);
-        try {
-            const content = generateArticlesFile(articles);
-            await saveArticlesToGitHub(content);
-            toast.success('✅ Articles synced with GitHub!');
-        } catch (err) {
-            console.error(err);
-            toast.error('❌ Sync failed.');
-        } finally {
-            setSaving(false);
-        }
-    };
+    if (loading) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     return (
         <div className="p-8">
@@ -49,14 +35,10 @@ export default function ArticleList() {
                     </div>
                     <div>
                         <h1 className="text-2xl font-bold text-white">Articles & News</h1>
-                        <p className="text-slate-400 text-sm mt-1">{articles.length} publications</p>
+                        <p className="text-slate-400 text-sm mt-1">{articles.length} publications (Neon Data)</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl text-sm font-medium transition-all">
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                        Sync GitHub
-                    </button>
                     <button onClick={() => navigate('/admin/articles/new')} className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-sm font-medium shadow-lg shadow-orange-500/25">
                         <Plus className="w-4 h-4" />
                         New Article
@@ -78,7 +60,7 @@ export default function ArticleList() {
                 {filtered.map(article => (
                     <div key={article.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex items-center gap-5 group hover:border-slate-700 transition-all">
                         <div className="w-20 h-16 rounded-xl bg-slate-800 overflow-hidden shrink-0 border border-slate-800">
-                            <img src={article.coverImage.url} className="w-full h-full object-cover" onError={e => e.currentTarget.src = '/images/placeholder.webp'} />
+                            <img src={article.coverImage?.url} className="w-full h-full object-cover" onError={e => e.currentTarget.src = '/images/placeholder.webp'} />
                         </div>
                         <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
@@ -93,7 +75,7 @@ export default function ArticleList() {
                             <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
                                 <span>Published: {new Date(article.datePublished).toLocaleDateString()}</span>
                                 <span className="text-slate-700">•</span>
-                                <span>{article.seo.readingTime} read</span>
+                                <span>{article.seo?.readingTime} read</span>
                             </div>
                         </div>
                         <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">

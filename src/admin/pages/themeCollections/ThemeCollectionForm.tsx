@@ -3,13 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { themeCollections as allCollectionsData } from '../../../data/themeCollections';
 import type { ThemeCollection } from '../../../data/themeCollections';
-import { tracks as allTracks } from '../../../data/tracks';
-import { generateThemeCollectionsFile } from '../../lib/generateThemeCollections';
-import { saveThemeCollectionsToGitHub } from '../../lib/githubSave';
+import { useNeonData } from '../../lib/useNeonData';
 import { toast } from 'sonner';
-import { Trash2, ArrowLeft, Github, Loader2, Sparkles, BookOpen, Brain, ListMusic, Globe } from 'lucide-react';
+import { Trash2, ArrowLeft, Loader2, Sparkles, BookOpen, Brain, ListMusic, Globe, Save } from 'lucide-react';
 
 type FormData = Omit<ThemeCollection, 'id'> & { id?: number, ageFrom?: string, ageTo?: string };
 
@@ -47,7 +44,13 @@ export default function ThemeCollectionForm() {
     const { slug } = useParams<{ slug?: string }>();
     const navigate = useNavigate();
     const isNew = !slug;
-    const existing = isNew ? null : allCollectionsData.find(c => c.slug === slug);
+
+    const { data: allCollectionsData, loading: collectionsLoading, saveItem } = useNeonData<ThemeCollection>('themeCollections');
+    const { data: allTracks } = useNeonData<any>('tracks');
+
+    const existing = isNew ? null : allCollectionsData?.find(c => c.slug === slug);
+    const formKey = isNew ? 'new-thm' : `edit-thm-${existing?.id}`;
+
     const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('Discovery');
     const [saving, setSaving] = useState(false);
 
@@ -59,6 +62,10 @@ export default function ThemeCollectionForm() {
             defaultAgeFrom = match[1];
             defaultAgeTo = match[2];
         }
+    }
+
+    if (!isNew && (collectionsLoading || !existing)) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
     }
 
     const defaultValues: Partial<FormData> = existing ? {
@@ -87,13 +94,8 @@ export default function ThemeCollectionForm() {
             delete payload.ageFrom;
             delete payload.ageTo;
 
-            let updated: ThemeCollection[];
-            if (isNew) updated = [...allCollectionsData, payload as ThemeCollection];
-            else updated = allCollectionsData.map(c => (c.slug === slug ? (payload as ThemeCollection) : c));
-
-            const content = generateThemeCollectionsFile(updated);
-            await saveThemeCollectionsToGitHub(content);
-            toast.success('✅ Updated Theme Collections on GitHub!');
+            await saveItem(payload as any, isNew);
+            toast.success('✅ Theme Collection Saved to Neon DB!');
             navigate('/admin/themes');
         } catch (err) {
             console.error(err);
@@ -104,7 +106,7 @@ export default function ThemeCollectionForm() {
     };
 
     return (
-        <div className="p-8 max-w-5xl">
+        <div key={formKey} className="p-8 max-w-5xl">
             <div className="flex items-center gap-6 mb-10">
                 <button onClick={() => navigate('/admin/themes')} className="p-3 bg-slate-900 border border-slate-800 text-slate-400 hover:text-white rounded-2xl transition-all"><ArrowLeft /></button>
                 <div>
@@ -281,8 +283,8 @@ export default function ThemeCollectionForm() {
                 <div className="mt-12 flex justify-between items-center bg-slate-900 border border-slate-800 p-8 rounded-[3rem] shadow-2xl">
                     <button type="button" onClick={() => navigate('/admin/themes')} className="text-slate-500 font-bold hover:text-white transition-all">Discard Changes</button>
                     <button type="submit" disabled={saving} className="flex items-center gap-4 px-12 py-5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black rounded-3xl shadow-2xl shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50">
-                        {saving ? <Loader2 className="animate-spin" /> : <Github />}
-                        {saving ? 'UPDATING...' : 'PUBLISH COLLECTIONS'}
+                        {saving ? <Loader2 className="animate-spin" /> : <Save />}
+                        {saving ? 'UPDATING...' : 'PUBLISH COLLECTION'}
                     </button>
                 </div>
             </form>

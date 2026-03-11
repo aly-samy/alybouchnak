@@ -1,45 +1,32 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { playlists as initialPlaylists } from '../../../data/playlists';
 import type { Playlist } from '../../../data/playlists';
-import { generatePlaylistsFile } from '../../lib/generatePlaylists';
-import { savePlaylistsToGitHub } from '../../lib/githubSave';
-import { Plus, Search, Pencil, Trash2, Github, Loader2, ExternalLink, Library, Disc } from 'lucide-react';
-import { toast } from 'sonner';
+import { useNeonData } from '../../lib/useNeonData';
+import { Plus, Search, Pencil, Trash2, Loader2, ExternalLink, Library, Disc } from 'lucide-react';
 
 export default function PlaylistList() {
-    const [playlists, setPlaylists] = useState<Playlist[]>(initialPlaylists);
+    const { data: playlists, loading, deleteItem } = useNeonData<Playlist>('playlists');
     const [query, setQuery] = useState('');
-    const [saving, setSaving] = useState(false);
     const [deleteSlug, setDeleteSlug] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const filtered = playlists.filter(p =>
         p.title.toLowerCase().includes(query.toLowerCase()) ||
-        p.slug.includes(query.toLowerCase())
+        p.slug.toLowerCase().includes(query.toLowerCase())
     );
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (!deleteSlug) return;
-        const updated = playlists.filter(p => p.slug !== deleteSlug);
-        setPlaylists(updated);
+        const target = playlists.find(p => p.slug === deleteSlug);
+        if (target?.id) {
+            await deleteItem(target.id);
+        }
         setDeleteSlug(null);
-        toast.success('Playlist removed locally — save to GitHub to sync');
     };
 
-    const handleSave = async () => {
-        setSaving(true);
-        try {
-            const content = generatePlaylistsFile(playlists);
-            await savePlaylistsToGitHub(content);
-            toast.success('✅ Playlists synced with GitHub!', { duration: 5000 });
-        } catch (err) {
-            console.error(err);
-            toast.error('❌ GitHub sync failed.');
-        } finally {
-            setSaving(false);
-        }
-    };
+    if (loading) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     return (
         <div className="p-8">
@@ -54,14 +41,6 @@ export default function PlaylistList() {
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button
-                        onClick={handleSave}
-                        disabled={saving}
-                        className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl text-sm font-medium transition-all disabled:opacity-50"
-                    >
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                        Sync to GitHub
-                    </button>
                     <button
                         onClick={() => navigate('/admin/playlists/new')}
                         className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-orange-500/25"
@@ -137,7 +116,7 @@ export default function PlaylistList() {
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
                         <h3 className="text-white font-semibold text-lg mb-2">Delete Playlist?</h3>
-                        <p className="text-slate-400 text-sm mb-6">Are you sure you want to remove this playlist? Changes must be synced to GitHub.</p>
+                        <p className="text-slate-400 text-sm mb-6">Are you sure you want to remove this playlist? This will be removed from the database permanently.</p>
                         <div className="flex gap-3">
                             <button onClick={() => setDeleteSlug(null)} className="flex-1 px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-sm font-medium">Cancel</button>
                             <button onClick={handleDelete} className="flex-1 px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-medium">Delete</button>

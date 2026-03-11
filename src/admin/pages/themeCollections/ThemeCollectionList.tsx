@@ -1,44 +1,32 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { themeCollections as initialCollections } from '../../../data/themeCollections';
 import type { ThemeCollection } from '../../../data/themeCollections';
-import { generateThemeCollectionsFile } from '../../lib/generateThemeCollections';
-import { saveThemeCollectionsToGitHub } from '../../lib/githubSave';
-import { Plus, Search, Pencil, Trash2, Github, Loader2, Sparkles, Activity } from 'lucide-react';
-import { toast } from 'sonner';
+import { useNeonData } from '../../lib/useNeonData';
+import { Plus, Search, Pencil, Trash2, Loader2, Sparkles, Activity } from 'lucide-react';
 
 export default function ThemeCollectionList() {
-    const [collections, setCollections] = useState<ThemeCollection[]>(initialCollections);
+    const { data: collections, loading, deleteItem } = useNeonData<ThemeCollection>('themeCollections');
     const [query, setQuery] = useState('');
-    const [saving, setSaving] = useState(false);
     const [deleteSlug, setDeleteSlug] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const filtered = collections.filter(c =>
         c.title.toLowerCase().includes(query.toLowerCase()) ||
-        c.slug.includes(query.toLowerCase())
+        c.slug.toLowerCase().includes(query.toLowerCase())
     );
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (!deleteSlug) return;
-        setCollections(prev => prev.filter(c => c.slug !== deleteSlug));
+        const target = collections.find(c => c.slug === deleteSlug);
+        if (target?.id) {
+            await deleteItem(target.id);
+        }
         setDeleteSlug(null);
-        toast.success('Collection removed locally');
     };
 
-    const handleSave = async () => {
-        setSaving(true);
-        try {
-            const content = generateThemeCollectionsFile(collections);
-            await saveThemeCollectionsToGitHub(content);
-            toast.success('✅ Theme Collections synced with GitHub!');
-        } catch (err) {
-            console.error(err);
-            toast.error('❌ GitHub sync failed.');
-        } finally {
-            setSaving(false);
-        }
-    };
+    if (loading) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     return (
         <div className="p-8">
@@ -53,14 +41,6 @@ export default function ThemeCollectionList() {
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button
-                        onClick={handleSave}
-                        disabled={saving}
-                        className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl text-sm font-medium transition-all"
-                    >
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                        Sync GitHub
-                    </button>
                     <button
                         onClick={() => navigate('/admin/themes/new')}
                         className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-orange-500/25"

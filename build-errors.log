@@ -1,0 +1,7 @@
+src/data/themeCollections.ts(1,1): error TS6133: 'Album' is declared but its value is never read.
+src/data/themeCollections.ts(74,5): error TS2353: Object literal may only specify known properties, and '"curatorNote"' does not exist in type 'ThemeCollection'.
+src/data/themeCollections.ts(107,5): error TS2353: Object literal may only specify known properties, and '"curatorNote"' does not exist in type 'ThemeCollection'.
+src/data/themeCollections.ts(140,5): error TS2353: Object literal may only specify known properties, and '"curatorNote"' does not exist in type 'ThemeCollection'.
+src/data/themeCollections.ts(174,5): error TS2353: Object literal may only specify known properties, and '"curatorNote"' does not exist in type 'ThemeCollection'.
+src/db/schema.ts(1,69): error TS6133: 'boolean' is declared but its value is never read.
+src/db/schema.ts(2,1): error TS6133: 'sql' is declared but its value is never read.

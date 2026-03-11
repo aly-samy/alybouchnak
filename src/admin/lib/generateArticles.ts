@@ -72,6 +72,6 @@ export function getAllArticles(): Article[] {
 `;
 
 export function generateArticlesFile(articles: Article[]): string {
-  const dataString = JSON.stringify(articles, null, 2);
+  const dataString = JSON.stringify(articles, (_, value) => value === null ? undefined : value, 2);
   return `${ARTICLE_INTERFACE}\n\nexport const articles: Article[] = ${dataString};\n${ARTICLE_FUNCTIONS}`;
 }

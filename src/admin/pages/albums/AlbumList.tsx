@@ -1,44 +1,32 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { albums as initialAlbums } from '../../../data/albums';
 import type { Album } from '../../../data/albums';
-import { generateAlbumsFile } from '../../lib/generateAlbums';
-import { saveAlbumsToGitHub } from '../../lib/githubSave';
-import { Plus, Search, Pencil, Trash2, Github, Loader2, ExternalLink } from 'lucide-react';
-import { toast } from 'sonner';
+import { useNeonData } from '../../lib/useNeonData';
+import { Plus, Search, Pencil, Trash2, Loader2, ExternalLink } from 'lucide-react';
 
 export default function AlbumList() {
-    const [albums, setAlbums] = useState<Album[]>(initialAlbums);
+    const { data: albums, loading, deleteItem } = useNeonData<Album>('albums');
     const [query, setQuery] = useState('');
-    const [saving, setSaving] = useState(false);
     const [deleteSlug, setDeleteSlug] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const filtered = albums.filter(a =>
         a.title.toLowerCase().includes(query.toLowerCase()) ||
-        a.slug.includes(query.toLowerCase())
+        a.slug.toLowerCase().includes(query.toLowerCase())
     );
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (!deleteSlug) return;
-        setAlbums(prev => prev.filter(a => a.slug !== deleteSlug));
+        const albumToDelete = albums.find(a => a.slug === deleteSlug);
+        if (albumToDelete?.id) {
+            await deleteItem(albumToDelete.id);
+        }
         setDeleteSlug(null);
-        toast.success('Album removed — click "Save to GitHub" to publish');
     };
 
-    const handleSave = async () => {
-        setSaving(true);
-        try {
-            const content = generateAlbumsFile(albums);
-            await saveAlbumsToGitHub(content);
-            toast.success('✅ Albums saved to GitHub! Redeploy triggered.', { duration: 5000 });
-        } catch (err) {
-            console.error(err);
-            toast.error('❌ GitHub save failed. Check your token/repo settings.');
-        } finally {
-            setSaving(false);
-        }
-    };
+    if (loading) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     return (
         <div className="p-8">
@@ -48,14 +36,6 @@ export default function AlbumList() {
                     <p className="text-slate-400 text-sm mt-1">{albums.length} albums total</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button
-                        onClick={handleSave}
-                        disabled={saving}
-                        className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl text-sm font-medium transition-all disabled:opacity-50"
-                    >
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                        Save to GitHub
-                    </button>
                     <button
                         onClick={() => navigate('/admin/albums/new')}
                         className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-orange-500/25"
@@ -133,7 +113,7 @@ export default function AlbumList() {
                     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
                         <h3 className="text-white font-semibold text-lg mb-2">Delete Album?</h3>
                         <p className="text-slate-400 text-sm mb-6">
-                            Delete <span className="text-white font-medium">"{albums.find(a => a.slug === deleteSlug)?.title}"</span>? This will be committed to GitHub.
+                            Delete <span className="text-white font-medium">"{albums.find(a => a.slug === deleteSlug)?.title}"</span>? This will be removed from the database permanently.
                         </p>
                         <div className="flex gap-3">
                             <button onClick={() => setDeleteSlug(null)} className="flex-1 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-sm font-medium transition-all">Cancel</button>

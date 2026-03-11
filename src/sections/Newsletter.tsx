@@ -11,8 +11,13 @@ const Newsletter = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [parentType, setParentType] = useState('Parent');
+  const [childName, setChildName] = useState('');
+  const [childBirthMonth, setChildBirthMonth] = useState('');
   const [isSubmitError, setIsSubmitError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -50,28 +55,36 @@ const Newsletter = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || !firstName) return;
 
-    // Encode form data for Netlify
-    const formData = new URLSearchParams();
-    formData.append('form-name', 'newsletter');
-    formData.append('email', email);
+    setIsLoading(true);
+    setIsSubmitError(false);
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString()
-    })
-      .then(() => {
-        setIsSubmitted(true);
-        setIsSubmitError(false);
-      })
-      .catch((error) => {
-        console.error('Form submission error:', error);
-        setIsSubmitError(true);
+    try {
+      const response = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          firstName,
+          parentType,
+          childName,
+          childBirthMonth
+        }),
       });
+
+      if (!response.ok) throw new Error('Subscription failed');
+
+      setIsSubmitted(true);
+      setIsSubmitError(false);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setIsSubmitError(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -100,38 +113,80 @@ const Newsletter = () => {
           {!isSubmitted ? (
             <form
               ref={formRef}
-              name="newsletter"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto"
+              className="flex flex-col gap-4 max-w-lg mx-auto bg-white/40 p-6 md:p-8 rounded-3xl backdrop-blur-sm border-2 border-white/50 shadow-xl"
             >
-              <input type="hidden" name="form-name" value="newsletter" />
-              <p className="hidden">
-                <label>
-                  Don’t fill this out if you're human: <input name="bot-field" />
-                </label>
-              </p>
-
-              <div className="flex-1 relative">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email Address"
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Your First Name"
                   required
-                  className="w-full px-6 py-4 rounded-full border-2 border-white bg-white/80 backdrop-blur-sm 
-                           text-[#101010] placeholder:text-[#2A2A2A]/50 font-medium
-                           focus:outline-none focus:border-[#F26B3A] focus:bg-white transition-all"
+                  className="w-full px-5 py-3.5 rounded-2xl border-2 border-white bg-white/80 text-[#101010] placeholder:text-[#2A2A2A]/50 font-medium focus:outline-none focus:border-[#F26B3A] transition-all"
                 />
+                <select
+                  value={parentType}
+                  onChange={(e) => setParentType(e.target.value)}
+                  className="w-full px-5 py-3.5 rounded-2xl border-2 border-white bg-white/80 text-[#101010] font-medium focus:outline-none focus:border-[#F26B3A] transition-all cursor-pointer"
+                >
+                  <option value="Parent">I'm a Parent</option>
+                  <option value="Toddler Parent">Toddler Parent</option>
+                  <option value="Preschool Parent">Preschool Parent</option>
+                  <option value="Educator">Educator</option>
+                  <option value="Grandparent">Grandparent</option>
+                </select>
               </div>
+
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email Address"
+                required
+                className="w-full px-5 py-3.5 rounded-2xl border-2 border-white bg-white/80 text-[#101010] placeholder:text-[#2A2A2A]/50 font-medium focus:outline-none focus:border-[#F26B3A] transition-all"
+              />
+
+              <div className="pt-2 pb-1 text-left">
+                <p className="text-xs font-semibold text-[#F26B3A] uppercase tracking-wider mb-2">Optional Magic Touch ✨</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    value={childName}
+                    onChange={(e) => setChildName(e.target.value)}
+                    placeholder="Child's First Name"
+                    className="w-full px-5 py-3 rounded-2xl border-2 border-white bg-white/60 text-[#101010] placeholder:text-[#2A2A2A]/50 text-sm font-medium focus:outline-none focus:border-[#F26B3A] transition-all"
+                  />
+                  <select
+                    value={childBirthMonth}
+                    onChange={(e) => setChildBirthMonth(e.target.value)}
+                    className="w-full px-5 py-3 rounded-2xl border-2 border-white bg-white/60 text-[#101010] text-sm font-medium focus:outline-none focus:border-[#F26B3A] transition-all cursor-pointer"
+                  >
+                    <option value="">Birth Month</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                  </select>
+                </div>
+                <p className="text-[10px] text-[#2A2A2A]/60 mt-2 leading-tight">We use this to send a special birthday song! (COPPA compliant: No full birthdates stored).</p>
+              </div>
+
               <button
                 type="submit"
-                className="btn-primary inline-flex items-center justify-center gap-2 whitespace-nowrap"
+                disabled={isLoading}
+                className="btn-primary w-full mt-2 inline-flex items-center justify-center gap-2 py-4 text-lg"
               >
-                Subscribe
-                <Send className="w-4 h-4" />
+                {isLoading ? 'Joining...' : 'Subscribe'}
+                {!isLoading && <Send className="w-5 h-5" />}
               </button>
             </form>
           ) : (

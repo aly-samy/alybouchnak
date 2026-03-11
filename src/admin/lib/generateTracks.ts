@@ -113,6 +113,6 @@ export function getRelatedTracks(trackId: number): Track[] {
 `;
 
 export function generateTracksFile(tracks: Track[]): string {
-    const dataString = JSON.stringify(tracks, null, 2);
-    return `${TRACK_INTERFACE}\n\nexport const tracks: Track[] = ${dataString};\n${TRACK_FUNCTIONS}`;
+  const dataString = JSON.stringify(tracks, (_, value) => value === null ? undefined : value, 2);
+  return `${TRACK_INTERFACE}\n\nexport const tracks: Track[] = ${dataString};\n${TRACK_FUNCTIONS}`;
 }

@@ -1,13 +1,18 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import OptimizedImage from '../components/OptimizedImage';
+import { Send, CheckCircle } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -28,6 +33,24 @@ const Footer = () => {
 
     return () => ctx.revert();
   }, []);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !firstName) return;
+    setIsLoading(true);
+    try {
+      const res = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, firstName, parentType: 'Parent' }),
+      });
+      if (res.ok) setIsSubmitted(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const musicLinks = [
     { label: 'Spotify', href: 'https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8' },
@@ -183,20 +206,50 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Contact */}
+            {/* Newsletter Fast Signup */}
             <div>
               <h4 className="font-['Fredoka_One'] text-lg text-[#101010] mb-4">
-                Get in Touch
+                Join the Family
               </h4>
               <p className="text-sm text-[#2A2A2A] mb-4">
-                Have questions or want to collaborate? We'd love to hear from you!
+                Get new songs, parenting tips, and goodies sent straight to your inbox!
               </p>
-              <a
-                href="mailto:hello@alybouchnak.com"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#F26B3A] hover:underline"
-              >
-                hello@alybouchnak.com
-              </a>
+              {!isSubmitted ? (
+                <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    className="w-full px-4 py-2.5 rounded-xl border border-white bg-white/60 text-sm focus:outline-none focus:border-[#F26B3A]"
+                  />
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      placeholder="Email Address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="w-full px-4 py-2.5 rounded-xl border border-white bg-white/60 text-sm focus:outline-none focus:border-[#F26B3A]"
+                    />
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="btn-primary px-4 py-2 flex items-center justify-center min-w-[48px]"
+                    >
+                      {isLoading ? <div className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin"></div> : <Send className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <div className="flex items-center gap-2 text-green-700 bg-green-500/10 border border-green-500/20 px-4 py-3 rounded-xl text-sm font-medium">
+                  <CheckCircle className="w-4 h-4" /> Welcome to the family!
+                </div>
+              )}
+              <div className="mt-4 text-xs text-[#2A2A2A]/70">
+                Need to leave? <a href="/manage-subscription" className="underline hover:text-[#F26B3A]">Manage Subscription</a>
+              </div>
             </div>
           </div>
 

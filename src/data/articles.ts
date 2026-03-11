@@ -74,64 +74,64 @@ export const articles: Article[] = [
       "height": 675,
       "caption": "Children interacting with pet animals"
     },
-    "datePublished": "2026-03-01T08:00:00Z",
-    "dateModified": "2026-03-02T14:30:00Z",
+    "datePublished": "2026-03-01T08:00:00.000Z",
+    "dateModified": "2026-03-02T14:30:00.000Z",
     "author": {
-      "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
+      "name": "Aly Bouchnak",
       "role": "Composer & Educator"
     },
     "seo": {
       "title": "Benefits of Animal Sounds | Aly Bouchnak Blog",
-      "description": "Discover how music helps kids learn animal sounds and improve speech.",
+      "ogType": "article",
       "keywords": [
         "toddler development",
         "educational music",
         "animal sounds"
       ],
-      "ogType": "article",
+      "description": "Discover how music helps kids learn animal sounds and improve speech.",
       "readingTime": "5 min"
     },
     "connections": {
-      "relatedTracks": [
-        19
-      ],
       "relatedAlbums": [
         "bouncy-beats"
+      ],
+      "relatedTracks": [
+        19
       ],
       "youtubeVideoId": "dQw4w9WgXcQ"
     },
     "articleSchema": {
-      "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "How Animal Sounds Accelerate Toddler Language Skills",
+      "about": [
+        {
+          "url": "https://alybouchnak.com/track/pet-pop-the-animal-song",
+          "name": "Pet-Pop | The Animal Song",
+          "@type": "MusicRecording"
+        }
+      ],
       "image": [
         "https://images.unsplash.com/photo-1596464716127-f2a82984de30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
-      "datePublished": "2026-03-01T08:00:00Z",
-      "dateModified": "2026-03-02T14:30:00Z",
+      "video": {
+        "name": "How Animal Sounds Accelerate Toddler Language Skills",
+        "@type": "VideoObject",
+        "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "contentUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "description": "A deep dive into why Pet-Pop songs are more than just fun—they are developmental tools.",
+        "thumbnailUrl": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+      },
       "author": [
         {
-          "@type": "Person",
+          "url": "https://alybouchnak.com/about",
           "name": "Aly Bouchnak",
-          "url": "https://alybouchnak.com/about"
+          "@type": "Person"
         }
       ],
-      "video": {
-        "@type": "VideoObject",
-        "name": "How Animal Sounds Accelerate Toddler Language Skills",
-        "description": "A deep dive into why Pet-Pop songs are more than just fun—they are developmental tools.",
-        "thumbnailUrl": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-        "contentUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
-      },
-      "about": [
-        {
-          "@type": "MusicRecording",
-          "name": "Pet-Pop | The Animal Song",
-          "url": "https://alybouchnak.com/track/pet-pop-the-animal-song"
-        }
-      ]
+      "@context": "https://schema.org",
+      "headline": "How Animal Sounds Accelerate Toddler Language Skills",
+      "dateModified": "2026-03-02T14:30:00Z",
+      "datePublished": "2026-03-01T08:00:00Z"
     }
   },
   {
@@ -148,57 +148,57 @@ export const articles: Article[] = [
       "height": 675,
       "caption": "A sleeping toddler"
     },
-    "datePublished": "2026-02-15T09:00:00Z",
-    "dateModified": "2026-02-15T09:00:00Z",
+    "datePublished": "2026-02-15T09:00:00.000Z",
+    "dateModified": "2026-02-15T09:00:00.000Z",
     "author": {
-      "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
+      "name": "Aly Bouchnak",
       "role": "Composer"
     },
     "seo": {
       "title": "The Power of Brown Noise | Sleep Science",
-      "description": "Learn why Brown Noise helps toddlers sleep better than white noise.",
+      "ogType": "article",
       "keywords": [
         "brown noise",
         "toddler sleep",
         "ISO principle",
         "deep sleep"
       ],
-      "ogType": "article",
+      "description": "Learn why Brown Noise helps toddlers sleep better than white noise.",
       "readingTime": "4 min"
     },
     "connections": {
+      "relatedAlbums": [
+        "deep-sleep-album"
+      ],
       "relatedTracks": [
         12,
         13
-      ],
-      "relatedAlbums": [
-        "deep-sleep-album"
       ]
     },
     "articleSchema": {
-      "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "The Science of Sleep: Why Brown Noise Works",
+      "about": [
+        {
+          "url": "https://alybouchnak.com/album/deep-sleep-album",
+          "name": "Deep Sleep for Toddlers",
+          "@type": "MusicAlbum"
+        }
+      ],
       "image": [
         "https://images.unsplash.com/photo-1512438257223-950eed158652?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
-      "datePublished": "2026-02-15T09:00:00Z",
-      "dateModified": "2026-02-15T09:00:00Z",
       "author": [
         {
-          "@type": "Person",
+          "url": "https://alybouchnak.com/about",
           "name": "Aly Bouchnak",
-          "url": "https://alybouchnak.com/about"
+          "@type": "Person"
         }
       ],
-      "about": [
-        {
-          "@type": "MusicAlbum",
-          "name": "Deep Sleep for Toddlers",
-          "url": "https://alybouchnak.com/album/deep-sleep-album"
-        }
-      ]
+      "@context": "https://schema.org",
+      "headline": "The Science of Sleep: Why Brown Noise Works",
+      "dateModified": "2026-02-15T09:00:00Z",
+      "datePublished": "2026-02-15T09:00:00Z"
     }
   },
   {
@@ -215,53 +215,53 @@ export const articles: Article[] = [
       "height": 675,
       "caption": "Music composition setup"
     },
-    "datePublished": "2026-03-05T11:00:00Z",
-    "dateModified": "2026-03-06T09:00:00Z",
+    "datePublished": "2026-03-05T11:00:00.000Z",
+    "dateModified": "2026-03-06T09:00:00.000Z",
     "author": {
-      "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
+      "name": "Aly Bouchnak",
       "role": "Creator"
     },
     "seo": {
       "title": "Behind The Bloom's House | Music News",
-      "description": "Discover how we created the interactive universe of The Bloom's House.",
+      "ogType": "article",
       "keywords": [
         "music production",
         "character design",
         "childrens entertainment"
       ],
-      "ogType": "article",
+      "description": "Discover how we created the interactive universe of The Bloom's House.",
       "readingTime": "6 min"
     },
     "connections": {
-      "relatedTracks": [],
       "relatedAlbums": [
         "meet-the-blooms"
-      ]
+      ],
+      "relatedTracks": []
     },
     "articleSchema": {
-      "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Behind the Scenes: Creating The Bloom's House Universe",
+      "about": [
+        {
+          "url": "https://alybouchnak.com/album/meet-the-blooms",
+          "name": "Meet The Blooms",
+          "@type": "MusicAlbum"
+        }
+      ],
       "image": [
         "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
-      "datePublished": "2026-03-05T11:00:00Z",
-      "dateModified": "2026-03-06T09:00:00Z",
       "author": [
         {
-          "@type": "Person",
+          "url": "https://alybouchnak.com/about",
           "name": "Aly Bouchnak",
-          "url": "https://alybouchnak.com/about"
+          "@type": "Person"
         }
       ],
-      "about": [
-        {
-          "@type": "MusicAlbum",
-          "name": "Meet The Blooms",
-          "url": "https://alybouchnak.com/album/meet-the-blooms"
-        }
-      ]
+      "@context": "https://schema.org",
+      "headline": "Behind the Scenes: Creating The Bloom's House Universe",
+      "dateModified": "2026-03-06T09:00:00Z",
+      "datePublished": "2026-03-05T11:00:00Z"
     }
   },
   {
@@ -278,48 +278,48 @@ export const articles: Article[] = [
       "height": 675,
       "caption": "A calm, sleeping toddler resting peacefully."
     },
-    "datePublished": "2026-03-07T09:00:00Z",
-    "dateModified": "2026-03-07T09:00:00Z",
+    "datePublished": "2026-03-07T09:00:00.000Z",
+    "dateModified": "2026-03-07T09:00:00.000Z",
     "author": {
-      "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
+      "name": "Aly Bouchnak",
       "role": "Composer"
     },
     "seo": {
       "title": "The Audible Smile: How Voice Tone Rewires a Baby's Stress",
-      "description": "Learn how the audible smile technique and infant-directed speech reduce cortisol and act as a biological safety signal for infants.",
+      "ogType": "article",
       "keywords": [
         "neuroscience",
         "audible smile",
         "parenting"
       ],
-      "ogType": "article",
+      "description": "Learn how the audible smile technique and infant-directed speech reduce cortisol and act as a biological safety signal for infants.",
       "readingTime": "25 min"
     },
     "connections": {
-      "relatedTracks": [],
       "relatedAlbums": [
         "tuned-for-dreams",
         "its-okay"
-      ]
+      ],
+      "relatedTracks": []
     },
     "articleSchema": {
-      "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "The Audible Smile: How Voice Tone, Rhythm, and Melody Rewire a Baby’s Stress Response",
+      "about": [],
       "image": [
         "https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
-      "datePublished": "2026-03-07T09:00:00Z",
-      "dateModified": "2026-03-07T09:00:00Z",
       "author": [
         {
-          "@type": "Person",
+          "url": "https://alybouchnak.com/about",
           "name": "Aly Bouchnak",
-          "url": "https://alybouchnak.com/about"
+          "@type": "Person"
         }
       ],
-      "about": []
+      "@context": "https://schema.org",
+      "headline": "The Audible Smile: How Voice Tone, Rhythm, and Melody Rewire a Baby’s Stress Response",
+      "dateModified": "2026-03-07T09:00:00Z",
+      "datePublished": "2026-03-07T09:00:00Z"
     }
   },
   {
@@ -336,16 +336,16 @@ export const articles: Article[] = [
       "height": 675,
       "caption": "A happy toddler eating and engaging playfully at mealtime."
     },
-    "datePublished": "2026-03-20T09:00:00Z",
-    "dateModified": "2026-03-20T09:00:00Z",
+    "datePublished": "2026-03-20T09:00:00.000Z",
+    "dateModified": "2026-03-20T09:00:00.000Z",
     "author": {
-      "name": "Aly Bouchnak",
       "url": "https://alybouchnak.com/about",
+      "name": "Aly Bouchnak",
       "role": "Composer"
     },
     "seo": {
       "title": "The Chewing Cadence Theory: Music & Toddler Mealtime",
-      "description": "Learn how rhythmic entrainment and music therapy techniques can solve toddler mealtime battles by regulating their chewing cadence.",
+      "ogType": "article",
       "keywords": [
         "toddler eating rhythm",
         "mealtime music toddlers",
@@ -354,34 +354,34 @@ export const articles: Article[] = [
         "pediatric feeding therapy",
         "behavioral scaffolding"
       ],
-      "ogType": "article",
+      "description": "Learn how rhythmic entrainment and music therapy techniques can solve toddler mealtime battles by regulating their chewing cadence.",
       "readingTime": "5 min"
     },
     "connections": {
-      "relatedTracks": [
-        1
-      ],
       "relatedAlbums": [
         "the-blooms-house-v1"
+      ],
+      "relatedTracks": [
+        1
       ]
     },
     "articleSchema": {
-      "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "The Chewing Cadence Theory: How Rhythm and Music Can Fix Toddler Mealtime Chaos",
+      "about": [],
       "image": [
         "https://images.unsplash.com/photo-1513258763567-93108c4e0ce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
       ],
-      "datePublished": "2026-03-20T09:00:00Z",
-      "dateModified": "2026-03-20T09:00:00Z",
       "author": [
         {
-          "@type": "Person",
+          "url": "https://alybouchnak.com/about",
           "name": "Aly Bouchnak",
-          "url": "https://alybouchnak.com/about"
+          "@type": "Person"
         }
       ],
-      "about": []
+      "@context": "https://schema.org",
+      "headline": "The Chewing Cadence Theory: How Rhythm and Music Can Fix Toddler Mealtime Chaos",
+      "dateModified": "2026-03-20T09:00:00Z",
+      "datePublished": "2026-03-20T09:00:00Z"
     }
   }
 ];

@@ -1,48 +1,33 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { tracks as initialTracks } from '../../../data/tracks';
 import type { Track } from '../../../data/tracks';
-import { generateTracksFile } from '../../lib/generateTracks';
-import { saveTracksToGitHub } from '../../lib/githubSave';
-import { Plus, Search, Pencil, Trash2, Github, Loader2, ExternalLink } from 'lucide-react';
-import { toast } from 'sonner';
+import { useNeonData } from '../../lib/useNeonData';
+import { Plus, Search, Pencil, Trash2, Loader2, ExternalLink } from 'lucide-react';
 
 export default function TrackList() {
-    const [tracks, setTracks] = useState<Track[]>(initialTracks);
+    const { data: tracks, loading, deleteItem } = useNeonData<Track>('tracks');
     const [query, setQuery] = useState('');
-    const [saving, setSaving] = useState(false);
     const [deleteId, setDeleteId] = useState<number | null>(null);
     const navigate = useNavigate();
 
     const filtered = tracks.filter(
         t =>
             t.title.toLowerCase().includes(query.toLowerCase()) ||
-            t.slug.includes(query.toLowerCase()) ||
+            t.slug.toLowerCase().includes(query.toLowerCase()) ||
             t.album.toLowerCase().includes(query.toLowerCase())
     );
 
     const confirmDelete = (id: number) => setDeleteId(id);
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (deleteId === null) return;
-        setTracks(prev => prev.filter(t => t.id !== deleteId));
+        await deleteItem(deleteId);
         setDeleteId(null);
-        toast.success('Track removed — click "Save to GitHub" to publish');
     };
 
-    const handleSave = async () => {
-        setSaving(true);
-        try {
-            const content = generateTracksFile(tracks);
-            await saveTracksToGitHub(content);
-            toast.success('✅ Saved to GitHub! Your site will redeploy shortly.', { duration: 5000 });
-        } catch (err) {
-            console.error(err);
-            toast.error('❌ GitHub save failed. Check your token/repo settings.');
-        } finally {
-            setSaving(false);
-        }
-    };
+    if (loading) {
+        return <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-orange-500" /></div>;
+    }
 
     return (
         <div className="p-8">
@@ -53,14 +38,6 @@ export default function TrackList() {
                     <p className="text-slate-400 text-sm mt-1">{tracks.length} tracks total</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button
-                        onClick={handleSave}
-                        disabled={saving}
-                        className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl text-sm font-medium transition-all disabled:opacity-50"
-                    >
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Github className="w-4 h-4" />}
-                        Save to GitHub
-                    </button>
                     <button
                         onClick={() => navigate('/admin/tracks/new')}
                         className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-sm font-medium transition-all shadow-lg shadow-orange-500/25"
@@ -156,7 +133,7 @@ export default function TrackList() {
                             <span className="text-white font-medium">
                                 "{tracks.find(t => t.id === deleteId)?.title}"
                             </span>
-                            ? This is only saved when you click "Save to GitHub".
+                            ? This will be removed from the database permanently.
                         </p>
                         <div className="flex gap-3">
                             <button

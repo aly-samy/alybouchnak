@@ -1,4 +1,3 @@
-
 export interface ThemeCollection {
   slug: string;
   title: string;
@@ -23,8 +22,8 @@ export interface ThemeCollection {
     description: string;
   }[];
   // Extended content for collection pages
-  curatorNote?: string;
   artistNote?: string;
+  curatorNote?: string;
   scienceFramework?: string;
   category: 'Routine & Utility' | 'Mood & Energy' | 'Adventure & Event' | 'Signature Collections';
   trackIds: number[];
@@ -48,124 +47,132 @@ export interface ThemeCollection {
 export const themeCollections: ThemeCollection[] = [
   {
     "id": 1,
+    "slug": "wake-up-and-go",
     "title": "The \"Wake Up & Go\" Collection",
     "subtitle": "The Problem Solvers",
-    "slug": "wake-up-and-go",
-    "releaseDate": "2026-04-01",
+    "description": "Turn the morning struggle into a game with these high-energy tracks designed to get toddlers out of bed and moving.",
     "coverImage": "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "artist": "Aly Bouchnak",
+    "releaseDate": "2026-04-01T00:00:00.000Z",
     "genre": "Children's Utility",
-    "mood": "Upbeat",
     "ageRange": "2-6 years",
-    "description": "Turn the morning struggle into a game with these high-energy tracks designed to get toddlers out of bed and moving.",
-    "status": "available",
+    "mood": "Upbeat",
     "spotifyUrl": "https://open.spotify.com/playlist/7d4eOaB22cE2b3sF8E1d4B",
     "appleMusicUrl": "#",
     "youtubeUrl": "#",
     "otherUrl": "#",
-    "upc": "123456789012",
     "trackCount": 2,
     "duration": "5:00",
-    "category": "Routine & Utility",
-    "trackIds": [
-      2,
-      6
-    ],
-    "curatorNote": "How to survive the 7 AM wake-up.",
+    "upc": "123456789012",
     "educationalBenefits": [
       {
         "title": "Routine Compliance",
         "description": "Associating waking up with a fun mini-dance party."
       }
-    ]
+    ],
+    "curatorNote": "How to survive the 7 AM wake-up.",
+    "category": "Routine & Utility",
+    "trackIds": [
+      2,
+      6
+    ],
+    "status": "available"
   },
   {
     "id": 2,
+    "slug": "bouncy-beats-party",
     "title": "The \"Bouncy Beats\" Party",
     "subtitle": "The Vibe Managers",
-    "slug": "bouncy-beats-party",
-    "releaseDate": "2026-05-01",
+    "description": "High-energy tracks for burning off extra energy safely indoors.",
     "coverImage": "https://images.unsplash.com/photo-1533174000220-db9b09fb7be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "artist": "Aly Bouchnak",
+    "releaseDate": "2026-05-01T00:00:00.000Z",
     "genre": "Kids Dance",
-    "mood": "Energetic",
     "ageRange": "1-6 years",
-    "description": "High-energy tracks for burning off extra energy safely indoors.",
-    "status": "available",
+    "mood": "Energetic",
     "spotifyUrl": "https://open.spotify.com/playlist/7d4eOaB22cE2b3sF8E1d4B",
     "appleMusicUrl": "#",
     "youtubeUrl": "#",
     "otherUrl": "#",
-    "upc": "123456789013",
     "trackCount": 2,
     "duration": "5:00",
-    "category": "Mood & Energy",
-    "trackIds": [
-      1,
-      3
-    ],
-    "curatorNote": "The 2-minute energy burn trick.",
+    "upc": "123456789013",
     "educationalBenefits": [
       {
         "title": "Gross Motor Skills",
         "description": "Encourages jumping and coordinated movements."
       }
-    ]
+    ],
+    "curatorNote": "The 2-minute energy burn trick.",
+    "category": "Mood & Energy",
+    "trackIds": [
+      1,
+      3
+    ],
+    "status": "available"
   },
   {
     "id": 3,
+    "slug": "family-road-trip",
     "title": "The \"Family Road Trip\" Collection",
     "subtitle": "The Memory Makers",
-    "slug": "family-road-trip",
-    "releaseDate": "2026-06-15",
+    "description": "Upbeat, non-annoying pop that parents can actually enjoy alongside their kids during long drives.",
     "coverImage": "https://images.unsplash.com/photo-1510345479053-f4b6cb2fcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "artist": "Aly Bouchnak",
+    "releaseDate": "2026-06-15T00:00:00.000Z",
     "genre": "Family Pop",
-    "mood": "Joyful",
     "ageRange": "All Ages",
-    "description": "Upbeat, non-annoying pop that parents can actually enjoy alongside their kids during long drives.",
-    "status": "available",
+    "mood": "Joyful",
     "spotifyUrl": "https://open.spotify.com/playlist/7d4eOaB22cE2b3sF8E1d4B",
     "appleMusicUrl": "#",
     "youtubeUrl": "#",
     "otherUrl": "#",
-    "upc": "123456789014",
     "trackCount": 3,
     "duration": "8:00",
+    "upc": "123456789014",
+    "educationalBenefits": [
+      {
+        "title": "Family Bonding",
+        "description": "Creates shared musical memories for the whole family."
+      }
+    ],
+    "curatorNote": "Download my 'Road Trip Survival' playlist guide.",
     "category": "Adventure & Event",
     "trackIds": [
       8,
       9,
       10
     ],
-    "curatorNote": "Download my 'Road Trip Survival' playlist guide.",
-    "educationalBenefits": [
-      {
-        "title": "Family Bonding",
-        "description": "Creates shared musical memories for the whole family."
-      }
-    ]
+    "status": "available"
   },
   {
     "id": 4,
+    "slug": "musical-uncle-picks",
     "title": "Favorite Musical Uncle Picks",
     "subtitle": "Signature Hits",
-    "slug": "musical-uncle-picks",
-    "releaseDate": "2026-07-01",
+    "description": "A curated list of my personal favorites and absolute top-streamed hits.",
     "coverImage": "https://images.unsplash.com/photo-1516280440502-628d052be572?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "artist": "Aly Bouchnak",
+    "releaseDate": "2026-07-01T00:00:00.000Z",
     "genre": "Curated Variety",
-    "mood": "Curated",
     "ageRange": "2-8 years",
-    "description": "A curated list of my personal favorites and absolute top-streamed hits.",
-    "status": "coming-soon",
+    "mood": "Curated",
     "spotifyUrl": "https://open.spotify.com/playlist/7d4eOaB22cE2b3sF8E1d4B",
     "appleMusicUrl": "#",
     "youtubeUrl": "#",
     "otherUrl": "#",
-    "upc": "123456789015",
     "trackCount": 7,
     "duration": "9:00",
+    "upc": "123456789015",
+    "educationalBenefits": [
+      {
+        "title": "Musical Variety",
+        "description": "Exposes children to diverse genres and tempos."
+      }
+    ],
+    "curatorNote": "The absolute best of the Bloom's House.",
+    "artistNote": "",
+    "scienceFramework": "",
     "category": "Signature Collections",
     "trackIds": [
       5,
@@ -176,15 +183,7 @@ export const themeCollections: ThemeCollection[] = [
       10,
       1
     ],
-    "curatorNote": "The absolute best of the Bloom's House.",
-    "educationalBenefits": [
-      {
-        "title": "Musical Variety",
-        "description": "Exposes children to diverse genres and tempos."
-      }
-    ],
-    "artistNote": "",
-    "scienceFramework": ""
+    "status": "coming-soon"
   }
 ];
 
