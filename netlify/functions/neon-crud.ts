@@ -58,16 +58,16 @@ export const handler: Handler = async (event: HandlerEvent) => {
         // Helper: normalize payload for Postgres
         // - Converts empty strings to null
         // - Strips explicit id on POST (let serial handle it)
+        // - Filters out any keys that don't exist as columns in the Drizzle table
+        const tableColumnNames = new Set(Object.keys(table));
         const normalizePayload = (data: any, stripId = false): any => {
-            const out: any = stripId ? {} : { ...data };
+            const out: any = {};
             for (const key of Object.keys(data)) {
                 if (stripId && key === 'id') continue;
+                if (!tableColumnNames.has(key)) continue; // Skip unknown columns
                 const val = data[key];
                 if (val === '' || val === undefined) {
                     out[key] = null;
-                } else if (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(val)) {
-                    // Full ISO datetime — keep as-is; Postgres timestamp handles it
-                    out[key] = val;
                 } else {
                     out[key] = val;
                 }
