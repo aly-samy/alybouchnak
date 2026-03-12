@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { tracks } from '../../data/tracks';
 import { albums } from '../../data/albums';
-import { Music, Disc3, TrendingUp, Clock } from 'lucide-react';
+import { Music, Disc3, TrendingUp, Clock, RefreshCw, CheckCircle, AlertCircle, Loader2, Zap } from 'lucide-react';
 
 function StatCard({ icon: Icon, label, value, sub }: {
     icon: React.ElementType; label: string; value: string | number; sub?: string;
@@ -21,22 +22,77 @@ function StatCard({ icon: Icon, label, value, sub }: {
     );
 }
 
+type RebuildStatus = 'idle' | 'loading' | 'success' | 'error';
+
 export default function Dashboard() {
+    const [rebuildStatus, setRebuildStatus] = useState<RebuildStatus>('idle');
+    const [rebuildMessage, setRebuildMessage] = useState('');
+
     const albumGroups = albums.map(album => ({
         name: album.title,
         count: tracks.filter(t => t.album === album.title).length,
         slug: album.slug,
     }));
 
+    const handleRebuild = async () => {
+        setRebuildStatus('loading');
+        setRebuildMessage('');
+        try {
+            const token = import.meta.env.VITE_ADMIN_PASSWORD || '';
+            const res = await fetch('/.netlify/functions/trigger-rebuild', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+            const json = await res.json();
+            if (!res.ok) throw new Error(json.error || 'Unknown error');
+            setRebuildStatus('success');
+            setRebuildMessage(json.message);
+        } catch (err: any) {
+            setRebuildStatus('error');
+            setRebuildMessage(err.message || 'Failed to trigger rebuild.');
+        }
+    };
+
     return (
-        <div className="p-8">
-            <div className="mb-8">
+        <div className="p-8 space-y-8">
+            <div>
                 <h1 className="text-2xl font-bold text-white">Dashboard</h1>
                 <p className="text-slate-400 mt-1">Overview of your content library</p>
             </div>
 
+            {/* Publish Panel */}
+            <div className="bg-gradient-to-br from-orange-950/40 to-slate-900 border border-orange-500/20 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+                <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-orange-500/10 border border-orange-500/30 rounded-xl flex items-center justify-center shrink-0">
+                        <Zap className="w-6 h-6 text-orange-400" />
+                    </div>
+                    <div>
+                        <h2 className="text-white font-bold text-base">Publish Changes to Live Site</h2>
+                        <p className="text-slate-400 text-sm mt-0.5">After adding or editing content, trigger a rebuild to update the public website.</p>
+                        {rebuildStatus === 'success' && (
+                            <p className="text-emerald-400 text-sm mt-1 flex items-center gap-1.5"><CheckCircle className="w-4 h-4" />{rebuildMessage}</p>
+                        )}
+                        {rebuildStatus === 'error' && (
+                            <p className="text-red-400 text-sm mt-1 flex items-center gap-1.5"><AlertCircle className="w-4 h-4" />{rebuildMessage}</p>
+                        )}
+                    </div>
+                </div>
+                <button
+                    id="rebuild-site-btn"
+                    onClick={handleRebuild}
+                    disabled={rebuildStatus === 'loading'}
+                    className="flex items-center gap-2.5 px-6 py-3 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed shrink-0"
+                >
+                    {rebuildStatus === 'loading' ? (
+                        <><Loader2 className="w-5 h-5 animate-spin" /> Triggering...</>
+                    ) : (
+                        <><RefreshCw className="w-5 h-5" /> Rebuild Site</>
+                    )}
+                </button>
+            </div>
+
             {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <StatCard icon={Music} label="Total Tracks" value={tracks.length} sub="across all albums" />
                 <StatCard icon={Disc3} label="Total Albums" value={albums.length} sub="published" />
                 <StatCard icon={TrendingUp} label="Avg BPM" value={Math.round(tracks.reduce((s, t) => s + t.bpm, 0) / tracks.length)} sub="across all tracks" />
