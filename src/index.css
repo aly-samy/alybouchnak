@@ -100,7 +100,15 @@
 
   /* Global Rich Text Formatting (ReactQuill Content) */
   .quill-content {
-    @apply prose prose-lg prose-slate max-w-none w-full mx-auto;
+    @apply prose prose-lg prose-slate max-w-full w-full mx-auto;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .quill-content table {
+    @apply w-full;
+    overflow-x: auto;
+    display: block;
   }
 
   /* High-end Typographic Scale */

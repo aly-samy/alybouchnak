@@ -105,6 +105,8 @@ const Footer = () => {
     { label: 'Meet The Blooms', href: '/meet-the-blooms' },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/articles' },
+    { label: 'Press', href: '/press' },
+    { label: 'Resources', href: '/resources' },
     { label: 'Contact', href: '/contact' },
   ];
 

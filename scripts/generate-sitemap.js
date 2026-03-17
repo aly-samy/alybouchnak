@@ -14,15 +14,19 @@ const ARTICLES_FILE = path.resolve(__dirname, '../src/data/articles.ts');
 const STATIC_ROUTES = [
     { url: '/', priority: 1.0, changefreq: 'weekly' },
     { url: '/discography', priority: 0.9, changefreq: 'weekly' },
+    { url: '/playlists', priority: 0.8, changefreq: 'weekly' },
+    { url: '/theme-collections', priority: 0.8, changefreq: 'weekly' },
     { url: '/meet-the-blooms', priority: 0.8, changefreq: 'monthly' },
-    { url: '/faq', priority: 0.7, changefreq: 'monthly' },
-    { url: '/contact', priority: 0.6, changefreq: 'monthly' },
     { url: '/about', priority: 0.8, changefreq: 'monthly' },
-    { url: '/epk', priority: 0.7, changefreq: 'monthly' },
     { url: '/articles', priority: 0.8, changefreq: 'weekly' },
+    { url: '/press', priority: 0.8, changefreq: 'weekly' },
+    { url: '/resources', priority: 0.8, changefreq: 'weekly' },
+    { url: '/faq', priority: 0.7, changefreq: 'monthly' },
+    { url: '/epk', priority: 0.7, changefreq: 'monthly' },
+    { url: '/contact', priority: 0.6, changefreq: 'monthly' },
+    { url: '/safety-policy', priority: 0.5, changefreq: 'monthly' },
     { url: '/privacy-policy', priority: 0.3, changefreq: 'yearly' },
     { url: '/terms-of-service', priority: 0.3, changefreq: 'yearly' },
-    { url: '/safety-policy', priority: 0.8, changefreq: 'monthly' }
 ];
 
 const DOMAIN = 'https://alybouchnak.com';
@@ -30,13 +34,11 @@ const DOMAIN = 'https://alybouchnak.com';
 function extractSlugsFromTs(filePath) {
     if (!fs.existsSync(filePath)) return [];
 
-    // Use dynamic import or a simpler regex match to get slugs.
-    // The previous implementation had scoping issues and incorrect date extraction logic.
     const content = fs.readFileSync(filePath, 'utf8');
     const items = [];
 
-    // Find all occurrences of slug: "something" or slug: 'something'
-    const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
+    // Match both slug: "value" and "slug": "value" formats
+    const slugRegex = /["']?slug["']?:\s*['"]([^'"]+)['"]/g;
     let match;
 
     while ((match = slugRegex.exec(content)) !== null) {
@@ -47,8 +49,8 @@ function extractSlugsFromTs(filePath) {
         const blockEnd = Math.min(content.length, match.index + 500);
         const block = content.substring(blockStart, blockEnd);
 
-        // Try to find releaseDate or datePublished near the slug
-        const dateMatch = block.match(/(?:releaseDate|datePublished):\s*['"]([^T'"]+)(?:T[^'"]*)?['"]/);
+        // Try to find releaseDate or datePublished near the slug (handle both quoted and unquoted keys)
+        const dateMatch = block.match(/["']?(?:releaseDate|datePublished)["']?:\s*['"]([^T'"]+)(?:T[^'"]*)?['"]/);
         const date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
 
         items.push({ slug, date });
@@ -63,24 +65,24 @@ function extractArticlesWithDetails(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
     const items = [];
 
-    const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
+    // Match both slug: "value" and "slug": "value" formats
+    const slugRegex = /["']?slug["']?:\s*['"]([^'"]+)['"]/g;
     let match;
 
     while ((match = slugRegex.exec(content)) !== null) {
         const slug = match[1];
 
-        // Find the block of text around this slug (increased range for long content strings)
         const blockStart = Math.max(0, match.index - 500);
         const blockEnd = Math.min(content.length, match.index + 3000);
         const block = content.substring(blockStart, blockEnd);
 
-        const typeMatch = block.match(/type:\s*['"]([^'"]+)['"]/);
+        const typeMatch = block.match(/["']?type["']?:\s*['"]([^'"]+)['"]/);
         const type = typeMatch ? typeMatch[1] : '';
 
-        const titleMatch = block.match(/title:\s*['"](.*?)['"],/);
+        const titleMatch = block.match(/["']?title["']?:\s*['"](.*?)['"],/);
         const title = titleMatch ? titleMatch[1].replace(/\\'/g, "'").replace(/\\"/g, '"') : slug;
 
-        const dateMatch = block.match(/datePublished:\s*['"]([^'"]+)['"]/);
+        const dateMatch = block.match(/["']?datePublished["']?:\s*['"]([^'"]+)['"]/);
         const rawDate = dateMatch ? dateMatch[1] : new Date().toISOString();
 
         items.push({ slug, type, title, rawDate });

@@ -8,6 +8,7 @@ import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { getAllAlbums } from '../data/albums';
 import { getAllTracks } from '../data/tracks';
+import { formatDate } from '../lib/formatDate';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -519,7 +520,7 @@ const Discography = () => {
                       {release.title}
                     </h3>
                     <p className="text-sm text-[#2A2A2A]/70 mb-3">
-                      {release.status === 'Upcoming' ? 'Releasing' : 'Released'}: {release.date}
+                      {release.status === 'Upcoming' ? 'Releasing' : 'Released'}: {formatDate(release.date)}
                     </p>
                     <p className="text-sm text-[#2A2A2A] mb-4 line-clamp-2">
                       {release.description}
@@ -607,7 +608,7 @@ const Discography = () => {
                       {release.title}
                     </h3>
                     <p className="text-sm text-white/60 mb-3">
-                      Released: {release.date}
+                      Released: {formatDate(release.date)}
                     </p>
                     <p className="text-sm text-white/80 mb-4">
                       {release.description}

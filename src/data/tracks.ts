@@ -1586,7 +1586,7 @@ export const tracks: Track[] = [
     "bpm": 120,
     "genre": "Children's Music, Mealtime Songs",
     "ageRange": "2-6 years",
-    "mood": "Gentle",
+    "mood": "Playful",
     "routine": "Mealtime",
     "isrc": "GX89G2661676",
     "upc": "5063906910496",

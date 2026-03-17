@@ -14,6 +14,8 @@ const DynamicAlbumPage = lazy(() => import('./pages/DynamicAlbumPage'));
 const Playlists = lazy(() => import('./pages/Playlists'));
 const ThemeCollections = lazy(() => import('./pages/ThemeCollections'));
 const Articles = lazy(() => import('./pages/Articles'));
+const Press = lazy(() => import('./pages/Press'));
+const Resources = lazy(() => import('./pages/Resources'));
 const DynamicPlaylistPage = lazy(() => import('./pages/DynamicPlaylistPage'));
 const DynamicThemeCollectionPage = lazy(() => import('./pages/DynamicThemeCollectionPage'));
 const DynamicArticlePage = lazy(() => import('./pages/DynamicArticlePage'));
@@ -66,6 +68,8 @@ function App() {
             <Route path="/playlists" element={<Playlists />} />
             <Route path="/theme-collections" element={<ThemeCollections />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/press" element={<Press />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="/album/:slug" element={<DynamicAlbumPage />} />
             <Route path="/playlist/:slug" element={<DynamicPlaylistPage />} />
             <Route path="/theme-collection/:slug" element={<DynamicThemeCollectionPage />} />
