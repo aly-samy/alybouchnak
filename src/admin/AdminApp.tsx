@@ -16,6 +16,7 @@ import ArticleForm from './pages/articles/ArticleForm';
 import FaqList from './pages/faqs/FaqList';
 import FaqForm from './pages/faqs/FaqForm';
 import SubscriberList from './pages/subscribers/SubscriberList';
+import InboxPage from './pages/inbox/InboxPage';
 import { Toaster } from 'sonner';
 
 function AdminRoutes() {
@@ -48,6 +49,8 @@ function AdminRoutes() {
                 <Route path="faqs/new" element={<FaqForm />} />
                 <Route path="faqs/:id/edit" element={<FaqForm />} />
                 <Route path="subscribers" element={<SubscriberList />} />
+                <Route path="inbox" element={<InboxPage />} />
+                <Route path="inbox/:threadId" element={<InboxPage />} />
                 <Route path="*" element={<Navigate to="/admin" replace />} />
             </Route>
         </Routes>

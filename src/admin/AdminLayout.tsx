@@ -1,5 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from './lib/adminAuth';
+import { useState, useEffect, useCallback } from 'react';
 import {
     Music,
     Disc3,
@@ -10,11 +11,13 @@ import {
     Sparkles,
     FileText,
     HelpCircle,
-    Users
+    Users,
+    Mail
 } from 'lucide-react';
 
 const navItems = [
     { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+    { to: '/admin/inbox', label: 'Inbox', icon: Mail, end: false, badge: true },
     { to: '/admin/tracks', label: 'Tracks', icon: Music, end: false },
     { to: '/admin/albums', label: 'Albums', icon: Disc3, end: false },
     { to: '/admin/playlists', label: 'Playlists', icon: Library, end: false },
@@ -25,8 +28,31 @@ const navItems = [
 ];
 
 export default function AdminLayout() {
-    const { logout } = useAdminAuth();
+    const { logout, token } = useAdminAuth();
     const navigate = useNavigate();
+    const [unreadCount, setUnreadCount] = useState(0);
+
+    const fetchUnreadCount = useCallback(async () => {
+        try {
+            const res = await fetch('/.netlify/functions/mailgun-threads/unread-count', {
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setUnreadCount(data.unreadCount || 0);
+            }
+        } catch {
+            // silently fail
+        }
+    }, [token]);
+
+    useEffect(() => {
+        if (token) {
+            fetchUnreadCount();
+            const interval = setInterval(fetchUnreadCount, 30000);
+            return () => clearInterval(interval);
+        }
+    }, [token, fetchUnreadCount]);
 
     const handleLogout = () => {
         logout();
@@ -52,7 +78,7 @@ export default function AdminLayout() {
 
                 {/* Navigation */}
                 <nav className="flex-1 p-4 space-y-1">
-                    {navItems.map(({ to, label, icon: Icon, end }) => (
+                    {navItems.map(({ to, label, icon: Icon, end, badge }) => (
                         <NavLink
                             key={to}
                             to={to}
@@ -66,6 +92,11 @@ export default function AdminLayout() {
                         >
                             <Icon className="w-4 h-4" />
                             {label}
+                            {badge && unreadCount > 0 && (
+                                <span className="ml-auto px-1.5 py-0.5 text-[10px] font-bold bg-orange-500 text-white rounded-full min-w-[18px] text-center leading-tight animate-pulse">
+                                    {unreadCount}
+                                </span>
+                            )}
                         </NavLink>
                     ))}
                 </nav>

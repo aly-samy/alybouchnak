@@ -1,4 +1,4 @@
-import { pgTable, serial, integer, text, varchar, timestamp, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, serial, integer, text, varchar, timestamp, jsonb, boolean } from 'drizzle-orm/pg-core';
 
 // --- TRACKS ---
 export const tracks = pgTable('tracks', {
@@ -178,4 +178,45 @@ export const subscribers = pgTable('subscribers', {
     status: varchar('status', { length: 50 }).default('active'), // active, unsubscribed
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow()
+});
+
+// --- EMAIL THREADS ---
+export const emailThreads = pgTable('email_threads', {
+    id: serial('id').primaryKey(),
+    subject: varchar('subject', { length: 500 }).notNull(),
+    participantEmail: varchar('participant_email', { length: 255 }).notNull(),
+    participantName: varchar('participant_name', { length: 255 }),
+    status: varchar('status', { length: 50 }).default('open'), // open, replied, closed
+    isRead: boolean('is_read').default(false),
+    lastMessageAt: timestamp('last_message_at', { withTimezone: true }).defaultNow(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow()
+});
+
+// --- EMAIL MESSAGES ---
+export const emailMessages = pgTable('email_messages', {
+    id: serial('id').primaryKey(),
+    threadId: integer('thread_id').notNull(),
+    mailgunId: varchar('mailgun_id', { length: 500 }),
+    direction: varchar('direction', { length: 10 }).notNull(), // inbound, outbound
+    fromEmail: varchar('from_email', { length: 255 }).notNull(),
+    fromName: varchar('from_name', { length: 255 }),
+    toEmail: varchar('to_email', { length: 500 }).notNull(),
+    cc: varchar('cc', { length: 500 }),
+    bcc: varchar('bcc', { length: 500 }),
+    subject: varchar('subject', { length: 500 }),
+    bodyHtml: text('body_html'),
+    bodyText: text('body_text'),
+    hasAttachments: boolean('has_attachments').default(false),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow()
+});
+
+// --- EMAIL ATTACHMENTS ---
+export const emailAttachments = pgTable('email_attachments', {
+    id: serial('id').primaryKey(),
+    messageId: integer('message_id').notNull(),
+    filename: varchar('filename', { length: 500 }).notNull(),
+    contentType: varchar('content_type', { length: 255 }),
+    size: integer('size'),
+    data: text('data'), // base64-encoded file content
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow()
 });
