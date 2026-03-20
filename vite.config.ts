@@ -12,7 +12,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          gsap: ['gsap']
+          gsap: ['gsap'],
+          icons: ['lucide-react']
         }
       }
     }

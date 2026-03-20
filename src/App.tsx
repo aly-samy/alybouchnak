@@ -36,12 +36,28 @@ function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
     // Initialize analytics on app load
     initGA();
 
-    // Delay Facebook Pixel to improve initial load performance
-    const pixelTimer = setTimeout(() => {
+    // Facebook Pixel Optimization: Load ONLY on first user interaction
+    // This avoids blocking the main thread during initial page load/parse
+    const loadPixel = () => {
       initPixel();
-    }, 2000);
+      // Remove listeners once loaded
+      window.removeEventListener('scroll', loadPixel);
+      window.removeEventListener('mousemove', loadPixel);
+      window.removeEventListener('touchstart', loadPixel);
+      window.removeEventListener('keydown', loadPixel);
+    };
 
-    return () => clearTimeout(pixelTimer);
+    window.addEventListener('scroll', loadPixel, { passive: true });
+    window.addEventListener('mousemove', loadPixel, { passive: true });
+    window.addEventListener('touchstart', loadPixel, { passive: true });
+    window.addEventListener('keydown', loadPixel, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', loadPixel);
+      window.removeEventListener('mousemove', loadPixel);
+      window.removeEventListener('touchstart', loadPixel);
+      window.removeEventListener('keydown', loadPixel);
+    };
   }, []);
 
   useEffect(() => {

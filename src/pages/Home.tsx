@@ -4,16 +4,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from '../sections/Navigation';
 import Hero from '../sections/Hero';
 import SpotifyPlayer from '../sections/SpotifyPlayer';
-import About from '../sections/About';
-import MoodSupport from '../sections/MoodSupport';
-import NewReleases from '../sections/NewReleases';
-import LatestPlaylists from '../sections/LatestPlaylists';
-import LatestThemes from '../sections/LatestThemes';
-import Playlist from '../sections/Playlist';
-import Testimonials from '../sections/Testimonials';
-import Support from '../sections/Support';
-import Newsletter from '../sections/Newsletter';
-import Footer from '../sections/Footer';
+import { lazy, Suspense } from 'react';
+
+const About = lazy(() => import('../sections/About'));
+const MoodSupport = lazy(() => import('../sections/MoodSupport'));
+const NewReleases = lazy(() => import('../sections/NewReleases'));
+const LatestPlaylists = lazy(() => import('../sections/LatestPlaylists'));
+const LatestThemes = lazy(() => import('../sections/LatestThemes'));
+const Playlist = lazy(() => import('../sections/Playlist'));
+const Testimonials = lazy(() => import('../sections/Testimonials'));
+const Support = lazy(() => import('../sections/Support'));
+const Newsletter = lazy(() => import('../sections/Newsletter'));
+const Footer = lazy(() => import('../sections/Footer'));
 import SEO from '../components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -182,16 +184,18 @@ function Home() {
       <main className="relative">
         <Hero />
         <SpotifyPlayer />
-        <About />
-        <MoodSupport />
-        <NewReleases />
-        <LatestPlaylists />
-        <LatestThemes />
-        <Playlist />
-        <Testimonials />
-        <Support />
-        <Newsletter />
-        <Footer />
+        <Suspense fallback={null}>
+          <About />
+          <MoodSupport />
+          <NewReleases />
+          <LatestPlaylists />
+          <LatestThemes />
+          <Playlist />
+          <Testimonials />
+          <Support />
+          <Newsletter />
+          <Footer />
+        </Suspense>
       </main>
     </div>
   );
