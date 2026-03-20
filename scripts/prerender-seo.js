@@ -21,10 +21,37 @@ const STATIC_ROUTES = [
     { slug: 'safety-policy', title: 'Safety & Values', description: 'Our Guilt-Free entertainment commitment.', image: `${DOMAIN}/images/Blooms-Safety-Seal.webp`, type: 'page' }
 ];
 
-// ─── REGEX HELPERS ───
+// ─── HELPERS ───
 function getVal(block, regex) {
     const m = regex.exec(block);
     return m ? (m[2] || m[1] || '') : '';
+}
+
+// Safe scanner for long quoted strings (avoids catastrophic regex backtracking)
+function getLongString(block, key) {
+    const keyPattern = new RegExp(`["']?${key}["']?:\\s*`);
+    const keyMatch = keyPattern.exec(block);
+    if (!keyMatch) return '';
+
+    let pos = keyMatch.index + keyMatch[0].length;
+    const quote = block[pos];
+    if (quote !== '"' && quote !== "'") return '';
+    pos++; // skip opening quote
+
+    let result = '';
+    while (pos < block.length) {
+        const ch = block[pos];
+        if (ch === '\\') {
+            result += block[pos + 1] || '';
+            pos += 2;
+        } else if (ch === quote) {
+            return result;
+        } else {
+            result += ch;
+            pos++;
+        }
+    }
+    return result;
 }
 
 function getArrayItems(block, key) {
@@ -92,14 +119,14 @@ function extractFullData(filePath, type) {
     while ((match = slugRegex.exec(content)) !== null) {
         const slug = match[1];
 
-        // Grab a large block around the slug (each track is ~1500 chars)
+        // Grab a large block around the slug (DB-generated tracks can be 5000+ chars)
         const blockStart = Math.max(0, match.index - 300);
-        const blockEnd = Math.min(content.length, match.index + 3000);
+        const blockEnd = Math.min(content.length, match.index + 8000);
         const block = content.substring(blockStart, blockEnd);
 
-        const title = getVal(block, /["']?title["']?:\s*(["'])(.*?)\1/) || slug;
-        const subtitle = getVal(block, /["']?subtitle["']?:\s*(["'])(.*?)\1/);
-        let desc = getVal(block, /["']?description["']?:\s*(["'])(.*?)\1/);
+        const title = getVal(block, /["']?title["']?:\s*["']([^"']+)["']/) || slug;
+        const subtitle = getVal(block, /["']?subtitle["']?:\s*["']([^"']+)["']/);
+        let desc = getLongString(block, 'description');
         if (!desc) desc = getVal(block, /["']?description["']?:\s*`([^`]+)`/);
 
         let cover = getVal(block, /["']?(?:coverImage|image)["']?[\s\w{:]*?["']?url["']?:\s*(["'])(.*?)\1/);
@@ -125,7 +152,7 @@ function extractFullData(filePath, type) {
         const albumUrl = getVal(block, /["']?albumUrl["']?:\s*(["'])(.*?)\1/);
 
         const lyricsPreview = getStringArray(block, 'lyricsPreview');
-        const lyricsFull = getVal(block, /["']?lyricsFull["']?:\s*(["'])((?:\\.|.)*?)\1/);
+        const lyricsFull = getLongString(block, 'lyricsFull');
         const educationalBenefits = getArrayItems(block, 'educationalBenefits');
 
         const category = getVal(block, /["']?category["']?:\s*(["'])(.*?)\1/);
