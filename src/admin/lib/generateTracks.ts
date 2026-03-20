@@ -18,7 +18,7 @@ const TRACK_INTERFACE = `export interface Track {
   releaseDate: string;
   duration: string;
   bpm: number;
-  genre: string;
+  genre?: string;
   ageRange: string;
   mood: string;
   routine: 'Playtime' | 'Bedtime' | 'Mealtime' | 'Cleanup' | 'Transition' | 'Learning' | 'Celebration' | 'Movement';
