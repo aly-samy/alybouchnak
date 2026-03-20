@@ -1,0 +1,20 @@
+/*
+  # Enable Early Hints for critical fonts (static names)
+  Link: </fonts/fredoka-regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/nunito-regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/nunito-700.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+  
+  # Security Headers
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: upgrade-insecure-requests;
+
+# Maximize caching for static assets in /assets/
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Maximize caching for fonts
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

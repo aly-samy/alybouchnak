@@ -35,7 +35,13 @@ function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Initialize analytics on app load
     initGA();
-    initPixel();
+
+    // Delay Facebook Pixel to improve initial load performance
+    const pixelTimer = setTimeout(() => {
+      initPixel();
+    }, 2000);
+
+    return () => clearTimeout(pixelTimer);
   }, []);
 
   useEffect(() => {

@@ -11,7 +11,8 @@ interface OptimizedImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 // Common breakpoints for responsive images
-const BREAKPOINTS = [320, 640, 768, 1024, 1280, 1536];
+// More granular breakpoints for better matching to display sizes (DPR 1x, 2x, 3x)
+const BREAKPOINTS = [256, 320, 384, 512, 640, 768, 896, 1024, 1280, 1536, 1920];
 
 const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
     ({ src, alt, width, height, quality = 85, className, loading, sizes, ...props }, ref) => {

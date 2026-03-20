@@ -51,7 +51,7 @@ export const themeCollections: ThemeCollection[] = [
     "title": "The \"Wake Up & Go\" Collection",
     "subtitle": "The Problem Solvers",
     "description": "Turn the morning struggle into a game with these high-energy tracks designed to get toddlers out of bed and moving.",
-    "coverImage": "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "coverImage": "/images/Aly-default_bg.webp",
     "artist": "Aly Bouchnak",
     "releaseDate": "2026-04-01T00:00:00.000Z",
     "genre": "Children's Utility",
@@ -79,12 +79,46 @@ export const themeCollections: ThemeCollection[] = [
     "status": "available"
   },
   {
+    "id": 3,
+    "slug": "family-road-trip",
+    "title": "The \"Family Road Trip\" Collection",
+    "subtitle": "The Memory Makers",
+    "description": "Upbeat, non-annoying pop that parents can actually enjoy alongside their kids during long drives.",
+    "coverImage": "/images/Aly-default_bg.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-06-15T00:00:00.000Z",
+    "genre": "Family Pop",
+    "ageRange": "0-16 years",
+    "mood": "Joyful",
+    "spotifyUrl": "https://open.spotify.com/playlist/7d4eOaB22cE2b3sF8E1d4B",
+    "appleMusicUrl": "#",
+    "youtubeUrl": "#",
+    "otherUrl": "#",
+    "trackCount": 3,
+    "duration": "8:00",
+    "upc": "123456789014",
+    "educationalBenefits": [
+      {
+        "title": "Family Bonding",
+        "description": "Creates shared musical memories for the whole family."
+      }
+    ],
+    "curatorNote": "Download my 'Road Trip Survival' playlist guide.",
+    "category": "Adventure & Event",
+    "trackIds": [
+      8,
+      9,
+      10
+    ],
+    "status": "available"
+  },
+  {
     "id": 2,
     "slug": "bouncy-beats-party",
     "title": "The \"Bouncy Beats\" Party",
     "subtitle": "The Vibe Managers",
     "description": "High-energy tracks for burning off extra energy safely indoors.",
-    "coverImage": "https://images.unsplash.com/photo-1533174000220-db9b09fb7be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "coverImage": "/images/Aly-default_bg.webp",
     "artist": "Aly Bouchnak",
     "releaseDate": "2026-05-01T00:00:00.000Z",
     "genre": "Kids Dance",
@@ -112,46 +146,12 @@ export const themeCollections: ThemeCollection[] = [
     "status": "available"
   },
   {
-    "id": 3,
-    "slug": "family-road-trip",
-    "title": "The \"Family Road Trip\" Collection",
-    "subtitle": "The Memory Makers",
-    "description": "Upbeat, non-annoying pop that parents can actually enjoy alongside their kids during long drives.",
-    "coverImage": "https://images.unsplash.com/photo-1510345479053-f4b6cb2fcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-06-15T00:00:00.000Z",
-    "genre": "Family Pop",
-    "ageRange": "All Ages",
-    "mood": "Joyful",
-    "spotifyUrl": "https://open.spotify.com/playlist/7d4eOaB22cE2b3sF8E1d4B",
-    "appleMusicUrl": "#",
-    "youtubeUrl": "#",
-    "otherUrl": "#",
-    "trackCount": 3,
-    "duration": "8:00",
-    "upc": "123456789014",
-    "educationalBenefits": [
-      {
-        "title": "Family Bonding",
-        "description": "Creates shared musical memories for the whole family."
-      }
-    ],
-    "curatorNote": "Download my 'Road Trip Survival' playlist guide.",
-    "category": "Adventure & Event",
-    "trackIds": [
-      8,
-      9,
-      10
-    ],
-    "status": "available"
-  },
-  {
     "id": 4,
     "slug": "musical-uncle-picks",
     "title": "Favorite Musical Uncle Picks",
     "subtitle": "Signature Hits",
     "description": "A curated list of my personal favorites and absolute top-streamed hits.",
-    "coverImage": "https://images.unsplash.com/photo-1516280440502-628d052be572?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "coverImage": "/images/Aly-default_bg.webp",
     "artist": "Aly Bouchnak",
     "releaseDate": "2026-07-01T00:00:00.000Z",
     "genre": "Curated Variety",
@@ -171,8 +171,6 @@ export const themeCollections: ThemeCollection[] = [
       }
     ],
     "curatorNote": "The absolute best of the Bloom's House.",
-    "artistNote": "",
-    "scienceFramework": "",
     "category": "Signature Collections",
     "trackIds": [
       5,

@@ -8,11 +8,16 @@
   <meta name="description"
     content="Aly Bouchnak creates modern nursery rhymes and kids pop songs for toddlers and preschoolers. Stream movement-based family dance music from The Bloom’s House." />
   <meta name="theme-color" content="#C8F0F7" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap"
-    rel="stylesheet">
-  <!-- Open Graph Default Meta Tags -->
+  <!-- Self-hosted fonts — no third-party CDN, no render-blocking -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/fredoka-regular.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/nunito-regular.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/nunito-700.woff2">
+  <link rel="preload" as="image" fetchpriority="high"
+    href="/cdn-cgi/image/width=640,height=640,quality=85,format=auto/images/aly-bouchnak-hero.webp"
+    imagesrcset="/cdn-cgi/image/width=320,quality=85,format=auto/images/aly-bouchnak-hero.webp 320w, /cdn-cgi/image/width=640,quality=85,format=auto/images/aly-bouchnak-hero.webp 640w, /cdn-cgi/image/width=1024,quality=85,format=auto/images/aly-bouchnak-hero.webp 1024w"
+    imagesizes="(max-width: 1024px) 100vw, 50vw">
+  <link rel="stylesheet" href="/fonts/fonts.css">
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://alybouchnak.com/" />
   <meta property="og:title" content="Aly Bouchnak - Modern Kids' Pop & Family Music" />
@@ -33,9 +38,6 @@
   <link rel="icon" href="favicon-144x144.png" sizes="144x144" type="image/png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  <!-- Mailchimp Integration Script -->
-  <script
-    id="mcjs">!function (c, h, i, m, p) { m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p) }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/07540dff81798cb9a2b8d925b/b9da0c1e41c1b71a5952de1ec.js");</script>
 </head>
 
 <body>

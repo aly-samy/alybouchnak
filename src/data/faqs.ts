@@ -7,12 +7,6 @@ export interface FAQ {
 
 export const faqs: FAQ[] = [
   {
-    "id": 1,
-    "category": "About Aly Bouchnak",
-    "question": "Who is Aly Bouchnak?",
-    "answer": "Aly Bouchnak is a children’s music artist and creator of \"The Bloom's House,\" a 3D plushie world. He produces modern \"Digital Pop\" for toddlers and families, bridging the gap between nursery rhymes and pop music."
-  },
-  {
     "id": 2,
     "category": "Music & Parenting",
     "question": "What is \"Balanced Stimulation\" music?",
@@ -89,6 +83,192 @@ export const faqs: FAQ[] = [
     "category": "Music & Parenting",
     "question": "Why do you use \"Digital Pop\" instead of acoustic instruments?",
     "answer": "We use Digital Pop to match the high energy levels of modern toddlers. While acoustic music is beautiful, our goal is to provide a \"mood shift\" that captures attention immediately. The 125 BPM tempo and clean, digital production style are engineered to cut through the noise and provide an instant dopamine boost, similar to adult pop music, but with safe, child-appropriate lyrics. This helps parents enjoy the music alongside their children, reducing \"listener fatigue\"."
+  },
+  {
+    "id": 16,
+    "category": "Music & Parenting",
+    "question": "What is the best non-overstimulating music for toddlers?",
+    "answer": "The best toddler music uses gentle sounds, clear vocals, and a steady, happy rhythm. Songs that combine soft instruments like piano, ukulele, and light digital beats help children stay engaged without overwhelming their senses. Music from Aly Bouchnak’s Bloom’s House studio is designed to be upbeat but calm, supporting happy play and movement."
+  },
+  {
+    "id": 17,
+    "category": "Music & Parenting",
+    "question": "Can you play calm music for my toddler?",
+    "answer": "Calm toddler music usually includes warm instruments, simple melodies, and clear singing that children can easily follow. Gentle acoustic pop or soft nursery rhymes are ideal because they keep kids relaxed while still engaging their attention. These songs create a comforting sound environment for quiet play or relaxation."
+  },
+  {
+    "id": 18,
+    "category": "Music & Parenting",
+    "question": "What music is safe for toddlers to listen to?",
+    "answer": "Safe toddler music is designed with family-friendly lyrics, gentle sounds, and positive themes. Songs that focus on kindness, curiosity, and everyday childhood experiences help children enjoy music while learning social and emotional skills. Parents often choose music created specifically for early childhood listening environments."
+  },
+  {
+    "id": 19,
+    "category": "Music & Parenting",
+    "question": "What songs are gentle for a toddler’s developing brain?",
+    "answer": "Gentle toddler songs usually feature slower rhythms, clear vocals, and soft instruments. Music that avoids loud effects and chaotic sounds helps young listeners process language and rhythm more comfortably. Balanced children’s music supports attention, learning, and emotional regulation during playtime or quiet moments."
+  },
+  {
+    "id": 20,
+    "category": "Music & Parenting",
+    "question": "Is there kids’ music that isn’t loud or chaotic?",
+    "answer": "Yes. Many modern children’s songs are designed to be upbeat without being overwhelming. Music with steady rhythms, warm instruments, and friendly vocals can keep toddlers engaged while avoiding the loud, chaotic sound found in some digital kids’ media. These songs support dancing, play, and positive moods."
+  },
+  {
+    "id": 21,
+    "category": "Music & Parenting",
+    "question": "What music helps toddlers relax without screen time?",
+    "answer": "Music is a great way to calm toddlers without using screens. Soft nursery rhymes, acoustic children’s songs, or gentle pop designed for young listeners can create a relaxing atmosphere. Playing music during quiet playtime or reading helps children unwind while still stimulating imagination and language development."
+  },
+  {
+    "id": 22,
+    "category": "Music & Parenting",
+    "question": "What music helps toddlers fall asleep faster?",
+    "answer": "Music with slow rhythms and gentle melodies can help toddlers relax before sleep. Soft lullabies, piano music, and quiet acoustic songs create a predictable bedtime atmosphere. Playing the same calming music every night helps signal to children that it is time to wind down and prepare for sleep."
+  },
+  {
+    "id": 23,
+    "category": "Music & Parenting",
+    "question": "Can you play calming music for toddler bedtime?",
+    "answer": "Calming bedtime music usually includes slow tempos, soft vocals, and simple melodies. These soothing sounds help toddlers relax after a busy day and transition into sleep more easily. Many parents include quiet music as part of a consistent bedtime routine to support healthy sleep habits."
+  },
+  {
+    "id": 24,
+    "category": "Music & Parenting",
+    "question": "What songs are good for a toddler sleep routine?",
+    "answer": "Songs used in a sleep routine should be gentle, predictable, and relaxing. Soft lullabies, quiet nursery rhymes, or mellow acoustic songs work well because they gradually lower stimulation levels. Playing the same music each night helps toddlers associate those sounds with bedtime."
+  },
+  {
+    "id": 25,
+    "category": "Music & Parenting",
+    "question": "What gentle music can help my baby relax before bed?",
+    "answer": "Babies relax best with soft melodies and simple musical arrangements. Quiet piano, acoustic guitar, or gentle lullabies create a calm environment that encourages relaxation. Music with clear, soothing vocals can help babies feel secure and comfortable as they prepare for sleep."
+  },
+  {
+    "id": 26,
+    "category": "Music & Parenting",
+    "question": "What lullabies help toddlers self-soothe?",
+    "answer": "Lullabies with slow tempos and comforting melodies help toddlers learn to relax on their own. Gentle singing and repetitive phrases create a sense of safety and familiarity. Over time, these calming songs become cues that help children settle down and fall asleep more easily."
+  },
+  {
+    "id": 27,
+    "category": "Music & Parenting",
+    "question": "Can you play soft nursery rhymes for sleep?",
+    "answer": "Soft nursery rhymes are perfect for bedtime. When performed with quiet instruments and gentle vocals, classic songs create a peaceful soundscape that helps toddlers relax. These familiar melodies provide comfort while supporting language development and emotional security before sleep."
+  },
+  {
+    "id": 28,
+    "category": "Music & Parenting",
+    "question": "Can you play music to help my toddler get the wiggles out?",
+    "answer": "High-energy toddler music with a steady rhythm is great for helping kids release extra energy. Songs that encourage jumping, clapping, and dancing allow children to move their bodies in a fun and healthy way. Music-based play is a great indoor activity for active toddlers."
+  },
+  {
+    "id": 29,
+    "category": "Music & Parenting",
+    "question": "What songs are good for toddler dance parties?",
+    "answer": "Great toddler dance songs have upbeat rhythms, simple lyrics, and clear beats that children can follow. Music that invites actions like clapping, stomping, and spinning keeps kids moving and laughing. Family dance parties are a fun way to combine exercise, music, and bonding time."
+  },
+  {
+    "id": 30,
+    "category": "Music & Parenting",
+    "question": "What music helps kids burn energy indoors?",
+    "answer": "Upbeat children’s music with a lively rhythm helps kids burn energy indoors. Songs with strong beats and playful lyrics encourage movement, dancing, and active play. Music-based games can transform a living room into a fun space where children release energy safely."
+  },
+  {
+    "id": 31,
+    "category": "Music & Parenting",
+    "question": "Can you play freeze dance music for toddlers?",
+    "answer": "Freeze dance music works best with clear beats and playful rhythms. Children dance while the music plays and freeze when it stops, turning listening into a fun game. This activity helps toddlers develop coordination, impulse control, and body awareness."
+  },
+  {
+    "id": 32,
+    "category": "Music & Parenting",
+    "question": "What music makes toddlers want to jump and clap?",
+    "answer": "Songs with strong rhythms and simple action words encourage toddlers to move. Music that includes instructions like clap, stomp, or jump naturally invites participation. These interactive songs turn listening into active play while helping children build coordination and confidence."
+  },
+  {
+    "id": 33,
+    "category": "Music & Parenting",
+    "question": "What fun songs can we dance to with my toddler?",
+    "answer": "Fun toddler dance songs usually combine upbeat rhythms with playful lyrics. Music that both parents and kids enjoy makes family dance time more exciting. Dancing together helps children develop motor skills while strengthening family connections."
+  },
+  {
+    "id": 34,
+    "category": "Music & Parenting",
+    "question": "What music helps stop a toddler tantrum?",
+    "answer": "Music can sometimes help shift a toddler’s mood during difficult moments. Playing an upbeat song or a familiar favorite can redirect attention and encourage movement. Dancing or clapping along to music can help children release frustration and return to a calmer emotional state."
+  },
+  {
+    "id": 35,
+    "category": "Music & Parenting",
+    "question": "Can you play a song to improve my toddler’s mood?",
+    "answer": "Happy, upbeat music can quickly lift a toddler’s mood. Songs with cheerful melodies and playful rhythms encourage dancing, laughter, and movement. Changing the energy in the room with music often helps children transition from frustration to positive engagement."
+  },
+  {
+    "id": 36,
+    "category": "Music & Parenting",
+    "question": "What music helps kids transition away from screen time?",
+    "answer": "Music is a helpful tool for transitioning away from screens. Playing an upbeat song invites children to move, dance, or play instead of focusing on a device. Many parents use music as a cue to signal the end of screen time and the start of active play."
+  },
+  {
+    "id": 37,
+    "category": "Music & Parenting",
+    "question": "Can music help my toddler calm down?",
+    "answer": "Yes. Music can influence mood and help children regulate their emotions. Calm songs encourage relaxation, while upbeat songs can redirect energy. Choosing the right type of music for the moment can help toddlers shift from stress or frustration to a more balanced state."
+  },
+  {
+    "id": 38,
+    "category": "Music & Parenting",
+    "question": "What song helps toddlers clean up their toys?",
+    "answer": "Cleanup songs turn chores into a fun activity. Upbeat music with simple lyrics encourages children to pick up toys while singing along. Many parents use the same cleanup song each day so toddlers learn to associate the music with putting things away."
+  },
+  {
+    "id": 39,
+    "category": "Music & Parenting",
+    "question": "Can you play music for toddler mealtime?",
+    "answer": "Light, cheerful music can make mealtime more relaxed and enjoyable. Songs with positive energy help create a friendly atmosphere at the table. Music sometimes distracts picky eaters just enough to help them focus on trying new foods."
+  },
+  {
+    "id": 40,
+    "category": "Music & Parenting",
+    "question": "Can music help my toddler learn to talk?",
+    "answer": "Music supports language development by combining rhythm, melody, and repetition. Songs with clear words and repeating phrases help toddlers recognize sounds and practice speech. Singing along to simple children’s songs encourages vocabulary growth and listening skills."
+  },
+  {
+    "id": 41,
+    "category": "Music & Parenting",
+    "question": "What songs help toddlers learn the alphabet?",
+    "answer": "Alphabet songs are one of the most effective tools for early learning. Repeating letters in a melody helps children remember the sequence more easily. Music turns learning the alphabet into a fun and engaging activity for toddlers and preschoolers."
+  },
+  {
+    "id": 42,
+    "category": "Music & Parenting",
+    "question": "What music helps toddlers learn animal sounds?",
+    "answer": "Animal songs help toddlers practice new sounds and words. Songs that include familiar animals and their noises encourage children to imitate sounds like moo, bark, or tweet. These playful interactions support speech development and early language learning."
+  },
+  {
+    "id": 43,
+    "category": "Music & Parenting",
+    "question": "What songs teach toddlers colors and numbers?",
+    "answer": "Songs that repeat colors and numbers help toddlers remember basic concepts. Music turns learning into a fun activity by pairing information with rhythm and melody. Children often memorize songs faster than spoken lessons, making music a powerful learning tool."
+  },
+  {
+    "id": 44,
+    "category": "Music & Parenting",
+    "question": "What music supports speech development in toddlers?",
+    "answer": "Speech-friendly toddler music features clear vocals, slow pronunciation, and repeating phrases. These elements help children hear language patterns and practice saying new words. Singing together is an enjoyable way for families to support early communication skills."
+  },
+  {
+    "id": 45,
+    "category": "Music & Parenting",
+    "question": "What nursery rhymes are best for language development?",
+    "answer": "Classic nursery rhymes are excellent for language development because they use rhythm, rhyme, and repetition. These patterns help toddlers recognize sounds and remember words. Singing familiar rhymes together strengthens listening skills, vocabulary, and early literacy foundations."
+  },
+  {
+    "id": 1,
+    "category": "About Aly Bouchnak",
+    "question": "Who is Aly Bouchnak?",
+    "answer": "Aly Bouchnak is a leading independent children’s music artist and the creator of **[The Bloom's House](https://alybouchnak.com)**, a unique 3D plushie world. He produces modern **\"Digital Pop\"** specifically for toddlers and Millennial families, bridging the gap between traditional nursery rhymes and high-energy pop music. Known as the **\"Favorite Musical Uncle,\"** Aly's mission is to provide [Balanced Stimulation](https://alybouchnak.com/about) that supports both active playtime and healthy daily routines.\n"
   }
 ];
 

@@ -73,9 +73,9 @@ const Hero = () => {
 
       // Avatar slide up
       tl.fromTo(avatarRef.current,
-        { y: '18vh', opacity: 0.1 },
-        { y: 0, opacity: 1, duration: 0.9 },
-        0.3
+        { y: '12vh', opacity: 1 },
+        { y: 0, opacity: 1, duration: 0.8 },
+        0.2
       );
     }, sectionRef);
 
@@ -227,8 +227,8 @@ const Hero = () => {
                 ref={avatarRef}
                 src="/images/aly-bouchnak-hero.webp"
                 alt="Aly Bouchnak"
-                width={800}
-                height={800}
+                width={640}
+                height={640}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 fetchPriority="high"
                 loading="eager"
