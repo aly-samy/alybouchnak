@@ -83,7 +83,7 @@ function createCombinedReleases(): CombinedRelease[] {
     isTrack: true,
     image: track.coverImage,
     link: `/track/${track.slug}`,
-    genre: track.genre,
+    genre: track.genre || "Children's Music",
     mood: track.mood,
   }));
 
