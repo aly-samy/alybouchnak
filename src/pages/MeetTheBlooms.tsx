@@ -611,7 +611,11 @@ export default function MeetTheBlooms() {
                             className="email-form"
                             onSubmit={handleDownload}
                         >
+                            <label htmlFor="meet-blooms-first-name" className="sr-only">First Name</label>
                             <input
+                                id="meet-blooms-first-name"
+                                name="meet-blooms-first-name"
+                                autoComplete="given-name"
                                 type="text"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
@@ -621,7 +625,11 @@ export default function MeetTheBlooms() {
                                 disabled={isFormSubmitting}
                                 style={{ marginBottom: '0.5rem' }}
                             />
+                            <label htmlFor="meet-blooms-email" className="sr-only">Email Address</label>
                             <input
+                                id="meet-blooms-email"
+                                name="meet-blooms-email"
+                                autoComplete="email"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

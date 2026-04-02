@@ -81,6 +81,8 @@ export default function ManageSubscription() {
                             </label>
                             <input
                                 id="email"
+                                name="email"
+                                autoComplete="email"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

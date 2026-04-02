@@ -163,8 +163,8 @@ export default function BloomQuizWizard({ isOpen, onClose }: BloomQuizWizardProp
 
             <div className="space-y-4">
                 <div>
-                    <label className="block text-sm font-semibold text-[#101010] mb-1">What is your name?</label>
-                    <input
+                    <label htmlFor="quiz-name" className="block text-sm font-semibold text-[#101010] mb-1">What is your name?</label>
+                    <input id="quiz-name" name="quiz-name" autoComplete="given-name"
                         type="text"
                         className="w-full px-4 py-3 rounded-xl border-2 border-transparent bg-[#FFF8F0] focus:border-[#F26B3A] focus:outline-none transition-colors"
                         placeholder="Enter your name"

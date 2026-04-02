@@ -218,7 +218,11 @@ const Footer = () => {
               </p>
               {!isSubmitted ? (
                 <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
+                  <label htmlFor="footer-first-name" className="sr-only">First Name</label>
                   <input
+                    id="footer-first-name"
+                    name="footer-first-name"
+                    autoComplete="given-name"
                     type="text"
                     placeholder="First Name"
                     value={firstName}
@@ -227,7 +231,11 @@ const Footer = () => {
                     className="w-full px-4 py-2.5 rounded-xl border border-white bg-white/60 text-sm focus:outline-none focus:border-[#F26B3A]"
                   />
                   <div className="flex gap-2">
+                    <label htmlFor="footer-email" className="sr-only">Email Address</label>
                     <input
+                      id="footer-email"
+                      name="footer-email"
+                      autoComplete="email"
                       type="email"
                       placeholder="Email Address"
                       value={email}
