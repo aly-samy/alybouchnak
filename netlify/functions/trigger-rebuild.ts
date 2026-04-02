@@ -1,4 +1,5 @@
 import type { Handler, HandlerEvent } from '@netlify/functions';
+import { secureCompare } from './utils/security.js';
 
 export const handler: Handler = async (event: HandlerEvent) => {
     if (event.httpMethod !== 'POST') {
@@ -8,7 +9,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
     // Verify admin token
     const adminToken = process.env.VITE_ADMIN_PASSWORD;
     const authHeader = event.headers.authorization;
-    if (!adminToken || !authHeader || authHeader !== `Bearer ${adminToken}`) {
+    if (!adminToken || !authHeader || !secureCompare(authHeader, `Bearer ${adminToken}`)) {
         return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
     }
 

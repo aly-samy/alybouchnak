@@ -2,6 +2,7 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 import { db } from '../../src/db/index.js';
 import * as schema from '../../src/db/schema.js';
 import { eq } from 'drizzle-orm';
+import { secureCompare } from './utils/security.js';
 
 export const handler: Handler = async (event: HandlerEvent) => {
     // Only allow POST, PUT, DELETE, GET requests
@@ -15,7 +16,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
     // Protect mutations (POST, PUT, DELETE)
     if (event.httpMethod !== 'GET') {
         const authHeader = event.headers.authorization;
-        if (!authHeader || authHeader !== `Bearer ${adminToken}`) {
+        if (!adminToken || !authHeader || !secureCompare(authHeader, `Bearer ${adminToken}`)) {
             return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
         }
     }

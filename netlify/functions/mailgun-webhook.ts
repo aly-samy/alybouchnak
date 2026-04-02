@@ -3,6 +3,7 @@ import { db } from '../../src/db/index.js';
 import { emailThreads, emailMessages, emailAttachments } from '../../src/db/schema.js';
 import { eq } from 'drizzle-orm';
 import crypto from 'crypto';
+import { secureCompare } from './utils/security.js';
 
 /**
  * Inbound Email Webhook Handler
@@ -30,7 +31,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
 
             // Verify shared secret
             const expectedSecret = process.env.CLOUDFLARE_WEBHOOK_SECRET || 'bloom-email-webhook-2026';
-            if (payload.secret !== expectedSecret) {
+            if (!secureCompare(payload.secret, expectedSecret)) {
                 console.error('Cloudflare webhook secret mismatch');
                 return { statusCode: 403, body: JSON.stringify({ error: 'Invalid secret' }) };
             }
@@ -65,7 +66,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
                     .update(timestamp + token)
                     .digest('hex');
 
-                if (signature !== expectedSignature) {
+                if (!secureCompare(signature, expectedSignature)) {
                     console.error('Mailgun webhook signature verification failed');
                     return { statusCode: 403, body: JSON.stringify({ error: 'Invalid signature' }) };
                 }
