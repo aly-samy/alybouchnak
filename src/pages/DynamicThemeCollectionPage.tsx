@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -29,10 +29,15 @@ function DynamicThemeCollectionPage() {
     const { slug } = useParams<{ slug: string }>();
     const collectionData = getThemeCollectionBySlug(slug || '') as ThemeCollection;
 
+    // Optimize track lookup
+    const trackMap = useMemo(() => new Map(allTracks.map(t => [t.id, t])), []);
+
     // Resolve tracks from IDs
-    const collectionTracks = collectionData?.trackIds
-        ? collectionData.trackIds.map(id => allTracks.find(t => t.id === id)).filter(Boolean) as typeof allTracks
-        : [];
+    const collectionTracks = useMemo(() => {
+        return collectionData?.trackIds
+            ? collectionData.trackIds.map(id => trackMap.get(id)).filter(Boolean) as typeof allTracks
+            : [];
+    }, [collectionData, trackMap]);
 
     const heroRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);

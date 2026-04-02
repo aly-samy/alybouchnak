@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -42,6 +42,9 @@ function DynamicAlbumPage() {
   const bgRef = useRef<HTMLDivElement>(null);
   const [expandedTrack, setExpandedTrack] = useState<number | null>(null);
   const [currentSpotifyUrl, setCurrentSpotifyUrl] = useState<string | null>(null);
+
+  // Optimize track lookup
+  const trackMap = useMemo(() => new Map(allTracksData.map(t => [t.id, t])), []);
 
   // Helper to check if album is released (has valid streaming URL, not placeholder)
   const isReleased = albumData && albumData.spotifyUrl && !albumData.spotifyUrl.includes('placeholder');
@@ -132,7 +135,7 @@ function DynamicAlbumPage() {
     'numTracks': albumData.trackCount,
     'url': `https://alybouchnak.com/album/${albumData.slug}`,
     'track': albumData.trackIds?.map(id => {
-      const track = allTracksData.find(t => t.id === id);
+      const track = trackMap.get(id);
       if (!track) return null;
 
       let isoDuration = "PT0M0S";
@@ -499,7 +502,7 @@ function DynamicAlbumPage() {
                 </div>
                 <div className="space-y-3">
                   {albumData.trackIds.map((id, index) => {
-                    const track = allTracksData.find(t => t.id === id);
+                    const track = trackMap.get(id);
                     if (!track) return null;
                     return (
                       <div
