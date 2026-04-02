@@ -1,4 +1,5 @@
 export interface ThemeCollection {
+  id?: number;
   slug: string;
   title: string;
   subtitle: string;
@@ -35,7 +36,6 @@ export interface ThemeCollection {
     link: string;
   }[];
   // For Discography compatibility
-  id?: number;
   type?: string;
   date?: string;
   image?: string;

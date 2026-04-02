@@ -15,7 +15,7 @@ jobs:
   setup:
     name: Setup
     outputs:
-      branch: ${{ steps.branch-name.outputs.branch }}
+      branch: ${{ steps.branch-name.outputs.current_branch }}
     runs-on: ubuntu-latest
     steps:
       - name: Get branch name
@@ -24,7 +24,7 @@ jobs:
   
   create-branch:
     name: Create Neon Branch
-    if: github.event.action != 'closed'
+    if: github.event.action != 'closed' && secrets.NEON_API_KEY != '' && secrets.NEON_PROJECT_ID != ''
     needs: setup
     runs-on: ubuntu-latest
     outputs:
@@ -37,12 +37,12 @@ jobs:
         with:
           project_id: ${{ secrets.NEON_PROJECT_ID }}
           # parent_branch: main
-          branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.current_branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
 
   delete-branch:
     name: Delete Neon Branch
-    if: github.event.action == 'closed'
+    if: github.event.action == 'closed' && secrets.NEON_API_KEY != '' && secrets.NEON_PROJECT_ID != ''
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -50,5 +50,5 @@ jobs:
         uses: neondatabase/delete-branch-action@v3
         with:
           project_id: ${{ secrets.NEON_PROJECT_ID }}
-          branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.current_branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
