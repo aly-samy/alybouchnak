@@ -11,11 +11,14 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   setup:
     name: Setup
     outputs:
-      branch: ${{ steps.branch-name.outputs.branch }}
+      branch: ${{ steps.branch-name.outputs.current_branch }}
     runs-on: ubuntu-latest
     steps:
       - name: Get branch name
@@ -35,7 +38,7 @@ jobs:
         id: create-branch
         uses: neondatabase/create-branch-action@v5
         with:
-          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          project_id: ${{ secrets.NEON_PROJECT_ID || vars.NEON_PROJECT_ID }}
           # parent_branch: main
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
@@ -49,6 +52,6 @@ jobs:
       - name: Delete branch
         uses: neondatabase/delete-branch-action@v3
         with:
-          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          project_id: ${{ secrets.NEON_PROJECT_ID || vars.NEON_PROJECT_ID }}
           branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
