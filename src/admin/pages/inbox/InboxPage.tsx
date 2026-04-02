@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import ComposeEmail from './ComposeEmail';
 import { useAdminAuth } from '../../lib/adminAuth';
+import DOMPurify from 'dompurify';
 
 interface Thread {
     id: number;
@@ -373,7 +374,7 @@ export default function InboxPage() {
                                         </div>
                                         <div
                                             className="text-sm text-slate-300 leading-relaxed prose prose-sm prose-invert max-w-none [&_a]:text-orange-400 [&_img]:rounded-lg [&_img]:max-w-full"
-                                            dangerouslySetInnerHTML={{ __html: msg.bodyHtml || msg.bodyText || '' }}
+                                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(msg.bodyHtml || msg.bodyText || '') }}
                                         />
                                         {msg.attachments && msg.attachments.length > 0 && (
                                             <div className="mt-3 pt-3 border-t border-slate-700 space-y-1">
