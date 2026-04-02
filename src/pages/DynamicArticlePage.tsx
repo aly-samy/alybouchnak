@@ -333,7 +333,11 @@ function DynamicArticlePage() {
 
                             {!subscribeSuccess ? (
                                 <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
+                                    <label htmlFor="article-first-name" className="sr-only">First Name</label>
                                     <input
+                                        id="article-first-name"
+                                        name="article-first-name"
+                                        autoComplete="given-name"
                                         type="text"
                                         placeholder="First Name"
                                         value={firstName}
@@ -341,7 +345,11 @@ function DynamicArticlePage() {
                                         required
                                         className="w-full px-4 py-3 rounded-xl border-none text-[#101010] text-sm focus:outline-none focus:ring-2 focus:ring-[#F7E859]"
                                     />
+                                    <label htmlFor="article-email" className="sr-only">Email Address</label>
                                     <input
+                                        id="article-email"
+                                        name="article-email"
+                                        autoComplete="email"
                                         type="email"
                                         placeholder="Email Address"
                                         value={email}

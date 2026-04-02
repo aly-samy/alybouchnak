@@ -117,7 +117,11 @@ const Newsletter = () => {
               className="flex flex-col gap-4 max-w-lg mx-auto bg-white/40 p-6 md:p-8 rounded-3xl backdrop-blur-sm border-2 border-white/50 shadow-xl"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label htmlFor="newsletter-first-name" className="sr-only">First Name</label>
                 <input
+                  id="newsletter-first-name"
+                  name="newsletter-first-name"
+                  autoComplete="given-name"
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -138,7 +142,11 @@ const Newsletter = () => {
                 </select>
               </div>
 
+              <label htmlFor="newsletter-email" className="sr-only">Email Address</label>
               <input
+                id="newsletter-email"
+                name="newsletter-email"
+                autoComplete="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -150,7 +158,11 @@ const Newsletter = () => {
               <div className="pt-2 pb-1 text-left">
                 <p className="text-xs font-semibold text-[#F26B3A] uppercase tracking-wider mb-2">Optional Magic Touch ✨</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <label htmlFor="newsletter-child-name" className="sr-only">Child's First Name</label>
                   <input
+                    id="newsletter-child-name"
+                    name="newsletter-child-name"
+                    autoComplete="off"
                     type="text"
                     value={childName}
                     onChange={(e) => setChildName(e.target.value)}

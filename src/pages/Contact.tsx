@@ -148,7 +148,7 @@ const Contact = () => {
                   <form name="contact" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit} className="space-y-6">
                     <input type="hidden" name="form-name" value="contact" />
                     <p className="hidden">
-                      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                      <label htmlFor="bot-field">Don’t fill this out if you're human: <input id="bot-field" name="bot-field" autoComplete="off" /></label>
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -160,6 +160,7 @@ const Contact = () => {
                           type="text"
                           id="name"
                           name="name"
+                          autoComplete="name"
                           required
                           value={formData.name}
                           onChange={handleChange}
@@ -175,6 +176,7 @@ const Contact = () => {
                           type="email"
                           id="email"
                           name="email"
+                          autoComplete="email"
                           required
                           value={formData.email}
                           onChange={handleChange}
