@@ -35,10 +35,11 @@ jobs:
         id: create-branch
         uses: neondatabase/create-branch-action@v5
         with:
-          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          project_id: ${{ vars.NEON_PROJECT_ID }}
           # parent_branch: main
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
+          username: neondb_owner
 
   delete-branch:
     name: Delete Neon Branch
@@ -49,6 +50,6 @@ jobs:
       - name: Delete branch
         uses: neondatabase/delete-branch-action@v3
         with:
-          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          project_id: ${{ vars.NEON_PROJECT_ID }}
           branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
