@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -40,6 +40,9 @@ function DynamicPlaylistPage() {
     const bgRef = useRef<HTMLDivElement>(null);
     const [expandedTrack, setExpandedTrack] = useState<number | null>(null);
     const [currentSpotifyUrl, setCurrentSpotifyUrl] = useState<string | null>(null);
+
+    // Optimize track lookup
+    const trackMap = useMemo(() => new Map(allTracksData.map(t => [t.id, t])), []);
 
     // Helper to check if playlist is released
     const isReleased = playlistData && playlistData.spotifyUrl && !playlistData.spotifyUrl.includes('placeholder');
@@ -124,7 +127,7 @@ function DynamicPlaylistPage() {
         'numTracks': playlistData.trackCount,
         'track': playlistData.tracks?.map(t => {
             const isInternal = !!t.trackId;
-            const track = isInternal ? allTracksData.find(x => x.id === t.trackId) : null;
+            const track = isInternal ? (t.trackId ? trackMap.get(t.trackId) : null) : null;
 
             // Convert MM:SS to PT#M#S
             let isoDuration = "PT0M0S";
@@ -338,7 +341,7 @@ function DynamicPlaylistPage() {
                                 <div className="space-y-3">
                                     {playlistData.tracks.map((t, index) => {
                                         const isInternal = !!t.trackId;
-                                        const track = isInternal ? allTracksData.find(x => x.id === t.trackId) : null;
+                                        const track = isInternal ? (t.trackId ? trackMap.get(t.trackId) : null) : null;
 
                                         const title = track ? track.title : t.title;
                                         const duration = track ? track.duration : t.duration;
