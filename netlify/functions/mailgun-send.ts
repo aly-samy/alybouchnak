@@ -2,6 +2,7 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 import { db } from '../../src/db/index.js';
 import { emailThreads, emailMessages, emailAttachments } from '../../src/db/schema.js';
 import { eq } from 'drizzle-orm';
+import { secureCompare } from './utils/security.js';
 
 const MAILGUN_API_URL = 'https://api.mailgun.net/v3';
 
@@ -38,7 +39,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
     // Auth check
     const adminToken = process.env.VITE_ADMIN_PASSWORD;
     const authHeader = event.headers.authorization;
-    if (!authHeader || authHeader !== `Bearer ${adminToken}`) {
+    if (!adminToken || !authHeader || !secureCompare(authHeader, `Bearer ${adminToken}`)) {
         return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
     }
 

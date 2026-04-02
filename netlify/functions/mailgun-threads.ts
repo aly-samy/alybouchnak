@@ -2,6 +2,7 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 import { db } from '../../src/db/index.js';
 import { emailThreads, emailMessages, emailAttachments } from '../../src/db/schema.js';
 import { eq, desc, sql } from 'drizzle-orm';
+import { secureCompare } from './utils/security.js';
 
 /**
  * Email Threads API — powers the admin inbox UI
@@ -16,7 +17,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
     // Auth check for all methods
     const adminToken = process.env.VITE_ADMIN_PASSWORD;
     const authHeader = event.headers.authorization;
-    if (!authHeader || authHeader !== `Bearer ${adminToken}`) {
+    if (!adminToken || !authHeader || !secureCompare(authHeader, `Bearer ${adminToken}`)) {
         return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
     }
 
