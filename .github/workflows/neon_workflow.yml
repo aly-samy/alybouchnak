@@ -39,6 +39,7 @@ jobs:
           # parent_branch: main
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
+          username: neondb_owner
 
   delete-branch:
     name: Delete Neon Branch
