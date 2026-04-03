@@ -1,3 +1,4 @@
+import OptimizedImage from '../components/OptimizedImage';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -388,12 +389,7 @@ const Discography = () => {
               {latestAlbums.map((album) => (
                 <article key={album.id} className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
                   <div className="aspect-square overflow-hidden">
-                    <img
-                      src={album.image}
-                      alt={album.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                      loading="lazy"
-                    />
+                    <OptimizedImage src={album.image} alt={album.title} width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" loading="lazy" />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
@@ -499,12 +495,7 @@ const Discography = () => {
                 >
                   {release.image ? (
                     <div className="relative aspect-square overflow-hidden">
-                      <img
-                        src={release.image}
-                        alt={release.title}
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                        loading="lazy"
-                      />
+                      <OptimizedImage src={release.image} alt={release.title} width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
                     </div>
                   ) : (
                     <div className="aspect-square bg-gradient-to-br from-[#F7E859]/30 to-[#C8F0F7]/30 flex items-center justify-center">
@@ -592,12 +583,7 @@ const Discography = () => {
                   className="release-card bg-[#2a2a2a] rounded-[28px] overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.30)]"
                 >
                   <div className="relative aspect-square overflow-hidden">
-                    <img
-                      src={release.image}
-                      alt={release.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      loading="lazy"
-                    />
+                    <OptimizedImage src={release.image} alt={release.title} width={400} height={400} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
                   </div>
 
                   <div className="p-5">

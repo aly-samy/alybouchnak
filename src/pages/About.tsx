@@ -1,3 +1,4 @@
+import OptimizedImage from '../components/OptimizedImage';
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -139,11 +140,7 @@ export default function About() {
 
                         <div className="w-full lg:w-1/2 fade-up">
                             <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl border-4 border-white/20 transform rotate-1">
-                                <img
-                                    src="/images/Aly-bouchnak-profile.webp"
-                                    alt="Aly Bouchnak (Uncle Aly)"
-                                    className="w-full h-full object-cover"
-                                />
+                                <OptimizedImage src="/images/Aly-bouchnak-profile.webp" alt="Aly Bouchnak (Uncle Aly)" width={600} height={800} sizes="(max-width: 1024px) 100vw, 50vw" className="w-full h-full object-cover" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                                 <div className="absolute bottom-6 left-6 right-6">
                                     <span className="inline-block bg-[#F9E104] text-[#101010] py-1.5 px-3 rounded-full text-sm font-black mb-2 uppercase tracking-wide">
