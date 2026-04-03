@@ -1,4 +1,5 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
+import { PlayCircle } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -6,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SpotifyPlayer = () => {
   const playerRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -44,18 +46,33 @@ const SpotifyPlayer = () => {
             </div>
 
             {/* Spotify Embed */}
-            <div className="relative w-full rounded-2xl overflow-hidden shadow-inner">
-              <iframe
-                src="https://open.spotify.com/embed/artist/1nRdHdUfxacuQeLWFPXqr8?utm_source=embed&theme=white&view=coverlist"
-                width="100%"
-                height="380"
-                frameBorder="0"
-                allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="rounded-2xl"
-                style={{ minHeight: '380px' }}
-                title="Aly Bouchnak on Spotify"
-              />
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-inner bg-[#282828] h-[380px] flex flex-col items-center justify-center group cursor-pointer transition-all duration-300 hover:shadow-2xl" onClick={() => setIsLoaded(true)}>
+              {!isLoaded ? (
+                <>
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+                  <div className="z-10 flex flex-col items-center space-y-4">
+                    <div className="w-20 h-20 bg-[#1DB954] text-white rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#1ED760]">
+                      <PlayCircle className="w-10 h-10 ml-1" />
+                    </div>
+                    <span className="font-['Nunito'] text-white font-bold text-lg tracking-wide drop-shadow-md">
+                      Load Spotify Player
+                    </span>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white/70 text-sm">
+                    <span className="flex items-center gap-1"><svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 5.4 12 12-5.4S18.6 0 12 0zm0 18.16c0 3.54 2.29 6.53 5.47 7.59.8-3.31-4.03-7.59-7.59-4.03-3.31-7.59-5.47-5.47-7.59-5.47v5.05c0-5.17 4.29-8.46 8.59-11.05l3.41 3.76c3.26-2.77 5.11-5.42 6.89-8.85l-3.67-3.41c-1.78-1.72-3.64-3.58-4.72-5.49-4.03-1.91-5.5-3.7-5.5-5.5V13c0-3.03 2.46-5.5 5.5-5.5s5.5 2.47 5.5 5.5v3.15c0 2.58-2.11 4.66-4.72 5.11l3.66 3.41c1.8 1.67 3.71 3.43 4.72 5.5 4.03 1.91 5.5 3.7 5.5 5.5v-3.15c0-2.58 2.11-4.66 4.72-5.11l-3.66-3.41c-1.8-1.67-3.71-3.43-4.72-5.5-4.03-1.91-5.5-3.7-5.5-5.5z"/></svg> Spotify</span>
+                  </div>
+                </>
+              ) : (
+                <iframe
+                  src="https://open.spotify.com/embed/artist/1nRdHdUfxacuQeLWFPXqr8?utm_source=embed&theme=white&view=coverlist&autoplay=1"
+                  width="100%"
+                  height="380"
+                  frameBorder="0"
+                  allow="autoplay; encrypted-media; clipboard-write; fullscreen; picture-in-picture"
+                  className="rounded-2xl w-full h-full"
+                  title="Aly Bouchnak on Spotify"
+                />
+              )}
             </div>
 
             {/* CTA Buttons */}
