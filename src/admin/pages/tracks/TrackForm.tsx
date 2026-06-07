@@ -621,10 +621,10 @@ export default function TrackForm() {
                     <div className="flex items-center gap-3">
                         <button
                             type="button"
-                            onClick={handleSubmit(async (_data) => {
+                            onClick={() => {
                                 toast.info('Changes discarded.');
                                 navigate('/admin/tracks');
-                            })}
+                            }}
                             className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded-xl text-sm font-medium transition-all"
                         >
                             Discard Changes
