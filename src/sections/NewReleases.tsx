@@ -2,7 +2,7 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
-import { getAllTracks } from '../data/tracks';
+import { getAllTracks } from '../data/catalog-summaries';
 import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,13 +14,12 @@ function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Rele
   const diffTime = release.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays > 14) return 'Upcoming';
-  if (diffDays > 0) return 'Pre-Saves';
+  if (diffDays > 0) return 'Upcoming';
   return 'Released';
 }
 
 // Get recent tracks from centralized data
-const recentTracks = getAllTracks()
+const recentTracks = [...getAllTracks()]
   .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
   .slice(0, 6);
 
@@ -41,7 +40,8 @@ const releases: Release[] = recentTracks.map((track, index) => ({
   date: new Date(track.releaseDate).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'UTC'
   }),
   description: track.description,
   image: track.coverImage,
@@ -55,6 +55,7 @@ const NewReleases = () => {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       // Heading animation
       gsap.fromTo(headingRef.current,

@@ -1,4 +1,9 @@
 export interface Track {
+  musicbrainzRecordingId?: string;
+  musicbrainzUrl?: string;
+  releaseGroupId?: string;
+  releaseType?: 'Single';
+  isStandaloneRelease?: boolean;
   // Internal identifier
   id: number;
   slug: string;
@@ -15,7 +20,7 @@ export interface Track {
   genre?: string;
   ageRange: string;
   mood: string;
-  routine: 'Playtime' | 'Bedtime' | 'Mealtime' | 'Cleanup' | 'Transition' | 'Learning' | 'Celebration' | 'Movement';
+  routine?: 'Playtime' | 'Bedtime' | 'Bath Time' | 'Mealtime' | 'Cleanup' | 'Transition' | 'Learning' | 'Celebration' | 'Movement';
 
   // International codes
   isrc: string; // International Standard Recording Code
@@ -68,6 +73,7 @@ export interface Track {
     genre: string;
     byArtist: {
       '@type': string;
+      '@id'?: string;
       name: string;
     };
     inAlbum: {
@@ -76,9 +82,10 @@ export interface Track {
       '@id': string;
     };
     datePublished: string;
-    isrcCode: string;
+    isrcCode?: string;
     description: string;
     image: string;
+    sameAs?: string[];
   };
 }
 
@@ -91,9 +98,9 @@ export const tracks: Track[] = [
     "description": "Revitalizing the world’s favorite farm song with upbeat electronic beats, interactive animal sounds, and a high-energy rhythm that turns a classic into a dance party.",
     "coverImage": "/images/Old-McDonald-had-a-farm.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-03-06T00:00:00.000Z",
+    "releaseDate": "2026-03-06",
     "duration": "2:14",
-    "bpm": 124,
+    "bpm": 120,
     "genre": "Kids Pop",
     "ageRange": "2-6 years",
     "mood": "Joyful",
@@ -144,194 +151,36 @@ export const tracks: Track[] = [
       "description": "Experience Old MacDonald like never before! Aly Bouchnak brings a modern, upbeat digital-pop vibe to the classic farm animal song for kids."
     },
     "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
       "@id": "https://alybouchnak.com/track/old-macdonald-farm-party#recording",
-      "url": "https://alybouchnak.com/track/old-macdonald-farm-party",
       "name": "Old MacDonald Had a Farm (Farm Party)",
-      "@type": "MusicRecording",
-      "genre": "Kids Pop",
-      "image": "https://alybouchnak.com/images/Old-McDonald-had-a-farm.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party",
-        "name": "The Bloom's House: Party Classics",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
+      "url": "https://alybouchnak.com/track/old-macdonald-farm-party",
       "duration": "PT2M14S",
+      "genre": "Kids Pop",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Party Classics",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party"
+      },
+      "datePublished": "2026-03-06",
       "isrcCode": "GX8KD2658865",
-      "description": "A high-energy party version of Old MacDonald with modern beats and animal sound effects.",
-      "datePublished": "2026-03-06"
-    }
-  },
-  {
-    "id": 20,
-    "slug": "the-funny-bunny-jump",
-    "title": "The Funny Bunny Jump (Freeze Dance)",
-    "subtitle": "The ultimate high-energy freeze dance for active toddler play.",
-    "description": "A high-octane, interactive electronic pop track designed to get kids moving, stomping, and practicing their listening skills with a fun \"freeze\" game.",
-    "coverImage": "/images/the-funny-bunny-jump-cover.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-04-03T00:00:00.000Z",
-    "duration": "1:50",
-    "bpm": 126,
-    "genre": "Kids Electronic Pop",
-    "ageRange": "1-8 years",
-    "mood": "Energetic",
-    "routine": "Playtime",
-    "isrc": "GX89G2614392",
-    "upc": "5063907299958",
-    "album": "The Bloom's House: Volume 1",
-    "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://push.fm/ps/the-funny-bunny-jump",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
-    "youtubeUrl": "https://youtube.com/placeholder",
-    "amazonUrl": "https://music.amazon.com/placeholder",
-    "otherUrl": "https://push.fm/ps/the-funny-bunny-jump",
-    "lyricsPreview": [
-      "Really Really Fun! (Jump and clap!)",
-      "Very very awesome! (Jump and clap!)",
-      "Funny Honey bunny! (Jump and clap!)",
-      "Silly silly gaming! (Jump and clap!)"
-    ],
-    "lyricsFull": "Are you ready? Here we go!\n\nReally Really Fun! (Jump and clap!)\nVery very awesome! (Jump and clap!)\nFunny Honey bunny! (Jump and clap!)\nSilly silly gaming! (Jump and clap!)\n\nLike a little hero! (Jump and clap!)\nLike a mini kangaroo! (Jump and clap!)\nRun a little faster! (Jump and clap!)\nYou are the master! (Jump and clap!)\n\nEverybody MOVE! (Yeah!)\nStomp! Stomp! Happy feet!\nHands up high! Touch the sky!\nPick me up! Fly so high!\n(We are flying!)\n\nSuper duper happy! (Jump and clap!)\nFeeling kinda snappy! (Jump and clap!)\nBouncing like a ball! (Jump and clap!)\nHaving a ball! (Jump and clap!)\n\nNow... Wiggle to the left...\nWiggle to the right...\nShake it all around...\nWith all your might!\nWiggle, wiggle, wiggle...\nAND...\n\n...Freeze.\n\nAre you ready?\n\nAre you ready??\n1, 2, 3, GO!\n\nREALLY REALLY FUN! (JUMP AND CLAP!)\nVERY VERY AWESOME! (JUMP AND CLAP!)\nEverybody MOVE!\nStomp! Stomp! Happy feet!\nYEAH!\n\nGreat job!",
-    "educationalBenefits": [
-      {
-        "title": "Inhibitory Control",
-        "description": "The \"Freeze\" mechanic helps children develop the ability to stop an action on command, a core executive function."
-      },
-      {
-        "title": "Gross Motor Skills",
-        "description": "Encourages physical development through stomping, jumping, and \"flying\" movements."
-      },
-      {
-        "title": "Auditory Processing",
-        "description": "Sharpens listening skills as children must pay close attention to the music cues to know when to stop and start."
-      }
-    ],
-    "artistNote": "I wrote this to be the \"viral\" engine of the brand. It combines the classic \"Freeze Dance\" mechanic with modern, punchy production to solve the \"rainy day\" problem for parents who need an instant energy release for their kids.",
-    "relatedTracks": [
-      23,
-      11,
-      10
-    ],
-    "seo": {
-      "title": "The Funny Bunny Jump (Freeze Dance) - Aly Bouchnak | Kids Exercise Song",
-      "ogImage": "https://alybouchnak.com/images/funny-bunny-jump-cover.webp",
-      "keywords": "freeze dance for kids, funny bunny jump, Aly Bouchnak, toddler exercise songs, active play music, nursery rhymes, electronic pop for kids, Hobby the bunny, The Bloom's House",
-      "canonical": "https://alybouchnak.com/track/the-funny-bunny-jump",
-      "description": "Get moving with \"The Funny Bunny Jump!\" The best high-energy freeze dance song for toddlers and preschoolers to stay active and have fun."
+      "description": "Revitalizing the world’s favorite farm song with upbeat electronic beats, interactive animal sounds, and a high-energy rhythm that turns a classic into a dance party.",
+      "image": "https://alybouchnak.com/images/Old-McDonald-had-a-farm.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/09b0f016-1cd4-4a2a-95f3-fa0918f48cbb"
+      ]
     },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/the-funny-bunny-jump#recording",
-      "url": "https://alybouchnak.com/track/the-funny-bunny-jump",
-      "name": "The Funny Bunny Jump (Freeze Dance)",
-      "@type": "MusicRecording",
-      "genre": "Kids Electronic Pop",
-      "image": "https://alybouchnak.com/images/funny-bunny-jump-cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT1M50S",
-      "isrcCode": "GX89G2614392",
-      "description": "An interactive freeze dance game that builds listening skills and motor control.",
-      "datePublished": "2026-04-03"
-    }
-  },
-  {
-    "id": 11,
-    "slug": "zakzooka-the-bear",
-    "title": "Zakzooka The Bear",
-    "subtitle": "Friendly bear adventure song (Ages 2–6)",
-    "description": "An adventurous song about Zakzooka the bear and his forest friends, teaching about bears, friendship, and woodland animals through storytelling.",
-    "coverImage": "/images/Zakzooka-The-Bear--Aly-Bouchnak.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-05-13T00:00:00.000Z",
-    "duration": "2:21",
-    "bpm": 118,
-    "genre": "Children's Music",
-    "ageRange": "2-6 years",
-    "mood": "Joyful",
-    "routine": "Playtime",
-    "isrc": "GX8LD2691082",
-    "upc": "5063941025018",
-    "album": "The Bloom's House: Volume 1",
-    "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://open.spotify.com/track/placeholder",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
-    "youtubeUrl": "https://youtube.com/placeholder",
-    "amazonUrl": "https://music.amazon.com/placeholder",
-    "lyricsPreview": [
-      "Zakzooka is a dizzy, whizzy, fuzzy bear",
-      "He has a wiggly tummy and messy, messy hair!",
-      "He eats the yummy food, he is always in a mood",
-      "For fishy, mushy, sushi... it is so good!",
-      "Zak, Zak, Zak, Zak Zak, Zak, Zoo-ooo! (We love you!)",
-      "Zak, Zak, Zak, Zak Zak, Zak, Zoo-Kaa! (He's the bear!)"
-    ],
-    "lyricsFull": "(Roar!)\nWho is that bear?\n(It's Zakzooka!)\nLet's go!\n\nZakzooka is a dizzy, whizzy, fuzzy bear\nHe has a wiggly tummy and messy, messy hair!\n\nHe eats the yummy food, he is always in a mood\nFor fishy, mushy, sushi... it is so good!\n(Yum, yum, yum!)\n\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\n(We love you!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-Kaa!\n(He's the bear!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\nZak-Zoo-Ka!\n\nHe has no fear, he flies up in the air\n(Fly, fly, fly!)\nHe swims inside the water, splashing everywhere\n(Splash, splash, splash!)\nNow stomp your feet like a big fuzzy bear\n(Stomp! Stomp!)\nAnd roar like Zakzooka if you dare!\n(ROAR!)\n\nAre you ready to roar?\n(Yeah!)\nAre you ready for more?\n(Let's go!)\n\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\n(We love you!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-Kaa!\n(He's the bear!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\nZak-Zoo-Ka!\n\nFishy, mushy, sushi!\n(Sushi!)\nFishy, mushy, sushi!\n(Sushi!)\nDizzy, whizzy, fuzzy!\n(Fuzzy!)\nWho is the bear?\n(Zakzooka!)\n\nZak, Zak, Zoo-ooo...\nZak, Zak, Zoo-Kaa...\n(Bye bye bear!)",
-    "educationalBenefits": [
-      {
-        "title": "Storytelling Skills",
-        "description": "Develops narrative understanding through song storytelling."
-      },
-      {
-        "title": "Friendship Values",
-        "description": "Teaches about friendship and helping others."
-      },
-      {
-        "title": "Forest Animals",
-        "description": "Introduces children to woodland creatures and their habitats."
-      },
-      {
-        "title": "Character Development",
-        "description": "Builds understanding of personality traits through Zakzooka."
-      }
-    ],
-    "artistNote": "Creating Zakzooka as a character was so much fun. I wanted a bear who was gentle, adventurous, and always ready to help friends. Kids need heroes they can relate to!",
-    "relatedTracks": [
-      1,
-      2,
-      10
-    ],
-    "seo": {
-      "title": "Zakzooka The Bear | Kids Forest Adventure Song | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/Zakzooka-The-Bear--Aly-Bouchnak.webp",
-      "keywords": "bear song for kids, forest adventure song, Zakzooka, woodland animals song, kids story song, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/zakzooka-the-bear",
-      "description": "Adventurous bear song teaching friendship and forest animals. Follow Zakzooka through woodland adventures. Ages 2-6."
-    },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/zakzooka-the-bear#recording",
-      "url": "https://alybouchnak.com/track/zakzooka-the-bear",
-      "name": "Zakzooka The Bear",
-      "@type": "MusicRecording",
-      "genre": "Children's Music",
-      "image": "https://alybouchnak.com/images/Zakzooka-The-Bear--Aly-Bouchnak.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT2M21S",
-      "isrcCode": "GX8LD2691082",
-      "description": "An adventurous song about Zakzooka the bear teaching about friendship and woodland animals through storytelling.",
-      "datePublished": "2026-02-14"
-    }
+    "musicbrainzRecordingId": "09b0f016-1cd4-4a2a-95f3-fa0918f48cbb",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/09b0f016-1cd4-4a2a-95f3-fa0918f48cbb",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "df742b15-f793-4bc8-9a15-ebb2f166c854",
+    "releaseType": "Single"
   },
   {
     "id": 23,
@@ -341,9 +190,9 @@ export const tracks: Track[] = [
     "description": "Turn the classroom into a dance floor with this vibrant, electronic reimagining of Mary’s famous lamb, featuring \"The Bloom’s House\" signature bouncy beats.",
     "coverImage": "/images/mary-little-lamb-school-party-cover.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-02-27T00:00:00.000Z",
+    "releaseDate": "2026-02-27",
     "duration": "2:06",
-    "bpm": 128,
+    "bpm": 126,
     "genre": "Digital Pop",
     "ageRange": "2-6 years",
     "mood": "Celebratory",
@@ -353,9 +202,9 @@ export const tracks: Track[] = [
     "album": "The Bloom's House: Party Classics",
     "albumUrl": "/album/the-blooms-house-classics-party",
     "spotifyUrl": "https://open.spotify.com/track/39mGnlWUZBz5gbx4U9Z1Mk",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
+    "appleMusicUrl": "https://music.apple.com/us/album/mary-had-a-little-lamb-single/1881748129?uo=4",
     "youtubeUrl": "https://youtu.be/-cp7P3vwvHQ",
-    "amazonUrl": "https://music.amazon.com/placeholder",
+    "amazonUrl": "",
     "otherUrl": "https://push.fm/fl/mary-had-a-little-lamb-song",
     "lyricsPreview": [
       "Mary had a little lamb, little lamb, little lamb",
@@ -396,27 +245,36 @@ export const tracks: Track[] = [
       "description": "Dance along to Mary Had a Little Lamb! Aly Bouchnak’s \"School Party\" version is a modern, electronic pop hit for toddlers and school-age kids."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/mary-had-a-little-lamb-school-party#recording",
-      "url": "https://alybouchnak.com/track/mary-had-a-little-lamb-school-party",
-      "name": "Mary Had a Little Lamb (School Party)",
-      "@type": "MusicRecording",
-      "genre": "Digital Pop",
-      "image": "https://alybouchnak.com/images/mary-little-lamb-school-party-cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party",
-        "name": "The Bloom's House: Party Classics",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/mary-had-a-little-lamb-school-party#recording",
+      "name": "Mary Had a Little Lamb (School Party)",
+      "url": "https://alybouchnak.com/track/mary-had-a-little-lamb-school-party",
+      "duration": "PT2M06S",
+      "genre": "Digital Pop",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M6S",
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Party Classics",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party"
+      },
+      "datePublished": "2026-02-27",
       "isrcCode": "GX8KD2657271",
-      "description": "A fresh, upbeat take on the classic nursery rhyme with a modern party beat.",
-      "datePublished": "2026-02-27"
-    }
+      "description": "Turn the classroom into a dance floor with this vibrant, electronic reimagining of Mary’s famous lamb, featuring \"The Bloom’s House\" signature bouncy beats.",
+      "image": "https://alybouchnak.com/images/mary-little-lamb-school-party-cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/31676dfb-e5a5-456d-9b59-0356804300e7"
+      ]
+    },
+    "musicbrainzRecordingId": "31676dfb-e5a5-456d-9b59-0356804300e7",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/31676dfb-e5a5-456d-9b59-0356804300e7",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "87207293-ac27-4703-8baa-70fe42f02e39",
+    "releaseType": "Single"
   },
   {
     "id": 22,
@@ -426,9 +284,9 @@ export const tracks: Track[] = [
     "description": "A party version of \"Head, Shoulders, Knees and Toes\" that gets children moving while learning body parts and developing coordination.",
     "coverImage": "/images/head-shoulders-knees-and-toes.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-04-24T00:00:00.000Z",
+    "releaseDate": "2026-04-24",
     "duration": "2:10",
-    "bpm": 130,
+    "bpm": 110,
     "genre": "Kids Pop",
     "ageRange": "2-6 years",
     "mood": "Energetic",
@@ -437,10 +295,11 @@ export const tracks: Track[] = [
     "upc": "5063941237718",
     "album": "The Bloom's House: Party Classics",
     "albumUrl": "/album/the-blooms-house-classics-party",
-    "spotifyUrl": "https://open.spotify.com/track/placeholder",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
-    "youtubeUrl": "https://youtube.com/placeholder",
-    "amazonUrl": "https://music.amazon.com/placeholder",
+    "spotifyUrl": "https://open.spotify.com/track/6D1rxF4uHKmEJ0Mf776OBH?si=e9b43ffa581242b7",
+    "appleMusicUrl": "https://music.apple.com/us/song/the-body-party-head-shoulders/1885613947",
+    "youtubeUrl": "https://youtu.be/iHQtkDluGgA",
+    "amazonUrl": "https://music.amazon.ca/tracks/B0GSS5PVQ1",
+    "otherUrl": "https://push.fm/fl/blooms-party-classics",
     "lyricsPreview": [
       "Head, Shoulders, Knees and Toes!, (Knees and Toes!)",
       "And Eyes! And Ears! And Mouth and Nose!",
@@ -479,111 +338,124 @@ export const tracks: Track[] = [
       "description": "Party version of the classic body parts song. Kids learn head, shoulders, knees and toes while dancing. Ages 2-6."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/body-party-head-shoulders#recording",
-      "url": "https://alybouchnak.com/track/body-party-head-shoulders",
-      "name": "The Body Party (Head & Shoulders)",
-      "@type": "MusicRecording",
-      "genre": "Kids Pop",
-      "image": "https://alybouchnak.com/images/head-shoulders-knees-and-toes.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party",
-        "name": "The Bloom's House: Party Classics",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/body-party-head-shoulders#recording",
+      "name": "The Body Party (Head & Shoulders)",
+      "url": "https://alybouchnak.com/track/body-party-head-shoulders",
       "duration": "PT2M10S",
+      "genre": "Kids Pop",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Party Classics",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party"
+      },
+      "datePublished": "2026-04-24",
       "isrcCode": "GX8LD2631231",
-      "description": "A party version teaching body parts with progressively faster tempos for fun coordination challenges.",
-      "datePublished": "2026-02-08"
-    }
+      "description": "A party version of \"Head, Shoulders, Knees and Toes\" that gets children moving while learning body parts and developing coordination.",
+      "image": "https://alybouchnak.com/images/head-shoulders-knees-and-toes.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/e7aa2fe4-af8c-4f39-8756-d333e3ec38db"
+      ]
+    },
+    "musicbrainzRecordingId": "e7aa2fe4-af8c-4f39-8756-d333e3ec38db",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/e7aa2fe4-af8c-4f39-8756-d333e3ec38db",
+    "isStandaloneRelease": false
   },
   {
-    "id": 9,
-    "slug": "alphabet-song",
-    "title": "The Alphabet Song",
-    "subtitle": "Letter learning song (Ages 2–6)",
-    "description": "A modern, upbeat version of the classic alphabet song that makes learning ABCs fun and engaging with contemporary beats and catchy melody.",
-    "coverImage": "/images/The-Alphabet-Song--Aly-Bouchnak.webp",
+    "id": 3,
+    "slug": "boom-teka-boom",
+    "title": "Boom Teka Boom (Wake Up Song)",
+    "subtitle": "Morning wake-up anthem with rhythmic energy (Ages 2–6)",
+    "description": "A high-energy wake-up song with rhythmic beats to start the day positively. Perfect for morning routines and getting toddlers moving.",
+    "coverImage": "/images/boom-teka-boom-cover.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-04-15T00:00:00.000Z",
-    "duration": "2:55",
-    "bpm": 125,
-    "genre": "Nursery Rhymes",
+    "releaseDate": "2026-01-30",
+    "duration": "2:09",
+    "bpm": 120,
+    "genre": "Children's Music, Pop, Electronic",
     "ageRange": "2-6 years",
-    "mood": "Upbeat",
-    "routine": "Learning",
-    "isrc": "GX8LD2663207",
-    "upc": "5063941576312",
-    "album": "The Bloom's House: Party Classics",
-    "albumUrl": "/album/the-blooms-house-classics-party",
-    "spotifyUrl": "https://open.spotify.com/track/placeholder",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
-    "youtubeUrl": "https://youtube.com/placeholder",
-    "amazonUrl": "https://music.amazon.com/placeholder",
+    "mood": "Energetic",
+    "routine": "Transition",
+    "isrc": "GXJ2E2565871",
+    "upc": "5063893188977",
+    "album": "The Bloom’s House: Volume 1",
+    "albumUrl": "/album/the-blooms-house-volume-1",
+    "spotifyUrl": "https://open.spotify.com/track/43ezNyM5fkmq2ivXQw0lwn",
+    "appleMusicUrl": "https://music.apple.com/us/song/boom-teka-boom-wake-up-song/1863464670",
+    "youtubeUrl": "https://youtu.be/g7UvUxsWOek",
+    "amazonUrl": "https://music.amazon.com/tracks/B0GCBD4YGZ",
+    "otherUrl": "https://push.fm/fl/boom-teka-boom",
     "lyricsPreview": [
-      "A is for apple, juicy and sweet",
-      "B is for ball, bounce bounce your feet",
-      "C is for cuddle, snuggle up tight",
-      "D is for dream, sleep all night"
+      "Wake up, sunshine",
+      "It is a new day",
+      "Time to get moving",
+      "Time to go and play!",
+      "Yay! Hooray!",
+      "Boom Boom Boom! Teka-Boom Teka-Boom! STOMP!"
     ],
-    "lyricsFull": "A, B, C, D\nCome and sing with me\n\nA is for apple, juicy and sweet\nB is for ball, bounce bounce your feet\nC is for cuddle, snuggle up tight\nD is for dream, sleep all night\n\nE is for earth, green and blue\nF is for family, me and you\nG is for garden, watch it grow\nH is for happy, say hello (Hello!)\n\nA B C D E F G\nH I J K L M N O P\nQ R S T U V\nW X Y and Z\nSinging with my family\n\nI is for ice cream, cold and yummy\nJ is for jump, wiggle your tummy\nK is for kiss on your cheek\nL is for love every week\n\nM is for music, dance around\nN is for night, quiet sound\nO is for ocean, splash and play\nP is for party, hip hooray (Yay!)\n\nA B C D E F G\nH I J K L M N O P\nQ R S T U V\nW X Y and Z\nSinging with my family\n\nQ is for quiet, go to sleep (Beep-beep-beep)\nR is for robot, beep-beep-beep\nS is for sunshine, shining bright\nT is for twinkle, starry light\n\nU is for up, touch the sky\nV is for island, playing hide\nW is for world, big and round\nX is for xylophone, happy sound\nY is for you, my best friend\nZ is for zoom, that's the end\n\nThat's the end\nA B C",
+    "lyricsFull": "Boom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\n\nWake up, sunshine\nIt is a new day\nTime to get moving\nTime to go and play!\nYay! Hooray!\n\nStretch your arms up\nWiggle your nose\nShake your sleepy shoulders\nTouch your tiny toes!\nYay! Hooray!\n\nRaise your hands up\nReaching to the sky\nLift your body, JUMP!\nSay to sleep, \"Goodbye!\"\nIt's time to play\nYay! Hooray!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\n\nYou're a bouncy ball now\nRed, yellow, blue!\nFull of happy energy\nThere's so much you can do!\nYay! Hooray!\n\nRaise your hands up\nReaching to the sky\nLift your body, JUMP!\nSay to sleep, \"Goodbye!\"\nIt's time to play\nYay! Hooray!\n\nShhh... listen now\nCan you hear the beat?\nGetting ready, getting set\nFrom your head down to your feet\nHere it comes!\n1... 2... 3... GO!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! JUMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! JUMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! JUMP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\nJUMP!\n\nAll the sleep is gone\nWe're ready for the day\nSinging all the way\nYay! Hooray!\n\nYay! Hooray!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! DONE!\n\nDONE!",
     "educationalBenefits": [
       {
-        "title": "Letter Recognition",
-        "description": "Teaches all 26 letters of the alphabet in order."
+        "title": "Morning Routine",
+        "description": "Helps establish consistent wake-up routines and transitions from sleep to activity."
       },
       {
-        "title": "Phonemic Awareness",
-        "description": "Introduces letter-sound associations through examples."
+        "title": "Gross Motor Skills",
+        "description": "Encourages stretching and movement to activate the body."
       },
       {
-        "title": "Memory Skills",
-        "description": "Builds memorization through melodic repetition."
-      },
-      {
-        "title": "Pre-Reading Skills",
-        "description": "Establishes foundation for future reading and writing."
+        "title": "Energy Boost",
+        "description": "Provides musical stimulation to increase alertness and engagement."
       }
     ],
-    "artistNote": "I wanted to create an alphabet song that parents actually enjoy hearing on repeat. The modern beat keeps it fresh while maintaining the educational foundation.",
+    "artistNote": "This song was inspired by watching parents struggle to wake up sleepy toddlers. I wanted to create something that makes the morning transition fun rather than a battle.",
     "relatedTracks": [
-      3,
+      6,
       4,
-      8
+      7
     ],
     "seo": {
-      "title": "The Alphabet Song | ABC Learning Song | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/The-Alphabet-Song--Aly-Bouchnak.webp",
-      "keywords": "alphabet song, ABC song for kids, learn letters song, kids educational music, toddler alphabet, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/alphabet-song",
-      "description": "Modern upbeat alphabet song for kids. Learn ABCs with fun beats and letter examples. Perfect for early literacy ages 2-6."
+      "title": "Boom Teka Boom | Wake Up Song for Kids | Morning Routine | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/boom-teka-boom-cover.webp",
+      "keywords": "wake up song, morning song for kids, toddler routine song, energetic kids music, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/boom-teka-boom",
+      "description": "Energetic wake-up song for toddlers. Perfect morning routine music to get kids moving and ready for the day."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/alphabet-song#recording",
-      "url": "https://alybouchnak.com/track/alphabet-song",
-      "name": "The Alphabet Song",
-      "@type": "MusicRecording",
-      "genre": "Nursery Rhymes",
-      "image": "https://alybouchnak.com/images/The-Alphabet-Song--Aly-Bouchnak.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party",
-        "name": "The Bloom's House: Party Classics",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/boom-teka-boom#recording",
+      "name": "Boom Teka Boom (Wake Up Song)",
+      "url": "https://alybouchnak.com/track/boom-teka-boom",
+      "duration": "PT2M09S",
+      "genre": "Children's Music, Pop, Electronic",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M55S",
-      "isrcCode": "GX8LD2663207",
-      "description": "A modern, upbeat alphabet song teaching ABCs with contemporary beats and letter examples.",
-      "datePublished": "2026-02-10"
-    }
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-01-30",
+      "isrcCode": "GXJ2E2565871",
+      "description": "A high-energy wake-up song with rhythmic beats to start the day positively. Perfect for morning routines and getting toddlers moving.",
+      "image": "https://alybouchnak.com/images/boom-teka-boom-cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/d0002499-4c70-4423-8fee-6df8b5c86d2b"
+      ]
+    },
+    "musicbrainzRecordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/d0002499-4c70-4423-8fee-6df8b5c86d2b",
+    "isStandaloneRelease": false
   },
   {
     "id": 19,
@@ -593,9 +465,9 @@ export const tracks: Track[] = [
     "description": "Soft, gradually fading melodies that mimic the natural dimming of light at sunset, helping children transition from alertness to sleepiness naturally.",
     "coverImage": "/images/The-Dimming-Light.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "2:42",
-    "bpm": 50,
+    "releaseDate": "2026-01-09",
+    "duration": "3:20",
+    "bpm": 68,
     "genre": "Children's Lullabies, Sleep Music",
     "ageRange": "0-3 years",
     "mood": "Transitional",
@@ -647,110 +519,35 @@ export const tracks: Track[] = [
       "description": "Gentle fading melodies mimicking sunset. Helps children transition naturally to sleepiness. Ages 0-3."
     },
     "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
       "@id": "https://alybouchnak.com/track/dimming-light-soft-sleepy-music#recording",
-      "url": "https://alybouchnak.com/track/dimming-light-soft-sleepy-music",
       "name": "The Dimming Light | Soft Sleepy Music",
-      "@type": "MusicRecording",
+      "url": "https://alybouchnak.com/track/dimming-light-soft-sleepy-music",
+      "duration": "PT3M20S",
       "genre": "Children's Lullabies, Sleep Music",
-      "image": "https://alybouchnak.com/images/The-Dimming-Light.webp",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
       "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
+        "@type": "MusicAlbum",
         "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
       },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT2M42S",
+      "datePublished": "2026-01-09",
       "isrcCode": "GXJ2E2542577",
-      "description": "Soft, gradually fading melodies mimicking natural sunset dimming to help children transition to sleep.",
-      "datePublished": "2026-01-09"
-    }
-  },
-  {
-    "id": 3,
-    "slug": "boom-teka-boom",
-    "title": "Boom Teka Boom (Wake Up Song)",
-    "subtitle": "Morning wake-up anthem with rhythmic energy (Ages 2–6)",
-    "description": "A high-energy wake-up song with rhythmic beats to start the day positively. Perfect for morning routines and getting toddlers moving.",
-    "coverImage": "/images/boom-teka-boom-cover.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-30T00:00:00.000Z",
-    "duration": "2:09",
-    "bpm": 120,
-    "genre": "Children's Music, Pop, Electronic",
-    "ageRange": "2-6 years",
-    "mood": "Energetic",
-    "routine": "Transition",
-    "isrc": "GXJ2E2565871",
-    "upc": "5063893188977",
-    "album": "The Bloom's House: Volume 1",
-    "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://open.spotify.com/track/43ezNyM5fkmq2ivXQw0lwn",
-    "appleMusicUrl": "https://music.apple.com/us/song/boom-teka-boom-wake-up-song/1863464670",
-    "youtubeUrl": "https://youtu.be/g7UvUxsWOek",
-    "amazonUrl": "https://music.amazon.com/tracks/B0GCBD4YGZ",
-    "otherUrl": "https://push.fm/fl/boom-teka-boom",
-    "lyricsPreview": [
-      "Wake up, sunshine",
-      "It is a new day",
-      "Time to get moving",
-      "Time to go and play!",
-      "Yay! Hooray!",
-      "Boom Boom Boom! Teka-Boom Teka-Boom! STOMP!"
-    ],
-    "lyricsFull": "Boom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! STOMP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\n\nWake up, sunshine\nIt is a new day\nTime to get moving\nTime to go and play!\nYay! Hooray!\n\nStretch your arms up\nWiggle your nose\nShake your sleepy shoulders\nTouch your tiny toes!\nYay! Hooray!\n\nRaise your hands up\nReaching to the sky\nLift your body, JUMP!\nSay to sleep, \"Goodbye!\"\nIt's time to play\nYay! Hooray!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\nBoom Boom Boom! Teka-Boom Teka-Boom! CLAP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\n\nYou're a bouncy ball now\nRed, yellow, blue!\nFull of happy energy\nThere's so much you can do!\nYay! Hooray!\n\nRaise your hands up\nReaching to the sky\nLift your body, JUMP!\nSay to sleep, \"Goodbye!\"\nIt's time to play\nYay! Hooray!\n\nShhh... listen now\nCan you hear the beat?\nGetting ready, getting set\nFrom your head down to your feet\nHere it comes!\n1... 2... 3... GO!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! JUMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! JUMP!\nBoom Boom Boom! Teka-Boom Teka-Boom! JUMP!\n\nBoom Boom Boom Boom\nBoom Boom Boom Boom\nJUMP!\n\nAll the sleep is gone\nWe're ready for the day\nSinging all the way\nYay! Hooray!\n\nYay! Hooray!\n\nBoom Boom Boom! Teka-Boom Teka-Boom! DONE!\n\nDONE!",
-    "educationalBenefits": [
-      {
-        "title": "Morning Routine",
-        "description": "Helps establish consistent wake-up routines and transitions from sleep to activity."
-      },
-      {
-        "title": "Gross Motor Skills",
-        "description": "Encourages stretching and movement to activate the body."
-      },
-      {
-        "title": "Energy Boost",
-        "description": "Provides musical stimulation to increase alertness and engagement."
-      }
-    ],
-    "artistNote": "This song was inspired by watching parents struggle to wake up sleepy toddlers. I wanted to create something that makes the morning transition fun rather than a battle.",
-    "relatedTracks": [
-      6,
-      4,
-      7
-    ],
-    "seo": {
-      "title": "Boom Teka Boom | Wake Up Song for Kids | Morning Routine | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/boom-teka-boom-cover.webp",
-      "keywords": "wake up song, morning song for kids, toddler routine song, energetic kids music, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/boom-teka-boom",
-      "description": "Energetic wake-up song for toddlers. Perfect morning routine music to get kids moving and ready for the day."
+      "description": "Soft, gradually fading melodies that mimic the natural dimming of light at sunset, helping children transition from alertness to sleepiness naturally.",
+      "image": "https://alybouchnak.com/images/The-Dimming-Light.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/8c48c13b-b219-41d1-ab56-889357b97d61"
+      ]
     },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/boom-teka-boom#recording",
-      "url": "https://alybouchnak.com/track/boom-teka-boom",
-      "name": "Boom Teka Boom (Wake Up Song)",
-      "@type": "MusicRecording",
-      "genre": "Children's Music, Pop, Electronic",
-      "image": "https://alybouchnak.com/images/boom-teka-boom-cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT2M9S",
-      "isrcCode": "GXJ2E2565871",
-      "description": "A high-energy wake-up song with rhythmic beats to start the day positively.",
-      "datePublished": "2026-01-30"
-    }
+    "musicbrainzRecordingId": "8c48c13b-b219-41d1-ab56-889357b97d61",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/8c48c13b-b219-41d1-ab56-889357b97d61",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
   },
   {
     "id": 17,
@@ -760,9 +557,9 @@ export const tracks: Track[] = [
     "description": "A protective drone frequency that creates a feeling of being watched over and safe, using low-frequency tones that mimic the comforting presence of a caregiver.",
     "coverImage": "/images/The-Protective-Shadow.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "2:45",
-    "bpm": 35,
+    "releaseDate": "2026-01-09",
+    "duration": "3:30",
+    "bpm": 50,
     "genre": "Children's Drone, Sleep Music",
     "ageRange": "0-3 years",
     "mood": "Protective",
@@ -814,27 +611,35 @@ export const tracks: Track[] = [
       "description": "Protective drone frequency for sleep. Creates feeling of being watched over and safe. Low-frequency comfort tones. Ages 0-3."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/protective-shadow-night-drone#recording",
-      "url": "https://alybouchnak.com/track/protective-shadow-night-drone",
-      "name": "The Protective Shadow | Night Drone for Sleep",
-      "@type": "MusicRecording",
-      "genre": "Children's Drone, Sleep Music",
-      "image": "https://alybouchnak.com/images/The-Protective-Shadow.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
-        "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/protective-shadow-night-drone#recording",
+      "name": "The Protective Shadow | Night Drone for Sleep",
+      "url": "https://alybouchnak.com/track/protective-shadow-night-drone",
+      "duration": "PT3M30S",
+      "genre": "Children's Drone, Sleep Music",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M45S",
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Tuned for Dreams",
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
+      },
+      "datePublished": "2026-01-09",
       "isrcCode": "GXJ2E2505077",
-      "description": "Protective drone frequency creating a feeling of being watched over and safe during sleep.",
-      "datePublished": "2026-01-09"
-    }
+      "description": "A protective drone frequency that creates a feeling of being watched over and safe, using low-frequency tones that mimic the comforting presence of a caregiver.",
+      "image": "https://alybouchnak.com/images/The-Protective-Shadow.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/2f821c16-f050-497a-864a-31d653c8ba30"
+      ]
+    },
+    "musicbrainzRecordingId": "2f821c16-f050-497a-864a-31d653c8ba30",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/2f821c16-f050-497a-864a-31d653c8ba30",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
   },
   {
     "id": 15,
@@ -844,9 +649,9 @@ export const tracks: Track[] = [
     "description": "A meditative track featuring gentle humming frequencies that resonate with the natural calming frequencies of the human voice, promoting deep and restorative sleep.",
     "coverImage": "/images/The-Ancient-Tongue.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "3:52",
-    "bpm": 45,
+    "releaseDate": "2026-01-09",
+    "duration": "3:15",
+    "bpm": 68,
     "genre": "Children's Meditation, Sleep Music",
     "ageRange": "0-3 years",
     "mood": "Meditative",
@@ -895,27 +700,35 @@ export const tracks: Track[] = [
       "description": "Meditative humming frequencies for deep sleep. Vocal resonance promotes calm and restorative rest. Ages 0-3."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/ancient-tongue-deep-sleep-humming#recording",
-      "url": "https://alybouchnak.com/track/ancient-tongue-deep-sleep-humming",
-      "name": "The Ancient Tongue | Deep Sleep Humming",
-      "@type": "MusicRecording",
-      "genre": "Children's Meditation, Sleep Music",
-      "image": "https://alybouchnak.com/images/The-Ancient-Tongue.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
-        "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/ancient-tongue-deep-sleep-humming#recording",
+      "name": "The Ancient Tongue | Deep Sleep Humming",
+      "url": "https://alybouchnak.com/track/ancient-tongue-deep-sleep-humming",
+      "duration": "PT3M15S",
+      "genre": "Children's Meditation, Sleep Music",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT3M52S",
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Tuned for Dreams",
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
+      },
+      "datePublished": "2026-01-09",
       "isrcCode": "GXJ2E2555627",
-      "description": "Meditative humming frequencies resonating with natural calming frequencies to promote deep sleep.",
-      "datePublished": "2026-01-09"
-    }
+      "description": "A meditative track featuring gentle humming frequencies that resonate with the natural calming frequencies of the human voice, promoting deep and restorative sleep.",
+      "image": "https://alybouchnak.com/images/The-Ancient-Tongue.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/f9469640-05cf-4950-825d-0159184d899b"
+      ]
+    },
+    "musicbrainzRecordingId": "f9469640-05cf-4950-825d-0159184d899b",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/f9469640-05cf-4950-825d-0159184d899b",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
   },
   {
     "id": 16,
@@ -925,9 +738,9 @@ export const tracks: Track[] = [
     "description": "Designed to loop seamlessly throughout the night, this track provides continuous gentle background music that maintains sleep without disruptive transitions.",
     "coverImage": "/images/The-Infinite-Loop.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "3:32",
-    "bpm": 40,
+    "releaseDate": "2026-01-09",
+    "duration": "2:15",
+    "bpm": 48,
     "ageRange": "0-3 years",
     "mood": "Sleep",
     "routine": "Bedtime",
@@ -975,27 +788,35 @@ export const tracks: Track[] = [
       "description": "Seamless looping sleep music for all-night use. Maintains peaceful sleep without disruptive transitions. Ages 0-3."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/infinite-loop-continuous-sleep-aid#recording",
-      "url": "https://alybouchnak.com/track/infinite-loop-continuous-sleep-aid",
-      "name": "The Infinite Loop | Continuous Sleep Aid",
-      "@type": "MusicRecording",
-      "genre": "",
-      "image": "https://alybouchnak.com/images/The-Infinite-Loop.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
-        "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/infinite-loop-continuous-sleep-aid#recording",
+      "name": "The Infinite Loop | Continuous Sleep Aid",
+      "url": "https://alybouchnak.com/track/infinite-loop-continuous-sleep-aid",
+      "duration": "PT2M15S",
+      "genre": "Children's Music",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT3M32S",
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Tuned for Dreams",
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
+      },
+      "datePublished": "2026-01-09",
       "isrcCode": "GXJ2E2577222",
-      "description": "Seamless looping sleep music providing continuous gentle background for all-night sleep.",
-      "datePublished": "2026-01-09"
-    }
+      "description": "Designed to loop seamlessly throughout the night, this track provides continuous gentle background music that maintains sleep without disruptive transitions.",
+      "image": "https://alybouchnak.com/images/The-Infinite-Loop.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/4a7de8fd-f0c1-4414-9756-d001b88a582f"
+      ]
+    },
+    "musicbrainzRecordingId": "4a7de8fd-f0c1-4414-9756-d001b88a582f",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/4a7de8fd-f0c1-4414-9756-d001b88a582f",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
   },
   {
     "id": 14,
@@ -1005,11 +826,11 @@ export const tracks: Track[] = [
     "description": "Based on the traditional \"shushing\" technique used by parents worldwide, this track combines gentle shushing sounds with soft melodies to calm fussy babies.",
     "coverImage": "/images/The-Sacred-Shush.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "2:45",
-    "bpm": 50,
+    "releaseDate": "2026-01-09",
+    "duration": "3:05",
+    "bpm": 66,
     "genre": "Children's Sleep, White Noise",
-    "ageRange": "0-1 years",
+    "ageRange": "0-4 years",
     "mood": "Tranquil",
     "routine": "Bedtime",
     "isrc": "GXJ2E2509998",
@@ -1059,27 +880,677 @@ export const tracks: Track[] = [
       "description": "Traditional shushing technique combined with soft melodies. Calms fussy babies and promotes sleep. Perfect for ages 0-1."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/sacred-shush-baby-shusher#recording",
-      "url": "https://alybouchnak.com/track/sacred-shush-baby-shusher",
-      "name": "The Sacred Shush | Baby Shusher Sound",
-      "@type": "MusicRecording",
-      "genre": "Children's Sleep, White Noise",
-      "image": "https://alybouchnak.com/images/The-Sacred-Shush.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
-        "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/sacred-shush-baby-shusher#recording",
+      "name": "The Sacred Shush | Baby Shusher Sound",
+      "url": "https://alybouchnak.com/track/sacred-shush-baby-shusher",
+      "duration": "PT3M05S",
+      "genre": "Children's Sleep, White Noise",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M45S",
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Tuned for Dreams",
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
+      },
+      "datePublished": "2026-01-09",
       "isrcCode": "GXJ2E2509998",
-      "description": "Traditional shushing technique combined with soft melodies to calm fussy babies.",
-      "datePublished": "2026-01-09"
-    }
+      "description": "Based on the traditional \"shushing\" technique used by parents worldwide, this track combines gentle shushing sounds with soft melodies to calm fussy babies.",
+      "image": "https://alybouchnak.com/images/The-Sacred-Shush.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/91bcb466-41b6-407d-8f26-a435b0dceba2"
+      ]
+    },
+    "musicbrainzRecordingId": "91bcb466-41b6-407d-8f26-a435b0dceba2",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/91bcb466-41b6-407d-8f26-a435b0dceba2",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
+  },
+  {
+    "id": 5,
+    "slug": "the-wise-mice",
+    "title": "The Wise Mice (Memory Game)",
+    "subtitle": "Cumulative memory song for cognitive skills (Ages 2–6)",
+    "description": "A cumulative memory song that enhances sequencing and cognitive skills. Children repeat growing sequences of mouse actions, building working memory.",
+    "coverImage": "/images/the-wise-mice-cover.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-02-11",
+    "duration": "2:20",
+    "bpm": 115,
+    "genre": "Children's Music",
+    "ageRange": "2-6 years",
+    "mood": "Playful",
+    "routine": "Learning",
+    "isrc": "GX89G2624756",
+    "upc": "5063907926106",
+    "album": "The Bloom’s House: Volume 1",
+    "albumUrl": "/album/the-blooms-house-volume-1",
+    "spotifyUrl": "https://open.spotify.com/track/3McW2hD8aFsXOx6pcru9IW",
+    "appleMusicUrl": "https://music.apple.com/us/song/the-wise-mice-memory-game/1877091609",
+    "youtubeUrl": "https://youtu.be/QHI7vPGAgY4",
+    "amazonUrl": "https://music.amazon.com/tracks/B0GN4CFSLX",
+    "otherUrl": "https://push.fm/fl/the-wise-mice",
+    "lyricsPreview": [
+      "Did you see the dog that woofed",
+      "That chased the cat that meowed",
+      "That scared the mice so wise",
+      "That nibbled the bag of rice",
+      "That I won as a prize?"
+    ],
+    "lyricsFull": "Did you see the wise mice\nNibbled the bag of rice\nThat I won as a prize?\n\nDid you see the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the fire that burned\nThat burned the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the water that splashed\nThat put out the fire that burned\nThat burned the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the cow that mooed\nThat drank the water that splashed\nThat put out the fire that burned\nThat burned the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see\nThe cow that mooed\nThat drank the water that splashed\nThat put out the fire that burned\nThat burned the stick that hit\n(Woof)\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the wise mice\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the wise mice?\nDid you see the wise mice?\n\nDid you see the wise mice?",
+    "educationalBenefits": [
+      {
+        "title": "Working Memory",
+        "description": "Builds capacity to hold and manipulate information in short-term memory."
+      },
+      {
+        "title": "Sequencing Skills",
+        "description": "Develops understanding of order and patterns."
+      },
+      {
+        "title": "Cognitive Flexibility",
+        "description": "Practices switching between remembering and adding new information."
+      }
+    ],
+    "artistNote": "Memory games are powerful tools for cognitive development. I created this cumulative song to make working memory training feel like play rather than work.",
+    "relatedTracks": [
+      9,
+      2,
+      10
+    ],
+    "seo": {
+      "title": "The Wise Mice | Memory Game Song | Cognitive Development | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/the-wise-mice-cover.webp",
+      "keywords": "memory game song, cognitive development music, sequencing song, educational kids music, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/the-wise-mice",
+      "description": "Cumulative memory song for kids ages 2-6. Build working memory and sequencing skills through playful mouse actions."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/the-wise-mice#recording",
+      "name": "The Wise Mice (Memory Game)",
+      "url": "https://alybouchnak.com/track/the-wise-mice",
+      "duration": "PT2M20S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-02-11",
+      "isrcCode": "GX89G2624756",
+      "description": "A cumulative memory song that enhances sequencing and cognitive skills. Children repeat growing sequences of mouse actions, building working memory.",
+      "image": "https://alybouchnak.com/images/the-wise-mice-cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/512854cf-fd9f-428e-9834-47772bf71be3"
+      ]
+    },
+    "musicbrainzRecordingId": "512854cf-fd9f-428e-9834-47772bf71be3",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/512854cf-fd9f-428e-9834-47772bf71be3",
+    "isStandaloneRelease": false
+  },
+  {
+    "id": 8,
+    "slug": "nanny-papa",
+    "title": "Nanny & Papa (Funny Bunny Family)",
+    "subtitle": "Heartwarming family celebration song (Ages 2–6)",
+    "description": "A heartwarming celebration of grandparent relationships. This song honors the special bond between children and their Nanny and Papa through joyful lyrics and warm melodies.",
+    "coverImage": "/images/nanny-and-papa-cover.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-02-11",
+    "duration": "2:34",
+    "bpm": 90,
+    "genre": "Nursery Rhymes",
+    "ageRange": "2-6 years",
+    "mood": "Joyful",
+    "routine": "Celebration",
+    "isrc": "GXBDS2573588",
+    "upc": "5063907265434",
+    "album": "The Bloom’s House: Volume 1",
+    "albumUrl": "/album/the-blooms-house-volume-1",
+    "spotifyUrl": "https://open.spotify.com/track/7hvodloW3JqfVKI4yJLQT6",
+    "appleMusicUrl": "https://music.apple.com/us/song/nanny-papa-funny-bunny-family/1870774446",
+    "youtubeUrl": "https://youtu.be/PKQHTPmkmVY",
+    "amazonUrl": "https://music.amazon.com/tracks/B0GJTMS9YS",
+    "otherUrl": "https://push.fm/fl/nanny-and-papa",
+    "lyricsPreview": [
+      "Nanny, Papa, sing with me",
+      "Funny-bunny family!",
+      "Giggles jumping one-two-three",
+      "Love is all we ever see",
+      "Nanny, Papa, hold me tight",
+      "Shiny smiles like morning light",
+      "Cuddles make the world feel right—",
+      "My sweet family day and night"
+    ],
+    "lyricsFull": "Nanny is my granny\nAny tiny funny bunny\nI just want she buy to me\n\nNanny is a canny\nMany money, shiny penny\nCalls me honey—cute as can be\n\nNanny, Papa, sing with me\nFunny-bunny family!\nGiggles jumping one-two-three\nLove is all we ever see\n\nNanny, Papa, hold me tight\nShiny smiles like morning light\nCuddles make the world feel right—\nMy sweet family day and night\n\nPapa is my hero\nLifts me high from one to zero\nSpins me 'round so full of glee\n\nPapa's strong and steady\nHugs are warm and always ready\nKeeps me safe as safe can be\n\nNanny, Papa, sing with me\nFunny-bunny family!\nGiggles jumping one-two-three\nLove is all we ever see\n\nNanny is my granny\nAny tiny funny bunny\nI just want she buy to me\n\nNanny is a canny\nMany money, shiny penny\nCalls me honey—cute as can be\n\nTick-tock, tick-tock, bedtime near\nEveryone I love is here\nSnuggle close and have no fear\nWhisper dreams into my ear\n\nNanny, Papa, sing with me\nFunny-bunny family!\nGiggles jumping one-two-three\nLove is all we ever see\n\nNanny, Papa, hold me tight\nShiny smiles like morning light\nCuddles make the world feel right—\nMy sweet family day and night\n\nNighty-night, my family\nFunny-bunny family",
+    "educationalBenefits": [
+      {
+        "title": "Family Bonds",
+        "description": "Strengthens emotional connections with extended family members."
+      },
+      {
+        "title": "Intergenerational Love",
+        "description": "Celebrates the unique grandparent-grandchild relationship."
+      },
+      {
+        "title": "Emotional Expression",
+        "description": "Encourages expressing love and gratitude for family."
+      }
+    ],
+    "artistNote": "Grandparents hold such a special place in children's hearts. This song is my tribute to the Nannys and Papas who shower their grandchildren with unconditional love.",
+    "relatedTracks": [
+      2,
+      6,
+      20
+    ],
+    "seo": {
+      "title": "Nanny & Papa | Grandparent Song | Family Love | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/nanny-and-papa-cover.webp",
+      "keywords": "grandparent song, nanny papa song, family love song, grandparents day song, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/nanny-papa",
+      "description": "Heartwarming song celebrating grandparent relationships. Perfect for honoring Nanny and Papa bonds with children."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/nanny-papa#recording",
+      "name": "Nanny & Papa (Funny Bunny Family)",
+      "url": "https://alybouchnak.com/track/nanny-papa",
+      "duration": "PT2M34S",
+      "genre": "Nursery Rhymes",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-02-11",
+      "isrcCode": "GXBDS2573588",
+      "description": "A heartwarming celebration of grandparent relationships. This song honors the special bond between children and their Nanny and Papa through joyful lyrics and warm melodies.",
+      "image": "https://alybouchnak.com/images/nanny-and-papa-cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/4ed7ee9b-2f8c-4371-9ca1-17f849a4904d"
+      ]
+    },
+    "musicbrainzRecordingId": "4ed7ee9b-2f8c-4371-9ca1-17f849a4904d",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/4ed7ee9b-2f8c-4371-9ca1-17f849a4904d",
+    "isStandaloneRelease": false
+  },
+  {
+    "id": 24,
+    "slug": "brave-hello",
+    "title": "Brave Hello",
+    "subtitle": "A Social-Emotional song for greetings and confidence (Ages 2–6)",
+    "description": "Helping little ones find their (Brave Hello) This track uses a gentle but bouncy rhythm to teach toddlers how to greet others with confidence, making social transitions easier for both kids and parents.",
+    "coverImage": "/images/Brave-Hello--Aly-Bouchnak-Cover.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-05-22",
+    "duration": "2:42",
+    "bpm": 122,
+    "genre": "Children's Music",
+    "ageRange": "4-8 years",
+    "mood": "Upbeat",
+    "routine": "Transition",
+    "isrc": "GX38U2681607",
+    "upc": "5063958741116",
+    "album": "The Bloom’s House: Volume 1",
+    "albumUrl": "/album/the-blooms-house-volume-1",
+    "spotifyUrl": "https://open.spotify.com/track/67icq0dHJrVVPY8G1Lig2w",
+    "appleMusicUrl": "https://music.apple.com/us/song/brave-hello/1893407756",
+    "youtubeUrl": "https://youtu.be/t5_lPS6o2aA",
+    "amazonUrl": "https://amazon.com/music/player/albums/B0GX76998P?marketplaceId=ATVPDKIKX0DER&musicTerritory=US&ref=dm_sh_o2DPX2ouM4hAU30N0TPkfajyp",
+    "otherUrl": "https://push.fm/fl/brave-hello",
+    "lyricsPreview": [
+      "Deep breath in, and a smile so wide",
+      "I’ve got my 'Brave Hello' inside",
+      "Wave your hand, and say it clear"
+    ],
+    "lyricsFull": "Deep breath in, and a smile so wide\nI’ve got my 'Brave Hello' inside\nWave your hand, and say it clear\nI’m so happy to be here!\n\nSometimes I feel a little shy\nWhen a new friend passes by\nBut I remember what to do\nI say 'Hello! How are you?'\n\nBrave Hello, Brave Hello\nWatch my confidence start to grow\nBrave Hello, Brave Hello\nEverywhere that I may go\n\nTo my teacher, to my friend\nOn the love, we can depend\nWith a wave and a happy face\nI feel brave in every place!",
+    "educationalBenefits": [
+      {
+        "title": "Social Confidence",
+        "description": "Models positive greeting behaviors to reduce social anxiety."
+      },
+      {
+        "title": "Emotional Regulation",
+        "description": "Uses deep breathing cues to help children manage 'shyness' or jitters."
+      },
+      {
+        "title": "Communication Skills",
+        "description": "Encourages clear verbal and non-verbal (waving) communication."
+      }
+    ],
+    "artistNote": "I wrote 'Brave Hello' to be a 'pocket-tool' for parents. Meeting new people can be scary for a 4-year-old, so I wanted to give them a catchy rhythm they can hum to feel brave during those first-day-of-school moments.",
+    "relatedTracks": [
+      8,
+      11,
+      7
+    ],
+    "seo": {
+      "title": "Brave Hello | Social-Emotional Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/Brave-Hello--Aly-Bouchnak-Cover.webp",
+      "keywords": "social-emotional song, brave hello, toddler music, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/brave-hello",
+      "description": "Helping little ones find their (Brave Hello) This track uses a gentle but bouncy rhythm to teach toddlers how to greet others with confidence, making social transitions easier for both kids and parents."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/brave-hello#recording",
+      "name": "Brave Hello",
+      "url": "https://alybouchnak.com/track/brave-hello",
+      "duration": "PT2M42S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-05-22",
+      "isrcCode": "GX38U2681607",
+      "description": "Helping little ones find their (Brave Hello) This track uses a gentle but bouncy rhythm to teach toddlers how to greet others with confidence, making social transitions easier for both kids and parents.",
+      "image": "https://alybouchnak.com/images/Brave-Hello--Aly-Bouchnak-Cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/74d640fd-0be5-4704-b0ae-8363d6c47f7b"
+      ]
+    },
+    "musicbrainzRecordingId": "74d640fd-0be5-4704-b0ae-8363d6c47f7b",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/74d640fd-0be5-4704-b0ae-8363d6c47f7b",
+    "isStandaloneRelease": false
+  },
+  {
+    "id": 2,
+    "slug": "pet-pop-animal-song",
+    "title": "Pet-Pop | The Animal Song",
+    "subtitle": "Fun pet animal movement song (Ages 2–6)",
+    "description": "A lively song about different pets and their sounds, encouraging children to mimic animal movements and sounds. Perfect for pet-themed activities and learning about domestic animals.",
+    "coverImage": "/images/pet-pop-animal-song-cover.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2025-12-19",
+    "duration": "2:10",
+    "bpm": 128,
+    "genre": "Children's Music, Pop, Nursery Rhymes",
+    "ageRange": "2-6 years",
+    "mood": "Playful",
+    "routine": "Playtime",
+    "isrc": "GXHZG2515365",
+    "upc": "5063863307490",
+    "album": "The Bloom’s House: Volume 1",
+    "albumUrl": "/album/the-blooms-house-volume-1",
+    "spotifyUrl": "https://open.spotify.com/track/4hEpXU03NdZQYmv456JoiI",
+    "appleMusicUrl": "https://music.apple.com/us/song/pet-pop-the-animal-song/1857066272",
+    "youtubeUrl": "https://youtu.be/enNB5x7nT7M",
+    "amazonUrl": "https://music.amazon.com/tracks/B0G4ND7L97",
+    "otherUrl": "https://push.fm/fl/pet-pop",
+    "lyricsPreview": [
+      "My doggie make a sound goes woof woof woof",
+      "My doggie likes to run goes run run run",
+      "All day long",
+      "My kitty make a sound goes meow meow meow",
+      "My kitty likes to sleep goes shh shh shh",
+      "All day long"
+    ],
+    "lyricsFull": "My doggie make a sound goes woof woof woof\nWoof woof woof\nWoof woof woof\nMy doggie likes to run goes run run run\nAll day long\n\nMy kitty make a sound goes meow meow meow\nMeow meow meow\nMeow meow meow\nMy kitty likes to sleep goes shh shh shh\nAll day long\n\nMy ducky make a sound goes quack quack quack\nQuack quack quack\nQuack quack quack\nMy ducky likes to go goes splash splash splash\nAll day long\n\nMy birdie make a sound goes tweet tweet tweet\nTweet tweet tweet\nTweet tweet tweet\nMy birdie likes to fly goes up up up\nAll day long\n\nMy cow make a sound goes moo moo moo\nMoo moo moo\nMoo moo moo\nMy cow likes to eat goes munch munch munch\nAll day long\n\nMy doggie make a sound goes woof woof woof\nWoof woof woof\nWoof woof woof\nMy doggie likes to run goes run run run\nAll day long\n\nMy friends make sounds goes meow meow meow\nQuack quack quack\nTweet tweet tweet\nMoo moo moo\nAll day long",
+    "educationalBenefits": [
+      {
+        "title": "Animal Recognition",
+        "description": "Helps children learn about different pets and their characteristic sounds."
+      },
+      {
+        "title": "Sound Association",
+        "description": "Builds understanding of animal sounds and their corresponding pets."
+      },
+      {
+        "title": "Motor Skills",
+        "description": "Develops coordination through animal movement imitation activities."
+      },
+      {
+        "title": "Social Skills",
+        "description": "Encourages group participation and shared animal role-play experiences."
+      }
+    ],
+    "artistNote": "This song came from observing how fascinated children are by pets. I wanted to create something that celebrates the special bond between kids and their furry (or feathery, or scaly) friends.",
+    "relatedTracks": [
+      10,
+      4,
+      11
+    ],
+    "seo": {
+      "title": "Pet-Pop | The Animal Song | Kids Pet Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/pet-pop-animal-song-cover.webp",
+      "keywords": "pet song, animal sounds for kids, dog cat song, kids animal song, pet animal sounds, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/pet-pop-animal-song",
+      "description": "Learn pet animal sounds with this fun movement song for kids ages 2-6. Perfect for pet-themed activities and learning about domestic animals."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/pet-pop-animal-song#recording",
+      "name": "Pet-Pop | The Animal Song",
+      "url": "https://alybouchnak.com/track/pet-pop-animal-song",
+      "duration": "PT2M10S",
+      "genre": "Children's Music, Pop, Nursery Rhymes",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2025-12-19",
+      "isrcCode": "GXHZG2515365",
+      "description": "A lively song about different pets and their sounds, encouraging children to mimic animal movements and sounds. Perfect for pet-themed activities and learning about domestic animals.",
+      "image": "https://alybouchnak.com/images/pet-pop-animal-song-cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/244d822b-9cf6-4997-bec2-39b8c6c346e0"
+      ]
+    },
+    "musicbrainzRecordingId": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/244d822b-9cf6-4997-bec2-39b8c6c346e0",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "14966f0b-0fe8-417a-b936-0c5247de62b9",
+    "releaseType": "Single"
+  },
+  {
+    "id": 18,
+    "slug": "liquid-room-brown-noise-womb",
+    "title": "The Liquid Room | Brown Noise Womb Sound",
+    "subtitle": "Womb-like brown noise sleep aid (Ages 0–1)",
+    "description": "Recreates the familiar sounds of the womb with brown noise and liquid-like frequencies, providing newborns with the comforting sounds they heard before birth.",
+    "coverImage": "/images/The-Liquid-Room.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-01-09",
+    "duration": "3:40",
+    "bpm": 74,
+    "ageRange": "0-4 years",
+    "mood": "Sleep",
+    "routine": "Bedtime",
+    "isrc": "GXJ2E2518383",
+    "upc": "5063893028990",
+    "album": "Tuned for Dreams",
+    "albumUrl": "/album/tuned-for-dreams",
+    "spotifyUrl": "https://open.spotify.com/track/3rUZ2E4FbIOUsrofXfjeta",
+    "appleMusicUrl": "https://music.apple.com/us/song/the-liquid-room-brown-noise-womb-sound/1862214093",
+    "youtubeUrl": "https://youtu.be/4yIbfJahJSc",
+    "amazonUrl": "https://music.amazon.com/tracks/B0G83LCQWV",
+    "lyricsPreview": [
+      "(instrumental)"
+    ],
+    "lyricsFull": "(instrumental)",
+    "educationalBenefits": [
+      {
+        "title": "Womb Comfort",
+        "description": "Recreates familiar prenatal auditory environment for newborns."
+      },
+      {
+        "title": "Noise Masking",
+        "description": "Blocks out disruptive environmental sounds for better sleep."
+      },
+      {
+        "title": "Transition Support",
+        "description": "Helps newborns adjust to life outside the womb."
+      },
+      {
+        "title": "Calming Reflex",
+        "description": "Triggers natural calming responses through familiar frequencies."
+      }
+    ],
+    "artistNote": "I studied recordings from inside the womb and worked with sound engineers to recreate those exact frequencies. For newborns, this is not just music, it is coming home.",
+    "relatedTracks": [
+      12,
+      14,
+      17
+    ],
+    "seo": {
+      "title": "The Liquid Room | Brown Noise Womb Sound | Newborn Sleep | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/The-Liquid-Room.webp",
+      "keywords": "womb sounds, brown noise for babies, newborn sleep aid, prenatal sound recreation, infant white noise, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/liquid-room-brown-noise-womb",
+      "description": "Womb-like brown noise for newborns. Recreates prenatal sounds for comfort and better sleep. Perfect for ages 0-1."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/liquid-room-brown-noise-womb#recording",
+      "name": "The Liquid Room | Brown Noise Womb Sound",
+      "url": "https://alybouchnak.com/track/liquid-room-brown-noise-womb",
+      "duration": "PT3M40S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Tuned for Dreams",
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
+      },
+      "datePublished": "2026-01-09",
+      "isrcCode": "GXJ2E2518383",
+      "description": "Recreates the familiar sounds of the womb with brown noise and liquid-like frequencies, providing newborns with the comforting sounds they heard before birth.",
+      "image": "https://alybouchnak.com/images/The-Liquid-Room.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/af47ff62-aa8b-4c4a-b1ba-2192a0a3fc54"
+      ]
+    },
+    "musicbrainzRecordingId": "af47ff62-aa8b-4c4a-b1ba-2192a0a3fc54",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/af47ff62-aa8b-4c4a-b1ba-2192a0a3fc54",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
+  },
+  {
+    "id": 21,
+    "slug": "wheels-on-the-bus-party-ride",
+    "title": "The Wheels on the Bus (Party Ride)",
+    "subtitle": "Transportation movement song (Ages 2–6)",
+    "description": "An energetic party version of the classic \"The Wheels on the Bus\" with modern beats and fun sound effects that get children moving and singing about bus adventures.",
+    "coverImage": "/images/The-Wheels-on-the-Bus--Party-Ride.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-03-27",
+    "duration": "2:19",
+    "bpm": 124,
+    "genre": "Kids Pop",
+    "ageRange": "2-6 years",
+    "mood": "Energetic",
+    "routine": "Movement",
+    "isrc": "GX8LD2630428",
+    "upc": "5063907564377",
+    "album": "The Bloom's House: Party Classics",
+    "albumUrl": "/album/the-blooms-house-classics-party",
+    "spotifyUrl": "https://open.spotify.com/track/0tVC0lMX5AbXlFXJFMr0h1",
+    "appleMusicUrl": "https://music.apple.com/eg/song/the-wheels-on-the-bus-party-ride/1882443457",
+    "youtubeUrl": "https://youtu.be/pyIb7Cbgs9M",
+    "amazonUrl": "https://music.amazon.ca/tracks/B0GRCQ598V",
+    "otherUrl": "https://push.fm/fl/the-wheels-on-the-bus-party-ride-aly-bouchnak",
+    "lyricsPreview": [
+      "The wheels on the bus go round and round",
+      "Round and round, round and round",
+      "The wheels on the bus go round and round",
+      "All through the town"
+    ],
+    "lyricsFull": "The Party Bus is here!\nI have a ticket for you... and you... and you!\nCome on inside!\nLet's roll!\n\nThe wheels on the bus go round and round\nRound and round, round and round\nThe wheels on the bus go round and round\nAll through the town!\n(Roll your hands!)\n\nThe wipers on the bus go Swish, Swish, Swish\nSwish, Swish, Swish!\nSwish, Swish, Swish!\nThe wipers on the bus go Swish, Swish, Swish\nAll through the town!\n(Side to side!)\n\nWe are riding on the bus!\n(Yeah!)\nIt’s a party just for us!\n(Woo!)\nThe sun is shining down...\nAll through the town!\n(Yay!)\n\nThe horn on the bus goes Beep, Beep, Beep\nBeep, Beep, Beep!\nBeep, Beep, Beep!\nThe horn on the bus goes Beep, Beep, Beep\nAll through the town!\n(Make some noise!)\n\nThe people on the bus go Up and Down!\n(Jump Up!)\nUp and Down!\n(Get Low!)\nUp and Down!\n(Jump Up!)\nThe people on the bus go Up and Down\nAll through the town!\n\nWe are stopped at a red light\n(Shhh...)\nWho is driving the bus?\nIs it a Bear?\n(No!)\nIs it a Cat?\n(No!)\nIt's the DJ!\nAnd the Driver on the bus says...\nEVERYBODY DANCE!\n\n(Go Bus! Go Bus! Go Bus!)\n(Wiggle your wheels!)\n\nThe wheels on the bus go round and round!\n(Round and round!)\nWe are here!\n(Ding Dong!)\nThanks for the ride!",
+    "educationalBenefits": [
+      {
+        "title": "Transportation Awareness",
+        "description": "Teaches children about buses and transportation concepts."
+      },
+      {
+        "title": "Sound Effects",
+        "description": "Develops understanding of vehicle sounds through repetition."
+      },
+      {
+        "title": "Movement Coordination",
+        "description": "Encourages physical actions matching song lyrics."
+      },
+      {
+        "title": "Sequencing Skills",
+        "description": "Builds understanding of patterns through verse repetition."
+      }
+    ],
+    "artistNote": "I remember doing all the hand motions to this song as a kid. I wanted to keep that interactive spirit but add beats that make both kids and parents want to dance together.",
+    "relatedTracks": [
+      3,
+      4,
+      5
+    ],
+    "seo": {
+      "title": "The Wheels on the Bus (Party Ride) | Kids Transportation Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/The-Wheels-on-the-Bus--Party-Ride.webp",
+      "keywords": "wheels on the bus, transportation song for kids, bus song, kids vehicle song, toddler movement song, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/wheels-on-the-bus-party-ride",
+      "description": "Energetic party version of the classic bus song. Kids learn vehicle sounds while dancing to modern beats. Perfect for ages 2-6."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/wheels-on-the-bus-party-ride#recording",
+      "name": "The Wheels on the Bus (Party Ride)",
+      "url": "https://alybouchnak.com/track/wheels-on-the-bus-party-ride",
+      "duration": "PT2M19S",
+      "genre": "Kids Pop",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Party Classics",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party"
+      },
+      "datePublished": "2026-03-27",
+      "isrcCode": "GX8LD2630428",
+      "description": "An energetic party version of the classic \"The Wheels on the Bus\" with modern beats and fun sound effects that get children moving and singing about bus adventures.",
+      "image": "https://alybouchnak.com/images/The-Wheels-on-the-Bus--Party-Ride.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/74c99441-ad72-47a9-b7e8-9d4d2385c5a9"
+      ]
+    },
+    "musicbrainzRecordingId": "74c99441-ad72-47a9-b7e8-9d4d2385c5a9",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/74c99441-ad72-47a9-b7e8-9d4d2385c5a9",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "977c93bd-3c32-48e7-a90f-d92adc5e78cf",
+    "releaseType": "Single"
+  },
+  {
+    "id": 11,
+    "slug": "zakzooka-the-bear",
+    "title": "Zakzooka The Bear",
+    "subtitle": "Friendly bear adventure song (Ages 2–6)",
+    "description": "An adventurous song about Zakzooka the bear and his forest friends, teaching about bears, friendship, and woodland animals through storytelling.",
+    "coverImage": "/images/Zakzooka-The-Bear--Aly-Bouchnak.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-05-13",
+    "duration": "2:21",
+    "bpm": 124,
+    "genre": "Children's Music",
+    "ageRange": "2-6 years",
+    "mood": "Joyful",
+    "routine": "Playtime",
+    "isrc": "GX8LD2691082",
+    "upc": "5063941025018",
+    "album": "The Bloom’s House: Volume 1",
+    "albumUrl": "/album/the-blooms-house-volume-1",
+    "spotifyUrl": "https://open.spotify.com/track/6jEWDrYSdLa01onxvHMsIA",
+    "appleMusicUrl": "https://music.apple.com/au/song/zakzooka-the-bear/1884963800",
+    "youtubeUrl": "https://youtu.be/OfhWCsIOOb4?si=HWS6_eNhc4dnM4-1",
+    "amazonUrl": "https://music.amazon.ca/tracks/B0GSH3NPJG",
+    "otherUrl": "https://push.fm/fl/zakzooka-the-bear",
+    "lyricsPreview": [
+      "Zakzooka is a dizzy, whizzy, fuzzy bear",
+      "He has a wiggly tummy and messy, messy hair!",
+      "He eats the yummy food, he is always in a mood",
+      "For fishy, mushy, sushi... it is so good!",
+      "Zak, Zak, Zak, Zak Zak, Zak, Zoo-ooo! (We love you!)",
+      "Zak, Zak, Zak, Zak Zak, Zak, Zoo-Kaa! (He's the bear!)"
+    ],
+    "lyricsFull": "(Roar!)\nWho is that bear?\n(It's Zakzooka!)\nLet's go!\n\nZakzooka is a dizzy, whizzy, fuzzy bear\nHe has a wiggly tummy and messy, messy hair!\n\nHe eats the yummy food, he is always in a mood\nFor fishy, mushy, sushi... it is so good!\n(Yum, yum, yum!)\n\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\n(We love you!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-Kaa!\n(He's the bear!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\nZak-Zoo-Ka!\n\nHe has no fear, he flies up in the air\n(Fly, fly, fly!)\nHe swims inside the water, splashing everywhere\n(Splash, splash, splash!)\nNow stomp your feet like a big fuzzy bear\n(Stomp! Stomp!)\nAnd roar like Zakzooka if you dare!\n(ROAR!)\n\nAre you ready to roar?\n(Yeah!)\nAre you ready for more?\n(Let's go!)\n\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\n(We love you!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-Kaa!\n(He's the bear!)\nZak, Zak, Zak, Zak\nZak, Zak, Zoo-ooo!\nZak-Zoo-Ka!\n\nFishy, mushy, sushi!\n(Sushi!)\nFishy, mushy, sushi!\n(Sushi!)\nDizzy, whizzy, fuzzy!\n(Fuzzy!)\nWho is the bear?\n(Zakzooka!)\n\nZak, Zak, Zoo-ooo...\nZak, Zak, Zoo-Kaa...\n(Bye bye bear!)",
+    "educationalBenefits": [
+      {
+        "title": "Storytelling Skills",
+        "description": "Develops narrative understanding through song storytelling."
+      },
+      {
+        "title": "Friendship Values",
+        "description": "Teaches about friendship and helping others."
+      },
+      {
+        "title": "Forest Animals",
+        "description": "Introduces children to woodland creatures and their habitats."
+      },
+      {
+        "title": "Character Development",
+        "description": "Builds understanding of personality traits through Zakzooka."
+      }
+    ],
+    "artistNote": "Creating Zakzooka as a character was so much fun. I wanted a bear who was gentle, adventurous, and always ready to help friends. Kids need heroes they can relate to!",
+    "relatedTracks": [
+      23,
+      1,
+      10
+    ],
+    "seo": {
+      "title": "Zakzooka The Bear | Kids Forest Adventure Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/Zakzooka-The-Bear--Aly-Bouchnak.webp",
+      "keywords": "bear song for kids, forest adventure song, Zakzooka, woodland animals song, kids story song, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/zakzooka-the-bear",
+      "description": "Adventurous bear song teaching friendship and forest animals. Follow Zakzooka through woodland adventures. Ages 2-6."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/zakzooka-the-bear#recording",
+      "name": "Zakzooka The Bear",
+      "url": "https://alybouchnak.com/track/zakzooka-the-bear",
+      "duration": "PT2M21S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-05-13",
+      "isrcCode": "GX8LD2691082",
+      "description": "An adventurous song about Zakzooka the bear and his forest friends, teaching about bears, friendship, and woodland animals through storytelling.",
+      "image": "https://alybouchnak.com/images/Zakzooka-The-Bear--Aly-Bouchnak.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/e210ac04-fd05-4f99-be7c-e6bf52aba4ab"
+      ]
+    },
+    "musicbrainzRecordingId": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "827dee41-2999-4c68-9532-5f659f891988",
+    "releaseType": "Single"
   },
   {
     "id": 13,
@@ -1089,9 +1560,9 @@ export const tracks: Track[] = [
     "description": "A gentle lullaby with rhythmic pendulum-like melodies that mimic the natural rocking motion, perfect for calming babies and promoting deep sleep.",
     "coverImage": "/images/The-Pendulum.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "2:50",
-    "bpm": 55,
+    "releaseDate": "2026-01-09",
+    "duration": "3:10",
+    "bpm": 69,
     "genre": "Children's Lullabies, Infant Sleep",
     "ageRange": "0-2 years",
     "mood": "Soothing",
@@ -1143,442 +1614,223 @@ export const tracks: Track[] = [
       "description": "Gentle rocking lullaby mimicking natural motion. Rhythmic melodies calm babies and promote deep sleep. Perfect for ages 0-2."
     },
     "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
       "@id": "https://alybouchnak.com/track/pendulum-rocking-lullaby#recording",
-      "url": "https://alybouchnak.com/track/pendulum-rocking-lullaby",
       "name": "The Pendulum | Rocking Lullaby for Baby",
-      "@type": "MusicRecording",
+      "url": "https://alybouchnak.com/track/pendulum-rocking-lullaby",
+      "duration": "PT3M10S",
       "genre": "Children's Lullabies, Infant Sleep",
-      "image": "https://alybouchnak.com/images/The-Pendulum.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
-        "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M50S",
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Tuned for Dreams",
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
+      },
+      "datePublished": "2026-01-09",
       "isrcCode": "GXJ2E2572277",
-      "description": "A gentle lullaby with pendulum-like melodies mimicking natural rocking motion for calming babies.",
-      "datePublished": "2026-01-09"
-    }
-  },
-  {
-    "id": 12,
-    "slug": "safe-container-calm-bedtime",
-    "title": "The Safe Container | Calm Bedtime Routine",
-    "subtitle": "Gentle sleep preparation song (Ages 0–3)",
-    "description": "A soothing lullaby that creates a feeling of safety and security, helping children transition from active play to peaceful sleep through gentle melodies and calming rhythms.",
-    "coverImage": "/images/The-Safe-Container.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "2:44",
-    "bpm": 60,
-    "genre": "Children's Lullabies, Sleep Music",
-    "ageRange": "0-3 years",
-    "mood": "Calming",
-    "routine": "Bedtime",
-    "isrc": "GXJ2E2568126",
-    "upc": "5063893028990",
-    "album": "Tuned for Dreams",
-    "albumUrl": "/album/tuned-for-dreams",
-    "spotifyUrl": "https://open.spotify.com/track/28ycLvXb40POUWBgxbOO4k",
-    "appleMusicUrl": "https://music.apple.com/us/song/the-safe-container-calm-bedtime-routine/1862214087",
-    "youtubeUrl": "https://youtu.be/mO_bhECagMU",
-    "amazonUrl": "https://music.amazon.com/tracks/B0G83BPSWJ",
-    "lyricsPreview": [
-      "Mm-mm, you are here, my love, I'm near",
-      "Low and warm, I stay right here",
-      "La-la, mellow light so slow",
-      "Gentle room in a sleepy glow"
-    ],
-    "lyricsFull": "Mm-mm, you are here, my love, I'm near\nLow and warm, I stay right here\nLa-la, mellow light so slow\nGentle room in a sleepy glow\n\nMm-mm, little one, you feel, you see\nSoft and safe with the room and me\nLa-la, hush of the window air\nTiny hands in the evening air\n\nI am here, you are here\nClose and calm, my melody near\nLo-lo, sway with the quiet night\nSafe inside this tender light\n\nMm-mm, la-la, slow we stay\nDrifting down in a gentle way\nI am here, you are here\nMm-mm you are here",
-    "educationalBenefits": [
-      {
-        "title": "Sleep Routine",
-        "description": "Establishes consistent bedtime rituals and sleep associations."
-      },
-      {
-        "title": "Emotional Security",
-        "description": "Builds feelings of safety and comfort for peaceful sleep."
-      },
-      {
-        "title": "Relaxation Skills",
-        "description": "Teaches calming techniques for self-soothing."
-      },
-      {
-        "title": "Parent-Child Bonding",
-        "description": "Strengthens attachment through shared bedtime routines."
-      }
-    ],
-    "artistNote": "I studied the concept of psychological safety and how important it is for children to feel contained and secure. This song was designed to create that feeling of being held, even when parents step out of the room.",
-    "relatedTracks": [
-      13,
-      14,
-      15
-    ],
-    "seo": {
-      "title": "The Safe Container | Calm Bedtime Routine | Sleep Music | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/The-Safe-Container.webp",
-      "keywords": "bedtime song, sleep music for kids, lullaby, calm bedtime routine, baby sleep aid, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/safe-container-calm-bedtime",
-      "description": "Soothing lullaby for bedtime routine. Creates feelings of safety and security for peaceful sleep. Perfect for ages 0-3."
+      "description": "A gentle lullaby with rhythmic pendulum-like melodies that mimic the natural rocking motion, perfect for calming babies and promoting deep sleep.",
+      "image": "https://alybouchnak.com/images/The-Pendulum.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/53151ab4-a873-4241-a0f6-203f2ec5a06e"
+      ]
     },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/safe-container-calm-bedtime#recording",
-      "url": "https://alybouchnak.com/track/safe-container-calm-bedtime",
-      "name": "The Safe Container | Calm Bedtime Routine",
-      "@type": "MusicRecording",
-      "genre": "Children's Lullabies, Sleep Music",
-      "image": "https://alybouchnak.com/images/The-Safe-Container.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
-        "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT2M44S",
-      "isrcCode": "GXJ2E2568126",
-      "description": "A soothing lullaby creating feelings of safety and security for peaceful sleep.",
-      "datePublished": "2026-01-09"
-    }
+    "musicbrainzRecordingId": "53151ab4-a873-4241-a0f6-203f2ec5a06e",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/53151ab4-a873-4241-a0f6-203f2ec5a06e",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
   },
   {
-    "id": 5,
-    "slug": "the-wise-mice",
-    "title": "The Wise Mice (Memory Game)",
-    "subtitle": "Cumulative memory song for cognitive skills (Ages 2–6)",
-    "description": "A cumulative memory song that enhances sequencing and cognitive skills. Children repeat growing sequences of mouse actions, building working memory.",
-    "coverImage": "/images/the-wise-mice-cover.webp",
+    "id": 10,
+    "slug": "duckie-song",
+    "title": "The Duckie Song",
+    "subtitle": "Animal adventure song (Ages 2–6)",
+    "description": "A sweet and playful song about a little duck's adventures, perfect for teaching about ducks and water animals while encouraging imagination.",
+    "coverImage": "/images/The-Duckie-Song-Aly-Bouchnak.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-02-11T00:00:00.000Z",
-    "duration": "2:20",
-    "bpm": 115,
-    "genre": "Children's Music",
-    "ageRange": "2-6 years",
-    "mood": "Playful",
-    "routine": "Learning",
-    "isrc": "GX89G2624756",
-    "upc": "5063907926106",
-    "album": "The Bloom's House: Volume 1",
+    "releaseDate": "2026-05-01",
+    "duration": "2:32",
+    "bpm": 116,
+    "genre": "Kids Pop",
+    "ageRange": "4-8 years",
+    "mood": "Upbeat",
+    "routine": "Playtime",
+    "isrc": "GX8LD2660078",
+    "upc": "5063941614571",
+    "album": "The Bloom’s House: Volume 1",
     "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://open.spotify.com/track/3McW2hD8aFsXOx6pcru9IW",
-    "appleMusicUrl": "https://music.apple.com/us/song/the-wise-mice-memory-game/1877091609",
-    "youtubeUrl": "https://youtu.be/QHI7vPGAgY4",
-    "amazonUrl": "https://music.amazon.com/tracks/B0GN4CFSLX",
-    "otherUrl": "https://push.fm/fl/the-wise-mice",
+    "spotifyUrl": "https://open.spotify.com/track/6vdJ4sQN6EUuVQ6iFwWfIe",
+    "appleMusicUrl": "https://music.apple.com/us/song/the-duckie-song/1885087615",
+    "youtubeUrl": "https://youtu.be/QITLXsVyW00",
+    "amazonUrl": "https://music.amazon.com/tracks/B0GSH6NMTP",
+    "otherUrl": "https://push.fm/fl/the-duckie-song",
     "lyricsPreview": [
-      "Did you see the dog that woofed",
-      "That chased the cat that meowed",
-      "That scared the mice so wise",
-      "That nibbled the bag of rice",
-      "That I won as a prize?"
+      "The duckie is walking, ( See! Like dis! )",
+      "She’s walking slowly, ( See! Like dis! )",
+      "She keeps on quacking, ( Hear! Like dis! )",
+      "Oh, how sweet she is, ( See! Like dis! )"
     ],
-    "lyricsFull": "Did you see the wise mice\nNibbled the bag of rice\nThat I won as a prize?\n\nDid you see the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the fire that burned\nThat burned the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the water that splashed\nThat put out the fire that burned\nThat burned the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the cow that mooed\nThat drank the water that splashed\nThat put out the fire that burned\nThat burned the stick that hit\nThat hit the dog that woofed\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see\nThe cow that mooed\nThat drank the water that splashed\nThat put out the fire that burned\nThat burned the stick that hit\n(Woof)\nThat chased the cat that meowed\nThat scared the mice so wise\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the wise mice\nThat nibbled the bag of rice\nThat I won as a prize?\n\nDid you see the wise mice?\nDid you see the wise mice?\n\nDid you see the wise mice?",
+    "lyricsFull": "The duckie is walking, ( See! Like dis! )\nShe’s walking slowly, ( See! Like dis! )\nShe keeps on quacking, ( Hear! Like dis! )\nOh, how sweet she is, ( See! Like dis! )\n\nAnd She sing ( Singing! Like dis! )\n\nQuack quack quacky quack quack \nQuack quack quacky quack quack \n\nShe has a baby, ( Tiny! Like dis! )\nHis feet are so tiny, ( Tiny! Like dis! )\nHe runs behind her, ( See! Like dis! )\nOh, how sweet he is, ( See! Like dis! )\n\nAnd they sing, Singing! Like dis!\n\nQuack quack quacky quack quack \nQuack quack quacky quack quack \n\nHere comes Daddy Duck, ( Walks like dis! )\nHe spots the foxy, ( Hiding! Like dis! )\nHe puffs his chest out, ( Big! Like dis! )\nThe foxy runs away, ( Fast! Like dis! )\n\nHere come Gram and Gramps, ( See! Like dis! )\nThey walk with a stick, ( See! Like dis! )\nThey’re waddling slowly, ( Slowly! Like dis! )\nAnd quack along too, ( Quacking! Like dis! )\n\nAnd they all sing, ( Singing! Like dis! )\n\nQuack quack quacky quack quack \nQuack quack quacky quack quack \n\nThe duckie is walking, ( See! Like dis! )\nShe’s walking slowly, ( See! Like dis! )\nShe keeps on quacking, ( Hear! Like dis!)\nOh, how sweet she is, ( See! Like dis!)",
     "educationalBenefits": [
       {
-        "title": "Working Memory",
-        "description": "Builds capacity to hold and manipulate information in short-term memory."
+        "title": "Animal Knowledge",
+        "description": "Teaches children about ducks and their characteristics."
       },
       {
-        "title": "Sequencing Skills",
-        "description": "Develops understanding of order and patterns."
+        "title": "Imaginative Play",
+        "description": "Encourages creative storytelling and pretend play."
       },
       {
-        "title": "Cognitive Flexibility",
-        "description": "Practices switching between remembering and adding new information."
+        "title": "Sound Recognition",
+        "description": "Develops understanding of duck sounds and water themes."
+      },
+      {
+        "title": "Nature Awareness",
+        "description": "Introduces concepts of ponds, rain, and water environments."
       }
     ],
-    "artistNote": "Memory games are powerful tools for cognitive development. I created this cumulative song to make working memory training feel like play rather than work.",
+    "artistNote": "Watching ducks at a local pond with my nephew inspired this song. The way children connect with animals is magical, and I wanted to capture that wonder.",
     "relatedTracks": [
-      9,
-      2,
-      10
+      23,
+      1,
+      11
     ],
     "seo": {
-      "title": "The Wise Mice | Memory Game Song | Cognitive Development | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/the-wise-mice-cover.webp",
-      "keywords": "memory game song, cognitive development music, sequencing song, educational kids music, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/the-wise-mice",
-      "description": "Cumulative memory song for kids ages 2-6. Build working memory and sequencing skills through playful mouse actions."
+      "title": "The Duckie Song | Kids Water Animal Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/The-Duckie-Song-Aly-Bouchnak.webp",
+      "keywords": "duck song for kids, duckie song, water animal song, pond song, kids animal adventure, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/duckie-song",
+      "description": "Sweet duck adventure song for kids. Learn about ducks and water animals through playful storytelling. Ages 2-6."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/the-wise-mice#recording",
-      "url": "https://alybouchnak.com/track/the-wise-mice",
-      "name": "The Wise Mice (Memory Game)",
-      "@type": "MusicRecording",
-      "genre": "Children's Music",
-      "image": "https://alybouchnak.com/images/the-wise-mice-cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/duckie-song#recording",
+      "name": "The Duckie Song",
+      "url": "https://alybouchnak.com/track/duckie-song",
+      "duration": "PT2M32S",
+      "genre": "Kids Pop",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M20S",
-      "isrcCode": "GX89G2624756",
-      "description": "A cumulative memory song that enhances sequencing and cognitive skills.",
-      "datePublished": "2026-02-11"
-    }
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-05-01",
+      "isrcCode": "GX8LD2660078",
+      "description": "A sweet and playful song about a little duck's adventures, perfect for teaching about ducks and water animals while encouraging imagination.",
+      "image": "https://alybouchnak.com/images/The-Duckie-Song-Aly-Bouchnak.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/c3197bfd-5586-49f1-824b-4d8170304516"
+      ]
+    },
+    "musicbrainzRecordingId": "c3197bfd-5586-49f1-824b-4d8170304516",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/c3197bfd-5586-49f1-824b-4d8170304516",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "93eae2fb-9090-40d2-829c-76b0290e3bb3",
+    "releaseType": "Single"
   },
   {
-    "id": 8,
-    "slug": "nanny-papa",
-    "title": "Nanny & Papa (Funny Bunny Family)",
-    "subtitle": "Heartwarming family celebration song (Ages 2–6)",
-    "description": "A heartwarming celebration of grandparent relationships. This song honors the special bond between children and their Nanny and Papa through joyful lyrics and warm melodies.",
-    "coverImage": "/images/nanny-and-papa-cover.webp",
+    "id": 9,
+    "slug": "alphabet-song",
+    "title": "The Alphabet Song",
+    "subtitle": "Letter learning song (Ages 2–6)",
+    "description": "A modern, upbeat version of the classic alphabet song that makes learning ABCs fun and engaging with contemporary beats and catchy melody.",
+    "coverImage": "/images/The-Alphabet-Song--Aly-Bouchnak.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-02-27T00:00:00.000Z",
-    "duration": "2:34",
-    "bpm": 90,
+    "releaseDate": "2026-04-15",
+    "duration": "2:55",
+    "bpm": 106,
     "genre": "Nursery Rhymes",
     "ageRange": "2-6 years",
-    "mood": "Joyful",
-    "routine": "Celebration",
-    "isrc": "GXBDS2573588",
-    "upc": "5063907265434",
-    "album": "The Bloom's House: Volume 1",
-    "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://open.spotify.com/track/7hvodloW3JqfVKI4yJLQT6",
-    "appleMusicUrl": "https://music.apple.com/us/song/nanny-papa-funny-bunny-family/1870774446",
-    "youtubeUrl": "https://youtu.be/PKQHTPmkmVY",
-    "amazonUrl": "https://music.amazon.com/tracks/B0GJTMS9YS",
-    "otherUrl": "https://push.fm/fl/nanny-and-papa",
-    "lyricsPreview": [
-      "Nanny, Papa, sing with me",
-      "Funny-bunny family!",
-      "Giggles jumping one-two-three",
-      "Love is all we ever see",
-      "Nanny, Papa, hold me tight",
-      "Shiny smiles like morning light",
-      "Cuddles make the world feel right—",
-      "My sweet family day and night"
-    ],
-    "lyricsFull": "Nanny is my granny\nAny tiny funny bunny\nI just want she buy to me\n\nNanny is a canny\nMany money, shiny penny\nCalls me honey—cute as can be\n\nNanny, Papa, sing with me\nFunny-bunny family!\nGiggles jumping one-two-three\nLove is all we ever see\n\nNanny, Papa, hold me tight\nShiny smiles like morning light\nCuddles make the world feel right—\nMy sweet family day and night\n\nPapa is my hero\nLifts me high from one to zero\nSpins me 'round so full of glee\n\nPapa's strong and steady\nHugs are warm and always ready\nKeeps me safe as safe can be\n\nNanny, Papa, sing with me\nFunny-bunny family!\nGiggles jumping one-two-three\nLove is all we ever see\n\nNanny is my granny\nAny tiny funny bunny\nI just want she buy to me\n\nNanny is a canny\nMany money, shiny penny\nCalls me honey—cute as can be\n\nTick-tock, tick-tock, bedtime near\nEveryone I love is here\nSnuggle close and have no fear\nWhisper dreams into my ear\n\nNanny, Papa, sing with me\nFunny-bunny family!\nGiggles jumping one-two-three\nLove is all we ever see\n\nNanny, Papa, hold me tight\nShiny smiles like morning light\nCuddles make the world feel right—\nMy sweet family day and night\n\nNighty-night, my family\nFunny-bunny family",
-    "educationalBenefits": [
-      {
-        "title": "Family Bonds",
-        "description": "Strengthens emotional connections with extended family members."
-      },
-      {
-        "title": "Intergenerational Love",
-        "description": "Celebrates the unique grandparent-grandchild relationship."
-      },
-      {
-        "title": "Emotional Expression",
-        "description": "Encourages expressing love and gratitude for family."
-      }
-    ],
-    "artistNote": "Grandparents hold such a special place in children's hearts. This song is my tribute to the Nannys and Papas who shower their grandchildren with unconditional love.",
-    "relatedTracks": [
-      2,
-      6,
-      20
-    ],
-    "seo": {
-      "title": "Nanny & Papa | Grandparent Song | Family Love | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/nanny-and-papa-cover.webp",
-      "keywords": "grandparent song, nanny papa song, family love song, grandparents day song, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/nanny-papa",
-      "description": "Heartwarming song celebrating grandparent relationships. Perfect for honoring Nanny and Papa bonds with children."
-    },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/nanny-papa#recording",
-      "url": "https://alybouchnak.com/track/nanny-papa",
-      "name": "Nanny & Papa (Funny Bunny Family)",
-      "@type": "MusicRecording",
-      "genre": "Nursery Rhymes",
-      "image": "https://alybouchnak.com/images/nanny-and-papa-cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT2M34S",
-      "isrcCode": "GXBDS2573588",
-      "description": "A heartwarming celebration of grandparent relationships.",
-      "datePublished": "2026-02-27"
-    }
-  },
-  {
-    "id": 24,
-    "slug": "brave-hello",
-    "title": "Brave Hello",
-    "subtitle": "A Social-Emotional song for greetings and confidence (Ages 2–6)",
-    "description": "Helping little ones find their (Brave Hello) This track uses a gentle but bouncy rhythm to teach toddlers how to greet others with confidence, making social transitions easier for both kids and parents.",
-    "coverImage": "/images/Brave-Hello--Aly-Bouchnak-Cover.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-05-22T00:00:00.000Z",
-    "duration": "2:15",
-    "bpm": 124,
-    "genre": "Children's Music",
-    "ageRange": "2-6 years",
     "mood": "Upbeat",
-    "routine": "Transition",
-    "isrc": "GX38U2681607",
-    "upc": "5063958741116",
-    "album": "The Bloom's House: Volume 1",
+    "routine": "Learning",
+    "isrc": "GX8LD2663207",
+    "upc": "5063941576312",
+    "album": "The Bloom’s House: Volume 1",
     "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://open.spotify.com/track/Placeholder",
-    "appleMusicUrl": "https://music.apple.com/us/song/Placeholder",
-    "youtubeUrl": "https://youtu.be/Placeholder",
-    "amazonUrl": "https://music.amazon.com/tracks/Placeholder",
+    "spotifyUrl": "https://open.spotify.com/track/2qJzVLZpmILTOBfsDUjPvf",
+    "appleMusicUrl": "https://music.apple.com/eg/song/the-alphabet-song-abc-song/1885054199",
+    "youtubeUrl": "https://youtu.be/OGx3h0r52pQ",
+    "amazonUrl": "#",
+    "otherUrl": "https://push.fm/fl/the-alphabet-song-abc-song",
     "lyricsPreview": [
-      "Deep breath in, and a smile so wide",
-      "I’ve got my 'Brave Hello' inside",
-      "Wave your hand, and say it clear"
+      "A is for apple, juicy and sweet",
+      "B is for ball, bounce bounce your feet",
+      "C is for cuddle, snuggle up tight",
+      "D is for dream, sleep all night"
     ],
-    "lyricsFull": "Deep breath in, and a smile so wide\nI’ve got my 'Brave Hello' inside\nWave your hand, and say it clear\nI’m so happy to be here!\n\nSometimes I feel a little shy\nWhen a new friend passes by\nBut I remember what to do\nI say 'Hello! How are you?'\n\nBrave Hello, Brave Hello\nWatch my confidence start to grow\nBrave Hello, Brave Hello\nEverywhere that I may go\n\nTo my teacher, to my friend\nOn the love, we can depend\nWith a wave and a happy face\nI feel brave in every place!",
+    "lyricsFull": "A, B, C, D\nCome and sing with me\n\nA is for apple, juicy and sweet\nB is for ball, bounce bounce your feet\nC is for cuddle, snuggle up tight\nD is for dream, sleep all night\n\nE is for earth, green and blue\nF is for family, me and you\nG is for garden, watch it grow\nH is for happy, say hello (Hello!)\n\nA B C D E F G\nH I J K L M N O P\nQ R S T U V\nW X Y and Z\nSinging with my family\n\nI is for ice cream, cold and yummy\nJ is for jump, wiggle your tummy\nK is for kiss on your cheek\nL is for love every week\n\nM is for music, dance around\nN is for night, quiet sound\nO is for ocean, splash and play\nP is for party, hip hooray (Yay!)\n\nA B C D E F G\nH I J K L M N O P\nQ R S T U V\nW X Y and Z\nSinging with my family\n\nQ is for quiet, go to sleep (Beep-beep-beep)\nR is for robot, beep-beep-beep\nS is for sunshine, shining bright\nT is for twinkle, starry light\n\nU is for up, touch the sky\nV is for island, playing hide\nW is for world, big and round\nX is for xylophone, happy sound\nY is for you, my best friend\nZ is for zoom, that's the end\n\nThat's the end\nA B C",
     "educationalBenefits": [
       {
-        "title": "Social Confidence",
-        "description": "Models positive greeting behaviors to reduce social anxiety."
+        "title": "Letter Recognition",
+        "description": "Teaches all 26 letters of the alphabet in order."
       },
       {
-        "title": "Emotional Regulation",
-        "description": "Uses deep breathing cues to help children manage 'shyness' or jitters."
+        "title": "Phonemic Awareness",
+        "description": "Introduces letter-sound associations through examples."
       },
       {
-        "title": "Communication Skills",
-        "description": "Encourages clear verbal and non-verbal (waving) communication."
+        "title": "Memory Skills",
+        "description": "Builds memorization through melodic repetition."
+      },
+      {
+        "title": "Pre-Reading Skills",
+        "description": "Establishes foundation for future reading and writing."
       }
     ],
-    "artistNote": "I wrote 'Brave Hello' to be a 'pocket-tool' for parents. Meeting new people can be scary for a 3-year-old, so I wanted to give them a catchy rhythm they can hum to feel brave during those first-day-of-school moments.",
+    "artistNote": "I wanted to create an alphabet song that parents actually enjoy hearing on repeat. The modern beat keeps it fresh while maintaining the educational foundation.",
     "relatedTracks": [
-      8,
-      11,
+      4,
+      23,
       7
     ],
     "seo": {
-      "title": "Brave Hello | Social-Emotional Song | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/Brave-Hello--Aly-Bouchnak-Cover.webp",
-      "keywords": "social-emotional song, brave hello, toddler music, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/brave-hello",
-      "description": "Helping little ones find their (Brave Hello) This track uses a gentle but bouncy rhythm to teach toddlers how to greet others with confidence, making social transitions easier for both kids and parents."
+      "title": "The Alphabet Song | ABC Learning Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/The-Alphabet-Song--Aly-Bouchnak.webp",
+      "keywords": "alphabet song, ABC song for kids, learn letters song, kids educational music, toddler alphabet, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/alphabet-song",
+      "description": "Modern upbeat alphabet song for kids. Learn ABCs with fun beats and letter examples. Perfect for early literacy ages 2-6."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/brave-hello#recording",
-      "url": "https://alybouchnak.com/track/brave-hello",
-      "name": "Brave Hello | Social-Emotional Song",
-      "@type": "MusicRecording",
-      "genre": "Children's Music",
-      "image": "https://alybouchnak.com/images/Brave-Hello--Aly-Bouchnak-Cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/alphabet-song#recording",
+      "name": "The Alphabet Song",
+      "url": "https://alybouchnak.com/track/alphabet-song",
+      "duration": "PT2M55S",
+      "genre": "Nursery Rhymes",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M15S",
-      "isrcCode": "GX38U2681607",
-      "description": "A social-emotional song helping children build confidence in greetings.",
-      "datePublished": "2026-05-22"
-    }
-  },
-  {
-    "id": 21,
-    "slug": "wheels-on-the-bus-party-ride",
-    "title": "The Wheels on the Bus (Party Ride)",
-    "subtitle": "Transportation movement song (Ages 2–6)",
-    "description": "An energetic party version of the classic \"The Wheels on the Bus\" with modern beats and fun sound effects that get children moving and singing about bus adventures.",
-    "coverImage": "/images/The-Wheels-on-the-Bus--Party-Ride.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-03-27T00:00:00.000Z",
-    "duration": "2:19",
-    "bpm": 130,
-    "genre": "Kids Pop",
-    "ageRange": "2-6 years",
-    "mood": "Energetic",
-    "routine": "Movement",
-    "isrc": "GX8LD2630428",
-    "upc": "5063907564377",
-    "album": "The Bloom's House: Party Classics",
-    "albumUrl": "/album/the-blooms-house-classics-party",
-    "spotifyUrl": "https://open.spotify.com/track/placeholder",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
-    "youtubeUrl": "https://youtube.com/placeholder",
-    "amazonUrl": "https://music.amazon.com/placeholder",
-    "otherUrl": "https://push.fm/ps/the-wheels-on-the-bus-song",
-    "lyricsPreview": [
-      "The wheels on the bus go round and round",
-      "Round and round, round and round",
-      "The wheels on the bus go round and round",
-      "All through the town"
-    ],
-    "lyricsFull": "The Party Bus is here!\nI have a ticket for you... and you... and you!\nCome on inside!\nLet's roll!\n\nThe wheels on the bus go round and round\nRound and round, round and round\nThe wheels on the bus go round and round\nAll through the town!\n(Roll your hands!)\n\nThe wipers on the bus go Swish, Swish, Swish\nSwish, Swish, Swish!\nSwish, Swish, Swish!\nThe wipers on the bus go Swish, Swish, Swish\nAll through the town!\n(Side to side!)\n\nWe are riding on the bus!\n(Yeah!)\nIt’s a party just for us!\n(Woo!)\nThe sun is shining down...\nAll through the town!\n(Yay!)\n\nThe horn on the bus goes Beep, Beep, Beep\nBeep, Beep, Beep!\nBeep, Beep, Beep!\nThe horn on the bus goes Beep, Beep, Beep\nAll through the town!\n(Make some noise!)\n\nThe people on the bus go Up and Down!\n(Jump Up!)\nUp and Down!\n(Get Low!)\nUp and Down!\n(Jump Up!)\nThe people on the bus go Up and Down\nAll through the town!\n\nWe are stopped at a red light\n(Shhh...)\nWho is driving the bus?\nIs it a Bear?\n(No!)\nIs it a Cat?\n(No!)\nIt's the DJ!\nAnd the Driver on the bus says...\nEVERYBODY DANCE!\n\n(Go Bus! Go Bus! Go Bus!)\n(Wiggle your wheels!)\n\nThe wheels on the bus go round and round!\n(Round and round!)\nWe are here!\n(Ding Dong!)\nThanks for the ride!",
-    "educationalBenefits": [
-      {
-        "title": "Transportation Awareness",
-        "description": "Teaches children about buses and transportation concepts."
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
       },
-      {
-        "title": "Sound Effects",
-        "description": "Develops understanding of vehicle sounds through repetition."
-      },
-      {
-        "title": "Movement Coordination",
-        "description": "Encourages physical actions matching song lyrics."
-      },
-      {
-        "title": "Sequencing Skills",
-        "description": "Builds understanding of patterns through verse repetition."
-      }
-    ],
-    "artistNote": "I remember doing all the hand motions to this song as a kid. I wanted to keep that interactive spirit but add beats that make both kids and parents want to dance together.",
-    "relatedTracks": [
-      3,
-      4,
-      5
-    ],
-    "seo": {
-      "title": "The Wheels on the Bus (Party Ride) | Kids Transportation Song | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/The-Wheels-on-the-Bus--Party-Ride.webp",
-      "keywords": "wheels on the bus, transportation song for kids, bus song, kids vehicle song, toddler movement song, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/wheels-on-the-bus-party-ride",
-      "description": "Energetic party version of the classic bus song. Kids learn vehicle sounds while dancing to modern beats. Perfect for ages 2-6."
+      "datePublished": "2026-04-15",
+      "isrcCode": "GX8LD2663207",
+      "description": "A modern, upbeat version of the classic alphabet song that makes learning ABCs fun and engaging with contemporary beats and catchy melody.",
+      "image": "https://alybouchnak.com/images/The-Alphabet-Song--Aly-Bouchnak.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5"
+      ]
     },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/wheels-on-the-bus-party-ride#recording",
-      "url": "https://alybouchnak.com/track/wheels-on-the-bus-party-ride",
-      "name": "The Wheels on the Bus (Party Ride)",
-      "@type": "MusicRecording",
-      "genre": "Kids Pop",
-      "image": "https://alybouchnak.com/images/The-Wheels-on-the-Bus--Party-Ride.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party",
-        "name": "The Bloom's House: Party Classics",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT2M19S",
-      "isrcCode": "GX8LD2630428",
-      "description": "An energetic party version of the classic bus song with modern beats and fun sound effects.",
-      "datePublished": "2026-02-03"
-    }
+    "musicbrainzRecordingId": "bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "d87d586b-40e9-43d1-86ae-57814f7cfe70",
+    "releaseType": "Single"
   },
   {
     "id": 6,
@@ -1588,16 +1840,16 @@ export const tracks: Track[] = [
     "description": "A playful mealtime song that encourages trying new foods and makes eating fun. Perfect for reducing picky eating and creating positive mealtime associations.",
     "coverImage": "/images/the-yummy-spoon-cover.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-03-11T00:00:00.000Z",
+    "releaseDate": "2026-03-11",
     "duration": "1:41",
-    "bpm": 120,
+    "bpm": 128,
     "genre": "Nursery Rhymes",
     "ageRange": "2-6 years",
     "mood": "Playful",
     "routine": "Mealtime",
     "isrc": "GX89G2661676",
     "upc": "5063906910496",
-    "album": "The Bloom's House: Volume 1",
+    "album": "The Bloom’s House: Volume 1",
     "albumUrl": "/album/the-blooms-house-volume-1",
     "spotifyUrl": "https://open.spotify.com/track/4VJ293dOvhuyYnGiCCpjZA",
     "appleMusicUrl": "https://music.apple.com/gb/song/the-yummy-spoon-open-wide/1877228063",
@@ -1643,114 +1895,34 @@ export const tracks: Track[] = [
       "description": "Playful mealtime song to encourage healthy eating. Perfect for reducing picky eating and making meals fun for toddlers."
     },
     "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
       "@id": "https://alybouchnak.com/track/the-yummy-spoon#recording",
-      "url": "https://alybouchnak.com/track/the-yummy-spoon",
       "name": "The Yummy Spoon (Open Wide)",
-      "@type": "MusicRecording",
-      "genre": "Nursery Rhymes",
-      "image": "https://alybouchnak.com/images/the-yummy-spoon-cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
+      "url": "https://alybouchnak.com/track/the-yummy-spoon",
       "duration": "PT1M41S",
-      "isrcCode": "GX89G2661676",
-      "description": "A playful mealtime song that encourages trying new foods and makes eating fun.",
-      "datePublished": "2026-03-11"
-    }
-  },
-  {
-    "id": 2,
-    "slug": "pet-pop-animal-song",
-    "title": "Pet-Pop | The Animal Song",
-    "subtitle": "Fun pet animal movement song (Ages 2–6)",
-    "description": "A lively song about different pets and their sounds, encouraging children to mimic animal movements and sounds. Perfect for pet-themed activities and learning about domestic animals.",
-    "coverImage": "/images/pet-pop-animal-song-cover.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2025-12-19T00:00:00.000Z",
-    "duration": "2:10",
-    "bpm": 128,
-    "genre": "Children's Music, Pop, Nursery Rhymes",
-    "ageRange": "2-6 years",
-    "mood": "Playful",
-    "routine": "Playtime",
-    "isrc": "GXHZG2515365",
-    "upc": "5063863307490",
-    "album": "The Bloom's House: Volume 1",
-    "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://open.spotify.com/track/4hEpXU03NdZQYmv456JoiI",
-    "appleMusicUrl": "https://music.apple.com/us/song/pet-pop-the-animal-song/1857066272",
-    "youtubeUrl": "https://youtu.be/enNB5x7nT7M",
-    "amazonUrl": "https://music.amazon.com/tracks/B0G4ND7L97",
-    "otherUrl": "https://push.fm/fl/pet-pop",
-    "lyricsPreview": [
-      "My doggie make a sound goes woof woof woof",
-      "My doggie likes to run goes run run run",
-      "All day long",
-      "My kitty make a sound goes meow meow meow",
-      "My kitty likes to sleep goes shh shh shh",
-      "All day long"
-    ],
-    "lyricsFull": "My doggie make a sound goes woof woof woof\nWoof woof woof\nWoof woof woof\nMy doggie likes to run goes run run run\nAll day long\n\nMy kitty make a sound goes meow meow meow\nMeow meow meow\nMeow meow meow\nMy kitty likes to sleep goes shh shh shh\nAll day long\n\nMy ducky make a sound goes quack quack quack\nQuack quack quack\nQuack quack quack\nMy ducky likes to go goes splash splash splash\nAll day long\n\nMy birdie make a sound goes tweet tweet tweet\nTweet tweet tweet\nTweet tweet tweet\nMy birdie likes to fly goes up up up\nAll day long\n\nMy cow make a sound goes moo moo moo\nMoo moo moo\nMoo moo moo\nMy cow likes to eat goes munch munch munch\nAll day long\n\nMy doggie make a sound goes woof woof woof\nWoof woof woof\nWoof woof woof\nMy doggie likes to run goes run run run\nAll day long\n\nMy friends make sounds goes meow meow meow\nQuack quack quack\nTweet tweet tweet\nMoo moo moo\nAll day long",
-    "educationalBenefits": [
-      {
-        "title": "Animal Recognition",
-        "description": "Helps children learn about different pets and their characteristic sounds."
-      },
-      {
-        "title": "Sound Association",
-        "description": "Builds understanding of animal sounds and their corresponding pets."
-      },
-      {
-        "title": "Motor Skills",
-        "description": "Develops coordination through animal movement imitation activities."
-      },
-      {
-        "title": "Social Skills",
-        "description": "Encourages group participation and shared animal role-play experiences."
-      }
-    ],
-    "artistNote": "This song came from observing how fascinated children are by pets. I wanted to create something that celebrates the special bond between kids and their furry (or feathery, or scaly) friends.",
-    "relatedTracks": [
-      10,
-      4,
-      11
-    ],
-    "seo": {
-      "title": "Pet-Pop | The Animal Song | Kids Pet Song | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/pet-pop-animal-song-cover.webp",
-      "keywords": "pet song, animal sounds for kids, dog cat song, kids animal song, pet animal sounds, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/pet-pop-animal-song",
-      "description": "Learn pet animal sounds with this fun movement song for kids ages 2-6. Perfect for pet-themed activities and learning about domestic animals."
-    },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/pet-pop-animal-song#recording",
-      "url": "https://alybouchnak.com/track/pet-pop-animal-song",
-      "name": "Pet-Pop | The Animal Song",
-      "@type": "MusicRecording",
-      "genre": "Children's Music, Pop, Nursery Rhymes",
-      "image": "https://alybouchnak.com/images/pet-pop-animal-song-cover.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
+      "genre": "Nursery Rhymes",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M10S",
-      "isrcCode": "GXHZG2515365",
-      "description": "A lively song about different pets and their sounds, encouraging children to mimic animal movements and sounds.",
-      "datePublished": "2025-12-19"
-    }
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-03-11",
+      "isrcCode": "GX89G2661676",
+      "description": "A playful mealtime song that encourages trying new foods and makes eating fun. Perfect for reducing picky eating and creating positive mealtime associations.",
+      "image": "https://alybouchnak.com/images/the-yummy-spoon-cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/a7fee9ff-6ef6-4d02-be44-bc1f932f5217"
+      ]
+    },
+    "musicbrainzRecordingId": "a7fee9ff-6ef6-4d02-be44-bc1f932f5217",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/a7fee9ff-6ef6-4d02-be44-bc1f932f5217",
+    "isStandaloneRelease": false
   },
   {
     "id": 7,
@@ -1760,9 +1932,9 @@ export const tracks: Track[] = [
     "description": "A high-energy party version of the classic \"If You're Happy and You Know It\" that encourages children to express emotions through movement and celebrate together.",
     "coverImage": "/images/If-you-happy-and-you-know-it.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-04-10T00:00:00.000Z",
+    "releaseDate": "2026-04-10",
     "duration": "2:33",
-    "bpm": 135,
+    "bpm": 122,
     "genre": "Kids Pop",
     "ageRange": "2-6 years",
     "mood": "Celebratory",
@@ -1771,11 +1943,11 @@ export const tracks: Track[] = [
     "upc": "5063925895088",
     "album": "The Bloom's House: Party Classics",
     "albumUrl": "/album/the-blooms-house-classics-party",
-    "spotifyUrl": "https://open.spotify.com/track/placeholder",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
-    "youtubeUrl": "https://youtube.com/placeholder",
-    "amazonUrl": "https://music.amazon.com/placeholder",
-    "otherUrl": "https://push.fm/ps/if-you-are-happy-and-you-know-it",
+    "spotifyUrl": "https://open.spotify.com/track/1abRucTZCtBbAjWdH1q6bR",
+    "appleMusicUrl": "https://music.apple.com/us/album/1885613941",
+    "youtubeUrl": "https://youtu.be/kims0olyI34",
+    "amazonUrl": "https://music.amazon.ca/tracks/B0GR5WNM82",
+    "otherUrl": "https://push.fm/fl/if-you-are-happy-and-you-know-it",
     "lyricsPreview": [
       "If you're happy and you know it, clap your hands (Clap! Clap!)",
       "If you're Happy and you know it, and you really want to show it...",
@@ -1817,191 +1989,36 @@ export const tracks: Track[] = [
       "description": "High-energy party version of the classic emotions song. Kids learn to express feelings through movement and celebration. Ages 2-6."
     },
     "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
       "@id": "https://alybouchnak.com/track/happy-party-edition#recording",
-      "url": "https://alybouchnak.com/track/happy-party-edition",
       "name": "If You're Happy and You Know It (Party Edition)",
-      "@type": "MusicRecording",
-      "genre": "Kids Pop",
-      "image": "https://alybouchnak.com/images/If-you-happy-and-you-know-it.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party",
-        "name": "The Bloom's House: Party Classics",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
+      "url": "https://alybouchnak.com/track/happy-party-edition",
       "duration": "PT2M33S",
-      "isrcCode": "GX8LD2681741",
-      "description": "A high-energy party version encouraging children to express emotions through movement and celebration.",
-      "datePublished": "2026-02-05"
-    }
-  },
-  {
-    "id": 10,
-    "slug": "duckie-song",
-    "title": "The Duckie Song",
-    "subtitle": "Water animal adventure song (Ages 2–6)",
-    "description": "A sweet and playful song about a little duck's adventures, perfect for teaching about ducks and water animals while encouraging imagination.",
-    "coverImage": "/images/The-Duckie-Song-Aly-Bouchnak.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-05-01T00:00:00.000Z",
-    "duration": "2:32",
-    "bpm": 120,
-    "genre": "Kids Pop",
-    "ageRange": "2-6 years",
-    "mood": "Upbeat",
-    "routine": "Playtime",
-    "isrc": "GX8LD2660078",
-    "upc": "5063941614571",
-    "album": "The Bloom's House: Volume 1",
-    "albumUrl": "/album/the-blooms-house-volume-1",
-    "spotifyUrl": "https://open.spotify.com/track/placeholder",
-    "appleMusicUrl": "https://music.apple.com/placeholder",
-    "youtubeUrl": "https://youtube.com/placeholder",
-    "amazonUrl": "https://music.amazon.com/placeholder",
-    "lyricsPreview": [
-      "The duckie is walking, ( See! Like dis! )",
-      "She’s walking slowly, ( See! Like dis! )",
-      "She keeps on quacking, ( Hear! Like dis! )",
-      "Oh, how sweet she is, ( See! Like dis! )"
-    ],
-    "lyricsFull": "The duckie is walking, ( See! Like dis! )\nShe’s walking slowly, ( See! Like dis! )\nShe keeps on quacking, ( Hear! Like dis! )\nOh, how sweet she is, ( See! Like dis! )\n\nAnd She sing ( Singing! Like dis! )\n\nQuack quack quacky quack quack \nQuack quack quacky quack quack \n\nShe has a baby, ( Tiny! Like dis! )\nHis feet are so tiny, ( Tiny! Like dis! )\nHe runs behind her, ( See! Like dis! )\nOh, how sweet he is, ( See! Like dis! )\n\nAnd they sing, Singing! Like dis!\n\nQuack quack quacky quack quack \nQuack quack quacky quack quack \n\nHere comes Daddy Duck, ( Walks like dis! )\nHe spots the foxy, ( Hiding! Like dis! )\nHe puffs his chest out, ( Big! Like dis! )\nThe foxy runs away, ( Fast! Like dis! )\n\nHere come Gram and Gramps, ( See! Like dis! )\nThey walk with a stick, ( See! Like dis! )\nThey’re waddling slowly, ( Slowly! Like dis! )\nAnd quack along too, ( Quacking! Like dis! )\n\nAnd they all sing, ( Singing! Like dis! )\n\nQuack quack quacky quack quack \nQuack quack quacky quack quack \n\nThe duckie is walking, ( See! Like dis! )\nShe’s walking slowly, ( See! Like dis! )\nShe keeps on quacking, ( Hear! Like dis!)\nOh, how sweet she is, ( See! Like dis!)",
-    "educationalBenefits": [
-      {
-        "title": "Animal Knowledge",
-        "description": "Teaches children about ducks and their characteristics."
-      },
-      {
-        "title": "Imaginative Play",
-        "description": "Encourages creative storytelling and pretend play."
-      },
-      {
-        "title": "Sound Recognition",
-        "description": "Develops understanding of duck sounds and water themes."
-      },
-      {
-        "title": "Nature Awareness",
-        "description": "Introduces concepts of ponds, rain, and water environments."
-      }
-    ],
-    "artistNote": "Watching ducks at a local pond with my nephew inspired this song. The way children connect with animals is magical, and I wanted to capture that wonder.",
-    "relatedTracks": [
-      1,
-      2,
-      4
-    ],
-    "seo": {
-      "title": "The Duckie Song | Kids Water Animal Song | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/The-Duckie-Song-Aly-Bouchnak.webp",
-      "keywords": "duck song for kids, duckie song, water animal song, pond song, kids animal adventure, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/duckie-song",
-      "description": "Sweet duck adventure song for kids. Learn about ducks and water animals through playful storytelling. Ages 2-6."
-    },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/duckie-song#recording",
-      "url": "https://alybouchnak.com/track/duckie-song",
-      "name": "The Duckie Song",
-      "@type": "MusicRecording",
       "genre": "Kids Pop",
-      "image": "https://alybouchnak.com/images/The-Duckie-Song-Aly-Bouchnak.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1",
-        "name": "The Bloom's House: Volume 1",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
       "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
       },
-      "duration": "PT2M32S",
-      "isrcCode": "GX8LD2660078",
-      "description": "A sweet song about a little duck's adventures teaching about water animals and encouraging imagination.",
-      "datePublished": "2026-02-12"
-    }
-  },
-  {
-    "id": 18,
-    "slug": "liquid-room-brown-noise-womb",
-    "title": "The Liquid Room | Brown Noise Womb Sound",
-    "subtitle": "Womb-like brown noise sleep aid (Ages 0–1)",
-    "description": "Recreates the familiar sounds of the womb with brown noise and liquid-like frequencies, providing newborns with the comforting sounds they heard before birth.",
-    "coverImage": "/images/The-Liquid-Room.webp",
-    "artist": "Aly Bouchnak",
-    "releaseDate": "2026-01-09T00:00:00.000Z",
-    "duration": "3:53",
-    "bpm": 30,
-    "ageRange": "0-1 years",
-    "mood": "Sleep",
-    "routine": "Bedtime",
-    "isrc": "GXJ2E2518383",
-    "upc": "5063893028990",
-    "album": "Tuned for Dreams",
-    "albumUrl": "/album/tuned-for-dreams",
-    "spotifyUrl": "https://open.spotify.com/track/3rUZ2E4FbIOUsrofXfjeta",
-    "appleMusicUrl": "https://music.apple.com/us/song/the-liquid-room-brown-noise-womb-sound/1862214093",
-    "youtubeUrl": "https://youtu.be/4yIbfJahJSc",
-    "amazonUrl": "https://music.amazon.com/tracks/B0G83LCQWV",
-    "lyricsPreview": [
-      "(instrumental)"
-    ],
-    "lyricsFull": "(instrumental)",
-    "educationalBenefits": [
-      {
-        "title": "Womb Comfort",
-        "description": "Recreates familiar prenatal auditory environment for newborns."
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Party Classics",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party"
       },
-      {
-        "title": "Noise Masking",
-        "description": "Blocks out disruptive environmental sounds for better sleep."
-      },
-      {
-        "title": "Transition Support",
-        "description": "Helps newborns adjust to life outside the womb."
-      },
-      {
-        "title": "Calming Reflex",
-        "description": "Triggers natural calming responses through familiar frequencies."
-      }
-    ],
-    "artistNote": "I studied recordings from inside the womb and worked with sound engineers to recreate those exact frequencies. For newborns, this is not just music, it is coming home.",
-    "relatedTracks": [
-      12,
-      14,
-      17
-    ],
-    "seo": {
-      "title": "The Liquid Room | Brown Noise Womb Sound | Newborn Sleep | Aly Bouchnak",
-      "ogImage": "https://alybouchnak.com/images/The-Liquid-Room.webp",
-      "keywords": "womb sounds, brown noise for babies, newborn sleep aid, prenatal sound recreation, infant white noise, Aly Bouchnak",
-      "canonical": "https://alybouchnak.com/track/liquid-room-brown-noise-womb",
-      "description": "Womb-like brown noise for newborns. Recreates prenatal sounds for comfort and better sleep. Perfect for ages 0-1."
+      "datePublished": "2026-04-10",
+      "isrcCode": "GX8LD2681741",
+      "description": "A high-energy party version of the classic \"If You're Happy and You Know It\" that encourages children to express emotions through movement and celebrate together.",
+      "image": "https://alybouchnak.com/images/If-you-happy-and-you-know-it.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/4c0acb9e-0bbf-47d1-9b94-03ea012063a1"
+      ]
     },
-    "trackSchema": {
-      "@id": "https://alybouchnak.com/track/liquid-room-brown-noise-womb#recording",
-      "url": "https://alybouchnak.com/track/liquid-room-brown-noise-womb",
-      "name": "The Liquid Room | Brown Noise Womb Sound",
-      "@type": "MusicRecording",
-      "genre": "",
-      "image": "https://alybouchnak.com/images/The-Liquid-Room.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/tuned-for-dreams",
-        "name": "Tuned for Dreams",
-        "@type": "MusicAlbum"
-      },
-      "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
-      "duration": "PT3M53S",
-      "isrcCode": "GXJ2E2518383",
-      "description": "Womb-like brown noise recreating familiar prenatal sounds for newborn comfort and sleep.",
-      "datePublished": "2026-01-09"
-    }
+    "musicbrainzRecordingId": "4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+    "releaseGroupId": "84d21e04-af8b-4292-a8d4-14449813d45b",
+    "isStandaloneRelease": true,
+    "releaseType": "Single"
   },
   {
     "id": 1,
@@ -2011,9 +2028,9 @@ export const tracks: Track[] = [
     "description": "A lively jungle-themed version of \"Five Little Monkeys\" with energetic beats that encourage counting, jumping, and playful monkey movements.",
     "coverImage": "/images/Five-little-monkeys-jumping-on-the-bed.webp",
     "artist": "Aly Bouchnak",
-    "releaseDate": "2026-03-20T00:00:00.000Z",
+    "releaseDate": "2026-03-20",
     "duration": "2:25",
-    "bpm": 124,
+    "bpm": 110,
     "genre": "Kids Pop",
     "ageRange": "2-6 years",
     "mood": "Energetic",
@@ -2067,27 +2084,1133 @@ export const tracks: Track[] = [
       "description": "Jungle party version of the classic counting song. Kids learn to count down from 5 while jumping and dancing. Ages 2-6."
     },
     "trackSchema": {
-      "@id": "https://alybouchnak.com/track/five-little-monkeys-jungle-party#recording",
-      "url": "https://alybouchnak.com/track/five-little-monkeys-jungle-party",
-      "name": "Five Little Monkeys (Jungle Party)",
-      "@type": "MusicRecording",
-      "genre": "Kids Pop",
-      "image": "https://alybouchnak.com/images/Five-little-monkeys-jumping-on-the-bed.webp",
-      "inAlbum": {
-        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party",
-        "name": "The Bloom's House: Party Classics",
-        "@type": "MusicAlbum"
-      },
       "@context": "https://schema.org",
-      "byArtist": {
-        "name": "Aly Bouchnak",
-        "@type": "MusicGroup"
-      },
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/five-little-monkeys-jungle-party#recording",
+      "name": "Five Little Monkeys (Jungle Party)",
+      "url": "https://alybouchnak.com/track/five-little-monkeys-jungle-party",
       "duration": "PT2M25S",
+      "genre": "Kids Pop",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Party Classics",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-classics-party"
+      },
+      "datePublished": "2026-03-20",
       "isrcCode": "GX8LD2671883",
-      "description": "A jungle-themed version of Five Little Monkeys with energetic beats for counting and jumping.",
-      "datePublished": "2026-02-01"
-    }
+      "description": "A lively jungle-themed version of \"Five Little Monkeys\" with energetic beats that encourage counting, jumping, and playful monkey movements.",
+      "image": "https://alybouchnak.com/images/Five-little-monkeys-jumping-on-the-bed.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/32f9a798-0a94-405a-ae45-bf53eb7c0a03"
+      ]
+    },
+    "musicbrainzRecordingId": "32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "34b3b823-8a56-487f-83d7-c1ad2df8b48b",
+    "releaseType": "Single"
+  },
+  {
+    "id": 20,
+    "slug": "the-funny-bunny-jump",
+    "title": "The Funny Bunny Jump (Freeze Dance)",
+    "subtitle": "The ultimate high-energy freeze dance for active toddler play.",
+    "description": "A high-octane, interactive electronic pop track designed to get kids moving, stomping, and practicing their listening skills with a fun \"freeze\" game.",
+    "coverImage": "/images/the-funny-bunny-jump-cover.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-04-03",
+    "duration": "1:50",
+    "bpm": 97,
+    "genre": "Kids Electronic Pop",
+    "ageRange": "1-8 years",
+    "mood": "Energetic",
+    "routine": "Playtime",
+    "isrc": "GX89G2614392",
+    "upc": "5063907299958",
+    "album": "The Bloom’s House: Volume 1",
+    "albumUrl": "/album/the-blooms-house-volume-1",
+    "spotifyUrl": "https://open.spotify.com/track/5QMXRYwsSuv9N5d1pXpsS2",
+    "appleMusicUrl": "https://music.apple.com/gb/song/1877020720",
+    "youtubeUrl": "https://www.youtube.com/watch?v=b6ON3HuB-DE",
+    "amazonUrl": "https://music.amazon.com/tracks/B0GN5DNC95",
+    "otherUrl": "https://push.fm/fl/the-funny-bunny-jump",
+    "lyricsPreview": [
+      "Really Really Fun! (Jump and clap!)",
+      "Very very awesome! (Jump and clap!)",
+      "Funny Honey bunny! (Jump and clap!)",
+      "Silly silly gaming! (Jump and clap!)"
+    ],
+    "lyricsFull": "Are you ready? Here we go!\n\nReally Really Fun! (Jump and clap!)\nVery very awesome! (Jump and clap!)\nFunny Honey bunny! (Jump and clap!)\nSilly silly gaming! (Jump and clap!)\n\nLike a little hero! (Jump and clap!)\nLike a mini kangaroo! (Jump and clap!)\nRun a little faster! (Jump and clap!)\nYou are the master! (Jump and clap!)\n\nEverybody MOVE! (Yeah!)\nStomp! Stomp! Happy feet!\nHands up high! Touch the sky!\nPick me up! Fly so high!\n(We are flying!)\n\nSuper duper happy! (Jump and clap!)\nFeeling kinda snappy! (Jump and clap!)\nBouncing like a ball! (Jump and clap!)\nHaving a ball! (Jump and clap!)\n\nNow... Wiggle to the left...\nWiggle to the right...\nShake it all around...\nWith all your might!\nWiggle, wiggle, wiggle...\nAND...\n\n...Freeze.\n\nAre you ready?\n\nAre you ready??\n1, 2, 3, GO!\n\nREALLY REALLY FUN! (JUMP AND CLAP!)\nVERY VERY AWESOME! (JUMP AND CLAP!)\nEverybody MOVE!\nStomp! Stomp! Happy feet!\nYEAH!\n\nGreat job!",
+    "educationalBenefits": [
+      {
+        "title": "Inhibitory Control",
+        "description": "The \"Freeze\" mechanic helps children develop the ability to stop an action on command, a core executive function."
+      },
+      {
+        "title": "Gross Motor Skills",
+        "description": "Encourages physical development through stomping, jumping, and \"flying\" movements."
+      },
+      {
+        "title": "Auditory Processing",
+        "description": "Sharpens listening skills as children must pay close attention to the music cues to know when to stop and start."
+      }
+    ],
+    "artistNote": "I wrote this to be the \"viral\" engine of the brand. It combines the classic \"Freeze Dance\" mechanic with modern, punchy production to solve the \"rainy day\" problem for parents who need an instant energy release for their kids.",
+    "relatedTracks": [
+      23,
+      11,
+      10
+    ],
+    "seo": {
+      "title": "The Funny Bunny Jump (Freeze Dance) - Aly Bouchnak | Kids Exercise Song",
+      "ogImage": "https://alybouchnak.com/images/the-funny-bunny-jump-cover.webp",
+      "keywords": "freeze dance for kids, funny bunny jump, Aly Bouchnak, toddler exercise songs, active play music, nursery rhymes, electronic pop for kids, Hobby the bunny, The Bloom's House",
+      "canonical": "https://alybouchnak.com/track/the-funny-bunny-jump",
+      "description": "Get moving with \"The Funny Bunny Jump!\" The best high-energy freeze dance song for toddlers and preschoolers to stay active and have fun."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/the-funny-bunny-jump#recording",
+      "name": "The Funny Bunny Jump (Freeze Dance)",
+      "url": "https://alybouchnak.com/track/the-funny-bunny-jump",
+      "duration": "PT1M50S",
+      "genre": "Kids Electronic Pop",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom’s House: Volume 1",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-1"
+      },
+      "datePublished": "2026-04-03",
+      "isrcCode": "GX89G2614392",
+      "description": "A high-octane, interactive electronic pop track designed to get kids moving, stomping, and practicing their listening skills with a fun \"freeze\" game.",
+      "image": "https://alybouchnak.com/images/the-funny-bunny-jump-cover.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/218e4350-2ebf-4ded-8d9c-5d959bf23595"
+      ]
+    },
+    "musicbrainzRecordingId": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/218e4350-2ebf-4ded-8d9c-5d959bf23595",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "89972a68-af3c-4e07-b49b-1872fbe7f8dc",
+    "releaseType": "Single"
+  },
+  {
+    "id": 12,
+    "slug": "safe-container-calm-bedtime",
+    "title": "The Safe Container | Calm Bedtime Routine",
+    "subtitle": "Gentle sleep preparation song (Ages 0–3)",
+    "description": "A soothing lullaby that creates a feeling of safety and security, helping children transition from active play to peaceful sleep through gentle melodies and calming rhythms.",
+    "coverImage": "/images/The-Safe-Container.webp",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-01-09",
+    "duration": "2:45",
+    "bpm": 68,
+    "genre": "Children's Lullabies, Sleep Music",
+    "ageRange": "0-3 years",
+    "mood": "Calming",
+    "routine": "Bedtime",
+    "isrc": "GXJ2E2568126",
+    "upc": "5063893028990",
+    "album": "Tuned for Dreams",
+    "albumUrl": "/album/tuned-for-dreams",
+    "spotifyUrl": "https://open.spotify.com/track/28ycLvXb40POUWBgxbOO4k",
+    "appleMusicUrl": "https://music.apple.com/us/song/the-safe-container-calm-bedtime-routine/1862214087",
+    "youtubeUrl": "https://youtu.be/mO_bhECagMU",
+    "amazonUrl": "https://music.amazon.com/tracks/B0G83BPSWJ",
+    "lyricsPreview": [
+      "Mm-mm, you are here, my love, I'm near",
+      "Low and warm, I stay right here",
+      "La-la, mellow light so slow",
+      "Gentle room in a sleepy glow"
+    ],
+    "lyricsFull": "Mm-mm, you are here, my love, I'm near\nLow and warm, I stay right here\nLa-la, mellow light so slow\nGentle room in a sleepy glow\n\nMm-mm, little one, you feel, you see\nSoft and safe with the room and me\nLa-la, hush of the window air\nTiny hands in the evening air\n\nI am here, you are here\nClose and calm, my melody near\nLo-lo, sway with the quiet night\nSafe inside this tender light\n\nMm-mm, la-la, slow we stay\nDrifting down in a gentle way\nI am here, you are here\nMm-mm you are here",
+    "educationalBenefits": [
+      {
+        "title": "Sleep Routine",
+        "description": "Establishes consistent bedtime rituals and sleep associations."
+      },
+      {
+        "title": "Emotional Security",
+        "description": "Builds feelings of safety and comfort for peaceful sleep."
+      },
+      {
+        "title": "Relaxation Skills",
+        "description": "Teaches calming techniques for self-soothing."
+      },
+      {
+        "title": "Parent-Child Bonding",
+        "description": "Strengthens attachment through shared bedtime routines."
+      }
+    ],
+    "artistNote": "I studied the concept of psychological safety and how important it is for children to feel contained and secure. This song was designed to create that feeling of being held, even when parents step out of the room.",
+    "relatedTracks": [
+      13,
+      14,
+      15
+    ],
+    "seo": {
+      "title": "The Safe Container | Calm Bedtime Routine | Sleep Music | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/The-Safe-Container.webp",
+      "keywords": "bedtime song, sleep music for kids, lullaby, calm bedtime routine, baby sleep aid, Aly Bouchnak",
+      "canonical": "https://alybouchnak.com/track/safe-container-calm-bedtime",
+      "description": "Soothing lullaby for bedtime routine. Creates feelings of safety and security for peaceful sleep. Perfect for ages 0-3."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/safe-container-calm-bedtime#recording",
+      "name": "The Safe Container | Calm Bedtime Routine",
+      "url": "https://alybouchnak.com/track/safe-container-calm-bedtime",
+      "duration": "PT2M45S",
+      "genre": "Children's Lullabies, Sleep Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Tuned for Dreams",
+        "@id": "https://alybouchnak.com/album/tuned-for-dreams"
+      },
+      "datePublished": "2026-01-09",
+      "isrcCode": "GXJ2E2568126",
+      "description": "A soothing lullaby that creates a feeling of safety and security, helping children transition from active play to peaceful sleep through gentle melodies and calming rhythms.",
+      "image": "https://alybouchnak.com/images/The-Safe-Container.webp",
+      "sameAs": [
+        "https://musicbrainz.org/recording/f963b3f5-39d9-4df9-8efa-2aef0ccf72c9"
+      ]
+    },
+    "musicbrainzRecordingId": "f963b3f5-39d9-4df9-8efa-2aef0ccf72c9",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/f963b3f5-39d9-4df9-8efa-2aef0ccf72c9",
+    "isStandaloneRelease": false,
+    "otherUrl": ""
+  },
+  {
+    "id": 25,
+    "slug": "hobby-the-bunny",
+    "title": "Hobby The Bunny",
+    "subtitle": "A Hoppy Bunny Dance Adventure",
+    "description": "Meet Hobby the Bunny in a hopping dance song with carrots, wiggling noses and high, low, left and right movement cues.",
+    "coverImage": "/images/release-21cead45-05f0-4e7d-9181-f3042062cb23.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-06-10",
+    "duration": "2:12",
+    "bpm": 110,
+    "genre": "Children's Music",
+    "ageRange": "1-6 years",
+    "mood": "Playful",
+    "routine": "Movement",
+    "isrc": "GX38U2666437",
+    "upc": "5063958788531",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "#",
+    "appleMusicUrl": "#",
+    "youtubeUrl": "#",
+    "amazonUrl": "#",
+    "otherUrl": "https://push.fm/ps/hobby-the-bunny",
+    "lyricsPreview": [
+      "(Hop!)",
+      "(Here I come!)",
+      "I'm a little bunny, soft and small",
+      "(Hoppy! Hoppy!)",
+      "I can jump and hop, best of all!",
+      "(Watch me go!)"
+    ],
+    "lyricsFull": "(Hop!)\n(Here I come!)\n\nI'm a little bunny, soft and small\n(Hoppy! Hoppy!)\nI can jump and hop, best of all!\n(Watch me go!)\nWith my fluffy tail so white\n(Hoppy! Hoppy!)\nI go hopping day and night!\n\nHop, hop, hop!\nI'm Hobby the Bunny!\nHop, hop, hop!\nSo hoppy and funny!\nHop, hop, hop!\nCome dance with me!\nHoppy, Hobby, Bunny, WHEE!\n\nI eat carrots, crunch, crunch, crunch!\n(Hoppy! Hoppy!)\nYummy orange for my lunch!\n(Munch, munch, munch!)\nEars stand up and ears go down\n(Hoppy! Hoppy!)\nBest hopper in the town!\n\nHop, hop, hop!\nI'm Hobby the Bunny!\nHop, hop, hop!\nSo hoppy and funny!\nHop, hop, hop!\nHop up and down with me!\nHoppy, Hobby, Bunny, WHEE!\n\nListen close... and hop with me!\nHop up HIGH! (Touch the sky!)\nHop down LOW! (To and fro!)\nHop to the LEFT!\nHop to the RIGHT!\nWiggle your nose... with all... your... might!\n(One... Two... Three... GO!)\n\n(Go Hobby! Go Hobby!)\nHop, hop, hop!\nI'm Hobby the Bunny!\nHop, hop, hop!\nSo hoppy and funny!\nHop, hop, hop!\nHop up and down with me!\nHoppy, Hobby, Bunny, WHEE!\n\n(Everybody hop now!)\n(Hop! Hop! Hop!)\nHoppy, Hobby, Bunny, WHEE!\nHoppy, Hobby, Bunny, WHEE!",
+    "educationalBenefits": [
+      {
+        "title": "Movement Coordination & Motor Skills",
+        "description": "“Hobby The Bunny” encourages children to jump, hop, wiggle, and move in different directions through interactive prompts and rhythmic cues. These physical actions help support balance, body coordination, spatial awareness, and gross motor skill development in a playful way."
+      },
+      {
+        "title": "Rhythm Recognition & Listening Skills",
+        "description": "The song’s repetitive hooks, stop-and-start gameplay, and rhythmic call-and-response structure help children develop timing, musical anticipation, and active listening abilities. The changing musical cues encourage kids to pay attention and react in real time."
+      },
+      {
+        "title": "Memory & Pattern Recognition",
+        "description": "Repeated phrases like “Hop, hop, hop!” and recurring movement sequences strengthen auditory memory and pattern recognition. Predictable repetition helps toddlers feel confident participating while improving cognitive recall through music."
+      },
+      {
+        "title": "Confidence Through Interactive Play",
+        "description": "By inviting children to sing, dance, and imitate Hobby the Bunny, the song creates a low-pressure environment for self-expression and participation. This type of guided musical play can help shy children feel more confident joining group activities."
+      },
+      {
+        "title": "Imaginative Roleplay & Creativity",
+        "description": "The bunny character encourages pretend play and imaginative storytelling. Children naturally imitate animals and create their own playful scenarios while dancing along, supporting creative thinking and emotional engagement."
+      }
+    ],
+    "artistNote": "I wanted Hobby The Bunny to feel like pure kinetic joy — the kind of song where kids instantly start bouncing before they even understand the lyrics. The goal was to combine movement, humor, and repetition into a playful character children can physically imitate and emotionally connect with.",
+    "relatedTracks": [
+      11,
+      10,
+      20
+    ],
+    "seo": {
+      "title": "Hobby The Bunny | Kids Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/release-21cead45-05f0-4e7d-9181-f3042062cb23.jpg",
+      "keywords": "kids bunny song, bunny dance song, hopping song for kids, preschool dance music, toddler movement song, kids tropical house music, interactive kids songs, bunny nursery rhyme, kids workout song, fun songs for toddlers, movement songs for preschoolers, family dance music, hopping bunny song, kids party music, educational dance songs",
+      "canonical": "https://alybouchnak.com/track/hobby-the-bunny",
+      "description": "Meet Hobby the Bunny in a hopping dance song with carrots, wiggling noses and high, low, left and right movement cues."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/hobby-the-bunny#recording",
+      "name": "Hobby The Bunny",
+      "url": "https://alybouchnak.com/track/hobby-the-bunny",
+      "duration": "PT2M12S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-06-10",
+      "isrcCode": "GX38U2666437",
+      "description": "Meet Hobby the Bunny in a hopping dance song with carrots, wiggling noses and high, low, left and right movement cues.",
+      "image": "https://alybouchnak.com/images/release-21cead45-05f0-4e7d-9181-f3042062cb23.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/cef73ac6-c8a1-4500-ac80-0373eeee6281"
+      ]
+    },
+    "musicbrainzRecordingId": "cef73ac6-c8a1-4500-ac80-0373eeee6281",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/cef73ac6-c8a1-4500-ac80-0373eeee6281",
+    "isStandaloneRelease": false
+  },
+  {
+    "id": 26,
+    "slug": "boss-bath",
+    "title": "Boss Bath",
+    "coverImage": "/images/my-little-love-cover.jpg",
+    "artist": "Aly Bouchnak",
+    "genre": "Digital Pop",
+    "ageRange": "0-16 years",
+    "mood": "Playful",
+    "routine": "Bath Time",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "https://open.spotify.com/album/4uZEGRMcbXIGJ1SmokuCXe",
+    "appleMusicUrl": "https://music.apple.com/us/album/1893583370",
+    "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_l74p7qwh9fN-bpypdpXOsrqu4sKorK3XY",
+    "amazonUrl": "https://www.amazon.com/gp/product/B0GX79RTJF",
+    "otherUrl": "https://push.fm/fl/alybouchnak",
+    "lyricsPreview": [
+      "It’s time for bath, A bubbly bath",
+      "Splashy-splashy laugh!",
+      "Let’s do a scrub,, And rub-a-rub",
+      "And clean the messy stuff!",
+      "Bubbles in the air, Duckies everywhere",
+      "And pour some soap on hair!"
+    ],
+    "educationalBenefits": [
+      {
+        "title": "",
+        "description": ""
+      }
+    ],
+    "relatedTracks": [
+      3,
+      9,
+      6
+    ],
+    "seo": {
+      "title": "Boss Bath | Kids Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/my-little-love-cover.jpg",
+      "keywords": "",
+      "canonical": "https://alybouchnak.com/track/boss-bath",
+      "description": "A bubbly bath-time sing-along with duckies, frogs, fish, scrubbing and splashing. Everybody wash-wash—even the boss!"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/boss-bath#recording",
+      "name": "Boss Bath",
+      "url": "https://alybouchnak.com/track/boss-bath",
+      "duration": "PT3M32S",
+      "genre": "Digital Pop",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-06-26",
+      "isrcCode": "GX38U2660781",
+      "description": "A bubbly bath-time sing-along with duckies, frogs, fish, scrubbing and splashing. Everybody wash-wash—even the boss!",
+      "image": "https://alybouchnak.com/images/my-little-love-cover.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/2cbd176f-d18b-4203-9001-d6423345bd85"
+      ]
+    },
+    "musicbrainzRecordingId": "2cbd176f-d18b-4203-9001-d6423345bd85",
+    "isrc": "GX38U2660781",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/2cbd176f-d18b-4203-9001-d6423345bd85",
+    "releaseDate": "2026-06-26",
+    "duration": "3:32",
+    "lyricsFull": "It’s time for bath, A bubbly bath\nSplashy-splashy laugh!\nLet’s do a scrub,, And rub-a-rub\nAnd clean the messy stuff!\nBubbles in the air, Duckies everywhere\nAnd pour some soap on hair!\nWe wash with care, Clean over here\nClean over there!\n\nDid you see the duckie-duck\nFloating there lucky-luck?\nDid you see the duckie-duck\nFloating there lucky-luck?\nEverybody wash-wash Even the boss!\nIt’s time for bath, A bubbly bath\nSplashing in a class!\n\nJump little frog, Splash on the log\nHoppy-hoppy jog!\nWe scrub the toes, We wash the nose\nAnd shiny-shiny grows!\nBubbles pop and fly, Froggy jumps so high\nAnd soap falls from the sky!\nNow rinse the hair, Shake everywhere\nSplash water everywhere!\n\nDid you see the froggy-frog\nJumping like a soggy log?\nDid you see the froggy-frog\nJumping like a soggy log?\nEverybody wash-wash Even the boss!\nIt’s time for bath, A bubbly bath\nSplashing in a class!\n\nSwim little fish, Swishy-swishy swish\nSoap makes every wish!\nWe wash the back, We scrub the crack\nNo spots left to attack!\nBubbles float around, Fishy makes a sound\nBlowing circles round and round!\nWe rinse the foam, From head to home\nNow everybody’s chrome!\n\nDid you see the fishie-fish\nSwimming in a soapy dish?\nDid you see the fishie-fish\nSwimming in a soapy dish?\nEverybody wash-wash Even the boss!\nIt’s time for bath, A bubbly bath\nSplashing in a class!\n\nIt’s time for bath, A bubbly bath\nSplashy-splashy laugh!\nLet’s do a scrub,, And rub-a-rub\nAnd clean the messy stuff!\nBubbles in the air, Duckies everywhere\nAnd pour some soap on hair!",
+    "bpm": 0,
+    "artistNote": "",
+    "description": "A bubbly bath-time sing-along with duckies, frogs, fish, scrubbing and splashing. Everybody wash-wash—even the boss!",
+    "isStandaloneRelease": false,
+    "subtitle": "Music by Aly Bouchnak",
+    "upc": ""
+  },
+  {
+    "id": 27,
+    "slug": "the-babble-beat",
+    "title": "The Babble Beat",
+    "coverImage": "/images/my-little-love-cover.jpg",
+    "artist": "Aly Bouchnak",
+    "genre": "Children's Music",
+    "ageRange": "1-3 years",
+    "mood": "Playful",
+    "routine": "Learning",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "lyricsPreview": [
+      "Listen to my special beat!",
+      "Listen to my special beat!",
+      "I like to talk, I like to sing",
+      "I make a sound like a bouncy spring!",
+      "My lips go pop, my tongue goes click",
+      "I make up words, it’s a magic trick!"
+    ],
+    "educationalBenefits": [
+      {
+        "title": "",
+        "description": ""
+      }
+    ],
+    "relatedTracks": [
+      11,
+      20,
+      25
+    ],
+    "seo": {
+      "title": "The Babble Beat | Kids Song | Aly Bouchnak",
+      "ogImage": "https://alybouchnak.com/images/my-little-love-cover.jpg",
+      "keywords": "",
+      "canonical": "https://alybouchnak.com/track/the-babble-beat",
+      "description": "A playful call-and-response song that turns babbling, popping bubbles, bird sounds and invented words into a dance beat."
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/the-babble-beat#recording",
+      "name": "The Babble Beat",
+      "url": "https://alybouchnak.com/track/the-babble-beat",
+      "duration": "PT1M56S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-07-15",
+      "isrcCode": "GX5MX2639207",
+      "description": "A playful call-and-response song that turns babbling, popping bubbles, bird sounds and invented words into a dance beat.",
+      "image": "https://alybouchnak.com/images/my-little-love-cover.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/261d3eb1-9a50-42bc-bb7d-09ec84aec888"
+      ]
+    },
+    "musicbrainzRecordingId": "261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+    "isrc": "GX5MX2639207",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+    "releaseDate": "2026-07-15",
+    "duration": "1:56",
+    "lyricsFull": "Listen to my special beat!\n\nListen to my special beat!\n\nI like to talk, I like to sing\nI make a sound like a bouncy spring!\nMy lips go pop, my tongue goes click\nI make up words, it’s a magic trick!\n\nWhat are you saying, little one?\n\nI'm making music, having fun!\n\nI say, Ba-Ba-Ba!\n(Ba-Ba-Ba-Ba-Ba-Ba-Ba!)\nI say, Da-Da-Da!\n(i say Da-Da-Da-Da-Da!)\nDa-Da-Da!\nBibble-obble, Wobble-bop!\n(Don't stop!)\nBibble-obble, Wobble-bop!\nEverybody dance to the Babble Bop!\n\nI see a bird, I say \"Tweet-Tweet\"\nBut then I turn it into a beat!\nTweet-tweet-twa! Twa-twa-twoo!\nNow I want to hear from YOU!\n\nI say, Ma-Ma-Ma!\n(Ma-Ma-Ma-Ma-Ma-Ma-Ma!)\nMa-Ma-Ma\nI say, La-La-La-La-La!\n(La-La-La!)\nBibble-obble, Wobble-bop!\n(Don't stop!)\nBibble-obble, Wobble-bop!\nEverybody dance to the Babble Bop!\n\nOkay, freeze!\nNow... make a sound like a popping bubble!\nBop! Bop! Bop!\n(Bop! Bop! Bop!)\nMake a sound like a wiggly jelly!\nWibble... Wobble... Wibble...\n\nAre you ready to wobble?\nDa-da-da\nBa-ba-ba\nMa-ma-ma\nMa-ma-ma\nBibble-obble, Wobble-bop!\n(Don't stop!)\nBibble-obble, Wobble-bop!\n(Don't stop!)\nBibble-obble, Wobble-bop!\nYeah! Bibble-obble, Wobble-bop!\n\nThat was silly",
+    "bpm": 0,
+    "artistNote": "",
+    "description": "A playful call-and-response song that turns babbling, popping bubbles, bird sounds and invented words into a dance beat.",
+    "isStandaloneRelease": false,
+    "spotifyUrl": "https://open.spotify.com/album/7Hb61Tqqj1cefeNJ5Le21h",
+    "appleMusicUrl": "https://music.apple.com/eg/album/6781052445",
+    "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_mgQyIQX1x9kG6V-GEat4qLtB8ZEMovef8",
+    "amazonUrl": "https://music.amazon.in/albums/B0H5CG3NDM",
+    "otherUrl": "",
+    "subtitle": "Music by Aly Bouchnak",
+    "upc": ""
+  },
+  {
+    "id": 28,
+    "slug": "cool-gang",
+    "title": "Cool Gang",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "Join the Cool Gang in a friendship dance song about welcoming someone new, helping a friend, sharing toys and celebrating the team.",
+    "coverImage": "/images/release-ef400481-323d-4090-922f-9d3f375a2e20.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-07-31",
+    "duration": "2:24",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Energetic",
+    "isrc": "GXBDS2684603",
+    "upc": "5064011224317",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "https://open.spotify.com/album/7MpHD5F6fllOTOAGa1uZbI",
+    "appleMusicUrl": "https://music.apple.com/eg/album/6782240578",
+    "youtubeUrl": "",
+    "lyricsPreview": [
+      "Yo! This is Aly Bouchnak!",
+      "Welcome to the Bloom’s House!",
+      "Do you want to be in the Cool Gang?",
+      "(BET!)",
+      "Then show me your vibes! Let’s go!",
+      "One for the squad, two for the team"
+    ],
+    "lyricsFull": "Yo! This is Aly Bouchnak!\nWelcome to the Bloom’s House!\nDo you want to be in the Cool Gang?\n(BET!)\nThen show me your vibes! Let’s go!\n\nOne for the squad, two for the team\nLiving out the Best Friend Dream\nWe don’t walk, yeah, we got that stride\nMain Character energy, side by side!\nGot the Rizz—and here’s the deal\nCool Gang love is the way we feel!\n\nWe’re the Cool Gang, shout it out!\nThe realest crew you’ll ever see\nStomp your feet, let it out\nShow the world what we’re about\nNo cap, no cap—side by side\nYou’re the Main Character. Own your ride\n\nIs it a W? (W!)\nIs it a Big, Big W? (W!)\nNo cap! (No Cap!)\nDoing it the W! W! Way!\n\nMain Character vibes! (Vibes!)\nMain Character crew! (Crew!)\nBet! Bet! Bet!\nYou’re Cool Gang too!\n\nLook to the left, give a nod\nLook to the right, that’s the squad\nNo Cap, we’re the golden crew\nThere’s always room for someone new\nHelp a friend, share a toy\nCool Gang love—that’s the real joy!\n\nOkay Gang, show me the code!\nStep one: Hands in the middle! (Wait for it...)\nStep two: Jump on three!\nOne...\nTwo...\nThree...\n\nThree\nJUMP!\nTHAT’S A W!\n\nWe’re the Cool Gang, shout it out!\nThe realest crew you’ll ever see\nStomp your feet, let it out\nShow the world what we’re about\nNo cap, no cap—side by side\nYou’re the Main Character. Own your ride\n\nIs it a W? (W!)\nIs it a Big, Big W? (W!)\nNo cap! (No Cap!)\nDoing it the W! W! Way!\n\nMain Character vibes! (Vibes!)\nMain Character crew! (Crew!)\nBet! Bet! Bet!\nYou’re Cool Gang too!\n\nCool Gang... We Move\nBest Friends... No Cap\nCool Gang... Stay cool out there\nBloom’s House...",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Cool Gang | Aly Bouchnak",
+      "description": "Join the Cool Gang in a friendship dance song about welcoming someone new, helping a friend, sharing toys and celebrating the team.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/cool-gang",
+      "ogImage": "https://alybouchnak.com/images/release-ef400481-323d-4090-922f-9d3f375a2e20.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/cool-gang#recording",
+      "name": "Cool Gang",
+      "url": "https://alybouchnak.com/track/cool-gang",
+      "duration": "PT2M24S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-07-31",
+      "isrcCode": "GXBDS2684603",
+      "description": "Join the Cool Gang in a friendship dance song about welcoming someone new, helping a friend, sharing toys and celebrating the team.",
+      "image": "https://alybouchnak.com/images/release-ef400481-323d-4090-922f-9d3f375a2e20.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/0cef27b3-cf4b-4799-9e1e-bc6f2356fa28"
+      ]
+    },
+    "musicbrainzRecordingId": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+    "isStandaloneRelease": false,
+    "amazonUrl": "https://www.amazon.fr/gp/product/B0H62Z8N3H",
+    "routine": "Celebration",
+    "otherUrl": ""
+  },
+  {
+    "id": 29,
+    "slug": "bock-bock-chicken",
+    "title": "Bock Bock Chicken",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "Bock Bock Chicken by Aly Bouchnak. Explore the recording and its releases in The Bloom's House catalog.",
+    "coverImage": "/images/release-e63d33d3-95ec-4585-8df1-c0677e75e7ac.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2025-09-16",
+    "duration": "1:56",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "",
+    "isrc": "GXF972564744",
+    "upc": "",
+    "album": "Boom Teka Boom (Wake Up Song)",
+    "albumUrl": "/album/boom-teka-boom-wake-up-song",
+    "spotifyUrl": "https://open.spotify.com/album/4ZLn6itB4aA41vUP9k7g5m",
+    "appleMusicUrl": "",
+    "youtubeUrl": "https://www.youtube.com/watch?v=rvmLSLbVJ_k",
+    "lyricsPreview": [],
+    "lyricsFull": "",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Bock Bock Chicken | Aly Bouchnak",
+      "description": "Bock Bock Chicken by Aly Bouchnak. Recording details and release information.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/bock-bock-chicken",
+      "ogImage": "https://alybouchnak.com/images/release-e63d33d3-95ec-4585-8df1-c0677e75e7ac.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/bock-bock-chicken#recording",
+      "name": "Bock Bock Chicken",
+      "url": "https://alybouchnak.com/track/bock-bock-chicken",
+      "duration": "PT1M56S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "Boom Teka Boom (Wake Up Song)",
+        "@id": "https://alybouchnak.com/album/boom-teka-boom-wake-up-song"
+      },
+      "datePublished": "2025-09-16",
+      "isrcCode": "GXF972564744",
+      "description": "Bock Bock Chicken by Aly Bouchnak. Explore the recording and its releases in The Bloom's House catalog.",
+      "image": "https://alybouchnak.com/images/release-e63d33d3-95ec-4585-8df1-c0677e75e7ac.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/1616455e-fad6-4426-a15c-3652b31479f5"
+      ]
+    },
+    "musicbrainzRecordingId": "1616455e-fad6-4426-a15c-3652b31479f5",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/1616455e-fad6-4426-a15c-3652b31479f5",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "2b91ba78-2649-44d0-ae5b-a8b16d1966fe",
+    "releaseType": "Single",
+    "amazonUrl": "",
+    "otherUrl": ""
+  },
+  {
+    "id": 30,
+    "slug": "who-is-daddys-favorite",
+    "title": "Who is Daddy’s Favorite?",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "A funny call-and-response family song celebrating Daddy, with spelling, tickles, silly household rules and a dance-like-a-dad break.",
+    "coverImage": "/images/release-5d431a2e-5bf9-4cc3-a308-9fd25fce7fc9.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-08-28",
+    "duration": "3:19",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Playful",
+    "isrc": "GX5MY2685965",
+    "upc": "5064010254025",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "https://open.spotify.com/album/2ZfmJSfFxu74Y78sCJKIRO",
+    "appleMusicUrl": "https://music.apple.com/us/album/6794532759",
+    "youtubeUrl": "https://www.youtube.com/watch?v=JzP0P-eG7g4",
+    "lyricsPreview": [
+      "\"Honey, I'm home! Alright crew... who wants to make some noise?\"",
+      "Who’s Daddy’s favorite? (ME!)",
+      "Who’s Daddy’s pride and joy? (ME!)",
+      "Who’s the Big Guy's #1 girl or boy? (ME!)",
+      "Who gets the treats? (ME!)",
+      "Who gets the toys? (ME!)"
+    ],
+    "lyricsFull": "\"Honey, I'm home! Alright crew... who wants to make some noise?\"\n\nWho’s Daddy’s favorite? (ME!)\nWho’s Daddy’s pride and joy? (ME!)\nWho’s the Big Guy's #1 girl or boy? (ME!)\nWho gets the treats? (ME!)\nWho gets the toys? (ME!)\nThe one who fills this house with joy and noise!\n\nD-A-D-D-Y! That's my guy!\nD-A-D-D-Y! My oh my!\n\nWho’s the human stroller when your legs are \"broken\"? (DADDY!)\nWho’s the money tree where the \"bank\" is always open? (DADDY!)\nWho eats the crusts so you can have the middle?\nWho solves the \"Why? Why? Why?\" tiny riddle?\nWho says \"Ask your Mom\" when the answer is No?\nAnd who’s the personal taxi... ready to GO!\n\nHe’s a jungle gym!\nHe’s a tickle machine!\nThe silliest guy that you’ve ever seen!\nHoly moly! Guacamole!\nDaddy, Daddy, Daddy, WHAT?\n\nWho’s Daddy’s favorite? (ME!)\nWho’s Daddy’s pride and joy? (ME!)\nWho’s the Big Guy's #1 girl or boy?\n(MEEE!)\n\nAlright kids... Pop-quiz! Time for the rules!\nDon't touch the... (THERMOSTAT!)\nDon't leave the... (LIGHTS ON!)\nMoney doesn't... (GROW ON TREES!)\nAnd don't put your finger in your... (NOSE!)\nOkey-dokey? (ARTICHOKEY!)\nNow... 1, 2, 3...\nDANCE LIKE A DAD!\n\nWho's the pitcher and the hitter and the umpire too?\nWho forgets the lyrics but sings 'em loud for you?\nWho’s the one who’s stuck? (DADDY!)\nWho’s the one out of luck? (DADDY!)\nAnd who spent his last buck on a giant rubber duck? (DADDY!)\nWho’s your best friend? (DADDY!)\nLove you ‘til the end? (DADDY!)\nNow give him a hug—yeah, squeeze him tight!\n\nWho’s Daddy’s favorite? (ME!)\nWho’s Daddy’s pride and joy? (ME!)\nWho’s the Big Guy's #1 girl or boy?\nWho gets the treats? (ME!)\nWho gets the toys? (ME!)\nThe one who fills this house with joy and noise!\nOh Daddy .  You're the best\n\"Don't make me turn this car around!\"\n\"I'm just resting my eyes...\"\nDaddy!\n\nDaddy",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Who is Daddy’s Favorite? | Aly Bouchnak",
+      "description": "A funny call-and-response family song celebrating Daddy, with spelling, tickles, silly household rules and a dance-like-a-dad break.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/who-is-daddys-favorite",
+      "ogImage": "https://alybouchnak.com/images/release-5d431a2e-5bf9-4cc3-a308-9fd25fce7fc9.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/who-is-daddys-favorite#recording",
+      "name": "Who is Daddy’s Favorite?",
+      "url": "https://alybouchnak.com/track/who-is-daddys-favorite",
+      "duration": "PT3M19S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-08-28",
+      "isrcCode": "GX5MY2685965",
+      "description": "A funny call-and-response family song celebrating Daddy, with spelling, tickles, silly household rules and a dance-like-a-dad break.",
+      "image": "https://alybouchnak.com/images/release-5d431a2e-5bf9-4cc3-a308-9fd25fce7fc9.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/250bcf9c-e14c-456c-a424-731d3f17bb11"
+      ]
+    },
+    "musicbrainzRecordingId": "250bcf9c-e14c-456c-a424-731d3f17bb11",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/250bcf9c-e14c-456c-a424-731d3f17bb11",
+    "isStandaloneRelease": false,
+    "amazonUrl": "https://www.amazon.com/gp/product/B0HBCKFS9L",
+    "routine": "Celebration",
+    "otherUrl": ""
+  },
+  {
+    "id": 31,
+    "slug": "laylas-coming",
+    "title": "Layla's Coming",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "Layla arrives on her light-up scooter in a movement song with glowing wheels, scooter slides, helmet taps, wiggles and freeze-dance cues.",
+    "coverImage": "/images/release-dbc6724f-345d-416c-a79d-8d67db5a6acc.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-10-15",
+    "duration": "2:32",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Energetic",
+    "isrc": "GXJ2E2651404",
+    "upc": "5064041235277",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "",
+    "appleMusicUrl": "",
+    "youtubeUrl": "",
+    "lyricsPreview": [
+      "Wait... do you hear that?",
+      "Look down the street!",
+      "I think... I think she’s coming!",
+      "(Round the corner... go, go, go!)",
+      "Layla’s cruising 'round the corner, everybody hide!",
+      "(Hide! Hide! Hide!)"
+    ],
+    "lyricsFull": "Wait... do you hear that?\nLook down the street!\nI think... I think she’s coming!\n(Round the corner... go, go, go!)\n\nLayla’s cruising 'round the corner, everybody hide!\n(Hide! Hide! Hide!)\nLayla’s cruising 'round the corner, everybody hide!\n(Hide! Hide! Hide!)\nShe’s a speedy little mover, riding on a light-up scooter!\nLayla’s cruising 'round the corner, everybody hide!\n\nShe’ll be flashing glowing wheels when she comes!\n(Whoosh! Whoosh!)\nStomp your feet and feel the beat of the drums!\n(Boom! Boom!)\nShe’s the coolest in the crowd, and her playlist’s playing LOUD!\n\nWait... did she bring the speaker?!\n(SHE BROUGHT THE SPEAKER!)\n\nHold on...\nEverybody stop\nEverybody freeze...\n(SHE IS HERE!)\n\nLayla! Layla!\n(Whoosh! Whoosh!)\nGlowing wheels and a speaker too!\nLayla! Layla!\n(Boom! Boom!)\nRound the corner, she's coming for you!\n(Round the corner, GO! GO! GO!)\n\nNow do the Scooter Slide!\n(Slide! Slide!)\nNow do the Helmet Tap!\n(Tap! Tap!)\nDo the Scooter Slide!\n(Slide! Slide!)\nNow do the Wiggle Turn!\n(Turn! Turn!)\n\nUh oh. She’s going too fast. The bass is too heavy!\nFaster! Faster!\n(Spin! Spin! Spin!)\n(Jump! Jump! Jump!)\n\nFREEZE!\n...AGAIN!!!\n\nLayla! Layla!\n(Whoosh! Whoosh!)\nGlowing wheels and a speaker too!\nLayla! Layla!\n(Boom! Boom!)\nRound the corner, she's coming for you!\n(Round the corner, GO! GO! GO!)\n\nPhew. Good job, crew\nWait... do you hear that?\nShe’s coming back!\n(Round the corner, GO! GO! GO!)",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Layla's Coming | Aly Bouchnak",
+      "description": "Layla arrives on her light-up scooter in a movement song with glowing wheels, scooter slides, helmet taps, wiggles and freeze-dance cues.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/laylas-coming",
+      "ogImage": "https://alybouchnak.com/images/release-dbc6724f-345d-416c-a79d-8d67db5a6acc.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/laylas-coming#recording",
+      "name": "Layla's Coming",
+      "url": "https://alybouchnak.com/track/laylas-coming",
+      "duration": "PT2M32S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-10-15",
+      "isrcCode": "GXJ2E2651404",
+      "description": "Layla arrives on her light-up scooter in a movement song with glowing wheels, scooter slides, helmet taps, wiggles and freeze-dance cues.",
+      "image": "https://alybouchnak.com/images/release-dbc6724f-345d-416c-a79d-8d67db5a6acc.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/353f3da5-fe78-49c4-ac67-33e873a0a49f"
+      ]
+    },
+    "musicbrainzRecordingId": "353f3da5-fe78-49c4-ac67-33e873a0a49f",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/353f3da5-fe78-49c4-ac67-33e873a0a49f",
+    "isStandaloneRelease": false,
+    "amazonUrl": "",
+    "routine": "Movement",
+    "otherUrl": ""
+  },
+  {
+    "id": 32,
+    "slug": "silly-goodbye-dance-see-you-later-alligator",
+    "title": "Silly Goodbye Dance (See You Later Alligator)",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "A goodbye transition song with animal rhymes, waving, hugs, kisses, stomping and the familiar “See you later, alligator!” refrain.",
+    "coverImage": "/images/release-ca9fbe69-f47d-4646-a592-439e9ed7165b.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-09-25",
+    "duration": "2:58",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Playful",
+    "isrc": "GXFHP2678212",
+    "upc": "5064041868062",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "",
+    "appleMusicUrl": "",
+    "youtubeUrl": "",
+    "lyricsPreview": [
+      "Goodbye, goodbye, it's time to fly",
+      "Wave your hands up to the sky!",
+      "Good Good Good",
+      "Goodbyeeeee",
+      "See you later... ALLIGATOR!",
+      "In a while... CROCODILE!"
+    ],
+    "lyricsFull": "Goodbye, goodbye, it's time to fly\nWave your hands up to the sky!\nGood Good Good\nGoodbyeeeee\n\nSee you later... ALLIGATOR!\nIn a while... CROCODILE!\nSee you soon... BABOON! (Ooh-ooh-aah!)\nTake care... POLAR BEAR! (Brrr!)\n\nSee you later... ALLIGATOR!\nIn a while... CROCODILE!\nSee you later... ALLIGATOR!\nIn a while... CROCODILE!\nOh, oh, oh\nSee you later...\nAh, Ah, Ah\nALLIGATOR!\nBye bye ... bye bye bye\n\nGoodbye, goodbye, it's time to fly\nWave your hands up to the sky!\nWe built our blocks, we sang our song\nNow stomp your feet and march along!\n(Stomp-stomp-stomp!)\n\nGive a hug...\nLADYBUG!\nBlow a kiss...\nJELLYFISH! (Bloop-mwah!)\nToodaloo...\nKANGAROO! (Hop, hop, hop!)\nOut the door...\nDINOSAUR! (Stomp and RAWR!)\n\nSee you later... ALLIGATOR!\nIn a while... CROCODILE!\nSee you later... ALLIGATOR!\nIn a while... CROCODILE!\nOh, oh, oh\nSee you later...\nAh, Ah, Ah\nALLIGATOR!\nBye bye ... bye bye bye\n\nGotta run, Honey Bun!\nNot too long, King Kong!\nStay cool... Silly Fool!\nChop chop, Lollipop!\n\nAdios, Hippos!\nBye bye, Butterfly!\nToodaloo, Caribou!\nGive a wave... Concave!\n\nWait. Concave? That's not an animal\nOhhhhhhhh\n\nBut it rhymes!\n\nHmmmmmmmmm\nOkay, you win. Give a wave, Concave!\n\nGoodbye, goodbye, it's time to fly\nWave your hands up to the sky!\nWe built our blocks, we sang our song\nNow stomp your feet and march along!\n(Stomp-stomp-stomp!)\n\nSee you later... ALLIGATOR!\nIn a while... CROCODILE!\nSee you later... ALLIGATOR!\nIn a while... CROCODILE!\nOh, oh, oh\nSee you later...\nAh, Ah, Ah\nALLIGATOR!\nBye bye bye bye bye",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Silly Goodbye Dance (See You Later Alligator) | Aly Bouchnak",
+      "description": "A goodbye transition song with animal rhymes, waving, hugs, kisses, stomping and the familiar “See you later, alligator!” refrain.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/silly-goodbye-dance-see-you-later-alligator",
+      "ogImage": "https://alybouchnak.com/images/release-ca9fbe69-f47d-4646-a592-439e9ed7165b.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/silly-goodbye-dance-see-you-later-alligator#recording",
+      "name": "Silly Goodbye Dance (See You Later Alligator)",
+      "url": "https://alybouchnak.com/track/silly-goodbye-dance-see-you-later-alligator",
+      "duration": "PT2M58S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-09-25",
+      "isrcCode": "GXFHP2678212",
+      "description": "A goodbye transition song with animal rhymes, waving, hugs, kisses, stomping and the familiar “See you later, alligator!” refrain.",
+      "image": "https://alybouchnak.com/images/release-ca9fbe69-f47d-4646-a592-439e9ed7165b.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/4155dd91-54da-4b31-940a-5c60d15caf8b"
+      ]
+    },
+    "musicbrainzRecordingId": "4155dd91-54da-4b31-940a-5c60d15caf8b",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/4155dd91-54da-4b31-940a-5c60d15caf8b",
+    "isStandaloneRelease": false,
+    "amazonUrl": "",
+    "routine": "Transition",
+    "otherUrl": ""
+  },
+  {
+    "id": 33,
+    "slug": "my-little-love",
+    "title": "My Little Love",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "A family dance song for mamas, papas and little ones, with warm hugs, tiny dancing feet, a freeze break and a funky beat.",
+    "coverImage": "/images/my-little-love-cover.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-08-14",
+    "duration": "2:59",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Playful",
+    "isrc": "GX5MY2603036",
+    "upc": "5064011593673",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "https://open.spotify.com/album/12bISkWiAE0A467nBh65Yj",
+    "appleMusicUrl": "https://music.apple.com/us/album/6788861011",
+    "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_lz6eT2uj7eRJzAjF5jeSkuVeVFQIsO7J8",
+    "lyricsPreview": [
+      "Yeah! We got a special vibe today!",
+      "For all the Mamas, the Papas, and the little ones!",
+      "Are you ready to move?",
+      "Are you ready to groove?",
+      "Let me see you bounce!",
+      "1, 2, 1, 2, 3, Let's GO!"
+    ],
+    "lyricsFull": "Yeah! We got a special vibe today!\nFor all the Mamas, the Papas, and the little ones!\nAre you ready to move?\nAre you ready to groove?\nLet me see you bounce!\n1, 2, 1, 2, 3, Let's GO!\n\nYou’re my Sweet Pea\nMy whole world, can’t you see?\nNothing else matters to me\n(Put your hands up!)\nYou are my Everything\n\nSafe in my arms\nSo cozy and so warm\nMy little lucky charm\n(Yeah, that's right!)\nYou are my Little Love\n\nYou’re my Sunshine bright!\n(Shine! Shine!)\nYou make the world so light!\n(So bright!)\nEverything’s gonna be alright!\nLet’s hug with all our might!\n\nLook at those tiny feet\nMoving to the funky beat!\nYou make my life complete\n(So sweet!)\nYou are my Everything\n\nWe spin around the floor\nThen we ask for more!\nOpen up every door\n(Let's go! Let's go!)\nYou are my Little Love\n\nWhoa, whoa, whoa... Hold up!\nFreeze!\n\nDon't move a muscle...\nNow... Wiggle your fingers!\nWiggle your toes!\n\nAre you ready for the drop?!\nI said... ARE YOU READY?!\nMAKE SOME NOISE!\n\nYou’re my Cutie Pie!\n(Cutie Pie!)\nThe apple of my eye!\n(My, oh my!)\nYou make my spirit fly!\nYou are my Everything!\n\nYeah!\nJust dance with your baby!\nHold 'em tight!\nAll night!\nDon't stop! Don't stop!\n\nMy Little Love...\nYeah...\nWe out",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "My Little Love | Aly Bouchnak",
+      "description": "A family dance song for mamas, papas and little ones, with warm hugs, tiny dancing feet, a freeze break and a funky beat.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/my-little-love",
+      "ogImage": "https://alybouchnak.com/images/my-little-love-cover.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/my-little-love#recording",
+      "name": "My Little Love",
+      "url": "https://alybouchnak.com/track/my-little-love",
+      "duration": "PT2M59S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-08-14",
+      "isrcCode": "GX5MY2603036",
+      "description": "A family dance song for mamas, papas and little ones, with warm hugs, tiny dancing feet, a freeze break and a funky beat.",
+      "image": "https://alybouchnak.com/images/my-little-love-cover.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/429a7557-31b7-444c-8dce-61bc93032c49"
+      ]
+    },
+    "musicbrainzRecordingId": "429a7557-31b7-444c-8dce-61bc93032c49",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/429a7557-31b7-444c-8dce-61bc93032c49",
+    "isStandaloneRelease": false,
+    "amazonUrl": "https://music.amazon.ca/albums/B0H83TB29P",
+    "routine": "Movement",
+    "otherUrl": ""
+  },
+  {
+    "id": 34,
+    "slug": "llama-drama-in-pajamas",
+    "title": "Llama (Drama in Pajamas)",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "A playful bedtime story about a llama in polka-dot pajamas, with stop-and-go cues, putting toys away, turning book pages and a quiet goodnight.",
+    "coverImage": "/images/release-328a04b4-be48-45e9-a6e6-32178f5eee76.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-10-09",
+    "duration": "2:47",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Transitional",
+    "isrc": "GXFHP2629495",
+    "upc": "5064041997960",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "",
+    "appleMusicUrl": "",
+    "youtubeUrl": "",
+    "lyricsPreview": [
+      "Llama! (STOP!)",
+      "Mama! (GO!)",
+      "Pajama! (STOP!)",
+      "Alabama! (GO!)",
+      "There’s a Llama, lives in Alabama",
+      "Wiggling around in his polka-dot pajama!"
+    ],
+    "lyricsFull": "Llama! (STOP!)\nMama! (GO!)\nPajama! (STOP!)\nAlabama! (GO!)\n\nThere’s a Llama, lives in Alabama\nWiggling around in his polka-dot pajama!\nHe’s waiting for his Mama, for the end of the day\nTo take the toys and put them all away!\nIs he sleepy? (NO!)\nIs he ready? (YES!)\nPut the llama-pajama to the test!\n\nLlama, Llama – Drama in Pajamas!\nBanana, Banana – all the way from Bahamas!\nA bedtime story, a whole panorama\nNo more drama for the Llama in Alabama!\n\nLlama, Llama – Drama in Pajamas!\n\nLeo’s got the book\nMax is in the bed\nVisions of bananas dancing in his head!\nFrom the islands, way out in the sea\nA story for you and a story for me!\nOne page! (FLIP!)\nTwo pages! (FLIP!)\nBedtime’s coming... don't you let it slip!\n\nNow... the Llama is... waiting...\n(Wait for it...)\nDRAMA!\nNow... the Llama is... eating...\n(Wait for it...)\nBANANA!\n\nIs everybody ready for the story?\n3... 2... 1... SHHHH!\nSilence for one beat\n\nLlama...\nPajama...\nBanana...\nBahamas...\nNo more drama...\n\nGoodnight, Llama",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Llama (Drama in Pajamas) | Aly Bouchnak",
+      "description": "A playful bedtime story about a llama in polka-dot pajamas, with stop-and-go cues, putting toys away, turning book pages and a quiet goodnight.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/llama-drama-in-pajamas",
+      "ogImage": "https://alybouchnak.com/images/release-328a04b4-be48-45e9-a6e6-32178f5eee76.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/llama-drama-in-pajamas#recording",
+      "name": "Llama (Drama in Pajamas)",
+      "url": "https://alybouchnak.com/track/llama-drama-in-pajamas",
+      "duration": "PT2M47S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-10-09",
+      "isrcCode": "GXFHP2629495",
+      "description": "A playful bedtime story about a llama in polka-dot pajamas, with stop-and-go cues, putting toys away, turning book pages and a quiet goodnight.",
+      "image": "https://alybouchnak.com/images/release-328a04b4-be48-45e9-a6e6-32178f5eee76.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/918159d7-f659-4d7c-9291-5a7a00e97e63"
+      ]
+    },
+    "musicbrainzRecordingId": "918159d7-f659-4d7c-9291-5a7a00e97e63",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/918159d7-f659-4d7c-9291-5a7a00e97e63",
+    "isStandaloneRelease": false,
+    "amazonUrl": "",
+    "routine": "Bedtime",
+    "otherUrl": ""
+  },
+  {
+    "id": 35,
+    "slug": "billy-boy",
+    "title": "Billy Boy",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "A modern Billy Boy sing-along about exploring the sky, sea, moon and park, with jumping, spinning and a playful dance drop.",
+    "coverImage": "/images/release-7d43efd4-4693-4de5-a3e2-07d1a0fac646.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-09-11",
+    "duration": "2:07",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Energetic",
+    "isrc": "GXF972681613",
+    "upc": "5064011078002",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "",
+    "appleMusicUrl": "",
+    "youtubeUrl": "",
+    "lyricsPreview": [
+      "Oh, where have you been, Billy Boy, Billy Boy?",
+      "Oh, where have you been, charming Billy?",
+      "I have been to the sky",
+      "I have been to the sea",
+      "He’s a young thing",
+      "And cannot leave his mommy!"
+    ],
+    "lyricsFull": "Oh, where have you been, Billy Boy, Billy Boy?\nOh, where have you been, charming Billy?\n\nI have been to the sky\nI have been to the sea\nHe’s a young thing\nAnd cannot leave his mommy!\nWAIT FOR THE DROP!\n\nHe’s the one! (Billy Boy!)\nOn the run! (Billy Boy!)\nHe’s the joy of the house—\nAnd he’s having all the fun!\nB-B-Billy!\nB-B-Billy!\nHe’s our charming Billy Boy!\n\nI been to the moon!\nI been to the park!\nI saw a light\nIn the dark!\nI saw a fish\nI saw a tree\nEverything's waiting\nJUST FOR ME!\n\nIs he jumping? (BILLY!)\nIs he spinning? (BILLY!)\nIs he winning? (BILLY!)\nGO BILLY, GO!\n\nHe’s the one! (Billy Boy!)\nOn the run! (Billy Boy!)\nHe’s the joy of the house—\nAnd he’s having all the fun!\nB-B-Billy!\nB-B-Billy!\nHe’s our charming Billy Boy!\n\nBilly Boy...\nCharming Billy...\nHe’s back",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Billy Boy | Aly Bouchnak",
+      "description": "A modern Billy Boy sing-along about exploring the sky, sea, moon and park, with jumping, spinning and a playful dance drop.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/billy-boy",
+      "ogImage": "https://alybouchnak.com/images/release-7d43efd4-4693-4de5-a3e2-07d1a0fac646.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/billy-boy#recording",
+      "name": "Billy Boy",
+      "url": "https://alybouchnak.com/track/billy-boy",
+      "duration": "PT2M07S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-09-11",
+      "isrcCode": "GXF972681613",
+      "description": "A modern Billy Boy sing-along about exploring the sky, sea, moon and park, with jumping, spinning and a playful dance drop.",
+      "image": "https://alybouchnak.com/images/release-7d43efd4-4693-4de5-a3e2-07d1a0fac646.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/cfa20fd7-6247-48b2-b8b4-063825d3b200"
+      ]
+    },
+    "musicbrainzRecordingId": "cfa20fd7-6247-48b2-b8b4-063825d3b200",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/cfa20fd7-6247-48b2-b8b4-063825d3b200",
+    "isStandaloneRelease": false,
+    "amazonUrl": "",
+    "routine": "Playtime",
+    "otherUrl": ""
+  },
+  {
+    "id": 36,
+    "slug": "bock-bock-chicken-2026",
+    "title": "Bock Bock Chicken",
+    "subtitle": "Music by Aly Bouchnak",
+    "description": "A chicken dance song with a yellow banana, blue pajamas, wing wiggling, tail shaking and a playful “Bock-bock” refrain.",
+    "coverImage": "/images/release-6b90db63-49d2-4d3b-9450-438bc0ceaa99.jpg",
+    "artist": "Aly Bouchnak",
+    "releaseDate": "2026-07-10",
+    "duration": "2:29",
+    "bpm": 0,
+    "genre": "Children's Music",
+    "ageRange": "",
+    "mood": "Playful",
+    "isrc": "GX5MY2662913",
+    "upc": "5064011809538",
+    "album": "The Bloom's House: Volume 2",
+    "albumUrl": "/album/the-blooms-house-volume-2",
+    "spotifyUrl": "",
+    "appleMusicUrl": "https://music.apple.com/us/album/bock-bock-chicken-single/6792094739?uo=4",
+    "youtubeUrl": "https://www.youtube.com/watch?v=CqGv6u77i8M",
+    "lyricsPreview": [
+      "Bock Bock Bock Ba-Bock",
+      "Bock-bock-bock-bock chicken!",
+      "Bock-bock-bock Holding a yellow banana!",
+      "Bock-bock-bock-bock chicken!",
+      "Bock-bock I'm jumping in my",
+      "Bluuuuue"
+    ],
+    "lyricsFull": "Bock Bock Bock Ba-Bock\nBock-bock-bock-bock chicken!\nBock-bock-bock Holding a yellow banana!\nBock-bock-bock-bock chicken!\nBock-bock I'm jumping in my\nBluuuuue\nPajamas!\n\nBock-bock chicken!\nWith a banana! (Bock-bock-bock)\nI'm jumping in my blue pajamas! (Let's Bock)\nBock-bock chicken!\nWith a banana! (Bock-bock-bock)\nI'm jumping in my blue pajamas! (And Bock)\n\nWiggle my wings and shake my tail!\nHop on the couch, I will not fail!\nFlap-flap-flap and drop it low!\nThat is how the chickens go!\n\nBock-bock chicken!\nWith a banana! (Bock-bock-bock)\nI'm jumping in my blue pajamas! (Like a duck)\nBock-bock chicken!\nWith a banana! (Bock-bock-bock)\nI'm jumping in my blue pajamas! (I'm stuck, I'm stuck)\n\nBock (ba-bock) ba-bock (bock) chickens!\nBock (bock) bock (banana)\nBock (ba-bock) ba-bock (bock) chickens!\n(Jumping in) my (pajamas!)\n\nBock-bock chicken!\nBock-bock-bock-bock chickens!\nBock-bock-bock-bock chicken!\n(Jumping in) my (pajamas!)\n\nBock-bock chicken!\nWith a banana! (Bock-bock-bock)\nI'm jumping in my blue pajamas! (And Cluck)\nBock-bock chicken!\nWith a banana! (Bock-bock-bock)\nI'm jumping in my blue pajamas!\n\nBock Ba-Bock Ba-Bock Bock-Bock Bock-Bock!\nChicken dancing nonstop!\n\nBa-Ba Ba-Ba Ba-Ba Bock Bock-Bock!\nBa-Ba Ba-Ba Ba-Ba Bock Bock-Bock!\nBock-Bock Bock-Bock! Bock Bock-Bock!\n\nBock-bock-bock-bock chicken!\nBock-bock Holding a yellow banana!\nBock-bock-bock-bock chicken!\nBock-bock I'm jumping in my\nBluuuuuuuuuuuuue\nPajamas!\n\nBa-Ba Ba-Ba Ba-Ba Bock Bock-Bock!\nBock-Bock! Bock Bock-Bock! (Bock)\nBock Ba-Bock Ba-Bock Bock-Bock-Bock!\nBock-Bock Bock-Bock! Bock-Bock!\nBock-Bock Bock-Bock! Bock-Bock!\nBock-Bock Bock-Bock! Bock-Bock!\nBa-Ba Ba-Ba Ba-Ba Bock Bock-Bock!\nBock Bock Bock!\nBock! Bock!\nBock!\nBock!",
+    "educationalBenefits": [],
+    "artistNote": "",
+    "relatedTracks": [],
+    "seo": {
+      "title": "Bock Bock Chicken | Aly Bouchnak",
+      "description": "A chicken dance song with a yellow banana, blue pajamas, wing wiggling, tail shaking and a playful “Bock-bock” refrain.",
+      "keywords": "Aly Bouchnak, The Blooms House, childrens music",
+      "canonical": "https://alybouchnak.com/track/bock-bock-chicken-2026",
+      "ogImage": "https://alybouchnak.com/images/release-6b90db63-49d2-4d3b-9450-438bc0ceaa99.jpg"
+    },
+    "trackSchema": {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      "@id": "https://alybouchnak.com/track/bock-bock-chicken-2026#recording",
+      "name": "Bock Bock Chicken",
+      "url": "https://alybouchnak.com/track/bock-bock-chicken-2026",
+      "duration": "PT2M29S",
+      "genre": "Children's Music",
+      "byArtist": {
+        "@type": "Person",
+        "@id": "https://alybouchnak.com/#artist",
+        "name": "Aly Bouchnak"
+      },
+      "inAlbum": {
+        "@type": "MusicAlbum",
+        "name": "The Bloom's House: Volume 2",
+        "@id": "https://alybouchnak.com/album/the-blooms-house-volume-2"
+      },
+      "datePublished": "2026-07-10",
+      "isrcCode": "GX5MY2662913",
+      "description": "A chicken dance song with a yellow banana, blue pajamas, wing wiggling, tail shaking and a playful “Bock-bock” refrain.",
+      "image": "https://alybouchnak.com/images/release-6b90db63-49d2-4d3b-9450-438bc0ceaa99.jpg",
+      "sameAs": [
+        "https://musicbrainz.org/recording/f0319532-c9ca-4f56-b724-eea2c49793ec"
+      ]
+    },
+    "musicbrainzRecordingId": "f0319532-c9ca-4f56-b724-eea2c49793ec",
+    "musicbrainzUrl": "https://musicbrainz.org/recording/f0319532-c9ca-4f56-b724-eea2c49793ec",
+    "isStandaloneRelease": true,
+    "releaseGroupId": "c52d9440-eee4-4431-8b78-a7a9c76c99d0",
+    "releaseType": "Single",
+    "amazonUrl": "",
+    "routine": "Movement",
+    "otherUrl": ""
   }
 ];
 

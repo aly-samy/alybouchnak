@@ -1,6 +1,8 @@
 import type { Album } from '../../data/albums';
 
 const ALBUM_INTERFACE = `export interface Album {
+  musicbrainzReleaseGroupId?: string;
+  musicbrainzUrl?: string;
   slug: string;
   title: string;
   subtitle: string;

@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Aly Bouchnak — official artist website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React, TypeScript and Vite website for alybouchnak.com, hosted on Netlify with a Neon-backed editorial dashboard.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use Node.js 22 or newer.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The public website runs without database credentials using the checked-in content snapshot. Netlify functions and administrative login require the configured server environment.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Build and verify
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm run build
+npm test
+npm run preview
 ```
+
+When `DATABASE_URL` is configured, prebuild refreshes editorial content from Neon, reconciles it with the verified MusicBrainz snapshot and artist-approved content, then generates lightweight card summaries. The build writes crawlable HTML, JSON-LD, sitemaps, Markdown and JSON discovery resources to `dist`.
+
+## Update the catalog
+
+- Verified release and recording metadata: `src/data/musicbrainz-catalog.json`.
+- Artist-approved lyrics and descriptions: `src/data/artist-catalog.ts`.
+- Artist entity information: `src/data/artist.ts`.
+- The generated `tracks.ts`, `albums.ts` and `catalog-summaries.ts` are reconciled during prebuild.
+
+```sh
+npm run catalog:refresh
+npm run build
+npm test
+```
+
+The refresh command reads public MusicBrainz data and reports missing artwork. It preserves known platform links and covers. Review future releases and any gaps before deployment. Artist overrides take precedence over corresponding Neon fields; this does not synchronize new catalog entries into the live CMS database.
+
+## Server-only configuration
+
+Configure `ADMIN_PASSWORD` in Netlify for admin login and API authorization. Use `GITHUB_TOKEN` for GitHub write features. Never place passwords or private keys in browser-exposed `VITE_` variables. Browser exposure is limited to intentionally public values.
+
+See [the audit and deployment notes](docs/WEBSITE-AUDIT-2026-10-12.md) for the required credential migration, verification details and remaining content gaps.

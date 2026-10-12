@@ -39,8 +39,8 @@ try {
     // Insert hashed assets into the top-level Link headers
     const linkHeaders = [];
     if (indexCss) linkHeaders.push(`Link: </assets/${indexCss}>; rel=preload; as=style`);
-    if (indexJs) linkHeaders.push(`Link: </assets/${indexJs}>; rel=preload; as=script`);
-    if (vendorJs) linkHeaders.push(`Link: </assets/${vendorJs}>; rel=preload; as=script`);
+    if (indexJs) linkHeaders.push(`Link: </assets/${indexJs}>; rel=modulepreload`);
+    if (vendorJs) linkHeaders.push(`Link: </assets/${vendorJs}>; rel=modulepreload`);
 
     if (linkHeaders.length > 0) {
         // Find where to insert (look for the first /* block)

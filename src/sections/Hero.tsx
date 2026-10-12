@@ -18,6 +18,7 @@ const Hero = () => {
 
   // Load animation (auto-play on mount)
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
@@ -84,6 +85,7 @@ const Hero = () => {
 
   // Scroll-driven exit animation
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -165,7 +167,7 @@ const Hero = () => {
               >
                 {headlineWords.map((word, i) => (
                   <span key={i} className="word inline-block mr-[0.3em]">
-                    {word}
+                    {word}{' '}
                   </span>
                 ))}
               </h1>

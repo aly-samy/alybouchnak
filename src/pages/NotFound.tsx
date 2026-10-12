@@ -7,6 +7,7 @@ const NotFound: React.FC = () => {
     return (
         <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#C8F0F7] font-['Outfit']">
             <SEO
+                noIndex
                 title="Page Not Found | The Bloom's House"
                 description="Oops! It looks like you're lost. Let's get you back to the fun."
             />

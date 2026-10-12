@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { tracks } from '../../data/tracks';
 import { albums } from '../../data/albums';
+import { useAdminAuth } from '../lib/adminAuth';
 import { Music, Disc3, TrendingUp, Clock, RefreshCw, CheckCircle, AlertCircle, Loader2, Zap } from 'lucide-react';
 
 function StatCard({ icon: Icon, label, value, sub }: {
@@ -25,6 +26,7 @@ function StatCard({ icon: Icon, label, value, sub }: {
 type RebuildStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export default function Dashboard() {
+    const { token } = useAdminAuth();
     const [rebuildStatus, setRebuildStatus] = useState<RebuildStatus>('idle');
     const [rebuildMessage, setRebuildMessage] = useState('');
 
@@ -38,7 +40,6 @@ export default function Dashboard() {
         setRebuildStatus('loading');
         setRebuildMessage('');
         try {
-            const token = import.meta.env.VITE_ADMIN_PASSWORD || '';
             const res = await fetch('/.netlify/functions/trigger-rebuild', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },

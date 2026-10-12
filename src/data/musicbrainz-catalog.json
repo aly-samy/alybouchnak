@@ -1,0 +1,1447 @@
+{
+  "verifiedOn": "2026-10-12",
+  "artistId": "aaec4457-1558-4400-a316-72e14f698922",
+  "sources": [
+    "https://musicbrainz.org/artist/aaec4457-1558-4400-a316-72e14f698922",
+    "https://music.apple.com/us/artist/aly-bouchnak/1840274949"
+  ],
+  "releases": [
+    {
+      "id": "1f33781b-387d-4445-84cf-d09a27b3d130",
+      "groupId": "84d21e04-af8b-4292-a8d4-14449813d45b",
+      "title": "If you Happy and you know it (Party Edition)",
+      "type": "Single",
+      "date": "2026-04-10",
+      "barcode": "5063925895088",
+      "coverImage": "/images/If-you-happy-and-you-know-it.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "If you Happy and you know it (Party Edition)",
+          "recordingId": "4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+          "length": 153000
+        }
+      ]
+    },
+    {
+      "id": "21cead45-05f0-4e7d-9181-f3042062cb23",
+      "groupId": "03f90596-f5c2-4e3b-9bbc-cdc154abda8b",
+      "title": "Hobby The Bunny",
+      "type": "EP",
+      "date": "2026-06-10",
+      "barcode": "5063958788531",
+      "coverImage": "/images/release-21cead45-05f0-4e7d-9181-f3042062cb23.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/7hoLYuk1fPlir8SHLXQfnj",
+      "appleMusicUrl": "https://music.apple.com/us/album/1893459178",
+      "youtubeUrl": "https://www.youtube.com/watch?v=G7uZnOBdce8",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Hobby The Bunny",
+          "recordingId": "cef73ac6-c8a1-4500-ac80-0373eeee6281",
+          "length": 132000
+        },
+        {
+          "title": "Zakzooka The Bear",
+          "recordingId": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+          "length": 141000
+        },
+        {
+          "title": "The Duckie Song",
+          "recordingId": "c3197bfd-5586-49f1-824b-4d8170304516",
+          "length": 152000
+        },
+        {
+          "title": "Mary Had a Little Lamb (School Party)",
+          "recordingId": "31676dfb-e5a5-456d-9b59-0356804300e7",
+          "length": 126000
+        },
+        {
+          "title": "The Wise Mice",
+          "recordingId": "512854cf-fd9f-428e-9834-47772bf71be3",
+          "length": 140000
+        },
+        {
+          "title": "Five Little Monkeys (Jungle Party)",
+          "recordingId": "32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+          "length": 145000
+        }
+      ]
+    },
+    {
+      "id": "22ddafe5-5ac4-4a4e-a55d-bca1dfeccfb9",
+      "groupId": "827dee41-2999-4c68-9532-5f659f891988",
+      "title": "Zakzooka The Bear",
+      "type": "Single",
+      "date": "2026-05-13",
+      "barcode": "5063941025018",
+      "coverImage": "/images/Zakzooka-The-Bear--Aly-Bouchnak.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/0nRHeDdKlsmakvSI9rMR8o",
+      "appleMusicUrl": "https://music.apple.com/au/album/1884963799",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OfhWCsIOOb4",
+      "amazonUrl": "https://music.amazon.in/albums/B0GSHFFZMM",
+      "tracks": [
+        {
+          "title": "Zakzooka The Bear",
+          "recordingId": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+          "length": 141000
+        }
+      ]
+    },
+    {
+      "id": "299a664f-39ea-4af0-a153-02c88978f389",
+      "groupId": "74a888bb-e22c-42b1-aa10-980cd5e02fb3",
+      "title": "My Little Love",
+      "type": "EP",
+      "date": "2026-08-14",
+      "barcode": "5064011593673",
+      "coverImage": "/images/my-little-love-cover.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/12bISkWiAE0A467nBh65Yj",
+      "appleMusicUrl": "https://music.apple.com/us/album/6788861011",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_lz6eT2uj7eRJzAjF5jeSkuVeVFQIsO7J8",
+      "amazonUrl": "https://music.amazon.ca/albums/B0H83TB29P",
+      "tracks": [
+        {
+          "title": "My Little Love",
+          "recordingId": "429a7557-31b7-444c-8dce-61bc93032c49",
+          "length": 179000
+        },
+        {
+          "title": "Cool Gang",
+          "recordingId": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+          "length": 144000
+        },
+        {
+          "title": "The Babble Beat",
+          "recordingId": "261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+          "length": 116000
+        },
+        {
+          "title": "Boss Bath",
+          "recordingId": "2cbd176f-d18b-4203-9001-d6423345bd85",
+          "length": 212000
+        },
+        {
+          "title": "Five Little Monkeys",
+          "recordingId": "32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+          "length": 145000
+        }
+      ]
+    },
+    {
+      "id": "2a446c92-7daf-43df-8fe7-d15c0e617507",
+      "groupId": "3a2f627c-0335-40c9-94ca-543531748cae",
+      "title": "The Bloom's House: Party Classics",
+      "type": "Album",
+      "date": "2026-04-24",
+      "barcode": "5063941237718",
+      "coverImage": "/images/The-Blooms-House-Party-Classics-Aly-Bouchnak.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/2Z2ziPoKvzMMdnYYGVWfAZ",
+      "appleMusicUrl": "https://music.apple.com/us/album/1885613941",
+      "youtubeUrl": "https://www.youtube.com/watch?v=NuftpQHwLdE",
+      "amazonUrl": "https://music.amazon.ca/albums/B0GSS9YPZJ",
+      "tracks": [
+        {
+          "title": "If You're Happy and You Know it (Party Edition)",
+          "recordingId": "4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+          "length": 153000
+        },
+        {
+          "title": "Five Little Monkeys (Jungle Party)",
+          "recordingId": "32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+          "length": 145000
+        },
+        {
+          "title": "Mary Had a Little Lamb (School Party)",
+          "recordingId": "31676dfb-e5a5-456d-9b59-0356804300e7",
+          "length": 126000
+        },
+        {
+          "title": "Old MacDonald Had a Farm (Farm Party)",
+          "recordingId": "09b0f016-1cd4-4a2a-95f3-fa0918f48cbb",
+          "length": 134000
+        },
+        {
+          "title": "The Wheels on the Bus (Party Ride)",
+          "recordingId": "74c99441-ad72-47a9-b7e8-9d4d2385c5a9",
+          "length": 139000
+        },
+        {
+          "title": "The Body Party (Head & Shoulders)",
+          "recordingId": "e7aa2fe4-af8c-4f39-8756-d333e3ec38db",
+          "length": 130000
+        }
+      ]
+    },
+    {
+      "id": "30c9f6e4-8a07-4d5c-9f95-a665b15c8a92",
+      "groupId": "634320d5-290f-4fb4-8c89-71cb0e95c896",
+      "title": "Boom Teka Boom (Wake Up Song)",
+      "type": "EP",
+      "date": "2026-01-30",
+      "barcode": "5063893188977",
+      "coverImage": "/images/boom-teka-boom-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/6GY3VleFHyMgWHtckzV0Bx",
+      "appleMusicUrl": "https://music.apple.com/eg/album/1863464669",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_kad6Z4DoGm7t1sPJZMfAC6k7Ea_LC1lXM",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Boom Teka Boom (Wake Up Song)",
+          "recordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+          "length": 129000
+        },
+        {
+          "title": "Pet-Pop | The Animal Song",
+          "recordingId": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+          "length": 130000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "1616455e-fad6-4426-a15c-3652b31479f5",
+          "length": 117000
+        }
+      ]
+    },
+    {
+      "id": "328a04b4-be48-45e9-a6e6-32178f5eee76",
+      "groupId": "aa90fdad-b6fb-4113-8398-e0e344d3dc22",
+      "title": "Llama (Drama in Pajamas)",
+      "type": "EP",
+      "date": "2026-10-09",
+      "barcode": "5064041997960",
+      "coverImage": "/images/release-328a04b4-be48-45e9-a6e6-32178f5eee76.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Llama (Drama in Pajamas)",
+          "recordingId": "918159d7-f659-4d7c-9291-5a7a00e97e63",
+          "length": 167000
+        },
+        {
+          "title": "Five Little Monkeys",
+          "recordingId": "32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+          "length": 145000
+        },
+        {
+          "title": "Mary Had a Little Lamb",
+          "recordingId": "31676dfb-e5a5-456d-9b59-0356804300e7",
+          "length": 126000
+        },
+        {
+          "title": "If You're Happy and You Know It",
+          "recordingId": "4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+          "length": 153000
+        },
+        {
+          "title": "Silly Goodbye Dance",
+          "recordingId": "4155dd91-54da-4b31-940a-5c60d15caf8b",
+          "length": 178000
+        }
+      ]
+    },
+    {
+      "id": "3dcc5503-7614-4aa7-b76c-a739aeabd871",
+      "groupId": "18ddc298-51ae-4101-a448-7e34bc2a25fb",
+      "title": "The Babble Beat",
+      "type": "EP",
+      "date": "2026-07-15",
+      "barcode": "5063992021731",
+      "coverImage": "/images/release-3dcc5503-7614-4aa7-b76c-a739aeabd871.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/7Hb61Tqqj1cefeNJ5Le21h",
+      "appleMusicUrl": "https://music.apple.com/eg/album/6781052445",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_mgQyIQX1x9kG6V-GEat4qLtB8ZEMovef8",
+      "amazonUrl": "https://music.amazon.in/albums/B0H5CG3NDM",
+      "tracks": [
+        {
+          "title": "The Babble Beat",
+          "recordingId": "261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+          "length": 116000
+        },
+        {
+          "title": "Boss Bath",
+          "recordingId": "2cbd176f-d18b-4203-9001-d6423345bd85",
+          "length": 212000
+        },
+        {
+          "title": "Hobby The Bunny",
+          "recordingId": "cef73ac6-c8a1-4500-ac80-0373eeee6281",
+          "length": 132000
+        },
+        {
+          "title": "If You're Happy And You Know It",
+          "recordingId": "4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+          "length": 153000
+        },
+        {
+          "title": "The Alphabet Song",
+          "recordingId": "bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5",
+          "length": 175000
+        }
+      ]
+    },
+    {
+      "id": "46b2106e-c09e-4dd4-9766-b5d76bb53309",
+      "groupId": "dd3af353-18bf-462e-93b7-174d5c804711",
+      "title": "Boss Bath",
+      "type": "EP",
+      "date": "2026-06-26",
+      "barcode": "5063959799024",
+      "coverImage": "/images/release-46b2106e-c09e-4dd4-9766-b5d76bb53309.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/4uZEGRMcbXIGJ1SmokuCXe",
+      "appleMusicUrl": "https://music.apple.com/us/album/1893583370",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_l74p7qwh9fN-bpypdpXOsrqu4sKorK3XY",
+      "amazonUrl": "https://www.amazon.com/gp/product/B0GX79RTJF",
+      "tracks": [
+        {
+          "title": "Boss Bath",
+          "recordingId": "2cbd176f-d18b-4203-9001-d6423345bd85",
+          "length": 212000
+        },
+        {
+          "title": "Hobby The Bunny",
+          "recordingId": "cef73ac6-c8a1-4500-ac80-0373eeee6281",
+          "length": 132000
+        },
+        {
+          "title": "Boom Teka Boom",
+          "recordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+          "length": 129000
+        },
+        {
+          "title": "The Funny Bunny Jump",
+          "recordingId": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+          "length": 110000
+        },
+        {
+          "title": "Brave Hello",
+          "recordingId": "74d640fd-0be5-4704-b0ae-8363d6c47f7b",
+          "length": 162000
+        },
+        {
+          "title": "If You're Happy and You Know It",
+          "recordingId": "4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+          "length": 153000
+        }
+      ]
+    },
+    {
+      "id": "48bcd3c3-0780-4ede-9a55-bbe5312054b6",
+      "groupId": "977c93bd-3c32-48e7-a90f-d92adc5e78cf",
+      "title": "The Wheels on the Bus (Party Ride)",
+      "type": "Single",
+      "date": "2026-03-27",
+      "barcode": "5063907564377",
+      "coverImage": "/images/The-Wheels-on-the-Bus--Party-Ride.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/45LVi7pjnW9azR7mNNRZBq",
+      "appleMusicUrl": "https://music.apple.com/eg/album/1882443456",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "The Wheels on the Bus (Party Ride)",
+          "recordingId": "74c99441-ad72-47a9-b7e8-9d4d2385c5a9",
+          "length": 139000
+        }
+      ]
+    },
+    {
+      "id": "58a22571-0e96-4567-b636-ea2c25de21bb",
+      "groupId": "46fd8f74-3ea3-4438-8457-fcbc5f39e19c",
+      "title": "The Bloom’s House: Volume 1",
+      "type": "Album",
+      "date": "2026-05-29",
+      "barcode": "5063959503706",
+      "coverImage": "/images/The-Blooms-House-volume-1-Aly-Bouchnak.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/134XipON3bV6hjGL4Dkn2G",
+      "appleMusicUrl": "https://music.apple.com/us/album/1893464507",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_mXBcizwqKA_e7IAIXd48T-Q5Gu-LIipmk",
+      "amazonUrl": "https://music.amazon.ca/albums/B0GX79PZKF",
+      "tracks": [
+        {
+          "title": "Brave Hello",
+          "recordingId": "74d640fd-0be5-4704-b0ae-8363d6c47f7b",
+          "length": 135000
+        },
+        {
+          "title": "Boom Teka Boom (Wake Up Song)",
+          "recordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+          "length": 129000
+        },
+        {
+          "title": "The Funny Bunny Jump",
+          "recordingId": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+          "length": 110000
+        },
+        {
+          "title": "The Wise Mice",
+          "recordingId": "512854cf-fd9f-428e-9834-47772bf71be3",
+          "length": 140000
+        },
+        {
+          "title": "The Yummy Spoon",
+          "recordingId": "a7fee9ff-6ef6-4d02-be44-bc1f932f5217",
+          "length": 101000
+        },
+        {
+          "title": "The Alphabet Song",
+          "recordingId": "bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5",
+          "length": 175000
+        },
+        {
+          "title": "Nanny & Papa",
+          "recordingId": "4ed7ee9b-2f8c-4371-9ca1-17f849a4904d",
+          "length": 154000
+        },
+        {
+          "title": "The Duckie Song",
+          "recordingId": "c3197bfd-5586-49f1-824b-4d8170304516",
+          "length": 152000
+        },
+        {
+          "title": "Pet-Pop",
+          "recordingId": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+          "length": 130000
+        },
+        {
+          "title": "Zakzooka The Bear",
+          "recordingId": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+          "length": 141000
+        }
+      ]
+    },
+    {
+      "id": "5c53cb41-3eb2-4c28-a4c5-bb5ec14afd3d",
+      "groupId": "34b3b823-8a56-487f-83d7-c1ad2df8b48b",
+      "title": "Five Little Monkeys (Jungle Party)",
+      "type": "Single",
+      "date": "2026-03-20",
+      "barcode": "5063925856317",
+      "coverImage": "/images/Five-little-monkeys-jumping-on-the-bed.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Five Little Monkeys (Jungle Party)",
+          "recordingId": "32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+          "length": 145000
+        }
+      ]
+    },
+    {
+      "id": "5d431a2e-5bf9-4cc3-a308-9fd25fce7fc9",
+      "groupId": "b1d80d1d-1819-4106-8960-8da496c2a332",
+      "title": "Who is Daddy’s Favorite?",
+      "type": "EP",
+      "date": "2026-08-28",
+      "barcode": "5064010254025",
+      "coverImage": "/images/release-5d431a2e-5bf9-4cc3-a308-9fd25fce7fc9.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/2ZfmJSfFxu74Y78sCJKIRO",
+      "appleMusicUrl": "https://music.apple.com/us/album/6794532759",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JzP0P-eG7g4",
+      "amazonUrl": "https://www.amazon.com/gp/product/B0HBCKFS9L",
+      "tracks": [
+        {
+          "title": "Who is Daddy’s Favorite?",
+          "recordingId": "250bcf9c-e14c-456c-a424-731d3f17bb11",
+          "length": 199000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "f0319532-c9ca-4f56-b724-eea2c49793ec",
+          "length": 149000
+        },
+        {
+          "title": "My Little Love",
+          "recordingId": "429a7557-31b7-444c-8dce-61bc93032c49",
+          "length": 179000
+        },
+        {
+          "title": "Cool Gang",
+          "recordingId": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+          "length": 144000
+        },
+        {
+          "title": "The Babble Beat",
+          "recordingId": "261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+          "length": 116000
+        }
+      ]
+    },
+    {
+      "id": "602c6a50-fe1f-4ccf-99f6-1f239619b54b",
+      "groupId": "23ccd8cb-0a8f-4da7-ba85-9a9a0d79bd0f",
+      "title": "The Wise Mice (Memory Game)",
+      "type": "EP",
+      "date": "2026-02-11",
+      "barcode": "5063907926106",
+      "coverImage": "/images/the-wise-mice-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "https://music.apple.com/us/album/the-wise-mice-single/1890022352?uo=4",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "The Wise Mice (Memory Game)",
+          "recordingId": "512854cf-fd9f-428e-9834-47772bf71be3",
+          "length": 140000
+        },
+        {
+          "title": "Nanny & Papa (Funny Bunny Family)",
+          "recordingId": "4ed7ee9b-2f8c-4371-9ca1-17f849a4904d",
+          "length": 154000
+        },
+        {
+          "title": "Boom Teka Boom (Wake Up Song)",
+          "recordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+          "length": 129000
+        },
+        {
+          "title": "Pet-Pop | The Animal Song",
+          "recordingId": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+          "length": 130000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "1616455e-fad6-4426-a15c-3652b31479f5",
+          "length": 116000
+        }
+      ]
+    },
+    {
+      "id": "6b90db63-49d2-4d3b-9450-438bc0ceaa99",
+      "groupId": "c52d9440-eee4-4431-8b78-a7a9c76c99d0",
+      "title": "Bock Bock Chicken",
+      "type": "Single",
+      "date": "2026-07-10",
+      "barcode": "5064011809538",
+      "coverImage": "/images/release-6b90db63-49d2-4d3b-9450-438bc0ceaa99.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "https://music.apple.com/us/album/bock-bock-chicken-single/6792094739?uo=4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CqGv6u77i8M",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "f0319532-c9ca-4f56-b724-eea2c49793ec",
+          "length": 149000
+        }
+      ]
+    },
+    {
+      "id": "6c7a200a-dd66-435a-a83a-fd30a08ca3b5",
+      "groupId": "32172fc2-b09a-4af6-9720-f75662f1d4d2",
+      "title": "Nanny & Papa (Funny Bunny Family)",
+      "type": "EP",
+      "date": "2026-02-27",
+      "barcode": "5063907265434",
+      "coverImage": "/images/nanny-and-papa-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/2DWdaBxfb1xUMOHme8oyC6",
+      "appleMusicUrl": "https://music.apple.com/us/album/nanny-papa-funny-bunny-family-single/1890026606?uo=4",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Nanny & Papa",
+          "recordingId": "4ed7ee9b-2f8c-4371-9ca1-17f849a4904d",
+          "length": 154000
+        },
+        {
+          "title": "Boom Teka Boom",
+          "recordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+          "length": 129000
+        },
+        {
+          "title": "Pet-Pop",
+          "recordingId": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+          "length": 130000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "1616455e-fad6-4426-a15c-3652b31479f5",
+          "length": 116000
+        }
+      ]
+    },
+    {
+      "id": "7d43efd4-4693-4de5-a3e2-07d1a0fac646",
+      "groupId": "fe14778e-cdcb-4c3a-b568-bd84c563d693",
+      "title": "Billy Boy",
+      "type": "EP",
+      "date": "2026-09-11",
+      "barcode": "5064011078002",
+      "coverImage": "/images/release-7d43efd4-4693-4de5-a3e2-07d1a0fac646.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Billy Boy",
+          "recordingId": "cfa20fd7-6247-48b2-b8b4-063825d3b200",
+          "length": 127000
+        },
+        {
+          "title": "Who is Daddy's Favorite?",
+          "recordingId": "250bcf9c-e14c-456c-a424-731d3f17bb11",
+          "length": 199000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "f0319532-c9ca-4f56-b724-eea2c49793ec",
+          "length": 149000
+        },
+        {
+          "title": "Cool Gang",
+          "recordingId": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+          "length": 144000
+        },
+        {
+          "title": "The Funny Bunny Jump",
+          "recordingId": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+          "length": 110000
+        }
+      ]
+    },
+    {
+      "id": "8295a5da-62fd-4811-b6da-ee184a8c0b3f",
+      "groupId": "14966f0b-0fe8-417a-b936-0c5247de62b9",
+      "title": "Pet-Pop | The Animal Song",
+      "type": "Single",
+      "date": "2025-12-19",
+      "barcode": null,
+      "coverImage": "/images/pet-pop-animal-song-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/2LrNt8q3U80tXzvQx5YPTW",
+      "appleMusicUrl": "https://music.apple.com/us/album/1857066271",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9FKP5ueRDso",
+      "amazonUrl": "https://music.amazon.com/albums/B0G4NFFBND",
+      "tracks": [
+        {
+          "title": "Pet-Pop | The Animal Song -Aly Bouchnak",
+          "recordingId": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+          "length": 140000
+        }
+      ]
+    },
+    {
+      "id": "8f16d0f4-a610-41b1-be58-6e545f55c32b",
+      "groupId": "70f43dc2-1eb3-4cf4-9b9f-a5c775c6ffe6",
+      "title": "The Bloom's House: Volume 2",
+      "type": "Album",
+      "date": "2026-10-23",
+      "barcode": "5064091070064",
+      "coverImage": "/images/release-8f16d0f4-a610-41b1-be58-6e545f55c32b.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Hobby The Bunny",
+          "recordingId": "cef73ac6-c8a1-4500-ac80-0373eeee6281",
+          "length": 132000
+        },
+        {
+          "title": "Boss Bath",
+          "recordingId": "2cbd176f-d18b-4203-9001-d6423345bd85",
+          "length": 212000
+        },
+        {
+          "title": "The Babble Beat",
+          "recordingId": "261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+          "length": 116000
+        },
+        {
+          "title": "Cool Gang (Big W Vibes)",
+          "recordingId": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+          "length": 144000
+        },
+        {
+          "title": "My Little Love",
+          "recordingId": "429a7557-31b7-444c-8dce-61bc93032c49",
+          "length": 179000
+        },
+        {
+          "title": "Who is Daddy’s Favorite?",
+          "recordingId": "250bcf9c-e14c-456c-a424-731d3f17bb11",
+          "length": 199000
+        },
+        {
+          "title": "Billy Boy",
+          "recordingId": "cfa20fd7-6247-48b2-b8b4-063825d3b200",
+          "length": 127000
+        },
+        {
+          "title": "Silly Goodbye Dance (See You Later Alligator)",
+          "recordingId": "4155dd91-54da-4b31-940a-5c60d15caf8b",
+          "length": 178000
+        },
+        {
+          "title": "Llama (Drama in Pajamas)",
+          "recordingId": "918159d7-f659-4d7c-9291-5a7a00e97e63",
+          "length": 167000
+        },
+        {
+          "title": "Layla's Coming!",
+          "recordingId": "353f3da5-fe78-49c4-ac67-33e873a0a49f",
+          "length": 152000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "f0319532-c9ca-4f56-b724-eea2c49793ec",
+          "length": 149000
+        }
+      ]
+    },
+    {
+      "id": "a5793e45-0a01-47c8-af19-a8c136357ce0",
+      "groupId": "89972a68-af3c-4e07-b49b-1872fbe7f8dc",
+      "title": "The Funny Bunny Jump (Freeze Dance)",
+      "type": "Single",
+      "date": "2026-04-03",
+      "barcode": "5063907299958",
+      "coverImage": "/images/the-funny-bunny-jump-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/1x11kgpnoMAsIj8GdxqaCA",
+      "appleMusicUrl": "https://music.apple.com/gb/album/1877020719",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_kqCeUMtZNseJEPxvBgQgX6xbDwX1FBawE",
+      "amazonUrl": "https://music.amazon.ca/albums/B0GN45MSG3",
+      "tracks": [
+        {
+          "title": "The Funny Bunny Jump (Freeze Dance)",
+          "recordingId": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+          "length": 110000
+        }
+      ]
+    },
+    {
+      "id": "b18552a4-e7db-4885-a8b3-af94274a8c06",
+      "groupId": "df742b15-f793-4bc8-9a15-ebb2f166c854",
+      "title": "Old MacDonald Had a Farm (Farm Party)",
+      "type": "Single",
+      "date": "2026-03-06",
+      "barcode": "5063925085663",
+      "coverImage": "/images/Old-McDonald-had-a-farm.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/2cJdtei6h4O1sCOMhhs7wv",
+      "appleMusicUrl": "https://music.apple.com/gb/album/1881714138",
+      "youtubeUrl": "",
+      "amazonUrl": "https://www.amazon.com/gp/product/B0GR5JZMFY",
+      "tracks": [
+        {
+          "title": "Old MacDonald Had a Farm (Farm Party)",
+          "recordingId": "09b0f016-1cd4-4a2a-95f3-fa0918f48cbb",
+          "length": 134000
+        }
+      ]
+    },
+    {
+      "id": "b5d50ec9-0e46-4822-8bfe-2e9a92d8f928",
+      "groupId": "f27af58f-e5de-4314-a09c-586101efc263",
+      "title": "The Yummy Spoon (Open Wide)",
+      "type": "EP",
+      "date": "2026-03-11",
+      "barcode": "5063906910496",
+      "coverImage": "/images/the-yummy-spoon-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/7E49NCiZEvqofDWy2hPcAO",
+      "appleMusicUrl": "https://music.apple.com/gb/album/1877228062",
+      "youtubeUrl": "",
+      "amazonUrl": "https://music.amazon.in/albums/B0GN5F3NKG",
+      "tracks": [
+        {
+          "title": "The Yummy Spoon (Open Wide)",
+          "recordingId": "a7fee9ff-6ef6-4d02-be44-bc1f932f5217",
+          "length": 101000
+        },
+        {
+          "title": "Nanny & Papa (Funny Bunny Family)",
+          "recordingId": "4ed7ee9b-2f8c-4371-9ca1-17f849a4904d",
+          "length": 154000
+        },
+        {
+          "title": "The Wise Mice (Memory Game)",
+          "recordingId": "512854cf-fd9f-428e-9834-47772bf71be3",
+          "length": 140000
+        },
+        {
+          "title": "Boom Teka Boom (Wake Up Song)",
+          "recordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+          "length": 129000
+        },
+        {
+          "title": "Pet-Pop | The Animal Song",
+          "recordingId": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+          "length": 130000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "1616455e-fad6-4426-a15c-3652b31479f5",
+          "length": 116000
+        }
+      ]
+    },
+    {
+      "id": "b9197af2-a1b6-4841-ae1b-e3470dd3cb68",
+      "groupId": "93eae2fb-9090-40d2-829c-76b0290e3bb3",
+      "title": "The Duckie Song",
+      "type": "Single",
+      "date": "2026-05-01",
+      "barcode": "5063941614571",
+      "coverImage": "/images/The-Duckie-Song-Aly-Bouchnak.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/2q45qotIJ6sTHagKmRHGr4",
+      "appleMusicUrl": "https://music.apple.com/us/album/1885087614",
+      "youtubeUrl": "https://www.youtube.com/watch?v=QITLXsVyW00",
+      "amazonUrl": "https://music.amazon.ca/albums/B0GSH4QTTQ",
+      "tracks": [
+        {
+          "title": "The Duckie Song",
+          "recordingId": "c3197bfd-5586-49f1-824b-4d8170304516",
+          "length": 152000
+        }
+      ]
+    },
+    {
+      "id": "c89736c1-7130-4607-8798-efba7fdcd71b",
+      "groupId": "d87d586b-40e9-43d1-86ae-57814f7cfe70",
+      "title": "The Alphabet song",
+      "type": "Single",
+      "date": "2026-04-15",
+      "barcode": "5063941576312",
+      "coverImage": "/images/The-Alphabet-Song--Aly-Bouchnak.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/1ojD57woPfxfryOFSIr4LH",
+      "appleMusicUrl": "https://music.apple.com/eg/album/1885054197",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_n7PZu6v058PRiZiYUIgaTcOMXhEeEZmDM",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "The Alphabet Song",
+          "recordingId": "bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5",
+          "length": 175000
+        }
+      ]
+    },
+    {
+      "id": "ca9fbe69-f47d-4646-a592-439e9ed7165b",
+      "groupId": "74a40f05-3c66-44dd-9726-cd360533da8d",
+      "title": "Silly Goodbye Dance (See You Later Alligator)",
+      "type": "EP",
+      "date": "2026-09-25",
+      "barcode": "5064041868062",
+      "coverImage": "/images/release-ca9fbe69-f47d-4646-a592-439e9ed7165b.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Silly Goodbye Dance (See You Later Alligator)",
+          "recordingId": "4155dd91-54da-4b31-940a-5c60d15caf8b",
+          "length": 178000
+        },
+        {
+          "title": "The Funny Bunny Jump",
+          "recordingId": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+          "length": 110000
+        },
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "f0319532-c9ca-4f56-b724-eea2c49793ec",
+          "length": 149000
+        },
+        {
+          "title": "Cool Gang",
+          "recordingId": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+          "length": 144000
+        },
+        {
+          "title": "My Little Love",
+          "recordingId": "429a7557-31b7-444c-8dce-61bc93032c49",
+          "length": 179000
+        }
+      ]
+    },
+    {
+      "id": "d6a8fe6b-b82e-43a3-a352-08365fdcef50",
+      "groupId": "029a33b3-28b2-4a3b-996d-d5ba7ac578ba",
+      "title": "Tuned for Dreams",
+      "type": "Album",
+      "date": "2026-01-09",
+      "barcode": null,
+      "coverImage": "/images/tuned-for-dreams-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/3MWhQxXFD4F0WDlqhp9a4m",
+      "appleMusicUrl": "",
+      "youtubeUrl": "https://www.youtube.com/playlist?list=OLAK5uy_kyFy2tayS40xowEFXNBqWdkFxccMau004",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "The Safe Container | Calm Bedtime Routine",
+          "recordingId": "f963b3f5-39d9-4df9-8efa-2aef0ccf72c9",
+          "length": 165000
+        },
+        {
+          "title": "The Pendulum | Rocking Lullaby for Baby",
+          "recordingId": "53151ab4-a873-4241-a0f6-203f2ec5a06e",
+          "length": 190000
+        },
+        {
+          "title": "The Sacred Shush | Baby Shusher Sound",
+          "recordingId": "91bcb466-41b6-407d-8f26-a435b0dceba2",
+          "length": 185000
+        },
+        {
+          "title": "The Ancient Tongue | Deep Sleep Humming",
+          "recordingId": "f9469640-05cf-4950-825d-0159184d899b",
+          "length": 195000
+        },
+        {
+          "title": "The Infinite Loop | Continuous Sleep Aid",
+          "recordingId": "4a7de8fd-f0c1-4414-9756-d001b88a582f",
+          "length": 135000
+        },
+        {
+          "title": "The Protective Shadow | Night Drone for Sleep",
+          "recordingId": "2f821c16-f050-497a-864a-31d653c8ba30",
+          "length": 210000
+        },
+        {
+          "title": "The Liquid Room | Brown Noise Womb Sound",
+          "recordingId": "af47ff62-aa8b-4c4a-b1ba-2192a0a3fc54",
+          "length": 220000
+        },
+        {
+          "title": "The Dimming Light | Soft Sleepy Music",
+          "recordingId": "8c48c13b-b219-41d1-ab56-889357b97d61",
+          "length": 200000
+        }
+      ]
+    },
+    {
+      "id": "dbc6724f-345d-416c-a79d-8d67db5a6acc",
+      "groupId": "d2fab4e4-27ad-4e4e-9375-380ae2c3c011",
+      "title": "Layla's Coming",
+      "type": "EP",
+      "date": "2026-10-15",
+      "barcode": "5064041235277",
+      "coverImage": "/images/release-dbc6724f-345d-416c-a79d-8d67db5a6acc.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "",
+      "appleMusicUrl": "",
+      "youtubeUrl": "",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Layla's Coming",
+          "recordingId": "353f3da5-fe78-49c4-ac67-33e873a0a49f",
+          "length": 152000
+        },
+        {
+          "title": "The Wheels on the Bus (Party Ride)",
+          "recordingId": "74c99441-ad72-47a9-b7e8-9d4d2385c5a9",
+          "length": 139000
+        },
+        {
+          "title": "The Body Party (Head & Shoulders)",
+          "recordingId": "60c46510-fd2d-4a16-837c-e5c4b1f9a84c",
+          "length": 130000
+        },
+        {
+          "title": "Zakzooka The Bear",
+          "recordingId": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+          "length": 141000
+        },
+        {
+          "title": "Boom Teka Boom (Wake Up Song)",
+          "recordingId": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+          "length": 129000
+        }
+      ]
+    },
+    {
+      "id": "e63d33d3-95ec-4585-8df1-c0677e75e7ac",
+      "groupId": "2b91ba78-2649-44d0-ae5b-a8b16d1966fe",
+      "title": "Bock Bock Chicken",
+      "type": "Single",
+      "date": "2025-09-16",
+      "barcode": null,
+      "coverImage": "/images/release-e63d33d3-95ec-4585-8df1-c0677e75e7ac.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/4ZLn6itB4aA41vUP9k7g5m",
+      "appleMusicUrl": "",
+      "youtubeUrl": "https://www.youtube.com/watch?v=rvmLSLbVJ_k",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Bock Bock Chicken",
+          "recordingId": "1616455e-fad6-4426-a15c-3652b31479f5",
+          "length": 117000
+        }
+      ]
+    },
+    {
+      "id": "ef400481-323d-4090-922f-9d3f375a2e20",
+      "groupId": "8b9ff75a-ae7d-4a00-bd8a-9def455965a0",
+      "title": "Cool Gang (Big W Vibes)",
+      "type": "EP",
+      "date": "2026-07-31",
+      "barcode": "5064011224317",
+      "coverImage": "/images/release-ef400481-323d-4090-922f-9d3f375a2e20.jpg",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/7MpHD5F6fllOTOAGa1uZbI",
+      "appleMusicUrl": "https://music.apple.com/eg/album/6782240578",
+      "youtubeUrl": "",
+      "amazonUrl": "https://www.amazon.fr/gp/product/B0H62Z8N3H",
+      "tracks": [
+        {
+          "title": "Cool Gang",
+          "recordingId": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+          "length": 144000
+        },
+        {
+          "title": "The Babble Beat",
+          "recordingId": "261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+          "length": 116000
+        },
+        {
+          "title": "Boss Bath",
+          "recordingId": "2cbd176f-d18b-4203-9001-d6423345bd85",
+          "length": 212000
+        },
+        {
+          "title": "Hobby The Bunny",
+          "recordingId": "cef73ac6-c8a1-4500-ac80-0373eeee6281",
+          "length": 132000
+        },
+        {
+          "title": "Zakzooka The Bear",
+          "recordingId": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+          "length": 141000
+        }
+      ]
+    },
+    {
+      "id": "fa396cea-4e4f-4060-8b7f-8745e527cd9a",
+      "groupId": "45d71b54-2905-4a0e-8db0-28d19a4dcb03",
+      "title": "Brave Hello",
+      "type": "EP",
+      "date": "2026-05-22",
+      "barcode": "5063958741116",
+      "coverImage": "/images/Brave-Hello--Aly-Bouchnak-Cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/3dNVr6iFEFQqnxyckhJ5ON",
+      "appleMusicUrl": "https://music.apple.com/us/album/brave-hello-ep/1893407755?uo=4",
+      "youtubeUrl": "",
+      "amazonUrl": "https://music.amazon.in/albums/B0GX76998P",
+      "tracks": [
+        {
+          "title": "Brave Hello",
+          "recordingId": "74d640fd-0be5-4704-b0ae-8363d6c47f7b",
+          "length": 162000
+        },
+        {
+          "title": "Zakzooka The Bear",
+          "recordingId": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+          "length": 141000
+        },
+        {
+          "title": "The Duckie Song",
+          "recordingId": "c3197bfd-5586-49f1-824b-4d8170304516",
+          "length": 152000
+        },
+        {
+          "title": "The Alphabet Song",
+          "recordingId": "bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5",
+          "length": 175000
+        },
+        {
+          "title": "The Funny Bunny Jump (Freeze Dance)",
+          "recordingId": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+          "length": 110000
+        }
+      ]
+    },
+    {
+      "id": "ff9441f7-da16-4ff2-8baa-28c277d49cc0",
+      "groupId": "87207293-ac27-4703-8baa-70fe42f02e39",
+      "title": "Mary Had a Little Lamb (School Party)",
+      "type": "Single",
+      "date": "2026-02-27",
+      "barcode": "5063925242516",
+      "coverImage": "/images/mary-little-lamb-school-party-cover.webp",
+      "artworkMissing": false,
+      "spotifyUrl": "https://open.spotify.com/album/5szw7SiYbS2KkR5h2Ym821",
+      "appleMusicUrl": "https://music.apple.com/us/album/mary-had-a-little-lamb-single/1881748129?uo=4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=-cp7P3vwvHQ",
+      "amazonUrl": "",
+      "tracks": [
+        {
+          "title": "Mary Had a Little Lamb (School Party)",
+          "recordingId": "31676dfb-e5a5-456d-9b59-0356804300e7",
+          "length": 126000
+        }
+      ]
+    }
+  ],
+  "recordings": [
+    {
+      "id": "09b0f016-1cd4-4a2a-95f3-fa0918f48cbb",
+      "title": "Old MacDonald Had a Farm (Farm Party)",
+      "date": "2026-03-06",
+      "length": 134000,
+      "isrcs": [
+        "GX8KD2658865"
+      ]
+    },
+    {
+      "id": "0cef27b3-cf4b-4799-9e1e-bc6f2356fa28",
+      "title": "Cool Gang",
+      "date": "2026-07-31",
+      "length": 144000,
+      "isrcs": [
+        "GXBDS2684603"
+      ]
+    },
+    {
+      "id": "1616455e-fad6-4426-a15c-3652b31479f5",
+      "title": "Bock Bock Chicken",
+      "date": "2025-09-16",
+      "length": 116000,
+      "isrcs": [
+        "GXF972564744"
+      ]
+    },
+    {
+      "id": "218e4350-2ebf-4ded-8d9c-5d959bf23595",
+      "title": "The Funny Bunny Jump (Freeze Dance)",
+      "date": "2026-04-03",
+      "length": 110000,
+      "isrcs": [
+        "GX89G2614392"
+      ]
+    },
+    {
+      "id": "244d822b-9cf6-4997-bec2-39b8c6c346e0",
+      "title": "Pet-Pop | The Animal Song",
+      "date": "2025-12-19",
+      "length": 130000,
+      "isrcs": [
+        "GXHZG2515365"
+      ]
+    },
+    {
+      "id": "250bcf9c-e14c-456c-a424-731d3f17bb11",
+      "title": "Who is Daddy’s Favorite?",
+      "date": "2026-08-28",
+      "length": 199000,
+      "isrcs": [
+        "GX5MY2685965"
+      ]
+    },
+    {
+      "id": "261d3eb1-9a50-42bc-bb7d-09ec84aec888",
+      "title": "The Babble Beat",
+      "date": "2026-07-15",
+      "length": 116000,
+      "isrcs": [
+        "GX5MX2639207"
+      ]
+    },
+    {
+      "id": "2cbd176f-d18b-4203-9001-d6423345bd85",
+      "title": "Boss Bath",
+      "date": "2026-06-26",
+      "length": 212000,
+      "isrcs": [
+        "GX38U2660781"
+      ]
+    },
+    {
+      "id": "2f821c16-f050-497a-864a-31d653c8ba30",
+      "title": "The Protective Shadow | Night Drone for Sleep",
+      "date": "2026-01-09",
+      "length": 210000,
+      "isrcs": [
+        "GXJ2E2505077"
+      ]
+    },
+    {
+      "id": "31676dfb-e5a5-456d-9b59-0356804300e7",
+      "title": "Mary Had a Little Lamb (School Party)",
+      "date": "2026-02-27",
+      "length": 126000,
+      "isrcs": [
+        "GX8KD2657271"
+      ]
+    },
+    {
+      "id": "32f9a798-0a94-405a-ae45-bf53eb7c0a03",
+      "title": "Five Little Monkeys (Jungle Party)",
+      "date": "2026-03-20",
+      "length": 145000,
+      "isrcs": [
+        "GX8LD2671883"
+      ]
+    },
+    {
+      "id": "353f3da5-fe78-49c4-ac67-33e873a0a49f",
+      "title": "Layla's Coming",
+      "date": "2026-10-15",
+      "length": 152000,
+      "isrcs": [
+        "GXJ2E2651404"
+      ]
+    },
+    {
+      "id": "4155dd91-54da-4b31-940a-5c60d15caf8b",
+      "title": "Silly Goodbye Dance (See You Later Alligator)",
+      "date": "2026-09-25",
+      "length": 178000,
+      "isrcs": []
+    },
+    {
+      "id": "429a7557-31b7-444c-8dce-61bc93032c49",
+      "title": "My Little Love",
+      "date": "2026-08-14",
+      "length": 179000,
+      "isrcs": [
+        "GX5MY2603036"
+      ]
+    },
+    {
+      "id": "4a7de8fd-f0c1-4414-9756-d001b88a582f",
+      "title": "The Infinite Loop | Continuous Sleep Aid",
+      "date": "2026-01-09",
+      "length": 135000,
+      "isrcs": [
+        "GXJ2E2577222"
+      ]
+    },
+    {
+      "id": "4c0acb9e-0bbf-47d1-9b94-03ea012063a1",
+      "title": "If you Happy and you know it (Party Edition)",
+      "date": "2026-04-10",
+      "length": 153000,
+      "isrcs": [
+        "GX8LD2681741"
+      ]
+    },
+    {
+      "id": "4ed7ee9b-2f8c-4371-9ca1-17f849a4904d",
+      "title": "Nanny & Papa",
+      "date": "2026-02-11",
+      "length": 154000,
+      "isrcs": [
+        "GXBDS2573588"
+      ]
+    },
+    {
+      "id": "512854cf-fd9f-428e-9834-47772bf71be3",
+      "title": "The Wise Mice (Memory Game)",
+      "date": "2026-02-11",
+      "length": 140000,
+      "isrcs": [
+        "GX89G2624756"
+      ]
+    },
+    {
+      "id": "53151ab4-a873-4241-a0f6-203f2ec5a06e",
+      "title": "The Pendulum | Rocking Lullaby for Baby",
+      "date": "2026-01-09",
+      "length": 190000,
+      "isrcs": [
+        "GXJ2E2572277"
+      ]
+    },
+    {
+      "id": "60c46510-fd2d-4a16-837c-e5c4b1f9a84c",
+      "title": "The Body Party (Head & Shoulders)",
+      "date": "2026-10-15",
+      "length": 130000,
+      "isrcs": [
+        "GX8LD2631231"
+      ]
+    },
+    {
+      "id": "74c99441-ad72-47a9-b7e8-9d4d2385c5a9",
+      "title": "The Wheels on the Bus (Party Ride)",
+      "date": "2026-03-27",
+      "length": 139000,
+      "isrcs": [
+        "GX8LD2630428"
+      ]
+    },
+    {
+      "id": "74d640fd-0be5-4704-b0ae-8363d6c47f7b",
+      "title": "Brave Hello",
+      "date": "2026-05-22",
+      "length": 162000,
+      "isrcs": [
+        "GX38U2681607"
+      ]
+    },
+    {
+      "id": "8c48c13b-b219-41d1-ab56-889357b97d61",
+      "title": "The Dimming Light | Soft Sleepy Music",
+      "date": "2026-01-09",
+      "length": 200000,
+      "isrcs": [
+        "GXJ2E2542577"
+      ]
+    },
+    {
+      "id": "918159d7-f659-4d7c-9291-5a7a00e97e63",
+      "title": "Llama (Drama in Pajamas)",
+      "date": "2026-10-09",
+      "length": 167000,
+      "isrcs": []
+    },
+    {
+      "id": "91bcb466-41b6-407d-8f26-a435b0dceba2",
+      "title": "The Sacred Shush | Baby Shusher Sound",
+      "date": "2026-01-09",
+      "length": 185000,
+      "isrcs": [
+        "GXJ2E2509998"
+      ]
+    },
+    {
+      "id": "a7fee9ff-6ef6-4d02-be44-bc1f932f5217",
+      "title": "The Yummy Spoon (Open Wide)",
+      "date": "2026-03-11",
+      "length": 101000,
+      "isrcs": [
+        "GX89G2661676"
+      ]
+    },
+    {
+      "id": "af47ff62-aa8b-4c4a-b1ba-2192a0a3fc54",
+      "title": "The Liquid Room | Brown Noise Womb Sound",
+      "date": "2026-01-09",
+      "length": 220000,
+      "isrcs": [
+        "GXJ2E2518383"
+      ]
+    },
+    {
+      "id": "bb66d33a-1e3b-4ec9-a2f4-4acfa373d0c5",
+      "title": "The Alphabet Song",
+      "date": "2026-04-15",
+      "length": 175000,
+      "isrcs": [
+        "GX8LD2663207"
+      ]
+    },
+    {
+      "id": "c3197bfd-5586-49f1-824b-4d8170304516",
+      "title": "The Duckie Song",
+      "date": "2026-05-01",
+      "length": 152000,
+      "isrcs": [
+        "GX8LD2660078"
+      ]
+    },
+    {
+      "id": "cef73ac6-c8a1-4500-ac80-0373eeee6281",
+      "title": "Hobby The Bunny",
+      "date": "2026-06-10",
+      "length": 132000,
+      "isrcs": [
+        "GX38U2666437"
+      ]
+    },
+    {
+      "id": "cfa20fd7-6247-48b2-b8b4-063825d3b200",
+      "title": "Billy Boy",
+      "date": "2026-09-11",
+      "length": 127000,
+      "isrcs": [
+        "GXF972681613"
+      ]
+    },
+    {
+      "id": "d0002499-4c70-4423-8fee-6df8b5c86d2b",
+      "title": "Boom Teka Boom (Wake Up Song)",
+      "date": "2026-01-30",
+      "length": 129000,
+      "isrcs": [
+        "GXJ2E2565871"
+      ]
+    },
+    {
+      "id": "e210ac04-fd05-4f99-be7c-e6bf52aba4ab",
+      "title": "Zakzooka The Bear",
+      "date": "2026-05-13",
+      "length": 141000,
+      "isrcs": [
+        "GX8LD2691082"
+      ]
+    },
+    {
+      "id": "e7aa2fe4-af8c-4f39-8756-d333e3ec38db",
+      "title": "The Body Party (Head & Shoulders)",
+      "date": "2026-04-24",
+      "length": 130000,
+      "isrcs": [
+        "GX8LD2631231"
+      ]
+    },
+    {
+      "id": "f0319532-c9ca-4f56-b724-eea2c49793ec",
+      "title": "Bock Bock Chicken",
+      "date": "2026-07-10",
+      "length": 149000,
+      "isrcs": [
+        "GX5MY2662913"
+      ]
+    },
+    {
+      "id": "f9469640-05cf-4950-825d-0159184d899b",
+      "title": "The Ancient Tongue | Deep Sleep Humming",
+      "date": "2026-01-09",
+      "length": 195000,
+      "isrcs": [
+        "GXJ2E2555627"
+      ]
+    },
+    {
+      "id": "f963b3f5-39d9-4df9-8efa-2aef0ccf72c9",
+      "title": "The Safe Container | Calm Bedtime Routine",
+      "date": "2026-01-09",
+      "length": 165000,
+      "isrcs": [
+        "GXJ2E2568126"
+      ]
+    }
+  ]
+}

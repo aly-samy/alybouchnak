@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface SEOProps {
   title: string;
@@ -15,12 +16,14 @@ const SEO = ({
   title,
   description,
   keywords = "children's music, kids songs, educational music, toddler songs, family music, digital pop for kids",
-  canonical = 'https://alybouchnak.com',
-  ogImage = 'https://alybouchnak.com/images/social-preview.png',
+  canonical: canonicalProp,
+  ogImage = 'https://alybouchnak.com/images/Aly-bouchnak-profile.webp',
   ogType = 'website',
   schemaData,
   noIndex = false,
 }: SEOProps) => {
+  const location = useLocation();
+  const canonical = canonicalProp || `https://alybouchnak.com${location.pathname}`;
   useEffect(() => {
     // Update document title
     document.title = title;
@@ -56,8 +59,8 @@ const SEO = ({
     updateMetaTag('description', description);
     updateMetaTag('keywords', keywords);
     updateMetaTag('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
-    updateMetaTag('theme-color', '#F9E104');
-    updateMetaTag('msapplication-TileColor', '#F9E104');
+    updateMetaTag('theme-color', '#C8F0F7');
+    updateMetaTag('msapplication-TileColor', '#C8F0F7');
 
     // Canonical
     updateLinkTag('canonical', canonical);
@@ -70,11 +73,11 @@ const SEO = ({
     updateMetaTag('og:image', ogImage, true);
 
     // Twitter
-    updateMetaTag('twitter:card', 'summary_large_image', true);
-    updateMetaTag('twitter:url', canonical, true);
-    updateMetaTag('twitter:title', title, true);
-    updateMetaTag('twitter:description', description, true);
-    updateMetaTag('twitter:image', ogImage, true);
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:url', canonical);
+    updateMetaTag('twitter:title', title);
+    updateMetaTag('twitter:description', description);
+    updateMetaTag('twitter:image', ogImage);
 
     // Classification
     updateMetaTag('classification', "Children's Music, Kids Songs, Family Music, Toddler Music, Educational Music, Digital Pop for Kids");
@@ -82,20 +85,19 @@ const SEO = ({
     updateMetaTag('topic', 'Digital Pop Music for Kids');
     updateMetaTag('summary', description);
 
-    // Apple iTunes App
-    updateMetaTag('apple-itunes-app', 'app-id=1840274949, app-argument=https://music.apple.com/artist/aly-bouchnak/1840274949');
-
     // Schema.org JSON-LD
-    if (schemaData) {
+    {
       const existingScript = document.querySelector('script[data-seo="schema"]');
       if (existingScript) {
         existingScript.remove();
       }
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.setAttribute('data-seo', 'schema');
-      script.textContent = JSON.stringify(schemaData);
-      document.head.appendChild(script);
+      if (schemaData) {
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.setAttribute('data-seo', 'schema');
+        script.textContent = JSON.stringify(schemaData);
+        document.head.appendChild(script);
+      }
     }
 
     return () => {

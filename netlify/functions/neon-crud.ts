@@ -10,11 +10,10 @@ export const handler: Handler = async (event: HandlerEvent) => {
         return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
     }
 
-    // Use VITE_ADMIN_PASSWORD as the server-side guard (already set in Netlify dashboard)
-    const adminToken = process.env.VITE_ADMIN_PASSWORD;
+    const adminToken = process.env.ADMIN_PASSWORD;
 
-    // Protect mutations (POST, PUT, DELETE)
-    if (event.httpMethod !== 'GET') {
+    // Protect reads and mutations, including subscriber and inbox records.
+    {
         const authHeader = event.headers.authorization;
         if (!adminToken || !authHeader || !secureCompare(authHeader, `Bearer ${adminToken}`)) {
             return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };

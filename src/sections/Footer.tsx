@@ -15,6 +15,8 @@ const Footer = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(contentRef.current,
         { y: 20, opacity: 0 },
@@ -217,7 +219,7 @@ const Footer = () => {
                 Get new songs, parenting tips, and goodies sent straight to your inbox!
               </p>
               {!isSubmitted ? (
-                <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
+                <form aria-label="Footer newsletter subscription" onSubmit={handleSubscribe} className="flex flex-col gap-3">
                   <label htmlFor="footer-first-name" className="sr-only">First Name</label>
                   <input
                     id="footer-first-name"
@@ -245,6 +247,7 @@ const Footer = () => {
                     />
                     <button
                       type="submit"
+                      aria-label={isLoading ? 'Subscribing to newsletter' : 'Subscribe to newsletter'}
                       disabled={isLoading}
                       className="btn-primary px-4 py-2 flex items-center justify-center min-w-[48px]"
                     >

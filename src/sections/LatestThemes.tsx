@@ -13,6 +13,8 @@ export default function LatestThemes() {
     const sectionRef = useRef<HTMLElement>(null);
 
     useLayoutEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         const ctx = gsap.context(() => {
             gsap.fromTo(
                 sectionRef.current,

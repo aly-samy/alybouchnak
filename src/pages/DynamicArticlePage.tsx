@@ -1,3 +1,4 @@
+import { sanitizeHtml } from '../lib/sanitizeHtml';
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -76,6 +77,9 @@ function DynamicArticlePage() {
         if (!article) return;
 
         window.scrollTo(0, 0);
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
 
         const ctx = gsap.context(() => {
             // Header Animation
@@ -219,7 +223,7 @@ function DynamicArticlePage() {
                     {/* Main Content Area */}
                     <div ref={contentRef} className="lg:col-span-8">
                         <div className="quill-content">
-                            <div dangerouslySetInnerHTML={{ __html: article.content }} />
+                            <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(article.content) }} />
 
                             {/* Related YouTube Video */}
                             {article.connections.youtubeVideoId && (

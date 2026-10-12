@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import type { ImgHTMLAttributes } from 'react';
 
 interface OptimizedImageProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -15,9 +15,10 @@ const BREAKPOINTS = [256, 320, 384, 512, 640, 768, 896, 1024, 1280, 1536, 1920];
 
 const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
     ({ src, alt, width, height, quality = 85, className, loading, sizes, ...props }, ref) => {
+        const [failedSrc, setFailedSrc] = useState<string | null>(null);
         // If the image is external (not from our domain) or an SVG, don't pass it through optimization
-        if (src.startsWith('http') || src.endsWith('.svg')) {
-            return <img ref={ref} src={src} alt={alt} width={width} height={height} className={className} loading={loading} sizes={sizes} {...props} />;
+        if (failedSrc === src || import.meta.env.DEV || src.startsWith('http') || src.endsWith('.svg')) {
+            return <img ref={ref} src={src} alt={alt} width={width} height={height} className={className} loading={loading || 'lazy'} decoding="async" sizes={sizes} {...props} />;
         }
 
         // Netlify Image CDN structure: /.netlify/images?url={url}&w={width}&h={height}&q={quality}
@@ -45,6 +46,8 @@ const OptimizedImage = forwardRef<HTMLImageElement, OptimizedImageProps>(
             <img
                 ref={ref}
                 src={fallbackSrc}
+                decoding="async"
+                onError={() => setFailedSrc(src)}
                 srcSet={generatedSrcSet}
                 sizes={sizes}
                 alt={alt}

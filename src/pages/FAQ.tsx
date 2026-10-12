@@ -37,6 +37,8 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
       // Header animation
       gsap.fromTo(headerRef.current,
@@ -102,7 +104,7 @@ const FAQ = () => {
         description="Find answers about Aly Bouchnak's Balanced Stimulation music for kids. Learn about age recommendations, songs for routines, and how our music supports child development."
         keywords="Aly Bouchnak FAQ, kids music questions, Balanced Stimulation, children's music info, toddler songs help"
         canonical="https://alybouchnak.com/faq"
-        ogImage="https://alybouchnak.com/images/social-preview.png"
+        ogImage="https://alybouchnak.com/images/Aly-bouchnak-profile.webp"
         ogType="website"
         schemaData={faqSchema}
       />

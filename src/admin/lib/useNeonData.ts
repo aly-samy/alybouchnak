@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
+import { useAdminAuth } from './adminAuth';
 
 export function useNeonData<T extends { id?: number }>(resourcePath: string) {
     const [data, setData] = useState<T[]>([]);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
-    const token = import.meta.env.VITE_ADMIN_PASSWORD || '';
+    const { token } = useAdminAuth();
 
     const fetchData = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`/.netlify/functions/neon-crud/${resourcePath}`);
+            const res = await fetch(`/.netlify/functions/neon-crud/${resourcePath}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             if (!res.ok) throw new Error('Failed to fetch data');
             const json = await res.json();
             setData(json);

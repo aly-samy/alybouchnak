@@ -12,6 +12,8 @@ export default function About() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         const ctx = gsap.context(() => {
             // Fade up elements with .fade-up class
             gsap.fromTo('.fade-up',
@@ -37,7 +39,7 @@ export default function About() {
         "@context": "https://schema.org",
         "@graph": [
             {
-                "@type": "MusicGroup",
+                "@type": "Person",
                 "@id": "https://alybouchnak.com/#artist",
                 "name": "Uncle Aly",
                 "alternateName": ["Aly Bouchnak", "The Bloom's House"],

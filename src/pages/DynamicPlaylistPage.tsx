@@ -1,3 +1,4 @@
+import { sanitizeHtml } from '../lib/sanitizeHtml';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -56,6 +57,9 @@ function DynamicPlaylistPage() {
 
         // Track content view for retargeting
         trackContentView(playlistData.title, "playlist");
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
 
         const ctx = gsap.context(() => {
             gsap.fromTo(heroRef.current,
@@ -290,7 +294,7 @@ function DynamicPlaylistPage() {
                                 </h2>
                                 <div
                                     className="quill-content text-[#2A2A2A]"
-                                    dangerouslySetInnerHTML={{ __html: playlistData.artistNote }}
+                                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(playlistData.artistNote) }}
                                 />
                             </section>
                         )}
@@ -304,7 +308,7 @@ function DynamicPlaylistPage() {
                                 </h2>
                                 <div
                                     className="quill-content text-[#2A2A2A]"
-                                    dangerouslySetInnerHTML={{ __html: playlistData.curatorNote }}
+                                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(playlistData.curatorNote) }}
                                 />
                             </section>
                         )}
@@ -318,7 +322,7 @@ function DynamicPlaylistPage() {
                                 </h2>
                                 <div
                                     className="quill-content text-[#2A2A2A]"
-                                    dangerouslySetInnerHTML={{ __html: playlistData.scienceFramework }}
+                                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(playlistData.scienceFramework) }}
                                 />
                             </section>
                         )}

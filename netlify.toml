@@ -12,10 +12,20 @@
   # Netlify Secret Scanning configuration
   # These variables are being flagged as secrets because their values match site content (brand name/repo name).
   # We omit them from the scan to allow the build to pass.
-  SECRETS_SCAN_OMIT_KEYS = "VITE_GITHUB_REPO,VITE_GITHUB_OWNER,VITE_GITHUB_TOKEN,VITE_ADMIN_PASSWORD"
-  SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_GITHUB_REPO,VITE_GITHUB_OWNER"
+  SECRETS_SCAN_SMART_DETECTION_ENABLED = "true"
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/manage-subscription"
+  to = "/index.html"
+  status = 200
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404

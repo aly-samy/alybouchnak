@@ -20,6 +20,8 @@ const Newsletter = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
       // Content animation
       gsap.fromTo(contentRef.current,
@@ -112,6 +114,7 @@ const Newsletter = () => {
           {/* Form */}
           {!isSubmitted ? (
             <form
+              aria-label="Newsletter subscription"
               ref={formRef}
               onSubmit={handleSubmit}
               className="flex flex-col gap-4 max-w-lg mx-auto bg-white/40 p-6 md:p-8 rounded-3xl backdrop-blur-sm border-2 border-white/50 shadow-xl"
@@ -129,7 +132,10 @@ const Newsletter = () => {
                   required
                   className="w-full px-5 py-3.5 rounded-2xl border-2 border-white bg-white/80 text-[#101010] placeholder:text-[#2A2A2A]/50 font-medium focus:outline-none focus:border-[#F26B3A] transition-all"
                 />
+                <label htmlFor="newsletter-parent-type" className="sr-only">Parent or educator role</label>
                 <select
+                  id="newsletter-parent-type"
+                  name="newsletter-parent-type"
                   value={parentType}
                   onChange={(e) => setParentType(e.target.value)}
                   className="w-full px-5 py-3.5 rounded-2xl border-2 border-white bg-white/80 text-[#101010] font-medium focus:outline-none focus:border-[#F26B3A] transition-all cursor-pointer"
@@ -169,7 +175,10 @@ const Newsletter = () => {
                     placeholder="Child's First Name"
                     className="w-full px-5 py-3 rounded-2xl border-2 border-white bg-white/60 text-[#101010] placeholder:text-[#2A2A2A]/50 text-sm font-medium focus:outline-none focus:border-[#F26B3A] transition-all"
                   />
+                  <label htmlFor="newsletter-child-birth-month" className="sr-only">Child's birth month</label>
                   <select
+                    id="newsletter-child-birth-month"
+                    name="newsletter-child-birth-month"
                     value={childBirthMonth}
                     onChange={(e) => setChildBirthMonth(e.target.value)}
                     className="w-full px-5 py-3 rounded-2xl border-2 border-white bg-white/60 text-[#101010] text-sm font-medium focus:outline-none focus:border-[#F26B3A] transition-all cursor-pointer"

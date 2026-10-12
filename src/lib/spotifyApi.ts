@@ -6,7 +6,8 @@
  */
 
 const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID || '';
-const SPOTIFY_CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET || '';
+// Client credentials require a server proxy; never embed a Spotify secret in browser code.
+const SPOTIFY_CLIENT_SECRET = '';
 
 interface SpotifyToken {
   access_token: string;

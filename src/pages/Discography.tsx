@@ -6,8 +6,7 @@ import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { getAllAlbums } from '../data/albums';
-import { getAllTracks } from '../data/tracks';
+import { getAllAlbums, getAllTracks } from '../data/catalog-summaries';
 import { formatDate } from '../lib/formatDate';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -17,7 +16,6 @@ const allAlbums = getAllAlbums();
 const allTracks = getAllTracks();
 
 // Define daytime and nighttime moods
-const DAYTIME_MOODS = ['Playful', 'Energetic', 'Upbeat', 'Celebratory'];
 const NIGHTTIME_MOODS = ['Calming', 'Transitional', 'Gentle', 'Sleep'];
 
 // Combine and categorize releases (tracks + albums)
@@ -45,14 +43,14 @@ function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Rele
   const diffTime = release.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays > 14) return 'Upcoming';
-  if (diffDays > 0) return 'Pre-Saves';
+  if (diffDays > 0) return 'Upcoming';
   return 'Released';
 }
 
 // Helper to determine type
 function getReleaseType(item: typeof allAlbums[0] | typeof allTracks[0], isTrack: boolean): 'Album' | 'EP' | 'Single' {
   if (isTrack) return 'Single';
+  if ('type' in item && (item.type === 'Album' || item.type === 'EP')) return item.type;
   const trackCount = (item as typeof allAlbums[0]).trackCount;
   if (trackCount && trackCount >= 8) return 'Album';
   if (trackCount && trackCount >= 4) return 'EP';
@@ -61,9 +59,9 @@ function getReleaseType(item: typeof allAlbums[0] | typeof allTracks[0], isTrack
 
 // Create combined releases array
 function createCombinedReleases(): CombinedRelease[] {
-  const albumsAsReleases: CombinedRelease[] = allAlbums.map(album => ({
+  const albumsAsReleases: CombinedRelease[] = allAlbums.map((album, index) => ({
     ...album,
-    id: album.id || Math.random(),
+    id: album.id || index + 1,
     type: getReleaseType(album, false),
     status: getReleaseStatus(album.releaseDate),
     date: album.date || album.releaseDate,
@@ -74,7 +72,7 @@ function createCombinedReleases(): CombinedRelease[] {
     mood: album.mood,
   }));
 
-  const tracksAsReleases: CombinedRelease[] = allTracks.map(track => ({
+  const tracksAsReleases: CombinedRelease[] = allTracks.filter(track => track.isStandaloneRelease !== false).map(track => ({
     ...track,
     id: track.id,
     type: getReleaseType(track, true),
@@ -108,7 +106,7 @@ const getUniqueGenres = (releases: CombinedRelease[]) => {
 };
 
 const getUniqueMoods = (releases: CombinedRelease[]) => {
-  return [...new Set(releases.map(r => r.mood))].sort();
+  return [...new Set(releases.map(r => r.mood).filter(Boolean))].sort();
 };
 
 const getUniqueRoutines = (releases: CombinedRelease[]) => {
@@ -116,8 +114,6 @@ const getUniqueRoutines = (releases: CombinedRelease[]) => {
   return [...new Set(routines)].sort();
 };
 
-const filteredDaytimeReleases = allReleases.filter(r => DAYTIME_MOODS.includes(r.mood) && r.status === 'Released');
-const filteredSleepReleases = allReleases.filter(r => NIGHTTIME_MOODS.includes(r.mood));
 
 // Schema.org for discography page
 const discographySchema = {
@@ -133,57 +129,23 @@ const discographySchema = {
     '@id': 'https://alybouchnak.com/#website'
   },
   about: {
-    '@type': 'MusicGroup',
+    '@type': 'Person',
     '@id': 'https://alybouchnak.com/#artist'
   },
   mainEntity: {
     '@type': 'ItemList',
-    numberOfItems: filteredDaytimeReleases.length + filteredSleepReleases.length,
-    itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    itemListElement: [
-      ...filteredDaytimeReleases
-        .map((release, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          item: {
-            '@type': 'MusicRecording',
-            '@id': `https://alybouchnak.com${release.link}#track`,
-            name: release.title,
-            url: release.link?.startsWith('http')
-              ? release.link
-              : `https://alybouchnak.com${release.link}`,
-            image: release.image
-              ? `https://alybouchnak.com${release.image}`
-              : undefined,
-            datePublished: release.date,
-            description: release.description,
-            byArtist: {
-              '@id': 'https://alybouchnak.com/#artist'
-            }
-          },
-        })),
-
-      ...filteredSleepReleases.map((release, index) => ({
-        '@type': 'ListItem',
-        position: filteredDaytimeReleases.length + index + 1,
-        item: {
-          '@type': 'MusicAlbum',
-          '@id': `https://alybouchnak.com${release.link}#album`,
-          name: release.title,
-          url: release.link?.startsWith('http')
-            ? release.link
-            : `https://alybouchnak.com${release.link}`,
-          image: release.image
-            ? `https://alybouchnak.com${release.image}`
-            : undefined,
-          datePublished: release.date,
-          description: release.description,
-          byArtist: {
-            '@id': 'https://alybouchnak.com/#artist'
-          }
-        },
-      })),
-    ],
+    numberOfItems: allReleases.length,
+    itemListOrder: 'https://schema.org/ItemListOrderDescending',
+    itemListElement: [...allReleases].sort(sortByDate).map((release, index) => ({
+      '@type': 'ListItem', position: index + 1,
+      item: {
+        '@type': release.isTrack ? 'MusicRecording' : 'MusicAlbum',
+        name: release.title, url: 'https://alybouchnak.com' + release.link,
+        image: 'https://alybouchnak.com' + release.image,
+        datePublished: release.releaseDate.slice(0, 10),
+        byArtist: { '@type': 'Person', '@id': 'https://alybouchnak.com/#artist', name: 'Aly Bouchnak' },
+      },
+    })),
   },
 };
 
@@ -205,7 +167,7 @@ const Discography = () => {
 
   // Filter and sort daytime releases
   const filteredDaytimeReleases = useMemo(() => {
-    let releases = allReleases.filter(r => DAYTIME_MOODS.includes(r.mood));
+    let releases = allReleases.filter(r => !NIGHTTIME_MOODS.includes(r.mood));
 
     if (daytimeYearFilter !== 'all') {
       releases = releases.filter(r => new Date(r.releaseDate).getFullYear().toString() === daytimeYearFilter);
@@ -247,13 +209,14 @@ const Discography = () => {
   const sleepTotalPages = Math.ceil(filteredSleepReleases.length / ITEMS_PER_PAGE);
 
   // Get filter options
-  const daytimeReleasesForFilters = allReleases.filter(r => DAYTIME_MOODS.includes(r.mood));
+  const daytimeReleasesForFilters = allReleases.filter(r => !NIGHTTIME_MOODS.includes(r.mood));
   const years = getUniqueYears(daytimeReleasesForFilters);
   const genres = getUniqueGenres(daytimeReleasesForFilters);
   const moods = getUniqueMoods(daytimeReleasesForFilters);
   const routines = getUniqueRoutines(daytimeReleasesForFilters);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       // Header animation
       gsap.fromTo(headerRef.current,
@@ -349,7 +312,7 @@ const Discography = () => {
         description="Explore the complete discography of Aly Bouchnak, featuring toddler dance songs, preschool learning tracks, and calming sleep albums from The Bloom’s House universe."
         keywords="Aly Bouchnak discography, toddler dance songs, preschool music, kids learning songs, children's sleep music, The Bloom's House album"
         canonical="https://alybouchnak.com/discography"
-        ogImage="https://alybouchnak.com/images/social-preview.png"
+        ogImage="https://alybouchnak.com/images/Aly-bouchnak-profile.webp"
         ogType="music.playlist"
         schemaData={discographySchema}
       />
@@ -493,7 +456,7 @@ const Discography = () => {
             <div ref={daytimeRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {paginatedDaytimeReleases.map((release) => (
                 <article
-                  key={release.id}
+                  key={`${release.isTrack ? "track" : "album"}-${release.id}`}
                   className={`release-card card overflow-hidden ${release.status === 'Upcoming' ? 'border-2 border-dashed border-gray-300' : ''
                     }`}
                 >
@@ -588,7 +551,7 @@ const Discography = () => {
             <div ref={sleepRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {paginatedSleepReleases.map((release) => (
                 <article
-                  key={release.id}
+                  key={`${release.isTrack ? "track" : "album"}-${release.id}`}
                   className="release-card bg-[#2a2a2a] rounded-[28px] overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.30)]"
                 >
                   <div className="relative aspect-square overflow-hidden">

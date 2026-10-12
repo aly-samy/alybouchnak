@@ -1,7 +1,7 @@
 async function apiCall(payload: any) {
     const response = await fetch('/.netlify/functions/github-crud', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${sessionStorage.getItem('admin_token') || ''}` },
         body: JSON.stringify(payload),
     });
 

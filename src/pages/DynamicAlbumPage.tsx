@@ -1,3 +1,4 @@
+import { sanitizeHtml } from '../lib/sanitizeHtml';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -21,6 +22,8 @@ import {
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
+import { spotifyEmbedUrl, isReleased as hasReleased } from '../lib/streaming';
+import { formatDate } from '../lib/formatDate';
 import Breadcrumbs from '../components/Breadcrumbs';
 import OptimizedImage from '../components/OptimizedImage';
 import { getAlbumBySlug } from '../data/albums';
@@ -47,7 +50,7 @@ function DynamicAlbumPage() {
   const trackMap = useMemo(() => new Map(allTracksData.map(t => [t.id, t])), []);
 
   // Helper to check if album is released (has valid streaming URL, not placeholder)
-  const isReleased = albumData && albumData.spotifyUrl && !albumData.spotifyUrl.includes('placeholder');
+  const isReleased = albumData && hasReleased(albumData.releaseDate);
   const hasPreSaveLink = albumData && albumData.otherUrl && !albumData.otherUrl.includes('placeholder');
 
   // Track engagement metrics
@@ -59,6 +62,7 @@ function DynamicAlbumPage() {
     // Track content view for retargeting
     trackContentView(albumData.title, "album");
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(heroRef.current,
         { y: 30, opacity: 0 },
@@ -109,6 +113,7 @@ function DynamicAlbumPage() {
   if (!albumData) {
     return (
       <div className="relative min-h-screen bg-[#C8F0F7]">
+        <SEO title="Album Not Found | Aly Bouchnak" description="This release could not be found." noIndex />
         <Navigation />
         <div className="pt-32 pb-16 text-center">
           <h1 className="font-['Fredoka_One'] text-4xl text-[#101010] mb-4">Album Not Found</h1>
@@ -125,9 +130,13 @@ function DynamicAlbumPage() {
     '@context': 'https://schema.org',
     '@type': 'MusicAlbum',
     'byArtist': {
-      '@type': 'MusicGroup',
+      '@type': 'Person',
+      '@id': 'https://alybouchnak.com/#artist',
       'name': 'Aly Bouchnak'
     },
+    'datePublished': albumData.releaseDate.slice(0, 10),
+    'sameAs': [albumData.musicbrainzUrl].filter(Boolean),
+    'albumReleaseType': albumData.type === 'EP' ? 'https://schema.org/EPRelease' : 'https://schema.org/AlbumRelease',
     'genre': albumData.genre,
     'image': `https://alybouchnak.com${albumData.coverImage}`,
     'name': albumData.title,
@@ -218,10 +227,10 @@ function DynamicAlbumPage() {
                       <Clock className="w-4 h-4" />
                       {albumData.duration}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/20 text-white text-sm font-semibold rounded-full">
+                    {albumData.ageRange && <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/20 text-white text-sm font-semibold rounded-full">
                       <Users className="w-4 h-4" />
                       Ages {albumData.ageRange}
-                    </span>
+                    </span>}
                   </div>
 
                   <h1 className="font-['Fredoka_One'] text-4xl sm:text-5xl lg:text-6xl text-white mb-2">
@@ -237,7 +246,7 @@ function DynamicAlbumPage() {
                       {/* Main Spotify Link + Other Platforms */}
                       <div className="flex flex-col items-center lg:items-start gap-5">
                         {/* Main Spotify Button */}
-                        <a
+                        {albumData.spotifyUrl && (<a
                           href={albumData.spotifyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -250,14 +259,14 @@ function DynamicAlbumPage() {
                           <Play className="w-6 h-6" />
                           Listen on Spotify
                           <ExternalLink className="w-4 h-4" />
-                        </a>
+                        </a>)}
 
                         {/* Other Platforms */}
                         <div className="flex items-center flex-wrap justify-center lg:justify-start gap-3 w-full lg:w-auto mt-2">
                           <span className="text-sm font-semibold text-white/90 mr-2">Also on:</span>
 
                           {/* Apple Music */}
-                          <a
+                          {albumData.appleMusicUrl && (<a
                             href={albumData.appleMusicUrl}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -270,10 +279,10 @@ function DynamicAlbumPage() {
                           >
                             <Music className="w-5 h-5 text-[#FC3C44] flex-shrink-0" />
                             <span className="max-w-0 overflow-hidden group-hover:max-w-[100px] group-hover:ml-2 text-white text-sm whitespace-nowrap transition-all duration-300">Apple Music</span>
-                          </a>
+                          </a>)}
 
                           {/* YouTube */}
-                          <a
+                          {albumData.youtubeUrl && (<a
                             href={albumData.youtubeUrl}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -286,7 +295,7 @@ function DynamicAlbumPage() {
                           >
                             <ExternalLink className="w-5 h-5 text-[#FF0000] flex-shrink-0" />
                             <span className="max-w-0 overflow-hidden group-hover:max-w-[100px] group-hover:ml-2 text-white text-sm whitespace-nowrap transition-all duration-300">YouTube</span>
-                          </a>
+                          </a>)}
 
                           {/* Amazon Music */}
                           {albumData.amazonUrl && (
@@ -415,7 +424,7 @@ function DynamicAlbumPage() {
                     </span>
                     <span className="flex items-center gap-1.5">
                       <Activity className="w-4 h-4" />
-                      Released {albumData.releaseDate}
+                      Release date: {formatDate(albumData.releaseDate)}
                     </span>
                   </div>
                 </div>
@@ -430,7 +439,8 @@ function DynamicAlbumPage() {
             <div className="max-w-4xl mx-auto">
               <div className="rounded-xl overflow-hidden shadow-2xl">
                 <iframe
-                  src={`https://open.spotify.com/embed/album/${albumData.spotifyUrl.split('/').pop()?.split('?')[0]}`}
+                  title="Spotify album player"
+                  src={spotifyEmbedUrl(albumData.spotifyUrl)}
                   width="100%"
                   height="352"
                   frameBorder="0"
@@ -466,7 +476,7 @@ function DynamicAlbumPage() {
                 </h2>
                 <div
                   className="quill-content text-[#2A2A2A]"
-                  dangerouslySetInnerHTML={{ __html: albumData.artistNote }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(albumData.artistNote) }}
                 />
               </section>
             )}
@@ -480,7 +490,7 @@ function DynamicAlbumPage() {
                 </h2>
                 <div
                   className="quill-content text-[#2A2A2A]"
-                  dangerouslySetInnerHTML={{ __html: albumData.scienceFramework }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(albumData.scienceFramework) }}
                 />
               </section>
             )}
@@ -495,6 +505,7 @@ function DynamicAlbumPage() {
                   </h2>
                   <button
                     onClick={() => setCurrentSpotifyUrl(albumData.spotifyUrl)}
+                    disabled={!spotifyEmbedUrl(albumData.spotifyUrl)}
                     className="flex items-center gap-2 text-sm font-bold text-orange-500 hover:text-orange-600 transition"
                   >
                     <Play className="w-4 h-4" /> Play Album
@@ -513,6 +524,7 @@ function DynamicAlbumPage() {
                           {/* Play Button */}
                           <button
                             onClick={() => setCurrentSpotifyUrl(track.spotifyUrl || albumData.spotifyUrl)}
+                            disabled={!spotifyEmbedUrl(track.spotifyUrl || albumData.spotifyUrl)}
                             className="flex-shrink-0 w-10 h-10 bg-[#1DB954]/10 hover:bg-[#1DB954] text-[#1DB954] hover:text-white rounded-full flex items-center justify-center transition-all shadow-sm group"
                             title="Play Track"
                           >
@@ -533,6 +545,8 @@ function DynamicAlbumPage() {
                           <span className="text-sm text-gray-500">{track.duration}</span>
                           <button
                             onClick={() => setExpandedTrack(expandedTrack === index ? null : index)}
+                            aria-expanded={expandedTrack === index}
+                            aria-label={`Details for ${track.title}`}
                             className="p-2 text-gray-400 hover:text-[#9333ea] transition-colors"
                           >
                             <ChevronDown className={`w-5 h-5 transition-transform ${expandedTrack === index ? 'rotate-180' : ''}`} />
@@ -556,7 +570,7 @@ function DynamicAlbumPage() {
                 Listen Everywhere
               </h2>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
+                {albumData.spotifyUrl && (<a
                   href={albumData.spotifyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -564,8 +578,8 @@ function DynamicAlbumPage() {
                 >
                   <Play className="w-5 h-5" />
                   Spotify
-                </a>
-                <a
+                </a>)}
+                {albumData.appleMusicUrl && (<a
                   href={albumData.appleMusicUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -573,8 +587,8 @@ function DynamicAlbumPage() {
                 >
                   <Music className="w-5 h-5" />
                   Apple Music
-                </a>
-                <a
+                </a>)}
+                {albumData.youtubeUrl && (<a
                   href={albumData.youtubeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -582,7 +596,7 @@ function DynamicAlbumPage() {
                 >
                   <ExternalLink className="w-5 h-5" />
                   YouTube Music
-                </a>
+                </a>)}
                 {albumData.amazonUrl && (
                   <a
                     href={albumData.amazonUrl}
@@ -644,7 +658,8 @@ function DynamicAlbumPage() {
           <div className="relative w-full max-w-6xl mx-auto px-2 sm:px-4 py-2 flex items-center gap-2 sm:gap-4">
             <div className="flex-1 h-[80px]">
               <iframe
-                src={`https://open.spotify.com/embed/${currentSpotifyUrl.includes('album') ? 'album' : 'track'}/${currentSpotifyUrl.split('/').pop()?.split('?')[0]}`}
+                title="Spotify music player"
+                src={spotifyEmbedUrl(currentSpotifyUrl)}
                 width="100%"
                 height="80"
                 frameBorder="0"

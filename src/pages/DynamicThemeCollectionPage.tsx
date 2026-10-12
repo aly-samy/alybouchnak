@@ -1,3 +1,4 @@
+import { sanitizeHtml } from '../lib/sanitizeHtml';
 import { useEffect, useRef, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -51,6 +52,9 @@ function DynamicThemeCollectionPage() {
 
         // Track content view for retargeting
         trackContentView(collectionData.title, "theme-collection");
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
 
         const ctx = gsap.context(() => {
             gsap.fromTo(heroRef.current,
@@ -239,7 +243,7 @@ function DynamicThemeCollectionPage() {
                                 </h2>
                                 <div
                                     className="quill-content text-[#2A2A2A]"
-                                    dangerouslySetInnerHTML={{ __html: collectionData.description }}
+                                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(collectionData.description) }}
                                 />
                             </section>
 
@@ -251,7 +255,7 @@ function DynamicThemeCollectionPage() {
                                     </h2>
                                     <div
                                         className="quill-content text-[#2A2A2A]"
-                                        dangerouslySetInnerHTML={{ __html: collectionData.scienceFramework }}
+                                        dangerouslySetInnerHTML={{ __html: sanitizeHtml(collectionData.scienceFramework) }}
                                     />
                                 </section>
                             )}
@@ -308,7 +312,7 @@ function DynamicThemeCollectionPage() {
                                     <Heart className="w-10 h-10 text-[#F26B3A] mb-4" />
                                     <div
                                         className="quill-content text-[#2A2A2A]"
-                                        dangerouslySetInnerHTML={{ __html: collectionData.artistNote }}
+                                        dangerouslySetInnerHTML={{ __html: sanitizeHtml(collectionData.artistNote) }}
                                     />
                                 </div>
                             )}

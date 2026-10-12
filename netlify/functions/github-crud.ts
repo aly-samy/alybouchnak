@@ -1,10 +1,16 @@
 import type { Handler, HandlerEvent } from '@netlify/functions';
 import { Octokit } from '@octokit/rest';
+import { secureCompare } from './utils/security.js';
 
 export const handler: Handler = async (event: HandlerEvent) => {
     // Only allow POST requests
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+    }
+
+    const secret = process.env.ADMIN_PASSWORD;
+    if (!secret || !event.headers.authorization || !secureCompare(event.headers.authorization, `Bearer ${secret}`)) {
+        return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
     }
 
     try {
@@ -14,7 +20,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
         // Securely retrieve the Token from server-side Environment Variables (Not exposed to the public)
         const owner = process.env.VITE_GITHUB_OWNER || process.env.GITHUB_OWNER;
         const repo = process.env.VITE_GITHUB_REPO || process.env.GITHUB_REPO;
-        const token = process.env.VITE_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+        const token = process.env.GITHUB_TOKEN;
 
         if (!owner || !repo || !token) {
             console.error('Missing GitHub configuration variables.');

@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-12",
+  "scope": "Local production build and representative browser checks; not a hosted production audit",
+  "build": "passed",
+  "automatedTests": {
+    "passed": 32,
+    "failed": 0
+  },
+  "lighthouse": {
+    "version": "13.5.0",
+    "testedUrl": "http://127.0.0.1:5180/",
+    "audits": {
+      "agent-accessibility-tree": {
+        "score": 1,
+        "title": "Accessibility tree is well-formed",
+        "issues": []
+      },
+      "llms-txt": {
+        "score": 1,
+        "title": "llms.txt follows recommendations",
+        "issues": []
+      },
+      "ard-schema": {
+        "score": 1,
+        "title": "`ai-catalog.json` schema is valid",
+        "issues": []
+      },
+      "button-name": {
+        "score": 1,
+        "title": "Buttons have an accessible name",
+        "issues": []
+      },
+      "select-name": {
+        "score": 1,
+        "title": "Select elements have associated label elements.",
+        "issues": []
+      }
+    }
+  },
+  "browser": {
+    "results": [
+      {
+        "viewport": 1440,
+        "route": "/",
+        "title": "Aly Bouchnak | Modern Kids Pop, Nursery Rhymes & Family Dance Music",
+        "canonical": "https://alybouchnak.com/",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Modern digital pop for kids & families. ",
+        "scripts": 1
+      },
+      {
+        "viewport": 1440,
+        "route": "/discography",
+        "title": "Aly Bouchnak Discography | Toddler Dance Songs, Preschool Music & Sleep Albums",
+        "canonical": "https://alybouchnak.com/discography",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Complete Discography",
+        "scripts": 1
+      },
+      {
+        "viewport": 1440,
+        "route": "/album/hobby-the-bunny",
+        "title": "Hobby The Bunny | Aly Bouchnak",
+        "canonical": "https://alybouchnak.com/album/hobby-the-bunny",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Hobby The Bunny",
+        "scripts": 1
+      },
+      {
+        "viewport": 1440,
+        "route": "/track/silly-goodbye-dance-see-you-later-alligator",
+        "title": "Silly Goodbye Dance (See You Later Alligator) | Aly Bouchnak",
+        "canonical": "https://alybouchnak.com/track/silly-goodbye-dance-see-you-later-alligator",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Silly Goodbye Dance (See You Later Alligator)",
+        "scripts": 1
+      },
+      {
+        "viewport": 390,
+        "route": "/",
+        "title": "Aly Bouchnak | Modern Kids Pop, Nursery Rhymes & Family Dance Music",
+        "canonical": "https://alybouchnak.com/",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Modern digital pop for kids & families. ",
+        "scripts": 1
+      },
+      {
+        "viewport": 390,
+        "route": "/discography",
+        "title": "Aly Bouchnak Discography | Toddler Dance Songs, Preschool Music & Sleep Albums",
+        "canonical": "https://alybouchnak.com/discography",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Complete Discography",
+        "scripts": 1
+      },
+      {
+        "viewport": 390,
+        "route": "/album/hobby-the-bunny",
+        "title": "Hobby The Bunny | Aly Bouchnak",
+        "canonical": "https://alybouchnak.com/album/hobby-the-bunny",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Hobby The Bunny",
+        "scripts": 1
+      },
+      {
+        "viewport": 390,
+        "route": "/track/silly-goodbye-dance-see-you-later-alligator",
+        "title": "Silly Goodbye Dance (See You Later Alligator) | Aly Bouchnak",
+        "canonical": "https://alybouchnak.com/track/silly-goodbye-dance-see-you-later-alligator",
+        "horizontalOverflow": false,
+        "brokenImages": [],
+        "h1": "Silly Goodbye Dance (See You Later Alligator)",
+        "scripts": 1
+      }
+    ],
+    "errors": [],
+    "interactionChecks": [
+      "newsletter controls have accessible names",
+      "full lyrics visible",
+      "rich text sanitization",
+      "newsletter controls have accessible names",
+      "full lyrics visible",
+      "mobile menu and SPA canonical update",
+      "rich text sanitization"
+    ]
+  },
+  "catalogChunkSizes": {
+    "catalog-summaries": {
+      "bytes": 29524,
+      "gzipBytes": 6561
+    },
+    "tracks": {
+      "bytes": 144389,
+      "gzipBytes": 32484
+    },
+    "albums": {
+      "bytes": 35019,
+      "gzipBytes": 9928
+    }
+  },
+  "lint": {
+    "originalErrors": 82,
+    "updatedErrors": 82,
+    "additionalErrors": 0
+  }
+}

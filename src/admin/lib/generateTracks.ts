@@ -5,6 +5,11 @@ import type { Track } from '../../data/tracks';
  * This is kept static since the interface shouldn't change via the admin panel.
  */
 const TRACK_INTERFACE = `export interface Track {
+  musicbrainzRecordingId?: string;
+  musicbrainzUrl?: string;
+  releaseGroupId?: string;
+  releaseType?: 'Single';
+  isStandaloneRelease?: boolean;
   // Internal identifier
   id: number;
   slug: string;
@@ -21,7 +26,7 @@ const TRACK_INTERFACE = `export interface Track {
   genre?: string;
   ageRange: string;
   mood: string;
-  routine: 'Playtime' | 'Bedtime' | 'Mealtime' | 'Cleanup' | 'Transition' | 'Learning' | 'Celebration' | 'Movement';
+  routine?: 'Playtime' | 'Bedtime' | 'Bath Time' | 'Mealtime' | 'Cleanup' | 'Transition' | 'Learning' | 'Celebration' | 'Movement';
 
   // International codes
   isrc: string; // International Standard Recording Code
@@ -74,6 +79,7 @@ const TRACK_INTERFACE = `export interface Track {
     genre: string;
     byArtist: {
       '@type': string;
+      '@id'?: string;
       name: string;
     };
     inAlbum: {
@@ -82,9 +88,10 @@ const TRACK_INTERFACE = `export interface Track {
       '@id': string;
     };
     datePublished: string;
-    isrcCode: string;
+    isrcCode?: string;
     description: string;
     image: string;
+    sameAs?: string[];
   };
 }`;
 

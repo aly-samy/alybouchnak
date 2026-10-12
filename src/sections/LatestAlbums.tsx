@@ -2,7 +2,7 @@ import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Disc, ExternalLink, Sun, Moon } from 'lucide-react';
-import { getAllAlbums } from '../data/albums';
+import { getAllAlbums } from '../data/catalog-summaries';
 import OptimizedImage from '../components/OptimizedImage';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,13 +14,12 @@ function getReleaseStatus(releaseDate: string): 'Upcoming' | 'Pre-Saves' | 'Rele
   const diffTime = release.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays > 14) return 'Upcoming';
-  if (diffDays > 0) return 'Pre-Saves';
+  if (diffDays > 0) return 'Upcoming';
   return 'Released';
 }
 
 // Get latest 3 albums sorted by release date
-const latestAlbums = getAllAlbums()
+const latestAlbums = [...getAllAlbums()].filter(album => album.type === 'Album')
   .sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime())
   .slice(0, 3);
 
@@ -49,6 +48,8 @@ export default function LatestAlbums() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         sectionRef.current,

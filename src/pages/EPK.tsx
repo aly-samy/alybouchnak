@@ -12,6 +12,8 @@ export default function EPK() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         const ctx = gsap.context(() => {
             gsap.fromTo('.fade-up',
                 { y: 30, opacity: 0 },

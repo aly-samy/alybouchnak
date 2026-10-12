@@ -13,6 +13,8 @@ const TermsOfService = () => {
     const contentRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         const ctx = gsap.context(() => {
             // Heading animation
             gsap.fromTo(headingRef.current,

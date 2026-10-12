@@ -12,6 +12,8 @@ const Playlist = () => {
   const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
       // Content animation
       gsap.fromTo(contentRef.current,

@@ -37,7 +37,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
     }
 
     // Auth check
-    const adminToken = process.env.VITE_ADMIN_PASSWORD;
+    const adminToken = process.env.ADMIN_PASSWORD;
     const authHeader = event.headers.authorization;
     if (!adminToken || !authHeader || !secureCompare(authHeader, `Bearer ${adminToken}`)) {
         return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };

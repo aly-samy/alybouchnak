@@ -47,6 +47,7 @@ export default function ManageSubscription() {
     return (
         <div className="relative min-h-screen bg-slate-50 flex flex-col">
             <SEO
+                noIndex
                 title="Manage Subscription | The Bloom's House"
                 description="Manage your newsletter subscription preferences."
                 canonical="https://alybouchnak.com/manage-subscription"

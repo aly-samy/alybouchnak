@@ -13,13 +13,14 @@ export default function AdminLogin() {
         e.preventDefault();
         setLoading(true);
         setError('');
-        // Tiny delay to prevent brute force timing attacks
-        await new Promise(r => setTimeout(r, 400));
-        const ok = login(password);
-        if (!ok) {
-            setError('Incorrect password. Please try again.');
+        try {
+            const ok = await login(password);
+            if (!ok) setError('Incorrect password. Please try again.');
+        } catch {
+            setError('Unable to sign in. Please try again.');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (

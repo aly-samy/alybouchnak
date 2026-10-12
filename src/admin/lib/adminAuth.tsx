@@ -3,7 +3,7 @@ import { createContext, useContext, useState, type ReactNode } from 'react';
 interface AdminAuthContextType {
     isAuthenticated: boolean;
     token: string;
-    login: (password: string) => boolean;
+    login: (password: string) => Promise<boolean>;
     logout: () => void;
 }
 
@@ -19,9 +19,12 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
         return sessionStorage.getItem(TOKEN_KEY) || '';
     });
 
-    const login = (password: string): boolean => {
-        const correct = import.meta.env.VITE_ADMIN_PASSWORD;
-        if (password === correct) {
+    const login = async (password: string): Promise<boolean> => {
+        const response = await fetch('/.netlify/functions/admin-login', {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${password}` },
+        });
+        if (response.ok) {
             sessionStorage.setItem(SESSION_KEY, 'true');
             sessionStorage.setItem(TOKEN_KEY, password);
             setIsAuthenticated(true);

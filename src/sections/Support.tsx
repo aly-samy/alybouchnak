@@ -11,6 +11,8 @@ const Support = () => {
   const widgetRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = gsap.context(() => {
       // Content animation
       gsap.fromTo(contentRef.current,

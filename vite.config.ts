@@ -5,6 +5,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Only intentionally public values may be replaced in browser code.
+  envPrefix: ['VITE_PUBLIC_', 'VITE_APPLE_MUSIC_DEVELOPER_TOKEN', 'VITE_SPOTIFY_CLIENT_ID'],
   base: '/',
   build: {
     cssCodeSplit: true,
@@ -23,6 +25,15 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'script-defer',
+      workbox: {
+        // Precache the application shell; load detail/admin chunks only when visited.
+        globPatterns: ['index.html', 'assets/index-*.{js,css}', 'assets/vendor-*.js', 'assets/gsap-*.js', 'assets/icons-*.js', 'favicon-*.png', 'apple-touch-icon.png'],
+        runtimeCaching: [{
+          urlPattern: ({ url, sameOrigin }) => sameOrigin && url.pathname.startsWith('/assets/'),
+          handler: 'CacheFirst',
+          options: { cacheName: 'app-assets', expiration: { maxEntries: 80, maxAgeSeconds: 30 * 24 * 60 * 60 } },
+        }],
+      },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'favicon-32x32.png', 'favicon-16x16.png'],
       manifest: {
         name: "Aly Bouchnak - Modern Kids' Pop & Family Music",

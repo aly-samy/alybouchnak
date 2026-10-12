@@ -18,6 +18,7 @@ import {
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import SEO from '../components/SEO';
+import { spotifyEmbedUrl, isReleased as hasReleased } from '../lib/streaming';
 import Breadcrumbs from '../components/Breadcrumbs';
 import OptimizedImage from '../components/OptimizedImage';
 import { getTrackBySlug } from '../data/tracks';
@@ -55,7 +56,7 @@ function DynamicTrackPage() {
   useEngagementTracking(trackData?.title || 'Track Page');
 
   // Helper to check if track is released (has valid streaming URL, not placeholder)
-  const isReleased = trackData && trackData.spotifyUrl && !trackData.spotifyUrl.includes('placeholder');
+  const isReleased = trackData && hasReleased(trackData.releaseDate);
   const hasPreSaveLink = trackData && trackData.otherUrl && !trackData.otherUrl.includes('placeholder');
 
   useEffect(() => {
@@ -64,6 +65,7 @@ function DynamicTrackPage() {
     // Track content view for retargeting
     trackContentView(trackData.title, "track");
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       // Hero section animation
       gsap.fromTo(heroRef.current,
@@ -108,6 +110,7 @@ function DynamicTrackPage() {
   if (!trackData) {
     return (
       <div className="relative min-h-screen bg-[#C8F0F7]">
+        <SEO title="Track Not Found | Aly Bouchnak" description="This track could not be found." noIndex />
         <Navigation />
         <div className="pt-32 pb-16 text-center">
           <h1 className="font-['Fredoka_One'] text-4xl text-[#101010] mb-4">
@@ -215,17 +218,17 @@ function DynamicTrackPage() {
                       <div className="text-center p-3 bg-white/60 rounded-2xl">
                         <Activity className="w-5 h-5 text-[#F26B3A] mx-auto mb-1" />
                         <div className="text-xs text-[#2A2A2A]/60">BPM</div>
-                        <div className="text-sm font-semibold text-[#101010]">{trackData.bpm}</div>
+                        <div className="text-sm font-semibold text-[#101010]">{trackData.bpm || '—'}</div>
                       </div>
                       <div className="text-center p-3 bg-white/60 rounded-2xl">
                         <Users className="w-5 h-5 text-[#F26B3A] mx-auto mb-1" />
                         <div className="text-xs text-[#2A2A2A]/60">Age</div>
-                        <div className="text-sm font-semibold text-[#101010]">{trackData.ageRange}</div>
+                        <div className="text-sm font-semibold text-[#101010]">{trackData.ageRange || '—'}</div>
                       </div>
                       <div className="text-center p-3 bg-white/60 rounded-2xl">
                         <Sun className="w-5 h-5 text-[#F26B3A] mx-auto mb-1" />
                         <div className="text-xs text-[#2A2A2A]/60">Mood</div>
-                        <div className="text-sm font-semibold text-[#101010]">{trackData.mood}</div>
+                        <div className="text-sm font-semibold text-[#101010]">{trackData.mood || '—'}</div>
                       </div>
                       <div className="text-center p-3 bg-white/60 rounded-2xl">
                         <Music className="w-5 h-5 text-[#F26B3A] mx-auto mb-1" />
@@ -234,8 +237,8 @@ function DynamicTrackPage() {
                       </div>
                       <div className="text-center p-3 bg-white/60 rounded-2xl">
                         <Zap className="w-5 h-5 text-[#F26B3A] mx-auto mb-1" />
-                        <div className="text-xs text-[#2A2A2A]/60">Released</div>
-                        <div className="text-sm font-semibold text-[#101010]">{new Date(trackData.releaseDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</div>
+                        <div className="text-xs text-[#2A2A2A]/60">Release date</div>
+                        <div className="text-sm font-semibold text-[#101010]">{new Date(trackData.releaseDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })}</div>
                       </div>
                     </div>
 
@@ -251,7 +254,7 @@ function DynamicTrackPage() {
                       </div>
                       <div className="px-4 py-2 bg-[#F26B3A]/10 rounded-lg border border-[#F26B3A]/20">
                         <span className="text-xs text-[#2A2A2A]/60">Routine</span>
-                        <div className="text-sm font-semibold text-[#101010]">{trackData.routine}</div>
+                        <div className="text-sm font-semibold text-[#101010]">{trackData.routine || '—'}</div>
                       </div>
                     </div>
 
@@ -261,7 +264,7 @@ function DynamicTrackPage() {
                         {/* Main Spotify Link + Other Platforms */}
                         <div className="flex flex-col items-center lg:items-start gap-5">
                           {/* Main Spotify Button */}
-                          <a
+                          {trackData.spotifyUrl && (<a
                             href={trackData.spotifyUrl}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -274,14 +277,14 @@ function DynamicTrackPage() {
                             <SpotifyIcon className="w-6 h-6" />
                             Listen on Spotify
                             <ExternalLink className="w-4 h-4" />
-                          </a>
+                          </a>)}
 
                           {/* Other Platforms */}
                           <div className="flex items-center flex-wrap justify-center lg:justify-start gap-3 w-full lg:w-auto mt-2">
                             <span className="text-sm font-semibold text-white/90 mr-2">Also on:</span>
 
                             {/* Apple Music */}
-                            <a
+                            {trackData.appleMusicUrl && (<a
                               href={trackData.appleMusicUrl}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -294,10 +297,10 @@ function DynamicTrackPage() {
                             >
                               <AppleMusicIcon className="w-5 h-5 text-white flex-shrink-0" />
                               <span className="max-w-0 overflow-hidden group-hover:max-w-[100px] group-hover:ml-2 text-white text-sm whitespace-nowrap transition-all duration-300">Apple Music</span>
-                            </a>
+                            </a>)}
 
                             {/* YouTube */}
-                            <a
+                            {trackData.youtubeUrl && (<a
                               href={trackData.youtubeUrl}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -310,7 +313,7 @@ function DynamicTrackPage() {
                             >
                               <Youtube className="w-5 h-5 text-white flex-shrink-0" />
                               <span className="max-w-0 overflow-hidden group-hover:max-w-[100px] group-hover:ml-2 text-white text-sm whitespace-nowrap transition-all duration-300">YouTube</span>
-                            </a>
+                            </a>)}
 
                             {/* Amazon Music */}
                             {trackData.amazonUrl && !trackData.amazonUrl.includes('placeholder') && (
@@ -439,12 +442,13 @@ function DynamicTrackPage() {
         </div>
 
         {/* Spotify Embed Section - Only show if released */}
-        {isReleased && (
+        {isReleased && spotifyEmbedUrl(trackData.spotifyUrl) && (
           <div className="bg-[#101010] py-8 px-4">
             <div className="max-w-4xl mx-auto">
               <div className="rounded-xl overflow-hidden shadow-2xl">
                 <iframe
-                  src={`https://open.spotify.com/embed/track/${trackData.spotifyUrl.split('/').pop()?.split('?')[0]}`}
+                  title="Spotify music player"
+                  src={spotifyEmbedUrl(trackData.spotifyUrl)}
                   width="100%"
                   height="152"
                   frameBorder="0"
@@ -460,26 +464,24 @@ function DynamicTrackPage() {
         {/* Content Sections */}
         <div ref={contentRef} className="relative">
           {/* Lyrics Section */}
-          <section className="py-16 bg-white/60">
+          {(trackData.lyricsFull || trackData.lyricsPreview?.length > 0) && <section className="py-16 bg-white/60">
             <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
               <div className="max-w-4xl mx-auto">
                 <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl text-[#101010] mb-8 text-center">
                   Lyrics
                 </h2>
-                {trackData.lyricsPreview && trackData.lyricsPreview.length > 0 && (
+                {(trackData.lyricsFull || trackData.lyricsPreview?.length > 0) && (
                   <div className="bg-white/80 rounded-3xl p-8 shadow-lg">
                     <div className="space-y-4 text-center">
-                      {trackData.lyricsPreview.map((line: string, index: number) => (
-                        <p key={index} className="text-lg text-[#2A2A2A] leading-relaxed">
-                          {line}
-                        </p>
-                      ))}
+                      <p className="text-lg text-[#2A2A2A] leading-relaxed whitespace-pre-line">
+                        {trackData.lyricsFull || trackData.lyricsPreview.join('\n')}
+                      </p>
                     </div>
                   </div>
                 )}
               </div>
             </div>
-          </section>
+          </section>}
 
           {/* About Section */}
           <section className="py-16 bg-gradient-to-b from-transparent to-[#F7E859]/20">

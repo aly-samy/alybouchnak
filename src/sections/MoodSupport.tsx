@@ -12,6 +12,7 @@ const MoodSupport = () => {
   const card2Ref = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -74,7 +75,7 @@ const MoodSupport = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-20 lg:py-32 bg-[#C8F0F7] z-30"
+      className="relative w-full py-20 lg:py-32 bg-[#C8F0F7] z-30 overflow-x-clip"
     >
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
         {/* Intro text */}

@@ -2,6 +2,7 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 import { db } from '../../src/db/index.js';
 import { subscribers } from '../../src/db/schema.js';
 import { eq } from 'drizzle-orm';
+import { secureCompare } from './utils/security.js';
 
 export const handler: Handler = async (event: HandlerEvent) => {
     // Allows POST (subscribe) and DELETE (unsubscribe/admin remove) and PUT (update)
@@ -17,6 +18,18 @@ export const handler: Handler = async (event: HandlerEvent) => {
 
         const { email, firstName, parentType, childName, childBirthMonth, status } = payload;
         const emailAddress = email || payload.email_address; // Kit usually uses email_address
+
+        // Administrative updates and deletion by ID require authentication.
+        // Public subscription and email-only opt-out retain their existing behavior.
+        const administrativeRequest = event.httpMethod === 'PUT' ||
+            (event.httpMethod === 'DELETE' && (payload.id || event.queryStringParameters?.id));
+        if (administrativeRequest) {
+            const secret = process.env.ADMIN_PASSWORD;
+            const authorization = event.headers.authorization;
+            if (!secret || !authorization || !secureCompare(authorization, `Bearer ${secret}`)) {
+                return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
+            }
+        }
 
         if (!emailAddress) {
             return { statusCode: 400, body: JSON.stringify({ error: 'Email is required' }) };

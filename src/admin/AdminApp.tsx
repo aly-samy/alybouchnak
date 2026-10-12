@@ -18,6 +18,7 @@ import FaqForm from './pages/faqs/FaqForm';
 import SubscriberList from './pages/subscribers/SubscriberList';
 import InboxPage from './pages/inbox/InboxPage';
 import { Toaster } from 'sonner';
+import SEO from '../components/SEO';
 
 function AdminRoutes() {
     const { isAuthenticated } = useAdminAuth();
@@ -60,6 +61,7 @@ function AdminRoutes() {
 export default function AdminApp() {
     return (
         <AdminAuthProvider>
+            <SEO title="Admin | Aly Bouchnak" description="Artist administration." noIndex />
             <AdminRoutes />
             <Toaster
                 theme="dark"
