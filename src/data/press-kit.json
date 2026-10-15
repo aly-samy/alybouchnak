@@ -1,0 +1,36 @@
+{
+  "updatedOn": "2026-10-15",
+  "title": "Aly Bouchnak — Official Press Kit",
+  "description": "Official Aly Bouchnak press kit: artist biography, The Bloom’s House, albums and songs, recording identifiers, streaming profiles, and press contact.",
+  "shortBio": "Aly Bouchnak is an independent children’s music artist, songwriter and producer, and the creator of The Bloom’s House. His catalog brings together original family pop, playful versions of familiar nursery rhymes, and quieter music for bedtime.",
+  "longBio": [
+    "Aly Bouchnak creates music for children and the adults who listen with them. Through The Bloom’s House, his songs explore everyday family moments: waking up, bath time, sharing a meal, playing together, and saying goodbye.",
+    "The daytime catalog includes action songs such as Hobby The Bunny, the bath-time song Boss Bath, and The Babble Beat, alongside family songs including My Little Love and Who is Daddy’s Favorite?. The Bloom’s House: Party Classics revisits familiar nursery rhymes with pop arrangements. Tuned for Dreams is a separate album of quieter bedtime recordings.",
+    "Each album and recording page on this website provides its release information, available listening links, and a track list or lyrics where supplied. Releases are credited to Aly Bouchnak; The Bloom’s House names the music world and release series."
+  ],
+  "contact": "hello@alybouchnak.com",
+  "sourceNote": "Release metadata is reconciled with MusicBrainz. Lyrics identified as artist-supplied come from Aly Bouchnak. Streaming links lead to the artist’s profiles or the release-specific links on each music page.",
+  "selectedTracks": [
+    "hobby-the-bunny",
+    "boss-bath",
+    "the-babble-beat",
+    "my-little-love",
+    "who-is-daddys-favorite",
+    "bock-bock-chicken-2026"
+  ],
+  "platforms": [
+    {
+      "label": "Spotify",
+      "url": "https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8"
+    },
+    {
+      "label": "Apple Music",
+      "url": "https://music.apple.com/us/artist/aly-bouchnak/1840274949"
+    },
+    { "label": "YouTube", "url": "https://www.youtube.com/@alybouchnak" },
+    {
+      "label": "MusicBrainz",
+      "url": "https://musicbrainz.org/artist/aaec4457-1558-4400-a316-72e14f698922"
+    }
+  ]
+}

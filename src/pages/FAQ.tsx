@@ -1,224 +1,149 @@
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown, Mail, MessageCircle } from 'lucide-react';
-import Navigation from '../sections/Navigation';
-import Footer from '../sections/Footer';
-import SEO from '../components/SEO';
-import { faqs as faqData } from '../data/faqs';
+import { Link } from "react-router-dom";
+import Navigation from "../sections/Navigation";
+import Footer from "../sections/Footer";
+import SEO from "../components/SEO";
+import { faqs } from "../data/faqs";
+import resourceLinks from "../data/faq-links.json";
+import pressKit from "../data/press-kit.json";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// Group FAQs by category
-const faqsByCategory = faqData.reduce((acc, current) => {
-  if (!acc[current.category]) acc[current.category] = [];
-  acc[current.category].push(current);
-  return acc;
-}, {} as Record<string, typeof faqData>);
-
-// FAQ Schema for SEO
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqData.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
-    },
-  })),
-};
-
-const FAQ = () => {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const faqRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const ctx = gsap.context(() => {
-      // Header animation
-      gsap.fromTo(headerRef.current,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          }
-        }
-      );
-
-      // FAQ items animation
-      if (faqRef.current) {
-        const items = faqRef.current.querySelectorAll('.faq-item, .category-header');
-        gsap.fromTo(items,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            stagger: 0.05,
-            scrollTrigger: {
-              trigger: faqRef.current,
-              start: 'top 80%',
-              toggleActions: 'play none none reverse',
-            }
-          }
-        );
-      }
-
-      // CTA animation
-      gsap.fromTo(ctaRef.current,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          scrollTrigger: {
-            trigger: ctaRef.current,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse',
-          }
-        }
-      );
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  const toggleFAQ = (id: number) => {
-    setOpenIndex(openIndex === id ? null : id);
+const links = resourceLinks as Record<
+  string,
+  { label: string; href: string }[]
+>;
+export default function FAQ() {
+  const categories = [...new Set(faqs.map((item) => item.category))];
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://alybouchnak.com/faq#webpage",
+    url: "https://alybouchnak.com/faq",
+    name: "Aly Bouchnak Music FAQ",
+    about: { "@id": "https://alybouchnak.com/#artist" },
+    dateModified: pressKit.updatedOn,
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      "@id": `https://alybouchnak.com/faq#question-${item.id}`,
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+        url: `https://alybouchnak.com/faq#question-${item.id}`,
+      },
+    })),
   };
-
   return (
-    <div className="relative min-h-screen bg-[#C8F0F7]">
+    <div className="min-h-screen bg-[#F6FBFC] text-[#101010]">
       <SEO
-        title="FAQ | Aly Bouchnak — Kids' Music Questions Answered"
-        description="Find answers about Aly Bouchnak's Balanced Stimulation music for kids. Learn about age recommendations, songs for routines, and how our music supports child development."
-        keywords="Aly Bouchnak FAQ, kids music questions, Balanced Stimulation, children's music info, toddler songs help"
+        title="Aly Bouchnak FAQ | Songs, Albums, Lyrics & Listening"
+        description="Official answers about Aly Bouchnak, The Bloom’s House, song versions, lyrics, streaming, everyday listening, and press or music permission enquiries."
         canonical="https://alybouchnak.com/faq"
-        ogImage="https://alybouchnak.com/images/Aly-bouchnak-profile.webp"
-        ogType="website"
-        schemaData={faqSchema}
+        schemaData={schema}
       />
-
-      {/* Grain overlay */}
-      <div className="grain-overlay" />
-
       <Navigation />
-
-      {/* Header */}
-      <div ref={headerRef} className="pt-32 pb-16">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-['Fredoka_One'] text-4xl sm:text-5xl lg:text-6xl text-[#101010] mb-4">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-lg sm:text-xl text-[#2A2A2A] mb-6">
-              Everything you need to know about Aly Bouchnak's music
-            </p>
-            <p className="text-base text-[#2A2A2A]/80 max-w-2xl mx-auto">
-              Find answers to common questions about our 'Balanced Stimulation' approach,
-              age recommendations, and where to listen to songs like 'Pet-Pop' and 'Bock Bock Chicken'.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Section */}
-      <section className="py-8 lg:py-16">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="max-w-3xl mx-auto">
-            <div ref={faqRef} className="space-y-10">
-              {Object.entries(faqsByCategory).map(([category, items]) => (
-                <div key={category} className="space-y-4">
-                  <h2 className="category-header font-['Fredoka_One'] text-2xl sm:text-3xl text-[#101010] mb-6 text-center lg:text-left">
-                    {category}
-                  </h2>
-                  <div className="space-y-4">
-                    {items.map((item) => (
-                      <div
-                        key={item.id}
-                        className="faq-item bg-white rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
-                      >
-                        <button
-                          onClick={() => toggleFAQ(item.id)}
-                          className="w-full flex items-center justify-between p-5 text-left"
-                        >
-                          <span className="font-['Fredoka_One'] text-base sm:text-lg text-[#101010] pr-4">
-                            {item.question}
-                          </span>
-                          <ChevronDown
-                            className={`w-5 h-5 text-[#F26B3A] flex-shrink-0 transition-transform duration-300 ${openIndex === item.id ? 'rotate-180' : ''
-                              }`}
-                          />
-                        </button>
-
-                        <div
-                          className={`overflow-hidden transition-all duration-300 ${openIndex === item.id ? 'max-h-96' : 'max-h-0'
-                            }`}
-                        >
-                          <div className="px-5 pb-5">
-                            <div className="border-t border-gray-100 pt-4">
-                              <p className="text-[#2A2A2A] leading-relaxed">
-                                {item.answer}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section ref={ctaRef} className="py-16 lg:py-24 bg-[#F7E859]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-['Fredoka_One'] text-3xl sm:text-4xl text-[#101010] mb-4">
-              Still Have Questions?
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-32 pb-20">
+        <header className="mb-10">
+          <p className="text-[#A7401B] font-bold uppercase text-sm tracking-wider mb-3">
+            The official answers
+          </p>
+          <h1 className="font-['Fredoka_One'] text-4xl sm:text-5xl mb-5">
+            Questions about the music?
+          </h1>
+          <p className="text-lg leading-relaxed">
+            Find Aly Bouchnak’s albums, songs, lyrics, and listening links, with
+            a direct route to the relevant music page.
+          </p>
+          <p className="text-sm text-gray-600 mt-4">
+            Editorial update:{" "}
+            <time dateTime={pressKit.updatedOn}>15 October 2026</time>
+          </p>
+        </header>
+        <nav aria-label="FAQ topics" className="flex flex-wrap gap-3 mb-12">
+          {categories.map((category, index) => (
+            <a
+              key={category}
+              href={`#topic-${index + 1}`}
+              className="rounded-full bg-white px-4 py-3 border border-gray-200 font-semibold hover:border-[#F26B3A]"
+            >
+              {category}
+            </a>
+          ))}
+        </nav>
+        {categories.map((category, index) => (
+          <section
+            key={category}
+            aria-labelledby={`topic-${index + 1}`}
+            className="mb-12"
+          >
+            <h2
+              id={`topic-${index + 1}`}
+              className="scroll-mt-28 font-['Fredoka_One'] text-2xl mb-5"
+            >
+              {category}
             </h2>
-            <p className="text-lg text-[#2A2A2A] mb-8">
-              Can't find the answer you're looking for? We're here to help!
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:hello@alybouchnak.com"
-                className="btn-primary inline-flex items-center justify-center gap-2"
-              >
-                <Mail className="w-5 h-5" />
-                Email Us
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#101010] font-bold rounded-full 
-                           shadow-[0_4px_0_#ddd] transition-all duration-200 hover:translate-y-[2px] hover:shadow-[0_2px_0_#ddd]
-                           active:translate-y-[4px] active:shadow-none"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Contact Form
-              </a>
+            <div className="space-y-4">
+              {faqs
+                .filter((item) => item.category === category)
+                .map((item) => (
+                  <article
+                    key={item.id}
+                    id={`question-${item.id}`}
+                    className="scroll-mt-28 bg-white p-6 sm:p-8 rounded-2xl border border-gray-200"
+                  >
+                    <h3 className="text-lg font-bold mb-3">
+                      <a
+                        href={`#question-${item.id}`}
+                        className="hover:underline"
+                      >
+                        {item.question}
+                      </a>
+                    </h3>
+                    <p className="leading-relaxed">{item.answer}</p>
+                    {links[item.id]?.length > 0 && (
+                      <ul className="flex flex-wrap gap-x-5 gap-y-2 mt-4">
+                        {links[item.id].map((link) => (
+                          <li key={link.href}>
+                            {link.href.startsWith("/") ? (
+                              <Link
+                                to={link.href}
+                                className="text-[#A7401B] font-semibold underline underline-offset-4"
+                              >
+                                {link.label}
+                              </Link>
+                            ) : (
+                              <a
+                                href={link.href}
+                                className="text-[#A7401B] font-semibold underline underline-offset-4"
+                              >
+                                {link.label}
+                              </a>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </article>
+                ))}
             </div>
-          </div>
-        </div>
-      </section>
-
+          </section>
+        ))}
+        <aside className="bg-[#F7E859] p-8 rounded-3xl">
+          <h2 className="font-['Fredoka_One'] text-2xl mb-3">
+            Need a different answer?
+          </h2>
+          <p className="leading-relaxed">
+            For press, collaborations, or a question about using a recording,
+            email{" "}
+            <a
+              href={`mailto:${pressKit.contact}`}
+              className="font-bold underline"
+            >
+              {pressKit.contact}
+            </a>
+            . Include the song title and a link to the recording you mean.
+          </p>
+        </aside>
+      </main>
       <Footer />
     </div>
   );
-};
-
-export default FAQ;
+}

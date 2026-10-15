@@ -7,8 +7,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const domain = 'https://alybouchnak.com';
 const escape = text => String(text).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]);
 const staticPaths = ['/', '/discography', '/playlists', '/theme-collections', '/meet-the-blooms', '/about', '/articles', '/press', '/resources', '/faq', '/epk', '/contact', '/safety-policy', '/privacy-policy', '/terms-of-service'];
+staticPaths.push('/discography/latest-albums', '/discography/bouncy-beats', '/discography/tuned-for-dreams');
 const articles = readData(path.join(root, 'src/data/articles.ts'), 'articles');
-const routes = staticPaths.map(route => ({ route }));
+const routes = staticPaths.map(route => ({ route, modified: ['/faq','/epk','/discography','/discography/latest-albums','/discography/bouncy-beats','/discography/tuned-for-dreams'].includes(route) ? '2026-10-15' : undefined }));
 for (const [key, prefix] of [['albums', 'album'], ['tracks', 'track'], ['playlists', 'playlist'], ['themeCollections', 'theme-collection'], ['articles', 'article']]) {
   for (const item of readData(path.join(root, `src/data/${key}.ts`), key)) {
     const modified = item.dateModified;

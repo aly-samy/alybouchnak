@@ -40,7 +40,7 @@ const Navigation = () => {
     if (path.startsWith('/#')) {
       return isHome && location.hash === path.substring(1);
     }
-    return location.pathname === path;
+    return location.pathname === path || (path === '/discography' && location.pathname.startsWith('/discography/'));
   };
 
   return (

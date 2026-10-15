@@ -1,0 +1,475 @@
+{
+  "releases": [
+    {
+      "title": "The Bloom's House: Volume 2",
+      "type": "Album",
+      "date": "2026-10-23",
+      "href": "/album/the-blooms-house-volume-2",
+      "upc": "5064091070064"
+    },
+    {
+      "title": "Layla's Coming",
+      "type": "EP",
+      "date": "2026-10-15",
+      "href": "/album/laylas-coming",
+      "upc": "5064041235277"
+    },
+    {
+      "title": "Llama (Drama in Pajamas)",
+      "type": "EP",
+      "date": "2026-10-09",
+      "href": "/album/llama-drama-in-pajamas",
+      "upc": "5064041997960"
+    },
+    {
+      "title": "Silly Goodbye Dance (See You Later Alligator)",
+      "type": "EP",
+      "date": "2026-09-25",
+      "href": "/album/silly-goodbye-dance-see-you-later-alligator",
+      "upc": "5064041868062"
+    },
+    {
+      "title": "Billy Boy",
+      "type": "EP",
+      "date": "2026-09-11",
+      "href": "/album/billy-boy",
+      "upc": "5064011078002"
+    },
+    {
+      "title": "Who is Daddy’s Favorite?",
+      "type": "EP",
+      "date": "2026-08-28",
+      "href": "/album/who-is-daddys-favorite",
+      "upc": "5064010254025"
+    },
+    {
+      "title": "My Little Love",
+      "type": "EP",
+      "date": "2026-08-14",
+      "href": "/album/my-little-love",
+      "upc": "5064011593673"
+    },
+    {
+      "title": "Cool Gang (Big W Vibes)",
+      "type": "EP",
+      "date": "2026-07-31",
+      "href": "/album/cool-gang-big-w-vibes",
+      "upc": "5064011224317"
+    },
+    {
+      "title": "The Babble Beat",
+      "type": "EP",
+      "date": "2026-07-15",
+      "href": "/album/the-babble-beat",
+      "upc": "5063992021731"
+    },
+    {
+      "title": "Bock Bock Chicken",
+      "type": "Single",
+      "date": "2026-07-10",
+      "href": "/track/bock-bock-chicken-2026",
+      "upc": "5064011809538"
+    },
+    {
+      "title": "Boss Bath",
+      "type": "EP",
+      "date": "2026-06-26",
+      "href": "/album/boss-bath",
+      "upc": "5063959799024"
+    },
+    {
+      "title": "Hobby The Bunny",
+      "type": "EP",
+      "date": "2026-06-10",
+      "href": "/album/hobby-the-bunny",
+      "upc": "5063958788531"
+    },
+    {
+      "title": "The Bloom’s House: Volume 1",
+      "type": "Album",
+      "date": "2026-05-29",
+      "href": "/album/the-blooms-house-volume-1",
+      "upc": "5063959503706"
+    },
+    {
+      "title": "Brave Hello",
+      "type": "EP",
+      "date": "2026-05-22",
+      "href": "/album/brave-hello",
+      "upc": "5063958741116"
+    },
+    {
+      "title": "Zakzooka The Bear",
+      "type": "Single",
+      "date": "2026-05-13",
+      "href": "/track/zakzooka-the-bear",
+      "upc": "5063941025018"
+    },
+    {
+      "title": "The Duckie Song",
+      "type": "Single",
+      "date": "2026-05-01",
+      "href": "/track/duckie-song",
+      "upc": "5063941614571"
+    },
+    {
+      "title": "The Bloom's House: Party Classics",
+      "type": "Album",
+      "date": "2026-04-24",
+      "href": "/album/the-blooms-house-classics-party",
+      "upc": "5063941237718"
+    },
+    {
+      "title": "The Alphabet Song",
+      "type": "Single",
+      "date": "2026-04-15",
+      "href": "/track/alphabet-song",
+      "upc": "5063941576312"
+    },
+    {
+      "title": "If You're Happy and You Know It (Party Edition)",
+      "type": "Single",
+      "date": "2026-04-10",
+      "href": "/track/happy-party-edition",
+      "upc": "5063925895088"
+    },
+    {
+      "title": "The Funny Bunny Jump (Freeze Dance)",
+      "type": "Single",
+      "date": "2026-04-03",
+      "href": "/track/the-funny-bunny-jump",
+      "upc": "5063907299958"
+    },
+    {
+      "title": "The Wheels on the Bus (Party Ride)",
+      "type": "Single",
+      "date": "2026-03-27",
+      "href": "/track/wheels-on-the-bus-party-ride",
+      "upc": "5063907564377"
+    },
+    {
+      "title": "Five Little Monkeys (Jungle Party)",
+      "type": "Single",
+      "date": "2026-03-20",
+      "href": "/track/five-little-monkeys-jungle-party",
+      "upc": "5063925856317"
+    },
+    {
+      "title": "The Yummy Spoon (Open Wide)",
+      "type": "EP",
+      "date": "2026-03-11",
+      "href": "/album/the-yummy-spoon-open-wide",
+      "upc": "5063906910496"
+    },
+    {
+      "title": "Old MacDonald Had a Farm (Farm Party)",
+      "type": "Single",
+      "date": "2026-03-06",
+      "href": "/track/old-macdonald-farm-party",
+      "upc": "5063925085663"
+    },
+    {
+      "title": "Mary Had a Little Lamb (School Party)",
+      "type": "Single",
+      "date": "2026-02-27",
+      "href": "/track/mary-had-a-little-lamb-school-party",
+      "upc": "5063925242516"
+    },
+    {
+      "title": "Nanny & Papa (Funny Bunny Family)",
+      "type": "EP",
+      "date": "2026-02-27",
+      "href": "/album/nanny-papa-funny-bunny-family",
+      "upc": "5063907265434"
+    },
+    {
+      "title": "The Wise Mice (Memory Game)",
+      "type": "EP",
+      "date": "2026-02-11",
+      "href": "/album/the-wise-mice-memory-game",
+      "upc": "5063907926106"
+    },
+    {
+      "title": "Boom Teka Boom (Wake Up Song)",
+      "type": "EP",
+      "date": "2026-01-30",
+      "href": "/album/boom-teka-boom-wake-up-song",
+      "upc": "5063893188977"
+    },
+    {
+      "title": "Tuned for Dreams",
+      "type": "Album",
+      "date": "2026-01-09",
+      "href": "/album/tuned-for-dreams",
+      "upc": "5063893028990"
+    },
+    {
+      "title": "Pet-Pop | The Animal Song",
+      "type": "Single",
+      "date": "2025-12-19",
+      "href": "/track/pet-pop-animal-song",
+      "upc": "5063863307490"
+    },
+    {
+      "title": "Bock Bock Chicken",
+      "type": "Single",
+      "date": "2025-09-16",
+      "href": "/track/bock-bock-chicken",
+      "upc": ""
+    }
+  ],
+  "recordings": [
+    {
+      "title": "Billy Boy",
+      "slug": "billy-boy",
+      "isrc": "GXF972681613",
+      "date": "2026-09-11",
+      "href": "/track/billy-boy"
+    },
+    {
+      "title": "Bock Bock Chicken",
+      "slug": "bock-bock-chicken",
+      "isrc": "GXF972564744",
+      "date": "2025-09-16",
+      "href": "/track/bock-bock-chicken"
+    },
+    {
+      "title": "Bock Bock Chicken",
+      "slug": "bock-bock-chicken-2026",
+      "isrc": "GX5MY2662913",
+      "date": "2026-07-10",
+      "href": "/track/bock-bock-chicken-2026"
+    },
+    {
+      "title": "Boom Teka Boom (Wake Up Song)",
+      "slug": "boom-teka-boom",
+      "isrc": "GXJ2E2565871",
+      "date": "2026-01-30",
+      "href": "/track/boom-teka-boom"
+    },
+    {
+      "title": "Boss Bath",
+      "slug": "boss-bath",
+      "isrc": "GX38U2660781",
+      "date": "2026-06-26",
+      "href": "/track/boss-bath"
+    },
+    {
+      "title": "Brave Hello",
+      "slug": "brave-hello",
+      "isrc": "GX38U2681607",
+      "date": "2026-05-22",
+      "href": "/track/brave-hello"
+    },
+    {
+      "title": "Cool Gang",
+      "slug": "cool-gang",
+      "isrc": "GXBDS2684603",
+      "date": "2026-07-31",
+      "href": "/track/cool-gang"
+    },
+    {
+      "title": "Five Little Monkeys (Jungle Party)",
+      "slug": "five-little-monkeys-jungle-party",
+      "isrc": "GX8LD2671883",
+      "date": "2026-03-20",
+      "href": "/track/five-little-monkeys-jungle-party"
+    },
+    {
+      "title": "Hobby The Bunny",
+      "slug": "hobby-the-bunny",
+      "isrc": "GX38U2666437",
+      "date": "2026-06-10",
+      "href": "/track/hobby-the-bunny"
+    },
+    {
+      "title": "If You're Happy and You Know It (Party Edition)",
+      "slug": "happy-party-edition",
+      "isrc": "GX8LD2681741",
+      "date": "2026-04-10",
+      "href": "/track/happy-party-edition"
+    },
+    {
+      "title": "Layla's Coming",
+      "slug": "laylas-coming",
+      "isrc": "GXJ2E2651404",
+      "date": "2026-10-15",
+      "href": "/track/laylas-coming"
+    },
+    {
+      "title": "Llama (Drama in Pajamas)",
+      "slug": "llama-drama-in-pajamas",
+      "isrc": "GXFHP2629495",
+      "date": "2026-10-09",
+      "href": "/track/llama-drama-in-pajamas"
+    },
+    {
+      "title": "Mary Had a Little Lamb (School Party)",
+      "slug": "mary-had-a-little-lamb-school-party",
+      "isrc": "GX8KD2657271",
+      "date": "2026-02-27",
+      "href": "/track/mary-had-a-little-lamb-school-party"
+    },
+    {
+      "title": "My Little Love",
+      "slug": "my-little-love",
+      "isrc": "GX5MY2603036",
+      "date": "2026-08-14",
+      "href": "/track/my-little-love"
+    },
+    {
+      "title": "Nanny & Papa (Funny Bunny Family)",
+      "slug": "nanny-papa",
+      "isrc": "GXBDS2573588",
+      "date": "2026-02-11",
+      "href": "/track/nanny-papa"
+    },
+    {
+      "title": "Old MacDonald Had a Farm (Farm Party)",
+      "slug": "old-macdonald-farm-party",
+      "isrc": "GX8KD2658865",
+      "date": "2026-03-06",
+      "href": "/track/old-macdonald-farm-party"
+    },
+    {
+      "title": "Pet-Pop | The Animal Song",
+      "slug": "pet-pop-animal-song",
+      "isrc": "GXHZG2515365",
+      "date": "2025-12-19",
+      "href": "/track/pet-pop-animal-song"
+    },
+    {
+      "title": "Silly Goodbye Dance (See You Later Alligator)",
+      "slug": "silly-goodbye-dance-see-you-later-alligator",
+      "isrc": "GXFHP2678212",
+      "date": "2026-09-25",
+      "href": "/track/silly-goodbye-dance-see-you-later-alligator"
+    },
+    {
+      "title": "The Alphabet Song",
+      "slug": "alphabet-song",
+      "isrc": "GX8LD2663207",
+      "date": "2026-04-15",
+      "href": "/track/alphabet-song"
+    },
+    {
+      "title": "The Ancient Tongue | Deep Sleep Humming",
+      "slug": "ancient-tongue-deep-sleep-humming",
+      "isrc": "GXJ2E2555627",
+      "date": "2026-01-09",
+      "href": "/track/ancient-tongue-deep-sleep-humming"
+    },
+    {
+      "title": "The Babble Beat",
+      "slug": "the-babble-beat",
+      "isrc": "GX5MX2639207",
+      "date": "2026-07-15",
+      "href": "/track/the-babble-beat"
+    },
+    {
+      "title": "The Body Party (Head & Shoulders)",
+      "slug": "body-party-head-shoulders",
+      "isrc": "GX8LD2631231",
+      "date": "2026-04-24",
+      "href": "/track/body-party-head-shoulders"
+    },
+    {
+      "title": "The Dimming Light | Soft Sleepy Music",
+      "slug": "dimming-light-soft-sleepy-music",
+      "isrc": "GXJ2E2542577",
+      "date": "2026-01-09",
+      "href": "/track/dimming-light-soft-sleepy-music"
+    },
+    {
+      "title": "The Duckie Song",
+      "slug": "duckie-song",
+      "isrc": "GX8LD2660078",
+      "date": "2026-05-01",
+      "href": "/track/duckie-song"
+    },
+    {
+      "title": "The Funny Bunny Jump (Freeze Dance)",
+      "slug": "the-funny-bunny-jump",
+      "isrc": "GX89G2614392",
+      "date": "2026-04-03",
+      "href": "/track/the-funny-bunny-jump"
+    },
+    {
+      "title": "The Infinite Loop | Continuous Sleep Aid",
+      "slug": "infinite-loop-continuous-sleep-aid",
+      "isrc": "GXJ2E2577222",
+      "date": "2026-01-09",
+      "href": "/track/infinite-loop-continuous-sleep-aid"
+    },
+    {
+      "title": "The Liquid Room | Brown Noise Womb Sound",
+      "slug": "liquid-room-brown-noise-womb",
+      "isrc": "GXJ2E2518383",
+      "date": "2026-01-09",
+      "href": "/track/liquid-room-brown-noise-womb"
+    },
+    {
+      "title": "The Pendulum | Rocking Lullaby for Baby",
+      "slug": "pendulum-rocking-lullaby",
+      "isrc": "GXJ2E2572277",
+      "date": "2026-01-09",
+      "href": "/track/pendulum-rocking-lullaby"
+    },
+    {
+      "title": "The Protective Shadow | Night Drone for Sleep",
+      "slug": "protective-shadow-night-drone",
+      "isrc": "GXJ2E2505077",
+      "date": "2026-01-09",
+      "href": "/track/protective-shadow-night-drone"
+    },
+    {
+      "title": "The Sacred Shush | Baby Shusher Sound",
+      "slug": "sacred-shush-baby-shusher",
+      "isrc": "GXJ2E2509998",
+      "date": "2026-01-09",
+      "href": "/track/sacred-shush-baby-shusher"
+    },
+    {
+      "title": "The Safe Container | Calm Bedtime Routine",
+      "slug": "safe-container-calm-bedtime",
+      "isrc": "GXJ2E2568126",
+      "date": "2026-01-09",
+      "href": "/track/safe-container-calm-bedtime"
+    },
+    {
+      "title": "The Wheels on the Bus (Party Ride)",
+      "slug": "wheels-on-the-bus-party-ride",
+      "isrc": "GX8LD2630428",
+      "date": "2026-03-27",
+      "href": "/track/wheels-on-the-bus-party-ride"
+    },
+    {
+      "title": "The Wise Mice (Memory Game)",
+      "slug": "the-wise-mice",
+      "isrc": "GX89G2624756",
+      "date": "2026-02-11",
+      "href": "/track/the-wise-mice"
+    },
+    {
+      "title": "The Yummy Spoon (Open Wide)",
+      "slug": "the-yummy-spoon",
+      "isrc": "GX89G2661676",
+      "date": "2026-03-11",
+      "href": "/track/the-yummy-spoon"
+    },
+    {
+      "title": "Who is Daddy’s Favorite?",
+      "slug": "who-is-daddys-favorite",
+      "isrc": "GX5MY2685965",
+      "date": "2026-08-28",
+      "href": "/track/who-is-daddys-favorite"
+    },
+    {
+      "title": "Zakzooka The Bear",
+      "slug": "zakzooka-the-bear",
+      "isrc": "GX8LD2691082",
+      "date": "2026-05-13",
+      "href": "/track/zakzooka-the-bear"
+    }
+  ]
+}

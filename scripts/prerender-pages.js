@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readData } from './read-data.js';
+import { discographySections, getDiscographyReleases, discographySchema } from '../src/lib/discography.ts';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -23,9 +24,22 @@ const artist = { ...readData(path.join(root, 'src/data/artist.ts'), 'artistSchem
 const artistReference = { '@type': 'Person', '@id': artist['@id'], name: artist.name };
 const list = (items, type) => `<ul>${items.map(item => `<li><a href="/${type}/${escape(item.slug)}">${escape(item.title)}</a></li>`).join('')}</ul>`;
 const releaseList = () => list(albums, 'album') + list(tracks.filter(t => t.isStandaloneRelease), 'track');
+const press = JSON.parse(fs.readFileSync(path.join(root, 'src/data/press-kit.json'), 'utf8'));
+const faqLinks = JSON.parse(fs.readFileSync(path.join(root, 'src/data/faq-links.json'), 'utf8'));
+const referenceCatalog = JSON.parse(fs.readFileSync(path.join(root, 'src/data/catalog-reference.json'), 'utf8'));
+const faqs = read('faqs');
+const collectionNav = `<nav aria-label="Discography collections"><a href="/discography">Overview</a> · ${discographySections.map(s=>`<a href="/discography/${s.slug}">${s.label}</a>`).join(' · ')}</nav>`;
+const faqEntity = {'@type':'FAQPage','@id':`${domain}/faq#webpage`,url:`${domain}/faq`,name:'Aly Bouchnak Music FAQ',dateModified:press.updatedOn,mainEntity:faqs.map(f=>({'@type':'Question','@id':`${domain}/faq#question-${f.id}`,name:f.question,acceptedAnswer:{'@type':'Answer',text:f.answer,url:`${domain}/faq#question-${f.id}`}}))};
+const epkEntity = {'@type':'ProfilePage','@id':`${domain}/epk#webpage`,url:`${domain}/epk`,name:press.title,dateModified:press.updatedOn,mainEntity:{...artist,description:press.shortBio}};
+const faqBody = `<p>Find Aly Bouchnak’s albums, songs, lyrics, and listening links, with a direct route to the relevant music page.</p><p>Editorial update: <time datetime="${press.updatedOn}">15 October 2026</time></p>` + [...new Set(faqs.map(f=>f.category))].map((category,index)=>`<section aria-labelledby="topic-${index+1}"><h2 id="topic-${index+1}">${escape(category)}</h2>${faqs.filter(f=>f.category===category).map(f=>`<article id="question-${f.id}"><h3>${escape(f.question)}</h3><p>${escape(f.answer)}</p><ul>${(faqLinks[f.id]||[]).map(link=>`<li><a href="${escape(link.href)}">${escape(link.label)}</a></li>`).join('')}</ul></article>`).join('')}</section>`).join('');
+const epkBody = `<p>Editorial update: <time datetime="${press.updatedOn}">15 October 2026</time></p><section id="biography"><h2>Artist biography</h2><h3>Short biography</h3><p>${escape(press.shortBio)}</p><h3>Extended biography</h3>${press.longBio.map(p=>`<p>${escape(p)}</p>`).join('')}</section><h2>Artist facts</h2><p>Artist credit: Aly Bouchnak. Music world and release series: The Bloom’s House. ISNI: 0000000529569919. IPI: 01337888402.</p><p>${referenceCatalog.releases.length} releases: ${['Album','EP','Single'].map(type=>`${referenceCatalog.releases.filter(r=>r.type===type).length} ${type==='Album'?'albums':type==='EP'?'EPs':'singles'}`).join(', ')}. Includes announced releases. ${referenceCatalog.recordings.length} recording pages.</p><section id="catalog"><h2>Music catalog</h2>${collectionNav}<ul>${referenceCatalog.releases.map(r=>`<li><a href="${r.href}">${escape(r.title)}</a> — ${r.type}, ${r.date}${r.upc?`, UPC ${escape(r.upc)}`:''}</li>`).join('')}</ul></section><section id="identifiers"><h2>Recording identifiers</h2><p>Bock Bock Chicken has separate 2025 and 2026 recordings; the lyrics supplied for this website belong to the 2026 version.</p><table><caption>Official recording pages, release dates and ISRC identifiers</caption><thead><tr><th scope="col">Recording</th><th scope="col">Release date</th><th scope="col">ISRC</th></tr></thead><tbody>${referenceCatalog.recordings.map(r=>`<tr><th scope="row"><a href="${r.href}">${escape(r.title)}</a></th><td>${r.date}</td><td>${escape(r.isrc||'Not listed')}</td></tr>`).join('')}</tbody></table></section><section id="contact"><h2>Press, permissions &amp; sources</h2><p>For press, interviews, collaborations, press materials, and music permission enquiries, email <a href="mailto:${press.contact}">${press.contact}</a>. Include your project, the song or release, and your deadline.</p><p>${escape(press.sourceNote)}</p><ul>${press.platforms.map(p=>`<li><a href="${p.url}">${p.label}</a></li>`).join('')}</ul><p><a href="/music-catalog.json">Structured music catalog</a> · <a href="/llms.txt">Official page directory</a> · <a href="/faq">FAQ</a></p></section>`;
 const staticPages = [
   ['', "Aly Bouchnak — Children's Music & The Bloom's House", "Original children's songs, modern nursery rhymes and family music by Aly Bouchnak.", `<p>Aly Bouchnak is an independent children's music artist, songwriter and producer, and creator of The Bloom's House. Discover music for playtime, everyday routines and bedtime.</p><h2>Albums, EPs and singles</h2>${releaseList()}`],
-  ['discography', 'Aly Bouchnak Discography', 'Browse all albums, EPs and singles by Aly Bouchnak, with release dates and complete track lists.', releaseList()],
+  ['discography', 'Aly Bouchnak Discography', 'Choose full-length albums, daytime releases, or bedtime recordings by Aly Bouchnak.', `${collectionNav}${discographySections.map(s=>`<section><h2><a href="/discography/${s.slug}">${s.label}</a></h2><p>${s.description}</p></section>`).join('')}<p>Albums, EPs and singles are official releases. A recording can appear on more than one release. Explore <a href="/playlists">playlists</a> for listening mixes or the <a href="/faq">FAQ</a> for details.</p>`, discographySchema(undefined, [])],
+  ...discographySections.map(s=>{
+    const items=getDiscographyReleases(albums,tracks,s.slug);
+    return [`discography/${s.slug}`,`${s.label} | Aly Bouchnak Discography`,s.description,`${collectionNav}<p>${s.description}</p><p>${items.length} results</p><ul>${items.map(r=>`<li><h2><a href="${r.href}">${escape(r.title)}</a></h2><p>${r.type} — Release date: ${r.releaseDate.slice(0,10)}</p><p>${escape(r.description)}</p></li>`).join('')}</ul>`,discographySchema(s.slug,items)];
+  }),
   ['about', 'About Aly Bouchnak', "Meet the children's music artist and creator of The Bloom's House.", `<p>${escape(artist.description)}</p><p>His Utility Music approach connects songs with everyday childhood routines, play and family life.</p>`],
   ['playlists', 'Playlists', 'Discover themed music playlists by Aly Bouchnak.', list(playlists, 'playlist')],
   ['theme-collections', 'Theme Collections', "Explore themed collections from The Bloom's House.", list(themes, 'theme-collection')],
@@ -33,8 +47,8 @@ const staticPages = [
   ['press', 'Press', 'Press coverage and news about Aly Bouchnak.', list(articles.filter(a => a.category === 'Press'), 'article')],
   ['resources', 'Resources', 'Music and activity resources for families.', list(articles.filter(a => a.category !== 'Press'), 'article')],
   ['meet-the-blooms', 'Meet the Blooms', "Meet the characters in The Bloom's House.", "<p>Explore the family and characters behind The Bloom's House music.</p>"],
-  ['faq', 'Frequently Asked Questions', "Learn about Aly Bouchnak's music and The Bloom's House.", '<p>Find answers about the music, streaming and family listening.</p>'],
-  ['epk', 'Electronic Press Kit', 'Artist information and music catalog for Aly Bouchnak.', `<p>${escape(artist.description)}</p>${releaseList()}`],
+  ['faq', 'Aly Bouchnak FAQ | Songs, Albums, Lyrics & Listening', 'Official answers about Aly Bouchnak, The Bloom’s House, song versions, lyrics, streaming, everyday listening, and press or music permission enquiries.', faqBody, faqEntity],
+  ['epk', press.title, press.description, epkBody, epkEntity],
   ['contact', 'Contact Aly Bouchnak', 'Contact Aly Bouchnak about music, press and collaborations.', '<p>Use the contact form to get in touch about music, press or collaborations.</p>'],
   ['privacy-policy', 'Privacy Policy', 'Privacy information for alybouchnak.com.', '<p>Read how this website handles personal information.</p>'],
   ['terms-of-service', 'Terms of Service', 'Terms for using alybouchnak.com.', '<p>Read the terms for using this website.</p>'],
@@ -44,8 +58,8 @@ const staticPages = [
 function writePage(route, title, description, image, content, entity) {
   const url = absolute(route);
   const graph = [artist, { '@type': 'WebSite', '@id': `${domain}/#website`, name: 'Aly Bouchnak', url: domain + '/' },
-    { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: title, description, inLanguage: 'en', isPartOf: { '@id': `${domain}/#website` }, about: artistReference },
-    ...(entity ? [entity] : [])];
+    { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: title, description, inLanguage: 'en', isPartOf: { '@id': `${domain}/#website` }, about: artistReference, ...(entity?.['@id'] === `${url}#webpage` ? entity : {}) },
+    ...(entity && entity['@id'] !== `${url}#webpage` ? [entity] : [])];
   let html = baseHtml.replace(/<title>[\s\S]*?<\/title>/, `<title>${escape(title)}</title>`);
   const setMeta = (name, value, property = false) => {
     const attr = property ? 'property' : 'name';
@@ -67,7 +81,7 @@ function writePage(route, title, description, image, content, entity) {
   fs.writeFileSync(path.join(directory, 'index.html'), html);
 }
 
-for (const [slug, title, description, content] of staticPages) writePage(slug ? `/${slug}` : '/', title, description, '', content);
+for (const [slug, title, description, content, entity] of staticPages) writePage(slug ? `/${slug}` : '/', title, description, '', content, entity);
 writePage('/404', 'Page Not Found | Aly Bouchnak', 'This page could not be found.', '', '<p><a href="/discography">Browse the discography</a> or return to the homepage.</p>');
 const notFoundHtml = fs.readFileSync(path.join(dist, '404/index.html'), 'utf8').replace('content="index, follow, max-image-preview:large"', 'content="noindex, nofollow"');
 fs.writeFileSync(path.join(dist, '404.html'), notFoundHtml);
@@ -93,7 +107,7 @@ for (const [items, type] of [[playlists, 'playlist'], [themes, 'theme-collection
   for (const item of items) writePage(`/${type}/${item.slug}`, `${item.title} | Aly Bouchnak`, item.description, item.coverImage,
     `<p>${escape(item.description)}</p>${list((item.trackIds || []).map(id => tracks.find(t => t.id === id)).filter(Boolean), 'track')}`);
 }
-const catalogText = `# Aly Bouchnak\n\n> ${artist.description}\n\nOfficial artist website: ${domain}\n\nUse the linked official pages for canonical release details and artist-approved lyrics. Metadata and lyrics remain distinct: release information comes from MusicBrainz, while supplied lyrics come from the artist.\n\n## Catalog\n\n` +
+const catalogText = `# Aly Bouchnak\n\n> ${artist.description}\n\nOfficial artist website: ${domain}\n\nUse the linked official pages for canonical release details and artist-approved lyrics. Metadata and lyrics remain distinct: release information comes from MusicBrainz, while supplied lyrics come from the artist.\n\n## Artist information and direct answers\n\n- [Official press kit](${domain}/epk): biography, contact, release catalog, and recording identifiers.\n- [Music FAQ](${domain}/faq): direct answers with links to recordings and releases.\n- [Latest Albums](${domain}/discography/latest-albums): full-length albums and release dates.\n- [Bouncy Beats](${domain}/discography/bouncy-beats): daytime albums, EPs, and singles.\n- [Tuned for Dreams](${domain}/discography/tuned-for-dreams): bedtime album and recordings.\n\nFor a recording’s lyrics or ISRC, use its recording page. For an ordered track list, use the album page. Bock Bock Chicken has separate 2025 and 2026 recordings; artist-supplied lyrics apply only to the 2026 version. Do not infer popularity, clinical outcomes, or availability from an announced release date.\n\n## Catalog\n\n` +
   albums.map(a => `- [${a.title}](${domain}/album/${a.slug}): ${a.type}, ${a.releaseDate.slice(0, 10)}, ${a.trackCount} tracks.`).join('\n') + '\n\n## Recordings\n\n' +
   tracks.map(t => `- [${t.title}](${domain}/track/${t.slug})${t.isrc ? ` — ISRC ${t.isrc}` : ''}`).join('\n') + `\n\n## Machine-readable resources\n\n- [Structured music catalog](${domain}/music-catalog.json): album track lists and recording identifiers.\n- [Resource discovery manifest](${domain}/.well-known/ard.json): read-only catalog discovery.\n\n## Sources\n\n- [MusicBrainz](https://musicbrainz.org/artist/aaec4457-1558-4400-a316-72e14f698922)\n- [Apple Music](https://music.apple.com/us/artist/aly-bouchnak/1840274949)\n- [Genius](https://genius.com/artists/Aly-bouchnak)\n\nMusicBrainz metadata verified on ${sourceCatalog.verifiedOn}. Future release dates describe upcoming releases. Missing lyrics or details are not inferred.\n`;
 fs.writeFileSync(path.join(dist, 'llms.txt'), catalogText);

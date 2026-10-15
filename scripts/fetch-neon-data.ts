@@ -32,7 +32,7 @@ async function fetchData() {
         fs.writeFileSync(resolve(process.cwd(), 'src/data/playlists.ts'), generatePlaylistsFile(playlists as any));
         console.log(`✅ Saved ${playlists.length} playlists.`);
 
-        const faqs = await db.select().from(schema.faqs);
+        const faqs = await db.select().from(schema.faqs).orderBy(schema.faqs.id);
         fs.writeFileSync(resolve(process.cwd(), 'src/data/faqs.ts'), generateFaqsFile(faqs as any));
         console.log(`✅ Saved ${faqs.length} FAQs.`);
 

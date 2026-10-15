@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "catalog:reconcile": "node scripts/reconcile-catalog.js",
-    "test": "node --experimental-strip-types --test src/data/*.test.ts tests/catalog.test.js tests/seo.test.js tests/admin-auth.test.js",
+    "test": "node --experimental-strip-types --test src/data/*.test.ts tests/catalog.test.js tests/seo.test.js tests/admin-auth.test.js tests/reference-pages.test.js",
     "catalog:refresh": "node scripts/refresh-musicbrainz.js"
   },
   "dependencies": {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://alybouchnak.com/</loc></url>
-  <url><loc>https://alybouchnak.com/discography</loc></url>
+  <url><loc>https://alybouchnak.com/discography</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://alybouchnak.com/playlists</loc></url>
   <url><loc>https://alybouchnak.com/theme-collections</loc></url>
   <url><loc>https://alybouchnak.com/meet-the-blooms</loc></url>
@@ -9,12 +9,15 @@
   <url><loc>https://alybouchnak.com/articles</loc></url>
   <url><loc>https://alybouchnak.com/press</loc></url>
   <url><loc>https://alybouchnak.com/resources</loc></url>
-  <url><loc>https://alybouchnak.com/faq</loc></url>
-  <url><loc>https://alybouchnak.com/epk</loc></url>
+  <url><loc>https://alybouchnak.com/faq</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://alybouchnak.com/epk</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://alybouchnak.com/contact</loc></url>
   <url><loc>https://alybouchnak.com/safety-policy</loc></url>
   <url><loc>https://alybouchnak.com/privacy-policy</loc></url>
   <url><loc>https://alybouchnak.com/terms-of-service</loc></url>
+  <url><loc>https://alybouchnak.com/discography/latest-albums</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://alybouchnak.com/discography/bouncy-beats</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://alybouchnak.com/discography/tuned-for-dreams</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://alybouchnak.com/album/the-blooms-house-volume-1</loc></url>
   <url><loc>https://alybouchnak.com/album/tuned-for-dreams</loc></url>
   <url><loc>https://alybouchnak.com/album/the-blooms-house-classics-party</loc></url>

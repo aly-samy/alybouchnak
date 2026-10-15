@@ -1,0 +1,117 @@
+{
+  "1": [{ "label": "Artist biography and press kit", "href": "/epk" }],
+  "2": [{ "label": "Meet the Blooms", "href": "/meet-the-blooms" }],
+  "3": [
+    { "label": "Browse the discography", "href": "/discography" },
+    {
+      "label": "Apple Music artist profile",
+      "href": "https://music.apple.com/us/artist/aly-bouchnak/1840274949"
+    },
+    {
+      "label": "Spotify artist profile",
+      "href": "https://open.spotify.com/artist/1nRdHdUfxacuQeLWFPXqr8"
+    }
+  ],
+  "4": [
+    {
+      "label": "Latest albums and release dates",
+      "href": "/discography/latest-albums"
+    }
+  ],
+  "5": [
+    {
+      "label": "Daytime albums, EPs and singles",
+      "href": "/discography/bouncy-beats"
+    }
+  ],
+  "6": [
+    {
+      "label": "Tuned for Dreams album and recordings",
+      "href": "/discography/tuned-for-dreams"
+    }
+  ],
+  "7": [
+    {
+      "label": "The Bloom’s House: Volume 2",
+      "href": "/album/the-blooms-house-volume-2"
+    }
+  ],
+  "8": [
+    {
+      "label": "Bock Bock Chicken — 2025 recording",
+      "href": "/track/bock-bock-chicken"
+    },
+    {
+      "label": "Bock Bock Chicken — 2026 recording and lyrics",
+      "href": "/track/bock-bock-chicken-2026"
+    }
+  ],
+  "9": [{ "label": "Lyrics and recording pages", "href": "/discography" }],
+  "10": [
+    {
+      "label": "Release dates and track lists",
+      "href": "/discography/latest-albums"
+    },
+    {
+      "label": "MusicBrainz release catalog",
+      "href": "https://musicbrainz.org/artist/aaec4457-1558-4400-a316-72e14f698922"
+    }
+  ],
+  "11": [
+    {
+      "label": "The Funny Bunny Jump (Freeze Dance)",
+      "href": "/track/the-funny-bunny-jump"
+    },
+    { "label": "Hobby The Bunny", "href": "/track/hobby-the-bunny" }
+  ],
+  "12": [
+    {
+      "label": "Boom Teka Boom (Wake Up Song)",
+      "href": "/track/boom-teka-boom"
+    }
+  ],
+  "13": [
+    {
+      "label": "Boss Bath lyrics and listening links",
+      "href": "/track/boss-bath"
+    }
+  ],
+  "14": [
+    { "label": "The Yummy Spoon (Open Wide)", "href": "/track/the-yummy-spoon" }
+  ],
+  "15": [
+    {
+      "label": "Silly Goodbye Dance (See You Later Alligator)",
+      "href": "/track/silly-goodbye-dance-see-you-later-alligator"
+    }
+  ],
+  "16": [
+    { "label": "My Little Love", "href": "/track/my-little-love" },
+    {
+      "label": "Who is Daddy’s Favorite?",
+      "href": "/track/who-is-daddys-favorite"
+    }
+  ],
+  "17": [
+    {
+      "label": "The Bloom’s House: Party Classics",
+      "href": "/album/the-blooms-house-classics-party"
+    }
+  ],
+  "18": [{ "label": "Explore the playlists", "href": "/playlists" }],
+  "19": [
+    {
+      "label": "Bedtime listening collection",
+      "href": "/discography/tuned-for-dreams"
+    }
+  ],
+  "20": [{ "label": "Music and activity resources", "href": "/resources" }],
+  "21": [{ "label": "Contact about music permissions", "href": "/contact" }],
+  "22": [{ "label": "Press kit and contact", "href": "/epk#contact" }],
+  "23": [
+    { "label": "Artist information", "href": "/epk" },
+    { "label": "Questions and answers", "href": "/faq" },
+    { "label": "Structured music catalog", "href": "/music-catalog.json" },
+    { "label": "Official page directory", "href": "/llms.txt" }
+  ]
+}

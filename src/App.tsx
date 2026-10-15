@@ -79,6 +79,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/discography" element={<Discography />} />
+            <Route path="/discography/latest-albums" element={<Discography key="latest-albums" section="latest-albums" />} />
+            <Route path="/discography/bouncy-beats" element={<Discography key="bouncy-beats" section="bouncy-beats" />} />
+            <Route path="/discography/tuned-for-dreams" element={<Discography key="tuned-for-dreams" section="tuned-for-dreams" />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/meet-the-blooms" element={<MeetTheBlooms />} />
             <Route path="/contact" element={<Contact />} />
